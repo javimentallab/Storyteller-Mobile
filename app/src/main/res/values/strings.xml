@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Storyteller</string>
+
+    <!-- Library -->
+    <string name="library">Library</string>
+    <string name="library_empty">No books yet. Narrate an EPUB or import an audiobook to get started.</string>
+    <string name="narrate_epub">Narrate EPUB</string>
+    <string name="import_audiobook">Import audiobook</string>
+    <string name="translate">Translate</string>
+    <string name="models">Models</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d chapter · %2$s</item>
+        <item quantity="other">%1$d chapters · %2$s</item>
+    </plurals>
+    <string name="book_working">● In progress</string>
+    <string name="book_partial">⏸ Unfinished · %1$d %%</string>
+    <string name="resume">Resume</string>
+    <string name="regenerate">Narrate again</string>
+    <string name="more_options">More options</string>
+    <string name="confirm_delete">Delete «%1$s» from this phone? Its audio is lost for good.</string>
+    <string name="confirm_regenerate">Narrate «%1$s» again from the start? What is narrated now is lost.</string>
+    <string name="confirm_cancel_job">Cancel «%1$s»? What is done so far is discarded.</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="keep_going">Keep going</string>
+    <string name="back">Back</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">Narrating, transcribing and translating</string>
+    <string name="done_channel">Finished</string>
+    <string name="job_finished">Finished</string>
+    <string name="job_failed">It stopped halfway. What is done is saved.</string>
+    <string name="stop_and_save">Stop and save</string>
+    <string name="job_queued">Waiting its turn…</string>
+    <string name="job_copying">Copying the file…</string>
+    <string name="job_reading">Reading the document…</string>
+    <string name="job_narrating">Chapter %1$d/%2$d · sentence %3$d</string>
+    <string name="job_encoding">Compressing the chapter…</string>
+    <string name="job_transcribing">Transcribing… %1$s of %2$s</string>
+    <string name="job_translating">Translating… %1$d/%2$d</string>
+    <string name="job_saving">Saving…</string>
+    <string name="job_stopping">Stopping…</string>
+    <string name="job_waiting">the service is busy, trying again in %1$d s</string>
+    <string name="eta_calculating">working out the time left…</string>
+    <string name="eta_less_minute">less than 1 min left</string>
+    <string name="eta_minutes">~%1$d min left</string>
+    <string name="eta_hours">~%1$d h %2$d min left</string>
+    <string name="eta_until">%1$s (around %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">The models don\'t run on the phone. For each job, choose the service that does it: a public one with your access key, or one of your own. Your text and audio go to the service you choose.</string>
+    <string name="section_narration">Narration</string>
+    <string name="section_narration_help">Text to speech. An API like OpenAI\'s: /v1/audio/speech</string>
+    <string name="section_transcription">Transcription</string>
+    <string name="section_transcription_help">Speech to text, for imported audiobooks. An API like OpenAI\'s: /v1/audio/transcriptions</string>
+    <string name="section_translation">Translation</string>
+    <string name="section_translation_help">Any chat model. An API like OpenAI\'s: /v1/chat/completions (Ollama and llama.cpp too)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Access key</string>
+    <string name="field_key_hint">Leave it empty if the service has none</string>
+    <string name="field_model">Model</string>
+    <string name="field_voice">Voice</string>
+    <string name="field_format">Audio format</string>
+    <string name="field_parallel">Requests at a time</string>
+    <string name="field_parallel_help">More is faster, if the service allows it.</string>
+    <string name="search_models">See what models it has</string>
+    <string name="search_voices">See what voices it has</string>
+    <string name="show_key">Show the key</string>
+    <string name="hide_key">Hide the key</string>
+    <string name="test">Try it</string>
+    <string name="testing">Trying…</string>
+    <string name="test_ok">It works.</string>
+    <string name="test_narration_ok">It works: %1$s s of audio.</string>
+    <string name="test_translation_ok">It works: «%1$s»</string>
+    <string name="http_status">Error %1$d</string>
+    <string name="cleartext_warning">This address isn\'t on your home network and doesn\'t use HTTPS: your key and your text would travel unencrypted.</string>
+    <string name="needs_model">Choose first which model does this.</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">Narrate an EPUB</string>
+    <string name="choose_epub">Choose EPUB…</string>
+    <string name="reading_file">Reading it…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d chapter</item>
+        <item quantity="other">%1$d chapters</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d sentences · %3$d characters</string>
+    <string name="narrate_goes_to">%1$d characters of text will be sent to %2$s. If that service charges by use, it charges for them.</string>
+    <string name="prepare_text">Prepare the text for the voice</string>
+    <string name="prepare_text_help">Numbers in words, abbreviations and odd punctuation. Many open voices need it. The subtitles aren\'t changed.</string>
+    <string name="no_chapters">No text found in this EPUB.</string>
+    <string name="start">Start</string>
+
+    <!-- Import -->
+    <string name="import_title">Import an audiobook</string>
+    <string name="import_help">It is copied to the phone and transcribed to make the synced subtitles. The audio goes to the service you chose, in pieces of two minutes.</string>
+    <string name="choose_audio">Choose audio…</string>
+    <string name="audio_language">Audio language</string>
+    <string name="detect_language">Detect automatically</string>
+
+    <!-- Translate -->
+    <string name="translate_title">Translate a document</string>
+    <string name="translate_help">EPUB, Word, PowerPoint, Excel, subtitles (SRT, VTT) or text (TXT, MD). Cursive and bold inside a sentence are lost.</string>
+    <string name="choose_document">Choose document…</string>
+    <string name="from_language">From</string>
+    <string name="to_language">To</string>
+    <string name="same_language">The two languages are the same.</string>
+    <string name="translations_list">Translations</string>
+    <string name="translation_done">Finished</string>
+    <string name="translation_partial">Unfinished · %1$d of %2$d</string>
+    <string name="translation_partial_short">Unfinished</string>
+    <string name="translation_running">Translating…</string>
+    <string name="save_to_phone">Save as…</string>
+    <string name="saved_to_phone">Saved.</string>
+    <string name="confirm_delete_translation">Delete the translation of «%1$s»?</string>
+
+    <!-- Player -->
+    <string name="live">● Live</string>
+    <string name="waiting_more">Waiting for more narration…</string>
+    <string name="section_n">Section %1$d</string>
+    <string name="go_to_chapter">Go to chapter</string>
+    <string name="go_to_position">Go to position</string>
+    <string name="position_hint">mm:ss or seconds</string>
+    <string name="bad_position">Write it as mm:ss or in seconds.</string>
+    <string name="go">Go</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="back_10">Back 10 seconds</string>
+    <string name="forward_10">Forward 10 seconds</string>
+    <string name="previous_chapter">Previous chapter</string>
+    <string name="next_chapter">Next chapter</string>
+    <string name="no_text_yet">No text yet for this part.</string>
+    <string name="cant_open_book">Can\'t open this book.</string>
+    <string name="playback_error">Can\'t play this chapter.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">The service rejected the access key. Check it in Models.</string>
+    <string name="err_not_found">The service doesn\'t have that. Check the URL and the model in Models.</string>
+    <string name="err_rate_limit">The service says too many requests, even after waiting. What is done is saved: resume it later.</string>
+    <string name="err_bad_request">The service refused the request. Check the model and the voice in Models.</string>
+    <string name="err_server">The service has a problem of its own. What is done is saved: resume it later.</string>
+    <string name="err_bad_answer">The service gave an answer this app can\'t read. Is that URL the right kind of API?</string>
+    <string name="err_network">Can\'t reach the service. What is done is saved: resume it later.</string>
+    <string name="err_bad_type">This app can\'t translate that type of file.</string>
+    <string name="err_cant_read_file">Can\'t read that file.</string>
+    <string name="err_no_text">No text to translate in that document.</string>
+    <string name="err_generic">Something went wrong (%1$s).</string>
+</resources>

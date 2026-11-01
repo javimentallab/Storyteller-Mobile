@@ -1,0 +1,169 @@
+{
+ "split": [
+  {
+   "in": "Hola. Adiós.",
+   "out": [
+    "Hola.",
+    "Adiós."
+   ]
+  },
+  {
+   "in": "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.\nEl resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino. ¿Quién lo diría? ¡Nadie! Tenía en su casa una ama que pasaba de los cuarenta… y una sobrina que no llegaba a los veinte.",
+   "out": [
+    "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.",
+    "Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos,",
+    "consumían las tres partes de su hacienda.",
+    "El resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino.",
+    "¿Quién lo diría?",
+    "¡Nadie!",
+    "Tenía en su casa una ama que pasaba de los cuarenta…",
+    "y una sobrina que no llegaba a los veinte."
+   ]
+  },
+  {
+   "in": "El Sr. Smith y la Sra. López fueron a EE. UU. con John F. Kennedy. Luego volvieron.",
+   "out": [
+    "El Sr. Smith y la Sra. López fueron a EE. UU.",
+    "con John F. Kennedy.",
+    "Luego volvieron."
+   ]
+  },
+  {
+   "in": "Dr. Who vs. Mr. Bean. Fin.",
+   "out": [
+    "Dr. Who vs. Mr. Bean.",
+    "Fin."
+   ]
+  },
+  {
+   "in": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "out": [
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaaaa"
+   ]
+  },
+  {
+   "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
+   "out": [
+    "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra p",
+    "alabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra pa",
+    "labra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra."
+   ]
+  },
+  {
+   "in": "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+   "out": [
+    "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+    "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+    "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+    "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+    "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,"
+   ]
+  },
+  {
+   "in": "...   ",
+   "out": []
+  },
+  {
+   "in": "",
+   "out": []
+  },
+  {
+   "in": "¿Sí? ¡No! Quizá… tal vez.\nOtra línea sin punto\nY otra.",
+   "out": [
+    "¿Sí?",
+    "¡No!",
+    "Quizá…",
+    "tal vez.",
+    "Otra línea sin punto Y otra."
+   ]
+  },
+  {
+   "in": "Dijo: «Ven aquí»; luego, sin más, se fue — y no volvió jamás, aunque todos lo esperaron durante muchos años en la plaza del pueblo, junto a la fuente vieja, bajo los árboles que su abuelo había plantado cuando era joven y fuerte.",
+   "out": [
+    "Dijo: «Ven aquí»; luego, sin más, se fue — y no volvió jamás, aunque todos lo esperaron durante muchos años en la plaza del pueblo, junto a la fuente vieja,",
+    "bajo los árboles que su abuelo había plantado cuando era joven y fuerte."
+   ]
+  },
+  {
+   "in": "Title in English. A sentence with numbers 3.14 and 1,000 here! Is it? Yes.",
+   "out": [
+    "Title in English.",
+    "A sentence with numbers 3.14 and 1,000 here!",
+    "Is it?",
+    "Yes."
+   ]
+  }
+ ],
+ "punct": [
+  {
+   "in": "Hola — dijo – él ― ayer",
+   "out": "Hola, dijo, él, ayer"
+  },
+  {
+   "in": "uno-dos y un guion - suelto",
+   "out": "uno-dos y un guion, suelto"
+  },
+  {
+   "in": "“Comillas” «raras» 'simples' O’Donnell McDonald’s",
+   "out": "Comillas raras 'simples' O'Donnell McDonald's"
+  },
+  {
+   "in": "Paréntesis (dentro) y [corchetes] {llaves}",
+   "out": "Paréntesis, dentro, y, corchetes, llaves"
+  },
+  {
+   "in": "Yo: hola. Son las 10:30",
+   "out": "Yo, hola. Son las 10:30"
+  },
+  {
+   "in": "lujo/caro y 1/2 kilo",
+   "out": "lujo, caro y 1/2 kilo"
+  },
+  {
+   "in": "a = b y A+ fin",
+   "out": "a igual a b y A más fin"
+  },
+  {
+   "in": "marca[[1]]aquí[[/1]] y ____ hueco",
+   "out": "marcaaquí y, hueco"
+  },
+  {
+   "in": "pal­abra blanda © ® ™ *",
+   "out": "palabra blanda"
+  },
+  {
+   "in": "uno;dos ; tres",
+   "out": "uno, dos, tres"
+  },
+  {
+   "in": "3,14 y uno ,dos",
+   "out": "3,14 y uno, dos"
+  },
+  {
+   "in": "doble , , coma y fin.,",
+   "out": "doble, coma y fin."
+  },
+  {
+   "in": "¿,hola?, ¡,sí!",
+   "out": "¿hola? ¡sí!"
+  },
+  {
+   "in": "..., empieza raro",
+   "out": "empieza raro"
+  },
+  {
+   "in": "acaba con coma,",
+   "out": "acaba con coma"
+  },
+  {
+   "in": "espacios    muchos",
+   "out": "espacios muchos"
+  },
+  {
+   "in": "puntos suspensivos… y más",
+   "out": "puntos suspensivos. y más"
+  }
+ ]
+}
