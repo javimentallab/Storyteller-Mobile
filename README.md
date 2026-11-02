@@ -65,7 +65,8 @@ without encryption beyond your home network, and it doesn't send your key there.
 
 ## Install
 
-There is no release yet. To build it, see [CONTRIBUTING](CONTRIBUTING.md). It needs Android 8.0 or later.
+Download the APK from the [latest release](https://github.com/javimentallab/Storyteller-Mobile/releases/latest).
+It needs Android 8.0 or later. To build it yourself, see [CONTRIBUTING](CONTRIBUTING.md).
 
 On Android 15 the system limits this kind of background work to 6 hours a day. When that happens, the app stops
 and saves, and you can resume it later.

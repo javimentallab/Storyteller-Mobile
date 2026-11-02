@@ -65,8 +65,8 @@ allá de tu red de casa, y ahí no envía tu clave. Más en [PRIVACY](PRIVACY.md
 
 ## Instalar
 
-Todavía no hay versión publicada. Para compilarla, consulta [CONTRIBUTING](CONTRIBUTING.md), en inglés. Necesita
-Android 8.0 o posterior.
+Descarga el APK de la [última versión](https://github.com/javimentallab/Storyteller-Mobile/releases/latest).
+Necesita Android 8.0 o posterior. Para compilarla tú, consulta [CONTRIBUTING](CONTRIBUTING.md), en inglés.
 
 En Android 15 el sistema limita este tipo de trabajo en segundo plano a 6 horas al día. Cuando pasa, la app se
 detiene y guarda, y luego puedes reanudarla.
