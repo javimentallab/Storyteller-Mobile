@@ -74,8 +74,10 @@ class Prefs private constructor(context: Context) {
             key = Secrets.open(o.optString("key")),
             model = o.optString("model"),
             voice = o.optString("voice"),
-            format = o.optString("format").ifEmpty { "mp3" },
+            format = o.optString("format").ifEmpty { "wav" },
             parallel = o.optInt("parallel", 1).coerceIn(1, MAX_PARALLEL),
+            language = o.optString("language").ifEmpty { Languages.default() },
+            qc = o.optBoolean("qc", false),
         )
     }
 
@@ -87,6 +89,8 @@ class Prefs private constructor(context: Context) {
             .put("voice", e.voice)
             .put("format", e.format)
             .put("parallel", e.parallel)
+            .put("language", e.language)
+            .put("qc", e.qc)
         sp.edit().putString("ep_" + c.key, o.toString()).apply()
     }
 

@@ -91,8 +91,12 @@ fun LibraryScreen(vm: AppViewModel) {
 
 @Composable
 private fun ActionRow(vm: AppViewModel) {
+    TextButton(
+        onClick = { vm.go(Screen.Fetch) },
+        modifier = Modifier.padding(start = 6.dp, top = 4.dp),
+    ) { Text(stringResource(R.string.fetch_title), color = Muted, fontSize = 13.sp) }
     Row(
-        Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 12.dp),
+        Modifier.fillMaxWidth().padding(start = 14.dp, end = 14.dp, top = 4.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         PrimaryButton(stringResource(R.string.narrate_epub), modifier = Modifier.weight(1f)) { vm.go(Screen.Narrate) }
@@ -114,6 +118,9 @@ private fun ActionRow(vm: AppViewModel) {
 private fun BookCard(vm: AppViewModel, b: BookSummary, active: Boolean) {
     var menu by remember { mutableStateOf(false) }
     var confirm by remember { mutableStateOf<String?>(null) }
+    val running by vm.job.collectAsStateWithLifecycle()
+    val waiting by vm.waiting.collectAsStateWithLifecycle()
+    val inLine = waiting.firstOrNull { it.bookId == b.id }
 
     Row(
         Modifier.fillMaxWidth()
@@ -136,15 +143,24 @@ private fun BookCard(vm: AppViewModel, b: BookSummary, active: Boolean) {
             )
             when {
                 active -> Text(stringResource(R.string.book_working), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
+                inLine != null -> Text(stringResource(R.string.book_in_line), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
                 !b.complete -> Text(stringResource(R.string.book_partial, b.progress), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             }
-            if (b.resumable && !active) {
-                TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) {
+            when {
+                active -> {}
+                inLine != null -> TextButton(onClick = { vm.switchToJob(inLine.id) }, modifier = Modifier.padding(top = 2.dp)) {
+                    Text(stringResource(R.string.job_switch))
+                }
+                b.resumable && running != null -> Row {
+                    TextButton(onClick = { vm.switchToBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_switch)) }
+                    TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_add_to_line)) }
+                }
+                b.resumable -> TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) {
                     Text(stringResource(R.string.resume))
                 }
             }
         }
-        if (!active) {
+        if (!active && inLine == null) {
             Box {
                 IconButton(onClick = { menu = true }) {
                     Icon(Icons.Filled.MoreVert, stringResource(R.string.more_options), tint = Muted)

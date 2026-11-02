@@ -50,8 +50,10 @@ data class Endpoint(
     val key: String = "",
     val model: String = "",
     val voice: String = "",
-    val format: String = "mp3",
+    val format: String = "wav",
     val parallel: Int = 1,
+    val language: String = "",
+    val qc: Boolean = false,
 ) {
     /** Enough to try. Some services need neither key nor model (a Whisper on the home network). */
     val isSet get() = url.isNotBlank()

@@ -5,7 +5,11 @@ import com.javimetallab.storyteller.data.Transcript
 import com.javimetallab.storyteller.data.Word
 import com.javimetallab.storyteller.engine.Chunker
 import com.javimetallab.storyteller.engine.Docs
+import com.javimetallab.storyteller.data.PronStore
 import com.javimetallab.storyteller.engine.Epub
+import com.javimetallab.storyteller.engine.Pcm
+import com.javimetallab.storyteller.engine.Pron
+import com.javimetallab.storyteller.engine.Qc
 import com.javimetallab.storyteller.engine.TextPrep
 import com.javimetallab.storyteller.engine.Timing
 import com.javimetallab.storyteller.engine.Translation
@@ -50,6 +54,104 @@ class EngineTest {
         assertTrue(cases.length() > 10)
         val pauses = golden.getJSONObject("pauses")
         for ((key, value) in close) assertEquals(key, pauses.getDouble(key), value.pause, 0.0)
+    }
+
+    @Test
+    fun chunksOfEachLanguageLikeTheDesktopEngine() {
+        val close = mapOf("coma" to TextPrep.Close.CLAUSE, "frase" to TextPrep.Close.SENTENCE, "parrafo" to TextPrep.Close.PARAGRAPH)
+        val cases = golden.getJSONArray("chunks_lang")
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val want = c.getJSONArray("out").let { a ->
+                (0 until a.length()).map { k -> TextPrep.Chunk(a.getJSONArray(k).getString(0), close.getValue(a.getJSONArray(k).getString(1))) }
+            }
+            assertEquals("${c.getString("lang")} ${c.getString("in").take(40)}", want, TextPrep.splitChunks(c.getString("in"), c.getString("lang")))
+        }
+        assertTrue(cases.length() > 5)
+    }
+
+    @Test
+    fun theTextForTheVoiceLikeTheDesktopEngine() {
+        val spellings = golden.getJSONObject("spell")
+        val cases = golden.getJSONArray("voice")
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val lang = c.getString("lang")
+            val spell = spellings.optJSONObject(lang)
+            val pron = c.optJSONObject("pron")?.let { Pron.of(it, lang) } ?: Pron.NONE
+            assertEquals(
+                "$lang: ${c.getString("in")}", c.getString("out"),
+                TextPrep.forVoice(c.getString("in"), lang, { n -> spell?.optString(n.toString())?.ifEmpty { null } ?: n.toString() }, pron),
+            )
+        }
+        assertTrue(cases.length() > 10)
+    }
+
+    @Test
+    fun theVerdictLikeTheDesktopEngine() {
+        val words = golden.getJSONArray("qc_words")
+        for (i in 0 until words.length()) {
+            val c = words.getJSONObject(i)
+            val want = c.getJSONArray("out").let { a -> (0 until a.length()).map { a.getString(it) } }
+            assertEquals(c.getString("in"), want, Qc.words(c.getString("in")))
+        }
+        val ratios = golden.getJSONArray("qc_ratio")
+        for (i in 0 until ratios.length()) {
+            val c = ratios.getJSONObject(i)
+            assertEquals("${c.getString("a")} ${c.getString("b")}", c.getDouble("r"), Qc.ratio(c.getString("a"), c.getString("b")), 1e-9)
+        }
+        val cases = golden.getJSONArray("qc")
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val v = Qc.eval(c.getString("ref"), c.getString("hyp"), fault = c.optString("fault"))
+            val name = "${c.getString("ref")} / ${c.getString("hyp")}"
+            assertEquals(name, c.getDouble("recall"), v.recall, 1e-9)
+            assertEquals(name, c.getBoolean("ok"), v.ok)
+            assertEquals(name, c.getDouble("score"), v.score, 1e-9)
+        }
+        assertTrue(cases.length() > 8)
+    }
+
+    @Test
+    fun voiceWithoutWordsAtTheEndIsAFault() {
+        val rate = 24_000
+        val voice = ShortArray(rate * 3) { i -> (if (i % 2 == 0) 8000 else -8000).toShort() }
+        assertTrue(Qc.audioFault("hola", Pcm(voice, rate), 1.0, Qc.Pace()).isNotEmpty())
+        assertEquals("", Qc.audioFault("hola", Pcm(voice, rate), 2.95, Qc.Pace()))
+        val quiet = ShortArray(rate * 3) { i -> if (i < rate) (if (i % 2 == 0) 8000 else -8000).toShort() else 0 }
+        assertEquals("", Qc.audioFault("hola", Pcm(quiet, rate), 1.0, Qc.Pace()))
+        val pace = Qc.Pace()
+        val text = "quince letras justas"
+        repeat(8) { pace.note(text, Pcm(ShortArray(rate), rate)) }
+        assertEquals("", Qc.audioFault(text, Pcm(ShortArray(rate), rate), null, pace))
+        assertTrue(Qc.audioFault(text, Pcm(ShortArray(rate * 3), rate), null, pace).isNotEmpty())
+    }
+
+    @Test
+    fun theDictionaryIsOfEachLanguage() {
+        val root = JSONObject()
+            .put("pron", JSONObject().put("software", "sófwer"))
+            .put("langs", JSONObject().put("en", JSONObject().put("pron", JSONObject().put("nginx", "engine x")).put("say_letters", org.json.JSONArray(listOf("SQL")))))
+        assertEquals("el sófwer de nginx.", TextPrep.forVoice("El software de nginx.", "es", { "$it" }, Pron.of(root, "es")))
+        assertEquals("the software of engine x, s q l.", TextPrep.forVoice("The software of nginx, SQL.", "en", { "$it" }, Pron.of(root, "en")))
+        assertEquals("le software.", TextPrep.forVoice("Le software.", "fr", { "$it" }, Pron.of(root, "fr")))
+    }
+
+    @Test
+    fun theDictionaryScreenGoesAndComesBack() {
+        val root = JSONObject().put("pron", JSONObject().put("software", "sófwer")).put("say_letters", org.json.JSONArray(listOf("USB")))
+        val t = PronStore.texts(root, "es")
+        assertEquals("software = sófwer", t.words)
+        assertEquals("USB", t.letters)
+        PronStore.withTexts(root, "en", PronStore.Texts("nginx = engine x\nno vale\n= tampoco\n", "SQL, API\nCSS", ""))
+        val e = PronStore.texts(root, "en")
+        assertEquals("nginx = engine x", e.words)
+        assertEquals("SQL, API, CSS", e.letters)
+        assertEquals("software = sófwer", PronStore.texts(root, "es").words)
+        PronStore.withTexts(root, "es", PronStore.Texts("email = ímeil", "", "NASA"))
+        assertEquals("email = ímeil", PronStore.texts(root, "es").words)
+        assertEquals("nginx = engine x", PronStore.texts(root, "en").words)
+        assertEquals("", PronStore.texts(JSONObject(), "fr").words)
     }
 
     @Test
@@ -405,14 +507,14 @@ class EngineTest {
     @Test
     fun forVoiceLeavesSubtitlesAloneAndSpellsWhatItSends() {
         val spell = { n: Long -> "<$n>" }
-        assertEquals("Tengo <3> gatos", TextPrep.forVoice("Tengo 3 gatos.".removeSuffix("."), "es", spell))
-        assertEquals("El doctor llegó a las <10> <30>.", TextPrep.forVoice("El Dr. llegó a las 10:30.", "es", spell))
-        assertEquals("Costó <1000> euros", TextPrep.forVoice("Costó 1.000 euros", "es", spell))
-        assertEquals("Vale <3> coma <5>", TextPrep.forVoice("Vale 3,5", "es", spell))
+        assertEquals("tengo <3> gatos", TextPrep.forVoice("Tengo 3 gatos.".removeSuffix("."), "es", spell))
+        assertEquals("el doctor llegó a las <10> <30>.", TextPrep.forVoice("El Dr. llegó a las 10:30.", "es", spell))
+        assertEquals("costó <1000> euros", TextPrep.forVoice("Costó 1.000 euros", "es", spell))
+        assertEquals("vale <3> coma <5>", TextPrep.forVoice("Vale 3,5", "es", spell))
         assertEquals("ce pe u del Prefacio", TextPrep.forVoice("CPU del PREFACIO", "es", spell))
-        assertEquals("Estados Unidos, hoy", TextPrep.forVoice("EE. UU.: hoy", "es", spell))
+        assertEquals("estados Unidos, hoy", TextPrep.forVoice("EE. UU.: hoy", "es", spell))
         // In another language, no Spanish in the way.
-        assertEquals("It cost <3> point <5>", TextPrep.forVoice("It cost 3,5", "en", spell))
+        assertEquals("it cost <3> point <5>", TextPrep.forVoice("It cost 3.5", "en", spell))
         assertEquals("CPU rules", TextPrep.forVoice("CPU rules", "en", spell))
     }
 }

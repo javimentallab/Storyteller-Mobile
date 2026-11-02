@@ -844,5 +844,863 @@
   "coma": 0.22,
   "frase": 0.55,
   "parrafo": 0.9
- }
+ },
+ "chunks_lang": [
+  {
+   "lang": "ru",
+   "in": "Привет, это длинная фраза на русском языке, и она продолжается. т.е. это не конец. Хорошо.",
+   "out": [
+    [
+     "Привет, это длинная фраза на русском языке,",
+     "coma"
+    ],
+    [
+     "и она продолжается. т.е. это не конец.",
+     "frase"
+    ],
+    [
+     "Хорошо.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ru",
+   "in": "палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата ",
+   "out": [
+    [
+     "палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата",
+     "coma"
+    ],
+    [
+     "палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата",
+     "coma"
+    ],
+    [
+     "палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата палата",
+     "coma"
+    ],
+    [
+     "палата палата палата палата палата палата палата палата",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "zh-cn",
+   "in": "这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这",
+   "out": [
+    [
+     "这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这",
+     "coma"
+    ],
+    [
+     "这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这",
+     "coma"
+    ],
+    [
+     "这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这",
+     "coma"
+    ],
+    [
+     "这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这这",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "zh-cn",
+   "in": "你好，世界。今天天气很好！我们走吧。",
+   "out": [
+    [
+     "你好，世界。",
+     "frase"
+    ],
+    [
+     "今天天气很好！",
+     "frase"
+    ],
+    [
+     "我们走吧。",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ja",
+   "in": "ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+   "out": [
+    [
+     "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+     "coma"
+    ],
+    [
+     "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+     "coma"
+    ],
+    [
+     "あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+     "coma"
+    ],
+    [
+     "あああああ",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ja",
+   "in": "彼は「行く。」と言った。雨です。",
+   "out": [
+    [
+     "彼は「行く。」",
+     "frase"
+    ],
+    [
+     "と言った。",
+     "frase"
+    ],
+    [
+     "雨です。",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ko",
+   "in": "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 ",
+   "out": [
+    [
+     "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요",
+     "coma"
+    ],
+    [
+     "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요",
+     "coma"
+    ],
+    [
+     "안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요 안녕하세요",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "hi",
+   "in": "नमस्ते दुनिया। आप कैसे हैं؟ ठीक.",
+   "out": [
+    [
+     "नमस्ते दुनिया।",
+     "frase"
+    ],
+    [
+     "आप कैसे हैं؟",
+     "frase"
+    ],
+    [
+     "ठीक.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ar",
+   "in": "مرحبا بالعالم الجميل في هذا اليوم، كيف حالك اليوم؟ بخير.",
+   "out": [
+    [
+     "مرحبا بالعالم الجميل في هذا اليوم،",
+     "coma"
+    ],
+    [
+     "كيف حالك اليوم؟",
+     "frase"
+    ],
+    [
+     "بخير.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "pt",
+   "in": "palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra ",
+   "out": [
+    [
+     "palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra",
+     "coma"
+    ],
+    [
+     "palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra",
+     "coma"
+    ],
+    [
+     "palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra palavra",
+     "coma"
+    ],
+    [
+     "palavra",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "it",
+   "in": "parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola ",
+   "out": [
+    [
+     "parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola",
+     "coma"
+    ],
+    [
+     "parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola parola",
+     "coma"
+    ],
+    [
+     "parola parola parola parola parola parola parola parola parola parola parola parola parola parola",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "en",
+   "in": "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word ",
+   "out": [
+    [
+     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+     "coma"
+    ],
+    [
+     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "de",
+   "in": "Das Haus, das ich sah. ä ist klein.",
+   "out": [
+    [
+     "Das Haus, das ich sah. ä ist klein.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "fr",
+   "in": "Il dit : « Oui. » à demain, sans doute. Voilà.",
+   "out": [
+    [
+     "Il dit : « Oui.",
+     "frase"
+    ],
+    [
+     "» à demain, sans doute.",
+     "frase"
+    ],
+    [
+     "Voilà.",
+     "parrafo"
+    ]
+   ]
+  }
+ ],
+ "voice": [
+  {
+   "lang": "es",
+   "in": "El Sr. Smith usa una CPU y pagó $74.99 por el 21000.",
+   "out": "el señor Smith usa una ce pe u y pagó setenta y cuatro dólares con noventa y nueve por el veintiún mil."
+  },
+  {
+   "lang": "es",
+   "in": "La NASA y la ONU. PREFACIO: Son las 10:30 y A+ = bueno.",
+   "out": "la Nasa y la Onu. Prefacio, Son las diez treinta y A más igual a bueno."
+  },
+  {
+   "lang": "es",
+   "in": "1.000 personas y 3,5 euros, o 3,000 dólares.",
+   "out": "mil personas y tres coma cinco euros, o tres mil dólares."
+  },
+  {
+   "lang": "es",
+   "in": "Mi software de USB en New York, con ABC y XYZ.",
+   "out": "mi sófwer de u ese be en niu york, con Abc y equis i griega zeta.",
+   "pron": {
+    "pron": {
+     "software": "sófwer",
+     "New York": "niu york"
+    },
+    "say_letters": [
+     "USB"
+    ],
+    "say_word": [
+     "ABC"
+    ],
+    "langs": {
+     "en": {
+      "pron": {
+       "nginx": "engine x"
+      },
+      "say_letters": [
+       "SQL"
+      ]
+     },
+     "ru": {
+      "pron": {
+       "мир": "мiр"
+      }
+     }
+    }
+   }
+  },
+  {
+   "lang": "es",
+   "in": "Y entonces... no sé qué pasó.",
+   "out": "y entonces. no sé qué pasó."
+  },
+  {
+   "lang": "es",
+   "in": "1 millón y 21 mil, uno mil.",
+   "out": "uno millón y veintiún mil, un mil."
+  },
+  {
+   "lang": "es",
+   "in": "Dorothy Sr. llegó con el Dr. Pérez y EE. UU.",
+   "out": "dorothy sénior llegó con el doctor Pérez y Estados Unidos"
+  },
+  {
+   "lang": "en",
+   "in": "Mr. Smith has a CPU and A+ = good, 3.5 and 1,000, it cost $5.",
+   "out": "mr. Smith has a CPU and A+ = good, three point five and one thousand, it cost $five."
+  },
+  {
+   "lang": "en",
+   "in": "The software of nginx, USB and SQL.",
+   "out": "the software of engine x, USB and s q l.",
+   "pron": {
+    "pron": {
+     "software": "sófwer",
+     "New York": "niu york"
+    },
+    "say_letters": [
+     "USB"
+    ],
+    "say_word": [
+     "ABC"
+    ],
+    "langs": {
+     "en": {
+      "pron": {
+       "nginx": "engine x"
+      },
+      "say_letters": [
+       "SQL"
+      ]
+     },
+     "ru": {
+      "pron": {
+       "мир": "мiр"
+      }
+     }
+    }
+   }
+  },
+  {
+   "lang": "en",
+   "in": "CPU rules the world.",
+   "out": "CPU rules the world."
+  },
+  {
+   "lang": "de",
+   "in": "3,5 und 1.000, aber 1,500 ist anders.",
+   "out": "drei Komma fünf und eintausend, aber eins Komma fünf null null ist anders."
+  },
+  {
+   "lang": "fr",
+   "in": "Le CPU à 10:30, 2,5 fois.",
+   "out": "le CPU à dix trente, deux virgule cinq fois."
+  },
+  {
+   "lang": "ru",
+   "in": "Весь мир, 1999 год и 3,5 метра.",
+   "out": "весь мiр, одна тысяча девятьсот девяносто девять год и три запятая пять метра.",
+   "pron": {
+    "pron": {
+     "software": "sófwer",
+     "New York": "niu york"
+    },
+    "say_letters": [
+     "USB"
+    ],
+    "say_word": [
+     "ABC"
+    ],
+    "langs": {
+     "en": {
+      "pron": {
+       "nginx": "engine x"
+      },
+      "say_letters": [
+       "SQL"
+      ]
+     },
+     "ru": {
+      "pron": {
+       "мир": "мiр"
+      }
+     }
+    }
+   }
+  },
+  {
+   "lang": "zh-cn",
+   "in": "第1999页，你好，世界。",
+   "out": "第1999页, 你好, 世界。"
+  },
+  {
+   "lang": "ja",
+   "in": "1999年に。3.5メートル。",
+   "out": "千九百九十九年に。三 点 五メートル。"
+  },
+  {
+   "lang": "ko",
+   "in": "1999년, 안녕하세요.",
+   "out": "천구백구십구년, 안녕하세요."
+  },
+  {
+   "lang": "ar",
+   "in": "في عام 1999، بخير.",
+   "out": "في عام ألف و تسعمائة و تسعة و تسعون، بخير."
+  },
+  {
+   "lang": "hi",
+   "in": "1999 में, ठीक है।",
+   "out": "एक हज़ार नौ सौ निन्यानवे में, ठीक है।"
+  },
+  {
+   "lang": "pt",
+   "in": "Em 1999, o CPU custou 2,5.",
+   "out": "em mil novecentos e noventa e nove, o CPU custou dois vírgula cinco."
+  },
+  {
+   "lang": "tr",
+   "in": "1999 yılında geldi.",
+   "out": "bindokuzyüzdoksandokuz yılında geldi."
+  }
+ ],
+ "spell": {
+  "es": {
+   "1500": "mil quinientos",
+   "2": "dos",
+   "4": "cuatro",
+   "74": "setenta y cuatro",
+   "1": "uno",
+   "0": "cero",
+   "3": "tres",
+   "9": "nueve",
+   "3000": "tres mil",
+   "99": "noventa y nueve",
+   "6": "seis",
+   "8": "ocho",
+   "2000": "dos mil",
+   "1000": "mil",
+   "21000": "veintiuno mil",
+   "5": "cinco",
+   "7": "siete",
+   "30": "treinta",
+   "10": "diez",
+   "21": "veintiuno"
+  },
+  "en": {
+   "1500": "one thousand, five hundred",
+   "2": "two",
+   "4": "four",
+   "1": "one",
+   "0": "zero",
+   "3": "three",
+   "9": "nine",
+   "3000": "three thousand",
+   "6": "six",
+   "8": "eight",
+   "21000": "twenty-one thousand",
+   "2000": "two thousand",
+   "1000": "one thousand",
+   "5": "five",
+   "7": "seven"
+  },
+  "de": {
+   "1500": "eintausendfünfhundert",
+   "2": "zwei",
+   "4": "vier",
+   "1": "eins",
+   "500": "fünfhundert",
+   "0": "null",
+   "3": "drei",
+   "9": "neun",
+   "3000": "dreitausend",
+   "6": "sechs",
+   "8": "acht",
+   "21000": "einundzwanzigtausend",
+   "2000": "zweitausend",
+   "1000": "eintausend",
+   "5": "fünf",
+   "7": "sieben"
+  },
+  "fr": {
+   "1500": "mille cinq cents",
+   "2": "deux",
+   "4": "quatre",
+   "30": "trente",
+   "1": "un",
+   "0": "zéro",
+   "3": "trois",
+   "9": "neuf",
+   "3000": "trois mille",
+   "10": "dix",
+   "6": "six",
+   "8": "huit",
+   "2000": "deux mille",
+   "1000": "mille",
+   "21000": "vingt et un mille",
+   "5": "cinq",
+   "7": "sept"
+  },
+  "ru": {
+   "1500": "одна тысяча пятьсот",
+   "2": "два",
+   "4": "четыре",
+   "1": "один",
+   "0": "ноль",
+   "3": "три",
+   "1999": "одна тысяча девятьсот девяносто девять",
+   "9": "девять",
+   "3000": "три тысячи",
+   "6": "шесть",
+   "8": "восемь",
+   "2000": "две тысячи",
+   "1000": "одна тысяча",
+   "21000": "двадцать одна тысяча",
+   "5": "пять",
+   "7": "семь"
+  },
+  "ja": {
+   "1500": "千五百",
+   "2": "二",
+   "4": "四",
+   "1": "一",
+   "0": "零",
+   "3": "三",
+   "1999": "千九百九十九",
+   "9": "九",
+   "3000": "三千",
+   "6": "六",
+   "8": "八",
+   "2000": "二千",
+   "1000": "千",
+   "21000": "二万千",
+   "5": "五",
+   "7": "七"
+  },
+  "ko": {
+   "1500": "천오백",
+   "2": "이",
+   "4": "사",
+   "1": "일",
+   "0": "영",
+   "3": "삼",
+   "1999": "천구백구십구",
+   "9": "구",
+   "3000": "삼천",
+   "6": "육",
+   "8": "팔",
+   "2000": "이천",
+   "1000": "천",
+   "21000": "이만 천",
+   "5": "오",
+   "7": "칠"
+  },
+  "ar": {
+   "1500": "ألف و خمسمائة",
+   "2": "اثنان",
+   "4": "أربعة",
+   "1": "واحد",
+   "0": "صفر",
+   "3": "ثلاثة",
+   "1999": "ألف و تسعمائة و تسعة و تسعون",
+   "9": "تسعة",
+   "3000": "ثلاثة آلاف",
+   "6": "ستة",
+   "8": "ثمانية",
+   "2000": "ألفا",
+   "1000": "ألف",
+   "21000": "واحد و عشرون ألف",
+   "5": "خمسة",
+   "7": "سبعة"
+  },
+  "hi": {
+   "1500": "एक हज़ार पाँच सौ",
+   "2": "दो",
+   "4": "चार",
+   "1": "एक",
+   "0": "शून्य",
+   "3": "तीन",
+   "1999": "एक हज़ार नौ सौ निन्यानवे",
+   "9": "नौ",
+   "3000": "तीन हज़ार",
+   "6": "छह",
+   "8": "आठ",
+   "2000": "दो हज़ार",
+   "1000": "एक हज़ार",
+   "21000": "इक्कीस हज़ार",
+   "5": "पाँच",
+   "7": "सात"
+  },
+  "pt": {
+   "1500": "mil e quinhentos",
+   "2": "dois",
+   "4": "quatro",
+   "1": "um",
+   "0": "zero",
+   "3": "três",
+   "1999": "mil novecentos e noventa e nove",
+   "9": "nove",
+   "3000": "três mil",
+   "6": "seis",
+   "8": "oito",
+   "2000": "dois mil",
+   "1000": "mil",
+   "21000": "vinte e um mil",
+   "5": "cinco",
+   "7": "sete"
+  },
+  "tr": {
+   "1500": "binbeşyüz",
+   "2": "iki",
+   "4": "dört",
+   "1": "bir",
+   "0": "sıfır",
+   "3": "üç",
+   "1999": "bindokuzyüzdoksandokuz",
+   "9": "dokuz",
+   "3000": "üçbin",
+   "6": "altı",
+   "8": "sekiz",
+   "2000": "ikibin",
+   "1000": "bin",
+   "21000": "yirmibirbin",
+   "5": "beş",
+   "7": "yedi"
+  }
+ },
+ "qc_words": [
+  {
+   "in": "Canción, ñu y 3 ÁRBOLES.",
+   "out": [
+    "cancion",
+    "nu",
+    "y",
+    "3",
+    "arboles"
+   ]
+  },
+  {
+   "in": "Привет, мир.",
+   "out": [
+    "привет",
+    "мир"
+   ]
+  },
+  {
+   "in": "你好，世界。",
+   "out": [
+    "你",
+    "好",
+    "世",
+    "界"
+   ]
+  },
+  {
+   "in": "彼は行く",
+   "out": [
+    "彼",
+    "は",
+    "行",
+    "く"
+   ]
+  },
+  {
+   "in": "don't stop",
+   "out": [
+    "don",
+    "t",
+    "stop"
+   ]
+  },
+  {
+   "in": "el_de-al lado",
+   "out": [
+    "el",
+    "de",
+    "al",
+    "lado"
+   ]
+  }
+ ],
+ "qc_ratio": [
+  {
+   "a": "casa",
+   "b": "cosa",
+   "r": 0.75
+  },
+  {
+   "a": "menor",
+   "b": "menores",
+   "r": 0.8333333333333334
+  },
+  {
+   "a": "resistencia",
+   "b": "resistenzia",
+   "r": 0.9090909090909091
+  },
+  {
+   "a": "abcd",
+   "b": "dcba",
+   "r": 0.25
+  },
+  {
+   "a": "volumen",
+   "b": "volumen",
+   "r": 1.0
+  },
+  {
+   "a": "en ojo",
+   "b": "enojo",
+   "r": 0.9090909090909091
+  },
+  {
+   "a": "xyz",
+   "b": "abc",
+   "r": 0.0
+  }
+ ],
+ "qc": [
+  {
+   "ref": "Hola, mundo.",
+   "hyp": "Hola mundo",
+   "fault": "",
+   "recall": 1.0,
+   "ok": true,
+   "score": 1.0
+  },
+  {
+   "ref": "El camino de menor resistencia.",
+   "hyp": "El camino de menor resistencia. ¡O no te sigo muerto, ponte!",
+   "fault": "",
+   "recall": 1.0,
+   "ok": false,
+   "score": 0.22000000000000003
+  },
+  {
+   "ref": "El volumen sube.",
+   "hyp": "El volumen volumen volumen volumen volumen volumen sube",
+   "fault": "",
+   "recall": 1.0,
+   "ok": false,
+   "score": 0.32
+  },
+  {
+   "ref": "La casa es muy grande.",
+   "hyp": "La casa es muy",
+   "fault": "",
+   "recall": 0.8,
+   "ok": false,
+   "score": 0.5
+  },
+  {
+   "ref": "La casa es muy grande y bonita.",
+   "hyp": "La casa es muy grande y",
+   "fault": "",
+   "recall": 0.8571428571428571,
+   "ok": false,
+   "score": 0.5571428571428572
+  },
+  {
+   "ref": "Uno dos tres cuatro.",
+   "hyp": "Uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece",
+   "fault": "",
+   "recall": 1.0,
+   "ok": false,
+   "score": 0.13
+  },
+  {
+   "ref": "Otro texto cualquiera aquí.",
+   "hyp": "algo que no tiene nada que ver",
+   "fault": "",
+   "recall": 0.0,
+   "ok": false,
+   "score": -0.32
+  },
+  {
+   "ref": "Hola, mundo.",
+   "hyp": "Hola mundo",
+   "fault": "1.0 s de voz sin palabras al final",
+   "recall": 1.0,
+   "ok": false,
+   "score": 0.4
+  },
+  {
+   "ref": "Привет, мир, как дела.",
+   "hyp": "Привет мир как дела",
+   "fault": "",
+   "recall": 1.0,
+   "ok": true,
+   "score": 1.0
+  },
+  {
+   "ref": "Привет, мир, как дела.",
+   "hyp": "совсем другое",
+   "fault": "",
+   "recall": 0.0,
+   "ok": false,
+   "score": -0.3
+  },
+  {
+   "ref": "你好，世界。",
+   "hyp": "你好世界",
+   "fault": "",
+   "recall": 1.0,
+   "ok": true,
+   "score": 1.0
+  },
+  {
+   "ref": "你好，世界。",
+   "hyp": "再见朋友",
+   "fault": "",
+   "recall": 0.0,
+   "ok": false,
+   "score": 0.0
+  },
+  {
+   "ref": "mil novecientos noventa y nueve.",
+   "hyp": "1999",
+   "fault": "",
+   "recall": 0.0,
+   "ok": false,
+   "score": 0.0
+  },
+  {
+   "ref": "",
+   "hyp": "algo",
+   "fault": "",
+   "recall": 1.0,
+   "ok": true,
+   "score": 1.0
+  },
+  {
+   "ref": "Hola.",
+   "hyp": "",
+   "fault": "",
+   "recall": 0.0,
+   "ok": false,
+   "score": 0.0
+  }
+ ]
 }

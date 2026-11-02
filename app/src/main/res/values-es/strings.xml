@@ -144,4 +144,35 @@
     <string name="err_cant_read_file">No puedo leer ese archivo.</string>
     <string name="err_no_text">No hay texto que traducir en ese documento.</string>
     <string name="err_generic">Algo ha fallado (%1$s).</string>
+
+    <!-- Idioma, QC, diccionario, voces y libros, como en el escritorio -->
+    <string name="field_language">Idioma</string>
+    <string name="field_language_help">El idioma en el que se lee el libro. Elige también una voz que suene bien en él.</string>
+    <string name="qc_title">Revisar y regenerar frases que suenen mal</string>
+    <string name="qc_help">Cada frase pasa por el servicio de transcripción y, si no coincide con el texto, se pide otra vez. Más lento. Necesita la URL de transcripción.</string>
+    <string name="voice_upload">Subir una voz…</string>
+    <string name="voice_uploading">Subiendo la voz…</string>
+    <string name="voice_upload_help">Una grabación limpia de 5 a 12 s. Solo la admite el servidor propio de Storyteller (st_server).</string>
+    <string name="voice_upload_send">Subir</string>
+    <string name="voice_upload_unsupported">Este servicio no admite voces: solo el servidor propio de Storyteller (st_server).</string>
+    <string name="voice_name">Nombre de la voz</string>
+    <string name="pron_title">Diccionario de pronunciación</string>
+    <string name="pron_help">Cómo se leen algunas palabras en %1$s. Cada idioma tiene el suyo: el idioma se cambia en Modelos.</string>
+    <string name="pron_words">Palabras: palabra = cómo se dice, una en cada línea</string>
+    <string name="pron_letters">Siglas que se deletrean</string>
+    <string name="pron_as_words">Siglas que se leen como palabra</string>
+    <string name="pron_save">Guardar</string>
+    <string name="fetch_title">Traer libros del escritorio</string>
+    <string name="fetch_help">Del servidor propio de Storyteller (st_server), en la URL de narración. Solo vienen los capítulos terminados; la app de escritorio se queda como está.</string>
+    <string name="fetch_loading">Preguntando al servidor…</string>
+    <string name="fetch_empty">Ese servidor aún no tiene capítulos terminados.</string>
+    <string name="fetch_unsupported">Este servicio no tiene libros: solo el servidor propio de Storyteller (st_server).</string>
+    <string name="fetch_summary">%1$d de %2$d capítulos · %3$s</string>
+    <string name="fetch_have_it">Ya lo tienes</string>
+    <string name="fetch_bring">Traer</string>
+
+    <string name="job_switch">Pasar a este</string>
+    <string name="job_add_to_line">Poner a la cola</string>
+    <string name="job_waiting_turn">En cola: %1$s</string>
+    <string name="book_in_line">● Esperando su turno</string>
 </resources>

@@ -1,5 +1,9 @@
 package com.javimetallab.storyteller.ui
 
+import com.javimetallab.storyteller.data.RemoteBook
+import com.javimetallab.storyteller.data.PronStore
+import com.javimetallab.storyteller.data.Languages
+import androidx.compose.material3.OutlinedTextField
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
@@ -256,5 +260,93 @@ private fun TranslationCard(vm: AppViewModel, t: TranslationItem, running: Boole
             stringResource(R.string.confirm_delete_translation, t.name), stringResource(R.string.delete),
             { vm.deleteTranslation(t) }, { confirm = false },
         )
+    }
+}
+
+/** The dictionary of the language being narrated. The same words mean something else in another language. */
+@Composable
+fun PronScreen(vm: AppViewModel) {
+    val lang = remember { vm.endpoint(Capability.NARRATION).language }
+    val start = remember { vm.pronTexts(lang) }
+    var words by rememberSaveable { mutableStateOf(start.words) }
+    var letters by rememberSaveable { mutableStateOf(start.letters) }
+    var asWords by rememberSaveable { mutableStateOf(start.asWords) }
+    Column(Modifier.fillMaxSize()) {
+        TopBar(stringResource(R.string.pron_title), onBack = { vm.back() })
+        Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+            FormColumn {
+                Text(stringResource(R.string.pron_help, Languages.name(lang)), color = Muted, fontSize = 13.sp)
+                OutlinedTextField(
+                    value = words, onValueChange = { words = it },
+                    label = { Text(stringResource(R.string.pron_words)) },
+                    placeholder = { Text("software = sófwer") }, minLines = 6,
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                )
+                OutlinedTextField(
+                    value = letters, onValueChange = { letters = it },
+                    label = { Text(stringResource(R.string.pron_letters)) }, placeholder = { Text("USB, CPU") },
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                )
+                OutlinedTextField(
+                    value = asWords, onValueChange = { asWords = it },
+                    label = { Text(stringResource(R.string.pron_as_words)) }, placeholder = { Text("NASA, UNESCO") },
+                    modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
+                )
+                PrimaryButton(stringResource(R.string.pron_save), modifier = Modifier.fillMaxWidth().padding(top = 18.dp)) {
+                    vm.savePron(lang, PronStore.Texts(words, letters, asWords))
+                    vm.back()
+                }
+            }
+        }
+    }
+}
+
+/** Books narrated on the desktop, from the user's own server: its URL is the one for narration. */
+@Composable
+fun FetchScreen(vm: AppViewModel) {
+    var books by remember { mutableStateOf<List<RemoteBook>?>(null) }
+    var failure by remember { mutableStateOf<String?>(null) }
+    var loading by remember { mutableStateOf(true) }
+    val here by vm.books.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) {
+        val (found, why) = vm.remoteBooks()
+        books = found
+        failure = why
+        loading = false
+    }
+    Column(Modifier.fillMaxSize()) {
+        TopBar(stringResource(R.string.fetch_title), onBack = { vm.back() })
+        Column(Modifier.weight(1f).verticalScroll(rememberScrollState())) {
+            FormColumn {
+                if (NeedsModel(vm, Capability.NARRATION)) return@FormColumn
+                Text(stringResource(R.string.fetch_help), color = Muted, fontSize = 13.sp)
+                if (loading) Text(stringResource(R.string.fetch_loading), color = Muted, modifier = Modifier.padding(top = 12.dp))
+                failure?.let { Text(it, color = Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 12.dp)) }
+                books?.let { list ->
+                    if (list.isEmpty()) Text(stringResource(R.string.fetch_empty), color = Muted, modifier = Modifier.padding(top = 12.dp))
+                    for (b in list) {
+                        val mine = here.firstOrNull { it.id == vm.remoteFolder(b) }
+                        val chapters = b.manifest.length()
+                        Row(Modifier.fillMaxWidth().padding(top = 14.dp), verticalAlignment = Alignment.CenterVertically) {
+                            Column(Modifier.weight(1f).padding(end = 10.dp)) {
+                                Text(b.title, color = Ink, fontWeight = FontWeight.SemiBold)
+                                Text(
+                                    stringResource(R.string.fetch_summary, chapters, b.total, Format.size(b.size)),
+                                    color = Muted, fontSize = 13.sp,
+                                )
+                            }
+                            if (mine != null && mine.done >= chapters) {
+                                Text(stringResource(R.string.fetch_have_it), color = Muted, fontSize = 13.sp)
+                            } else {
+                                PrimaryButton(stringResource(R.string.fetch_bring)) {
+                                    vm.fetchBook(b)
+                                    vm.back()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -3,10 +3,12 @@ package com.javimetallab.storyteller.engine
 import android.content.Context
 import android.net.Uri
 import com.javimetallab.storyteller.data.Capability
+import com.javimetallab.storyteller.data.Languages
 import com.javimetallab.storyteller.data.Library
 import com.javimetallab.storyteller.data.ModelApi
 import com.javimetallab.storyteller.data.ModelException
 import com.javimetallab.storyteller.data.Prefs
+import com.javimetallab.storyteller.data.PronStore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -38,6 +40,8 @@ class NarrateTask(
     override fun discard() {
         if (!resume) book.deleteRecursively()
     }
+
+    override fun resumed() = NarrateTask(context, book, title, resume = true)
 
     private fun saveManifest() {
         val a = JSONArray()
@@ -73,12 +77,16 @@ class NarrateTask(
             JSONObject()
         }
         val prepareText = options.optBoolean("prepare", true)
-        val lang = epub.language.lowercase().take(2).ifEmpty { "es" }
+        val lang = endpoint.language.ifBlank { Languages.default() }      // the user's choice, like the voice
         val speller = Speller(lang)
+        val pron = PronStore.forLanguage(context, lang)
+        val listener = Prefs.get(context).endpoint(Capability.TRANSCRIPTION).takeIf { endpoint.qc && it.isSet }
+            ?.let { ctl.watch(ModelApi(it)) }
+        val pace = Qc.Pace()
         val chapters = epub.chapters
         total = chapters.size
         if (total == 0) throw IOException("no text")
-        val sentences = chapters.map { TextPrep.splitChunks(it.text) }
+        val sentences = chapters.map { TextPrep.splitChunks(it.text, lang) }
         val allSentences = sentences.sumOf { it.size }.coerceAtLeast(1)
         sentenceCount = allSentences
         if (resume) loadPrevious()
@@ -86,7 +94,7 @@ class NarrateTask(
         saveManifest()
         val parallel = endpoint.parallel.coerceAtLeast(1)
         var doneSentences = entries.values.sumOf { it.optInt("n") }
-        val pace = ArrayDeque<Long>()
+        val times = ArrayDeque<Long>()
         for ((ci, ch) in chapters.withIndex()) {
             val id = ci + 1
             val base = "cap%02d".format(id)
@@ -121,14 +129,41 @@ class NarrateTask(
                     list.size, start, parallel,
                     work = { k ->
                         val text = list[k].text
+                        val spoken = if (prepareText) TextPrep.forVoice(text, lang, speller::spell, pron) else text
                         val tmp = File(temp, "${book.name}-$id-$k.audio")
+                        val heard = File(temp, "${book.name}-$id-$k.heard.wav")
                         try {
-                            ctl.retrying {
-                                api.speech(if (prepareText) TextPrep.forVoice(text, lang, speller::spell) else text, tmp)
+                            var best: Pcm? = null
+                            var bestScore = -1e9
+                            for (attempt in 0..(if (listener != null) Qc.RETRIES else 0)) {
+                                ctl.retrying { api.speech(spoken, tmp, lang) }
+                                val pcm = AudioCodec.decodeAll(tmp)
+                                if (listener == null) {
+                                    best = pcm
+                                    break
+                                }
+                                val said = try {
+                                    AudioCodec.writeWav(heard, pcm.samples, pcm.samples.size, pcm.rate)
+                                    listener.transcribe(heard, Languages.forWhisper(lang), if (lang == "es") "Lectura de un libro." else ".")
+                                } catch (e: IOException) {
+                                    ctl.check()
+                                    if (best == null) best = pcm      // nobody to ask: what was generated stays
+                                    break
+                                }
+                                val verdict = Qc.eval(spoken, said.text, fault = Qc.audioFault(spoken, pcm, said.words.lastOrNull()?.end, pace))
+                                if (verdict.score > bestScore) {
+                                    bestScore = verdict.score
+                                    best = pcm
+                                }
+                                if (verdict.ok) {
+                                    pace.note(spoken, pcm)
+                                    break
+                                }
                             }
-                            AudioCodec.decodeAll(tmp)
+                            best!!
                         } finally {
                             tmp.delete()
+                            heard.delete()
                         }
                     },
                     deliver = { k, pcm ->
@@ -151,9 +186,9 @@ class NarrateTask(
                             .put("duration", round3(dur)).put("done", false).put("sr", w.rate).put("frames", w.frames)
                             .put("file", "$base.wav")
                         saveManifest()
-                        pace.addLast(System.nanoTime() / 1_000_000)
-                        while (pace.size > 40) pace.removeFirst()
-                        val perSentence = if (pace.size >= 4) (pace.last() - pace.first()).toDouble() / (pace.size - 1) / 1000 else null
+                        times.addLast(System.nanoTime() / 1_000_000)
+                        while (times.size > 40) times.removeFirst()
+                        val perSentence = if (times.size >= 4) (times.last() - times.first()).toDouble() / (times.size - 1) / 1000 else null
                         val left = allSentences - doneSentences
                         ctl.progress {
                             it.copy(
@@ -202,6 +237,13 @@ class TranscribeTask(
 
     override fun discard() {
         if (!resume) book.deleteRecursively()
+    }
+
+    /** Until the first piece is saved there is nothing to go on from: it starts again from its file. */
+    override fun resumed() = if (File(book, "gen_state.json").exists()) {
+        TranscribeTask(context, book, title, null, "", null)
+    } else {
+        TranscribeTask(context, book, title, source, extension, language)
     }
 
     private fun save(dur: Double, covered: Double, complete: Boolean) {
@@ -349,6 +391,8 @@ class TranslateTask(
     override fun discard() {
         if (!resume) folder.deleteRecursively()
     }
+
+    override fun resumed() = TranslateTask(context, folder, meta)
 
     private fun saveMeta() = Library.writeAtomic(File(folder, "meta.json"), meta.toString())
 

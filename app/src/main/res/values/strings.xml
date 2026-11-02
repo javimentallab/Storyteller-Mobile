@@ -146,4 +146,35 @@
     <string name="err_cant_read_file">Can\'t read that file.</string>
     <string name="err_no_text">No text to translate in that document.</string>
     <string name="err_generic">Something went wrong (%1$s).</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">Language</string>
+    <string name="field_language_help">The language the book is read in. Choose a voice that sounds good in it too.</string>
+    <string name="qc_title">Check and redo sentences that sound wrong</string>
+    <string name="qc_help">Each sentence goes to the transcription service and, if it doesn\'t match the text, is asked for again. Slower. It needs the transcription URL.</string>
+    <string name="voice_upload">Upload a voice…</string>
+    <string name="voice_uploading">Uploading the voice…</string>
+    <string name="voice_upload_help">A clean recording of 5 to 12 s. Only Storyteller\'s own server (st_server) takes it.</string>
+    <string name="voice_upload_send">Upload</string>
+    <string name="voice_upload_unsupported">This service doesn\'t take voices: only Storyteller\'s own server (st_server) does.</string>
+    <string name="voice_name">Name of the voice</string>
+    <string name="pron_title">Pronunciation dictionary</string>
+    <string name="pron_help">How some words are read in %1$s. Each language has its own: change the language in Models.</string>
+    <string name="pron_words">Words: word = how it is said, one on each line</string>
+    <string name="pron_letters">Acronyms read letter by letter</string>
+    <string name="pron_as_words">Acronyms read as a word</string>
+    <string name="pron_save">Save</string>
+    <string name="fetch_title">Bring books from the desktop</string>
+    <string name="fetch_help">From Storyteller\'s own server (st_server), at the narration URL. Only finished chapters come; the desktop app stays as it is.</string>
+    <string name="fetch_loading">Asking the server…</string>
+    <string name="fetch_empty">That server has no finished chapters yet.</string>
+    <string name="fetch_unsupported">This service has no books: only Storyteller\'s own server (st_server) does.</string>
+    <string name="fetch_summary">%1$d of %2$d chapters · %3$s</string>
+    <string name="fetch_have_it">Already here</string>
+    <string name="fetch_bring">Bring</string>
+
+    <string name="job_switch">Switch to this</string>
+    <string name="job_add_to_line">Add to the line</string>
+    <string name="job_waiting_turn">Waiting: %1$s</string>
+    <string name="book_in_line">● Waiting its turn</string>
 </resources>

@@ -1,5 +1,13 @@
 package com.javimetallab.storyteller.ui
 
+import com.javimetallab.storyteller.data.Languages
+import com.javimetallab.storyteller.Screen
+import com.javimetallab.storyteller.PickedFile
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.AlertDialog
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -64,7 +72,7 @@ private val PRESETS = listOf(
     Preset("Groq", "https://api.groq.com/openai/v1", ALL),
     Preset("OpenRouter", "https://openrouter.ai/api/v1", setOf(Capability.TRANSLATION)),
 )
-private val FORMATS = listOf("mp3", "wav", "opus", "flac", "aac")
+private val FORMATS = listOf("wav", "mp3", "opus", "flac", "aac")
 
 @Composable
 fun ModelsScreen(vm: AppViewModel) {
@@ -148,13 +156,27 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
             enabled = base != null,
         ) { change(e.copy(model = it)) }
         if (c == Capability.NARRATION) {
+            Picker(stringResource(R.string.field_language), Languages.CODES, e.language, { Languages.name(it) }) { change(e.copy(language = it)) }
+            Text(stringResource(R.string.field_language_help), color = Muted, fontSize = 12.sp)
             ListedField(
                 label = stringResource(R.string.field_voice), value = e.voice,
                 search = stringResource(R.string.search_voices),
                 load = { vm.listVoices(e) },
                 enabled = base != null,
             ) { change(e.copy(voice = it)) }
+            VoiceUpload(vm, e, base != null) { change(e.copy(voice = it)) }
             Picker(stringResource(R.string.field_format), FORMATS, e.format, { it }) { change(e.copy(format = it)) }
+            Row(Modifier.fillMaxWidth().padding(top = 10.dp), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(stringResource(R.string.qc_title), color = Ink)
+                    Text(stringResource(R.string.qc_help), color = Muted, fontSize = 12.sp)
+                }
+                Switch(
+                    checked = e.qc, onCheckedChange = { change(e.copy(qc = it)) },
+                    colors = SwitchDefaults.colors(checkedTrackColor = Amber, checkedThumbColor = OnAmber),
+                )
+            }
+            TextButton(onClick = { vm.go(Screen.Pron) }) { Text(stringResource(R.string.pron_title), color = Amber) }
         }
         if (c != Capability.TRANSCRIPTION) {
             Text(stringResource(R.string.field_parallel), color = Muted, fontSize = 13.sp, modifier = Modifier.padding(top = 8.dp))
@@ -180,6 +202,54 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
             Text(r.text, color = if (r.ok) Amber else Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 6.dp))
         }
     }
+}
+
+private val NOT_IN_VOICE_NAME = Regex("[^A-Za-z0-9._-]+")
+
+/** An audio file of the phone becomes a voice of the service. Only the user's own server takes it. */
+@Composable
+private fun VoiceUpload(vm: AppViewModel, e: Endpoint, enabled: Boolean, onUploaded: (String) -> Unit) {
+    var picked by remember { mutableStateOf<PickedFile?>(null) }
+    var name by remember { mutableStateOf("") }
+    var busy by remember { mutableStateOf(false) }
+    var failure by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        val f = uri?.let { vm.describe(it) } ?: return@rememberLauncherForActivityResult
+        picked = f
+        name = NOT_IN_VOICE_NAME.replace(f.name.substringBeforeLast('.'), "-").trim('-', '.').take(60)
+        failure = null
+    }
+    TextButton(enabled = enabled && !busy, onClick = { launcher.launch(arrayOf("audio/*")) }) {
+        Text(stringResource(if (busy) R.string.voice_uploading else R.string.voice_upload), color = if (enabled) Amber else Muted)
+    }
+    Text(stringResource(R.string.voice_upload_help), color = Muted, fontSize = 12.sp)
+    failure?.let { Text(it, color = Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 4.dp)) }
+    val f = picked ?: return
+    AlertDialog(
+        onDismissRequest = { picked = null },
+        title = { Text(stringResource(R.string.voice_upload)) },
+        text = {
+            OutlinedTextField(
+                value = name, onValueChange = { name = it.trim() },
+                label = { Text(stringResource(R.string.voice_name)) }, singleLine = true,
+            )
+        },
+        confirmButton = {
+            TextButton(enabled = name.isNotBlank(), onClick = {
+                val chosen = name
+                picked = null
+                busy = true
+                scope.launch {
+                    val why = vm.uploadVoice(e, f, chosen)
+                    busy = false
+                    failure = why
+                    if (why == null) onUploaded(chosen)
+                }
+            }) { Text(stringResource(R.string.voice_upload_send)) }
+        },
+        dismissButton = { TextButton(onClick = { picked = null }) { Text(stringResource(android.R.string.cancel)) } },
+    )
 }
 
 /** A name typed by hand, or picked from what the service says it has. */

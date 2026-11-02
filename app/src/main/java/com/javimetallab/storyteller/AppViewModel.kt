@@ -1,5 +1,10 @@
 package com.javimetallab.storyteller
 
+import com.javimetallab.storyteller.engine.Task
+import com.javimetallab.storyteller.engine.FetchBookTask
+import com.javimetallab.storyteller.data.RemoteBook
+import com.javimetallab.storyteller.data.PronStore
+import com.javimetallab.storyteller.data.Format
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
@@ -48,6 +53,8 @@ sealed interface Screen {
     data object Import : Screen
     data object Translate : Screen
     data object Models : Screen
+    data object Pron : Screen
+    data object Fetch : Screen
 }
 
 data class PickedFile(val uri: Uri, val name: String, val size: Long)
@@ -76,6 +83,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
 
     val job: StateFlow<JobState?> = Work.current
     val queued: StateFlow<Int> = Work.queued
+    val waiting: StateFlow<List<JobState>> = Work.waitingJobs
 
     private val _preview = MutableStateFlow<EpubPreview?>(null)
     val preview: StateFlow<EpubPreview?> = _preview
@@ -199,7 +207,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     when (c) {
                         Capability.NARRATION -> {
                             val tmp = File(ctx.cacheDir, "test.audio")
-                            api.speech("Hola.", tmp)
+                            api.speech("Hola.", tmp, e.language)
                             val pcm = AudioCodec.decodeAll(tmp)
                             tmp.delete()
                             TestResult(true, ctx.getString(R.string.test_narration_ok, "%.1f".format(pcm.seconds)))
@@ -225,6 +233,57 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
             _tests.value = _tests.value + (c to result)
             _testing.value = null
         }
+    }
+
+    /** Sends an audio file to the service as a new voice. Null if it went well; if not, why. */
+    suspend fun uploadVoice(e: Endpoint, f: PickedFile, name: String): String? = withContext(Dispatchers.IO) {
+        val ctx = getApplication<Application>()
+        val tmp = File(ctx.cacheDir, "voice-upload")
+        try {
+            copyToFile(f.uri, tmp)
+            ModelApi(e).uploadVoice(name, tmp)
+            null
+        } catch (x: ModelException) {
+            if (x.kind == ModelException.Kind.NOT_FOUND) {
+                ctx.getString(R.string.voice_upload_unsupported)
+            } else {
+                listOfNotNull(ctx.getString(R.string.http_status, x.status), x.detail).joinToString(": ")
+            }
+        } catch (x: IOException) {
+            x.message ?: x.javaClass.simpleName
+        } finally {
+            tmp.delete()
+        }
+    }
+
+    /** The books of the user's own server, or why not. */
+    suspend fun remoteBooks(): Pair<List<RemoteBook>?, String?> = withContext(Dispatchers.IO) {
+        val ctx = getApplication<Application>()
+        try {
+            ModelApi(prefs.endpoint(Capability.NARRATION)).books() to null
+        } catch (x: ModelException) {
+            null to if (x.kind == ModelException.Kind.NOT_FOUND) {
+                ctx.getString(R.string.fetch_unsupported)
+            } else {
+                listOfNotNull(ctx.getString(R.string.http_status, x.status), x.detail).joinToString(": ")
+            }
+        } catch (x: IOException) {
+            null to (x.message ?: x.javaClass.simpleName)
+        }
+    }
+
+    fun remoteFolder(b: RemoteBook) = Format.slug(b.id)
+
+    fun fetchBook(b: RemoteBook) {
+        val ctx = getApplication<Application>()
+        Work.submit(ctx, FetchBookTask(ctx, b, library.dir(remoteFolder(b))))
+    }
+
+    fun pronTexts(lang: String) = PronStore.texts(PronStore.read(getApplication()), lang)
+
+    fun savePron(lang: String, t: PronStore.Texts) {
+        val ctx = getApplication<Application>()
+        PronStore.save(ctx, PronStore.withTexts(PronStore.read(ctx), lang, t))
     }
 
     // ---- files
@@ -259,7 +318,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     val tmp = File(ctx.cacheDir, "pending.epub")
                     copyToFile(uri, tmp)
                     val book = Epub.read(tmp)
-                    val pieces = book.chapters.map { ch -> TextPrep.splitChunks(ch.text).map { it.text } }
+                    val lang = prefs.endpoint(Capability.NARRATION).language
+                    val pieces = book.chapters.map { ch -> TextPrep.splitChunks(ch.text, lang).map { it.text } }
                     val fallback = picked?.name?.substringBeforeLast('.')?.replace('_', ' ').orEmpty()
                     EpubPreview(
                         tmp, picked?.name.orEmpty(), book.title.ifBlank { fallback }, book.chapters.size,
@@ -297,15 +357,23 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun resumeBook(b: BookSummary) {
+    private fun resumeTask(b: BookSummary): Task {
         val ctx = getApplication<Application>()
         val dir = library.dir(b.id)
-        if (b.kind == "import") {
-            Work.submit(ctx, TranscribeTask(ctx, dir, b.title, null, "", null))
-        } else {
-            Work.submit(ctx, NarrateTask(ctx, dir, b.title, resume = true))
-        }
+        return if (b.kind == "import") TranscribeTask(ctx, dir, b.title, null, "", null) else NarrateTask(ctx, dir, b.title, resume = true)
     }
+
+    /** Behind whatever is running. A book already in line isn't added twice. */
+    fun resumeBook(b: BookSummary) {
+        if (!Work.isActive(b.id)) Work.submit(getApplication(), resumeTask(b))
+    }
+
+    /** Now: what is running saves what it has and waits right behind. */
+    fun switchToBook(b: BookSummary) {
+        if (!Work.isActive(b.id)) Work.submitNow(getApplication(), resumeTask(b))
+    }
+
+    fun switchToJob(id: Long) = Work.switchTo(id)
 
     fun regenerateBook(b: BookSummary) {
         val ctx = getApplication<Application>()

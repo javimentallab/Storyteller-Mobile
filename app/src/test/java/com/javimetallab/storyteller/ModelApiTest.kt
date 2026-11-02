@@ -344,4 +344,106 @@ class ModelApiTest {
         }
         assertEquals(1, requests.size)
     }
+
+    private fun tmp() = File.createTempFile("st-api", ".bin").also { it.deleteOnExit() }
+
+    @Test
+    fun theLanguageGoesAlongUntilTheServiceRefusesIt() {
+        answer = { c -> if (c.json.has("language")) Triple(400, "{\"error\":\"language\"}", emptyMap()) else Triple(200, "audio", emptyMap()) }
+        val a = api(format = "wav")
+        a.speech("Да.", tmp(), "ru")
+        assertEquals(listOf(true, true, false), requests.map { it.json.has("language") })
+        assertEquals(listOf("wav", "mp3", "wav"), requests.map { it.json.getString("response_format") })
+        requests.clear()
+        a.speech("Нет.", tmp(), "ru")
+        assertEquals(1, requests.size)
+        assertFalse(requests[0].json.has("language"))
+    }
+
+    @Test
+    fun aServiceThatTakesTheLanguageGetsIt() {
+        answer = { Triple(200, "audio", emptyMap()) }
+        val dest = tmp()
+        api(format = "wav").speech("你好。", dest, "zh-cn")
+        assertEquals("zh-cn", requests.single().json.getString("language"))
+        assertEquals("audio", dest.readText())
+    }
+
+    @Test
+    fun aServiceWithoutWavIsAskedForMp3FromThenOn() {
+        answer = { c -> if (c.json.getString("response_format") == "wav") Triple(400, "{\"error\":\"wav\"}", emptyMap()) else Triple(200, "audio", emptyMap()) }
+        val a = api(format = "wav")
+        a.speech("Uno.", tmp())
+        a.speech("Dos.", tmp())
+        assertEquals(listOf("wav", "mp3", "mp3"), requests.map { it.json.getString("response_format") })
+    }
+
+    @Test
+    fun aRefusalThatIsNotAboutTheFormatStops() {
+        answer = { Triple(401, "{\"error\":\"key\"}", emptyMap()) }
+        try {
+            api(format = "wav").speech("Uno.", tmp(), "es")
+            fail("401")
+        } catch (e: ModelException) {
+            assertEquals(ModelException.Kind.AUTH, e.kind)
+        }
+        assertEquals(1, requests.size)
+    }
+
+    @Test
+    fun aVoiceGoesUpAsItIs() {
+        answer = { Triple(201, "{\"id\":\"mi voz\"}", emptyMap()) }
+        val audio = tmp().apply { writeBytes(byteArrayOf(1, 2, 3, 0, -1)) }
+        api().uploadVoice("mi voz", audio)
+        val r = requests.single()
+        assertEquals("PUT", r.method)
+        assertEquals("/v1/audio/voices/mi%20voz", r.path)
+        assertEquals("Bearer sk-test", r.auth)
+        assertArrayEquals(byteArrayOf(1, 2, 3, 0, -1), r.body)
+    }
+
+    @Test
+    fun aServiceWithoutVoicesSaysSo() {
+        answer = { Triple(404, "{\"error\":{\"message\":\"no\"}}", emptyMap()) }
+        try {
+            api().uploadVoice("x", tmp().apply { writeText("a") })
+            fail("404")
+        } catch (e: ModelException) {
+            assertEquals(ModelException.Kind.NOT_FOUND, e.kind)
+        }
+    }
+
+    @Test
+    fun theBooksOfTheServerOnlyWithWhatABookMayHave() {
+        answer = {
+            Triple(
+                200,
+                """{"books": [{"id": "un libro", "title": "Un libro", "state": {"total": 5, "complete": false},
+                    "manifest": [{"id": 1, "base": "cap01", "n": 2, "done": true, "file": "../../malo"}, {"id": 2, "base": "../malo", "done": true}],
+                    "files": [{"name": "cap01.mp3", "size": 7}, {"name": "cap01.json", "size": 3}, {"name": "../malo.mp3", "size": 1},
+                              {"name": "source.epub", "size": 2}, {"name": "playback.json", "size": 1}]},
+                   {"id": "vacio", "title": "Nada", "manifest": [{"id": 1, "base": "../x"}], "files": []}]}""",
+                emptyMap(),
+            )
+        }
+        val b = api().books().single()
+        assertEquals("/v1/storyteller/books", requests.single().path)
+        assertEquals(Triple("un libro", "Un libro", 5), Triple(b.id, b.title, b.total))
+        assertEquals(1, b.manifest.length())
+        assertEquals("cap01", b.manifest.getJSONObject(0).getString("base"))
+        assertFalse(b.manifest.getJSONObject(0).has("file"))
+        assertEquals(listOf("cap01.mp3", "cap01.json", "source.epub"), b.files.map { it.name })
+        assertEquals(12L, b.size)
+    }
+
+    @Test
+    fun aFileOfABookArrivesAndSaysHowMuch() {
+        answer = { Triple(200, "contenido", emptyMap()) }
+        val dest = tmp()
+        var last = 0L
+        api().download("un libro", "cap01.mp3", dest) { last = it }
+        assertEquals("/v1/storyteller/books/un%20libro/cap01.mp3", requests.single().path)
+        assertEquals("contenido", dest.readText())
+        assertEquals(9L, last)
+    }
 }

@@ -117,6 +117,9 @@ abstract class Task(val kind: String, val title: String, val bookId: String? = n
 
     /** Stopped before it started, or cancelled: undo what was prepared. */
     open fun discard() {}
+
+    /** The same job, to go on later from what it has saved. */
+    open fun resumed(): Task = this
 }
 
 /**
@@ -136,22 +139,44 @@ object Work {
     /** Goes up each time something on disk changes shape: the library looks again. */
     val changed = MutableStateFlow(0)
 
-    private val waiting = ArrayDeque<Pair<JobState, Task>>()
+    private val waiting = JobQueue<Pair<JobState, Task>> { it.first.id }
+    private val _waitingJobs = MutableStateFlow<List<JobState>>(emptyList())
+    val waitingJobs: StateFlow<List<JobState>> = _waitingJobs
+
+    @Volatile private var switching = false
+
+    private fun publishWaiting() {
+        _queued.value = waiting.size
+        _waitingJobs.value = waiting.snapshot.map { it.first }
+    }
     private var control: Control? = null
     private var worker: Job? = null
 
     fun isActive(bookId: String) = _current.value?.bookId == bookId || synchronized(waiting) { waiting.any { it.first.bookId == bookId } }
 
-    fun submit(context: Context, task: Task) {
+    /** Stops what is running, saving what it has, and this one goes on. The other waits right behind it. */
+    fun switchTo(id: Long) {
+        synchronized(waiting) {
+            if (!waiting.toFront(id)) return
+            publishWaiting()
+            if (control != null) switching = true
+        }
+        stop(save = true)
+    }
+
+    fun submitNow(context: Context, task: Task) = switchTo(submit(context, task))
+
+    fun submit(context: Context, task: Task): Long {
         val job = JobState(ids.incrementAndGet(), task.kind, task.title, task.bookId, task.translationId)
         val app = context.applicationContext
         synchronized(waiting) {
             waiting.addLast(job to task)
-            _queued.value = waiting.size
+            publishWaiting()
             if (worker?.isActive != true) worker = scope.launch { drain(app) }
         }
         changed.update { it + 1 }
         ContextCompat.startForegroundService(app, Intent(app, WorkService::class.java))
+        return job.id
     }
 
     fun stop(save: Boolean) {
@@ -164,7 +189,8 @@ object Work {
         while (true) {
             val (job, task) = synchronized(waiting) {
                 val next = waiting.removeFirstOrNull()
-                _queued.value = waiting.size
+                publishWaiting()
+                switching = false
                 if (next == null) worker = null
                 next
             } ?: return
@@ -178,6 +204,15 @@ object Work {
                 if (ctl.mode == Control.Mode.CANCEL) {
                     runCatching { task.discard() }
                     Finished(_current.value ?: job, Outcome.CANCELED)
+                } else if (switching) {
+                    synchronized(waiting) {
+                        waiting.putBehindFirst(job to task.resumed())
+                        publishWaiting()
+                    }
+                    control = null
+                    _current.value = null
+                    changed.update { it + 1 }
+                    continue                     // nothing to announce: it hasn't ended, it has given way
                 } else {
                     Finished(_current.value ?: job, Outcome.STOPPED)
                 }

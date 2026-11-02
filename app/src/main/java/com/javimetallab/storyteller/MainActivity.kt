@@ -19,7 +19,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.javimetallab.storyteller.ui.AppFrame
 import com.javimetallab.storyteller.ui.ImportScreen
 import com.javimetallab.storyteller.ui.LibraryScreen
+import com.javimetallab.storyteller.ui.FetchScreen
 import com.javimetallab.storyteller.ui.ModelsScreen
+import com.javimetallab.storyteller.ui.PronScreen
 import com.javimetallab.storyteller.ui.NarrateScreen
 import com.javimetallab.storyteller.ui.PlayerScreen
 import com.javimetallab.storyteller.ui.StorytellerTheme
@@ -58,6 +60,8 @@ class MainActivity : ComponentActivity() {
                         Screen.Import -> ImportScreen(vm)
                         Screen.Translate -> TranslateScreen(vm)
                         Screen.Models -> ModelsScreen(vm)
+                        Screen.Pron -> PronScreen(vm)
+                        Screen.Fetch -> FetchScreen(vm)
                     }
                 }
             }

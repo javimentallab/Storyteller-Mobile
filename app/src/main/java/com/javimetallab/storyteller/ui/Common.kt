@@ -32,6 +32,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -257,9 +258,10 @@ private fun etaText(seconds: Double): String {
 @Composable
 fun JobPanel(vm: AppViewModel, job: JobState, queued: Int) {
     var askCancel by remember { mutableStateOf(false) }
+    val waiting by vm.waiting.collectAsStateWithLifecycle()
     Column(Modifier.fillMaxWidth().background(Panel).padding(horizontal = 16.dp, vertical = 10.dp)) {
         Text(job.title, color = Ink, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        Text(jobText(job) + if (queued > 0) " · +$queued" else "", color = Muted, fontSize = 13.sp, modifier = Modifier.padding(vertical = 4.dp))
+        Text(jobText(job), color = Muted, fontSize = 13.sp, modifier = Modifier.padding(vertical = 4.dp))
         if (job.pct >= 0) {
             LinearProgressIndicator(
                 progress = { job.pct / 100f }, modifier = Modifier.fillMaxWidth(), color = Amber, trackColor = Night,
@@ -270,6 +272,15 @@ fun JobPanel(vm: AppViewModel, job: JobState, queued: Int) {
         Row(Modifier.fillMaxWidth().padding(top = 2.dp), horizontalArrangement = Arrangement.End) {
             TextButton(onClick = { vm.stopJob(save = true) }, enabled = !job.stopping) { Text(stringResource(R.string.stop_and_save)) }
             TextButton(onClick = { askCancel = true }, enabled = !job.stopping) { Text(stringResource(R.string.cancel), color = Muted) }
+        }
+        for (w in waiting) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(
+                    stringResource(R.string.job_waiting_turn, w.title), color = Muted, fontSize = 13.sp, maxLines = 1,
+                    overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f),
+                )
+                TextButton(onClick = { vm.switchToJob(w.id) }, enabled = !job.stopping) { Text(stringResource(R.string.job_switch)) }
+            }
         }
     }
     if (askCancel) {

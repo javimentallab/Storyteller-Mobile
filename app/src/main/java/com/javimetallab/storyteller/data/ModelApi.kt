@@ -7,6 +7,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLEncoder
 import java.util.Collections
 import java.util.UUID
 
@@ -28,6 +29,14 @@ data class Segment(val start: Double, val end: Double, val text: String)
 data class Word(val start: Double, val end: Double, val text: String)
 
 data class Transcript(val text: String, val segments: List<Segment>, val words: List<Word> = emptyList())
+
+/** A book on the user's own server, st_server: only its finished chapters. */
+data class RemoteBook(val id: String, val title: String, val manifest: JSONArray, val state: JSONObject, val files: List<RemoteFile>) {
+    val size get() = files.sumOf { it.size }
+    val total get() = state.optInt("total", manifest.length())
+}
+
+data class RemoteFile(val name: String, val size: Long)
 
 /**
  * Client of the de facto standard API that OpenAI, Groq, Ollama, llama.cpp, Whisper servers and
@@ -115,15 +124,76 @@ class ModelApi(private val endpoint: Endpoint) {
         return parseVoices(o.optJSONArray("voices") ?: o.optJSONArray("data"))
     }
 
-    /** Narrates one sentence into a file, in the configured format. */
-    fun speech(text: String, dest: File) {
-        val body = JSONObject()
-            .put("input", text)
-            .put("response_format", endpoint.format.ifBlank { "mp3" })
+    @Volatile private var format = endpoint.format.ifBlank { "wav" }
+
+    @Volatile private var saysLanguage = true
+
+    /**
+     * Narrates one sentence into a file. Without loss if the service can: what a voice loses here
+     * doesn't come back. The standard API has no language, so it goes along until the service
+     * refuses it, and from then on the service gets it from the text. Like cc_service on the desktop.
+     */
+    fun speech(text: String, dest: File, language: String? = null) {
+        val body = JSONObject().put("input", text)
         if (endpoint.model.isNotBlank()) body.put("model", endpoint.model)
         if (endpoint.voice.isNotBlank()) body.put("voice", endpoint.voice)
-        postJson("/audio/speech", body, 180_000) { c ->
+        if (saysLanguage && !language.isNullOrBlank()) {
+            try {
+                return speechInSomeFormat(JSONObject(body.toString()).put("language", language), dest)
+            } catch (e: ModelException) {
+                if (e.kind != ModelException.Kind.BAD_REQUEST) throw e
+            }
+            saysLanguage = false
+        }
+        speechInSomeFormat(body, dest)
+    }
+
+    private fun speechInSomeFormat(body: JSONObject, dest: File) {
+        fun ask(asked: String) = postJson("/audio/speech", JSONObject(body.toString()).put("response_format", asked), 180_000) { c ->
             c.inputStream.use { input -> FileOutputStream(dest).use { input.copyTo(it) } }
+        }
+        try {
+            ask(format)
+        } catch (e: ModelException) {
+            if (e.kind != ModelException.Kind.BAD_REQUEST || format == "mp3") throw e
+            ask("mp3")
+            format = "mp3"
+        }
+    }
+
+    /** An audio file becomes a voice, on the user's own server. Other services answer 404. */
+    fun uploadVoice(name: String, audio: File) {
+        val c = connect("/audio/voices/${encode(name)}", "PUT", 180_000)
+        use(c) {
+            c.doOutput = true
+            c.setRequestProperty("Content-Type", "application/octet-stream")
+            c.setFixedLengthStreamingMode(audio.length())
+            c.outputStream.use { out -> audio.inputStream().use { it.copyTo(out) } }
+            if (c.responseCode !in 200..299) throw failure(c)
+        }
+    }
+
+    /** The books of the user's own server. Other services answer 404. */
+    fun books(): List<RemoteBook> = parseBooks(getJson("/storyteller/books").optJSONArray("books"))
+
+    /** One file of one of those books, reporting how much has arrived. */
+    fun download(book: String, name: String, dest: File, onBytes: (Long) -> Unit = {}) {
+        val c = connect("/storyteller/books/${encode(book)}/${encode(name)}", "GET", 120_000)
+        use(c) {
+            if (c.responseCode !in 200..299) throw failure(c)
+            c.inputStream.use { input ->
+                FileOutputStream(dest).use { out ->
+                    val buffer = ByteArray(256 * 1024)
+                    var got = 0L
+                    while (true) {
+                        val n = input.read(buffer)
+                        if (n < 0) break
+                        out.write(buffer, 0, n)
+                        got += n
+                        onBytes(got)
+                    }
+                }
+            }
         }
     }
 
@@ -135,10 +205,10 @@ class ModelApi(private val endpoint: Endpoint) {
      * closely. A model that can't give them refuses with a 400, and then it asks for less. Only an
      * answer changes what is asked from then on: a piece that fails everywhere says nothing of the service.
      */
-    fun transcribe(wav: File, language: String?): Transcript {
+    fun transcribe(wav: File, language: String?, prompt: String? = null): Transcript {
         for (i in ask..ASKS.lastIndex) {
             try {
-                val answer = parseTranscript(sendAudio(wav, language, ASKS[i].first, ASKS[i].second))
+                val answer = parseTranscript(sendAudio(wav, language, ASKS[i].first, ASKS[i].second, prompt))
                 ask = i
                 return answer
             } catch (e: ModelException) {
@@ -148,7 +218,7 @@ class ModelApi(private val endpoint: Endpoint) {
         error("unreachable")
     }
 
-    private fun sendAudio(wav: File, language: String?, format: String, timesOf: List<String>): JSONObject {
+    private fun sendAudio(wav: File, language: String?, format: String, timesOf: List<String>, prompt: String?): JSONObject {
         val boundary = "----storyteller" + UUID.randomUUID().toString().replace("-", "")
         val fields = buildString {
             fun field(name: String, value: String) {
@@ -158,6 +228,7 @@ class ModelApi(private val endpoint: Endpoint) {
             field("response_format", format)
             for (t in timesOf) field("timestamp_granularities[]", t)
             if (!language.isNullOrBlank() && language != "auto") field("language", language)
+            if (!prompt.isNullOrBlank()) field("prompt", prompt)
             append("--$boundary\r\nContent-Disposition: form-data; name=\"file\"; filename=\"audio.wav\"\r\n")
             append("Content-Type: audio/wav\r\n\r\n")
         }.toByteArray(Charsets.UTF_8)
@@ -207,6 +278,36 @@ class ModelApi(private val endpoint: Endpoint) {
     }
 
     companion object {
+        private val BOOK_FILE = Regex("cap\\d{2,3}\\.(?:mp3|m4a|json)|source\\.epub")
+        private val CHAPTER_BASE = Regex("cap\\d{2,3}")
+
+        private fun encode(s: String) = URLEncoder.encode(s, "UTF-8").replace("+", "%20")
+
+        /** What a server says becomes file names on the phone: only what a book is allowed to have. */
+        fun parseBooks(a: JSONArray?): List<RemoteBook> {
+            if (a == null) return emptyList()
+            return (0 until a.length()).mapNotNull { i ->
+                val o = a.optJSONObject(i) ?: return@mapNotNull null
+                val id = o.optString("id").ifEmpty { return@mapNotNull null }
+                val manifest = JSONArray()
+                val listed = o.optJSONArray("manifest")
+                for (k in 0 until (listed?.length() ?: 0)) {
+                    val e = listed!!.optJSONObject(k) ?: continue
+                    if (!CHAPTER_BASE.matches(e.optString("base"))) continue
+                    e.remove("file")
+                    manifest.put(e)
+                }
+                if (manifest.length() == 0) return@mapNotNull null
+                val f = o.optJSONArray("files")
+                val files = (0 until (f?.length() ?: 0)).mapNotNull { k ->
+                    val x = f!!.optJSONObject(k) ?: return@mapNotNull null
+                    val name = x.optString("name")
+                    if (BOOK_FILE.matches(name)) RemoteFile(name, x.optLong("size")) else null
+                }
+                RemoteBook(id, o.optString("title").ifEmpty { id }, manifest, o.optJSONObject("state") ?: JSONObject(), files)
+            }
+        }
+
         private val ASKS = listOf(
             "verbose_json" to listOf("word", "segment"),
             "verbose_json" to emptyList(),

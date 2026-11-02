@@ -1,5 +1,38 @@
 package com.javimetallab.storyteller.engine
 
+import org.json.JSONObject
+
+/** The user's dictionary for one language. */
+class Pron(words: Map<String, String>, val asWords: Set<String>, val asLetters: Set<String>) {
+    private val said = words.mapKeys { it.key.lowercase() }
+    private val rx = if (said.isEmpty()) {
+        null
+    } else {
+        val alternatives = said.keys.sortedByDescending { it.length }.joinToString("|") { Regex.escape(it) }
+        Regex("(?<![\\p{L}\\p{N}_])(?:$alternatives)(?![\\p{L}\\p{N}_])", RegexOption.IGNORE_CASE)
+    }
+
+    fun apply(text: String) = rx?.replace(text) { said[it.value.lowercase()] ?: it.value } ?: text
+
+    companion object {
+        val NONE = Pron(emptyMap(), emptySet(), emptySet())
+
+        /** The part of pron.json for a language: the top is for Spanish, the rest goes in "langs". */
+        fun entry(root: JSONObject, lang: String): JSONObject? =
+            if (lang == "es") root else root.optJSONObject("langs")?.optJSONObject(lang)
+
+        fun of(root: JSONObject, lang: String): Pron {
+            val e = entry(root, lang) ?: return NONE
+            val words = e.optJSONObject("pron")
+            fun list(key: String) = e.optJSONArray(key)?.let { a -> (0 until a.length()).map { a.optString(it).uppercase() }.toSet() }.orEmpty()
+            return Pron(
+                words?.keys()?.asSequence()?.associateWith { words.optString(it) }.orEmpty(),
+                list("say_word"), list("say_letters"),
+            )
+        }
+    }
+}
+
 /**
  * How a book's text becomes pieces for the voice. A port of engine/cc_engine.py of the desktop
  * app; tests/golden_text.json checks both give the same pieces.
@@ -29,15 +62,22 @@ object TextPrep {
     // lower case letter ("¿Qué hora es? —dijo él", "etc. y", "Bueno… quizá"). Chinese and Japanese
     // have no space after the sign: without cutting there, a whole paragraph would go in one piece.
     private val CHUNK_SENTENCE_END = Regex(
-        "(?:(?<=[.!?…।؟])|(?<=[.!?…।؟][»”\"’)\\]]))$S+(?![—–-]?$S*[a-záéíóúüñ])" +
+        "(?:(?<=[.!?…।؟])|(?<=[.!?…।؟][»”\"’)\\]]))$S+(?![—–-]?$S*[a-zà-öø-ÿа-яёα-ω])" +
             "|(?:(?<=[。！？])(?![」』”）])|(?<=[。！？][」』”）]))$S*",
     )
     private val ENDS_SENTENCE = Regex("[.!?…。！？।؟][»”\"’)\\]」』）]*$")
     private val CHUNK_CLAUSE_END = Regex("(?<=[,;:،؛])$S+|(?<=[，、；：])$S*")
     private const val TIGHT_CLAUSE_END = "，、；："   // no space is written after these
 
+    // Most characters per piece: XTTS cuts the audio past its limit (a little less here, because
+    // numbers are spelled out later). The other languages take 240 or more.
+    private val HARD = mapOf(
+        "zh-cn" to 75, "ja" to 65, "ko" to 85, "hi" to 140, "ar" to 155, "ru" to 170, "cs" to 175, "pt" to 190,
+        "it" to 200, "pl" to 210, "hu" to 210, "tr" to 210,
+    )
+
     /** One piece per clause, so that the pause is ours: left to XTTS, a comma gets anything from 0 to 0.8 s. */
-    private fun splitParagraph(text: String, hard: Int = 240, short: Int = 20): List<String> {
+    private fun splitParagraph(text: String, hard: Int, short: Int = 20): List<String> {
         val raw = ArrayList<String>()
         for (s in CHUNK_SENTENCE_END.split(text)) {
             if (raw.isNotEmpty() && ABBR_END.containsMatchIn(raw.last())) {
@@ -63,7 +103,7 @@ object TextPrep {
                 var p = clause
                 while (p.length > hard) {               // a monstrous clause: cut at a space
                     var cut = p.lastIndexOf(' ', hard - 1)
-                    if (cut < 60) cut = hard
+                    if (cut < minOf(60, hard / 2)) cut = hard
                     out += p.substring(0, cut).pyStrip()
                     p = p.substring(cut).pyStrip()
                 }
@@ -74,10 +114,11 @@ object TextPrep {
     }
 
     /** The pieces for the voice, like split_chunks on the desktop. Each line of the text is a paragraph. */
-    fun splitChunks(text: String): List<Chunk> {
+    fun splitChunks(text: String, lang: String = "es"): List<Chunk> {
+        val hard = HARD[lang] ?: 240
         val out = ArrayList<Chunk>()
         for (paragraph in text.split("\n")) {
-            val parts = splitParagraph(paragraph)
+            val parts = splitParagraph(paragraph, hard)
             for ((i, c) in parts.withIndex()) {
                 val close = when {
                     i == parts.lastIndex -> Close.PARAGRAPH
@@ -238,15 +279,34 @@ object TextPrep {
         return vowels >= maxOf(1, low.length / 4)
     }
 
-    /** PREFACIO reads as a word, CPU letter by letter. */
-    private fun fixCaps(token: String): String {
+    /** PREFACIO reads as a word, CPU letter by letter. Only the user's lists go beyond Spanish. */
+    private fun fixCaps(token: String, lang: String, pron: Pron): String {
         val core = NOT_WORD.replace(token, "")
         if (core.length < 2 || !core.all { it.isLetter() } || core != core.uppercase() || core == core.lowercase()) return token
+        val es = lang == "es"
+        val up = core.uppercase()
+        val word = core.lowercase().replaceFirstChar { it.uppercase() }
+        val letters = if (es) core.lowercase().map { LETTERS_ES[it] ?: it.toString() }.joinToString(" ") else core.lowercase().toList().joinToString(" ")
         val spoken = when {
-            core.uppercase() in SAY_WORD || pronounceable(core) -> core.lowercase().replaceFirstChar { it.uppercase() }
-            else -> core.lowercase().map { LETTERS_ES[it] ?: it.toString() }.joinToString(" ")
+            up in pron.asLetters -> letters
+            up in pron.asWords || (es && up in SAY_WORD) -> word
+            !es -> return token
+            pronounceable(core) -> word
+            else -> letters
         }
         return token.replace(core, spoken)
+    }
+
+    /** XTTS and others read a capital at the start of a piece oddly, and it sounds the same without. */
+    private fun lowerInitial(text: String, lang: String): String {
+        for ((i, ch) in text.withIndex()) {
+            if (ch.isLetter()) {
+                if (lang != "es" && text.getOrNull(i + 1)?.isUpperCase() == true) return text   // an acronym: in Spanish, fixCaps did it
+                return text.substring(0, i) + ch.lowercase() + text.substring(i + 1)
+            }
+            if (ch.isDigit()) break
+        }
+        return text
     }
 
     private val MONEY_CENTS = Regex("\\$$S?(\\d+)\\.(\\d{2})$NA")
@@ -255,43 +315,57 @@ object TextPrep {
     private val THOUSANDS_DOT = Regex("(?<=\\d)\\.(?=\\d{3}$NA)")
     private val THOUSANDS_COMMA = Regex("$NB\\d{1,3}(?:,\\d{3})+$NA(?![,.]\\d)")
     private val NUMBER = Regex("\\d+(?:,\\d+)?")
+    private val NUMBER_POINT = Regex("\\d+(?:\\.\\d+)?")
+    private val TWENTY_ONE = Regex("${NB}veintiuno (mil|millones)$NA")
+    private val ONE_THOUSAND = Regex("${NB}uno (mil|millones)$NA")
 
     private fun numbers(input: String, lang: String, spell: (Long) -> String): String {
         var t = input
-        if (lang == "es") {
+        val es = lang == "es"
+        val point = lang in DECIMAL_POINT
+        if (es) {
             t = MONEY_CENTS.replace(t, "$1 dólares con $2")
             t = MONEY.replace(t) { it.groupValues[1] + " dólares" }
         }
         t = THOUSANDS_SPACE.replace(t, "")
-        t = THOUSANDS_DOT.replace(t, "")
-        t = THOUSANDS_COMMA.replace(t) { it.value.replace(",", "") }
-        return NUMBER.replace(t) { m ->
-            val parts = m.value.split(",")
+        if (!point) t = THOUSANDS_DOT.replace(t, "")
+        if (es || point) t = THOUSANDS_COMMA.replace(t) { it.value.replace(",", "") }   // "1,500" is a decimal in German
+        t = (if (point) NUMBER_POINT else NUMBER).replace(t) { m ->
+            val parts = m.value.split(if (point) '.' else ',')
             val whole = parts[0].toLongOrNull() ?: return@replace m.value
             if (parts.size == 1) {
                 spell(whole)
             } else {
-                val decimals = parts[1].map { spell(it.digitToInt().toLong()) }.joinToString(" ")
-                spell(whole) + " " + (DECIMAL_WORD[lang] ?: "coma") + " " + decimals
+                val word = DECIMAL_WORD[lang] ?: return@replace m.value
+                spell(whole) + " " + word + " " + parts[1].map { spell(it.digitToInt().toLong()) }.joinToString(" ")
             }
         }
+        if (es) {                                                  // 21000: veintiún mil, not "veintiuno mil"
+            t = TWENTY_ONE.replace(t, "veintiún $1")
+            t = ONE_THOUSAND.replace(t, "un $1")
+        }
+        return t
     }
 
     private val DECIMAL_WORD = mapOf(
         "es" to "coma", "en" to "point", "fr" to "virgule", "de" to "Komma", "it" to "virgola", "pt" to "vírgula",
-        "ca" to "coma", "gl" to "coma",
+        "ca" to "coma", "gl" to "coma", "pl" to "przecinek", "tr" to "virgül", "ru" to "запятая", "nl" to "komma",
+        "cs" to "celá", "hu" to "egész", "ar" to "فاصلة", "zh-cn" to "点", "ja" to "点", "ko" to "점", "hi" to "दशमलव",
     )
+    private val DECIMAL_POINT = setOf("en", "zh-cn", "ja", "ko", "hi", "ar")         // written 3.5; 3,5 elsewhere
 
     /**
      * The whole path to the audio. Good voices don't need it, but many open ones read digits,
      * capitals and odd punctuation badly, and it does no harm to the rest.
      */
-    fun forVoice(input: String, lang: String, spell: (Long) -> String): String {
+    fun forVoice(input: String, lang: String, spell: (Long) -> String, pron: Pron = Pron.NONE): String {
         var t = input
         if (lang == "es") for ((rx, rep) in ABBREVIATIONS_ES) t = rx.replace(t, rep)
         t = CLOCK.replace(t, "$1 $2")
         t = normalizePunct(t, lang)
-        if (lang == "es") t = t.split(" ").joinToString(" ") { fixCaps(it) }
+        t = t.split(" ").joinToString(" ") { fixCaps(it, lang, pron) }
+        t = lowerInitial(t, lang)
+        t = pron.apply(t)
         return numbers(t, lang, spell)
     }
 }
