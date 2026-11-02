@@ -167,7 +167,7 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
             VoiceUpload(vm, e, base != null) { change(e.copy(voice = it)) }
             Picker(stringResource(R.string.field_format), FORMATS, e.format, { it }) { change(e.copy(format = it)) }
             Row(Modifier.fillMaxWidth().padding(top = 10.dp), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
+                Column(Modifier.weight(1f).padding(end = 8.dp)) {
                     Text(stringResource(R.string.qc_title), color = Ink)
                     Text(stringResource(R.string.qc_help), color = Muted, fontSize = 12.sp)
                 }

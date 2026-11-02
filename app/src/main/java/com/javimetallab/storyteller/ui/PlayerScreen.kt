@@ -98,7 +98,7 @@ fun PlayerScreen(vm: AppViewModel) {
     var askPosition by remember { mutableStateOf(false) }
 
     Column(Modifier.fillMaxSize()) {
-        TopBar(ui.title, onBack = { vm.back() }) {
+        TopBar(ui.title, onBack = { vm.back() }, titleLines = 1) {
             Box {
                 IconButton(onClick = { menu = true }) {
                     Icon(Icons.Filled.MoreVert, stringResource(R.string.more_options), tint = Muted)

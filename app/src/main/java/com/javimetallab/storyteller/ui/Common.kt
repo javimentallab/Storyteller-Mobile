@@ -129,8 +129,9 @@ fun AppFrame(vm: AppViewModel, content: @Composable () -> Unit) {
     }
 }
 
+/** Two lines, as some titles don't fit in one in every language. A book's title can be any length: pass 1 for it. */
 @Composable
-fun TopBar(title: String, onBack: (() -> Unit)?, actions: @Composable () -> Unit = {}) {
+fun TopBar(title: String, onBack: (() -> Unit)?, titleLines: Int = 2, actions: @Composable () -> Unit = {}) {
     Row(
         Modifier.fillMaxWidth().background(Panel).statusBarsPadding().padding(horizontal = 4.dp, vertical = 2.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -143,7 +144,7 @@ fun TopBar(title: String, onBack: (() -> Unit)?, actions: @Composable () -> Unit
         Text(
             title,
             fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold, fontSize = 20.sp, color = Ink,
-            maxLines = 1, overflow = TextOverflow.Ellipsis,
+            maxLines = titleLines, overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f).padding(horizontal = if (onBack == null) 12.dp else 4.dp, vertical = 12.dp),
         )
         actions()

@@ -131,7 +131,7 @@ fun NarrateScreen(vm: AppViewModel) {
                     )
                 }
                 Row(Modifier.fillMaxWidth().padding(top = 14.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Column(Modifier.weight(1f)) {
+                    Column(Modifier.weight(1f).padding(end = 8.dp)) {
                         Text(stringResource(R.string.prepare_text), color = Ink)
                         Text(stringResource(R.string.prepare_text_help), color = Muted, fontSize = 12.sp)
                     }
