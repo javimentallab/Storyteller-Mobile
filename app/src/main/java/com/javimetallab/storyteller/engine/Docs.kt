@@ -97,10 +97,12 @@ object Translation {
 }
 
 object Docs {
-    val EXTENSIONS = setOf("epub", "docx", "pptx", "xlsx", "srt", "vtt", "txt", "md")
+    val EXTENSIONS = setOf("epub", "pdf", "docx", "pptx", "xlsx", "srt", "vtt", "txt", "md")
 
-    fun open(file: File, tgt: String): Doc = when (file.extension.lowercase()) {
+    /** [title] and [onPage] are for a PDF: it has no title of its own to keep, and it can take long to read. */
+    fun open(file: File, tgt: String, title: String = file.nameWithoutExtension, onPage: () -> Unit = {}): Doc = when (file.extension.lowercase()) {
         "epub" -> EpubDoc(file, tgt)
+        "pdf" -> PdfDoc(file, tgt, title, onPage)
         "docx" -> OfficeDoc.docx(file)
         "pptx" -> OfficeDoc.pptx(file)
         "xlsx" -> OfficeDoc.xlsx(file)

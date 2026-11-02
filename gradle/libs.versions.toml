@@ -25,6 +25,7 @@ media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", versi
 media3-session = { group = "androidx.media3", name = "media3-session", version.ref = "media3" }
 
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.18.3" }
+pdfbox-android = { group = "com.tom-roush", name = "pdfbox-android", version = "2.0.27.0" }
 
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 json-test = { group = "org.json", name = "json", version = "20240303" }

@@ -1,0 +1,46 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /F1 << /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding << /BaseEncoding /WinAnsiEncoding /Differences [128 /fi /fl] >> >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Times-Bold /Encoding /WinAnsiEncoding >> /F3 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >> /F4 << /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding << /Differences [65 /nadiesabe] >> >> /F5 << /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding << /Differences [243 /oacute] >> >> >>
+endobj
+4 0 obj
+<< /Type /XObject /Subtype /Form /BBox [0 0 300 40] /Resources << /Font 3 0 R >> /Length 57 >>
+stream
+BT /F3 9 Tf 0 0 Td (Texto dentro de un formulario) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /XObject /Subtype /Image /Width 1 /Height 1 /ColorSpace /DeviceGray /BitsPerComponent 8 /Length 1 >>
+stream
+€
+endstream
+endobj
+6 0 obj
+<< /Length 35 >>
+stream
+q 100 0 0 100 100 300 cm /Im1 Do Q
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 420 600] /Resources << /Font 3 0 R /XObject << /Im1 5 0 R >> >> /Contents 6 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000654 00000 n 
+0000000838 00000 n 
+0000000982 00000 n 
+0000001066 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+1208
+%%EOF

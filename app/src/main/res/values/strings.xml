@@ -101,7 +101,7 @@
 
     <!-- Translate -->
     <string name="translate_title">Translate a document</string>
-    <string name="translate_help">EPUB, Word, PowerPoint, Excel, subtitles (SRT, VTT) or text (TXT, MD). Cursive and bold inside a sentence are lost.</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, subtitles (SRT, VTT) or text (TXT, MD). Cursive and bold inside a sentence are lost. A PDF comes out as a translated EPUB, without its layout.</string>
     <string name="choose_document">Choose document…</string>
     <string name="from_language">From</string>
     <string name="to_language">To</string>
@@ -145,6 +145,7 @@
     <string name="err_bad_type">This app can\'t translate that type of file.</string>
     <string name="err_cant_read_file">Can\'t read that file.</string>
     <string name="err_no_text">No text to translate in that document.</string>
+    <string name="err_no_text_pdf">This PDF has no text to translate. It is probably scanned, and the app doesn\'t read images.</string>
     <string name="err_generic">Something went wrong (%1$s).</string>
 
     <!-- Language, QC, dictionary, voices and books, like on the desktop -->

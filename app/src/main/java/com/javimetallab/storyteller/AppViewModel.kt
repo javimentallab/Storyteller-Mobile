@@ -430,8 +430,9 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     d.mkdirs()
                     copyToFile(file.uri, File(d, "source.$ext"))
                     val stem = file.name.substringBeforeLast('.')
+                    val outExt = if (ext == "pdf") "epub" else ext      // a PDF comes out as an EPUB
                     val m = JSONObject().put("name", file.name).put("src", src).put("tgt", tgt).put("state", "partial")
-                        .put("source", "source.$ext").put("output", "output.$ext").put("output_name", "$stem ($tgt).$ext")
+                        .put("source", "source.$ext").put("output", "output.$outExt").put("output_name", "$stem ($tgt).$outExt")
                     Library.writeAtomic(File(d, "meta.json"), m.toString())
                     d to m
                 }

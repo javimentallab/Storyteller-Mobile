@@ -40,7 +40,7 @@ android {
             signingConfig = signingConfigs.findByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
@@ -86,7 +86,27 @@ dependencies {
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.session)
     implementation(libs.jsoup)
+    // Bouncy Castle is 11 MB of jars, and only opens PDFs locked to a certificate.
+    implementation(libs.pdfbox.android) {
+        exclude(group = "org.bouncycastle")
+    }
 
     testImplementation(libs.junit)
     testImplementation(libs.json.test)
+}
+
+// On the JVM PdfBox looks for its data on the classpath, and an AAR's assets aren't there.
+val pdfboxAar: Configuration by configurations.creating { isTransitive = false }
+dependencies { pdfboxAar(libs.pdfbox.android) }
+val pdfboxAssets = tasks.register<Sync>("pdfboxAssets") {
+    from({ zipTree(pdfboxAar.singleFile) }) {
+        include("assets/**")
+        eachFile { path = path.removePrefix("assets/") }
+        includeEmptyDirs = false
+    }
+    into(layout.buildDirectory.dir("pdfboxAssets"))
+}
+tasks.withType<Test>().configureEach {
+    dependsOn(pdfboxAssets)
+    doFirst { classpath += files(layout.buildDirectory.dir("pdfboxAssets")) }
 }

@@ -9,6 +9,7 @@ import com.javimetallab.storyteller.data.ModelApi
 import com.javimetallab.storyteller.data.ModelException
 import com.javimetallab.storyteller.data.Prefs
 import com.javimetallab.storyteller.data.PronStore
+import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -403,7 +404,10 @@ class TranslateTask(
         val src = meta.getString("src")
         val tgt = meta.getString("tgt")
         val doc = try {
-            Docs.open(File(folder, meta.getString("source")), tgt)
+            PDFBoxResourceLoader.init(context)
+            Docs.open(File(folder, meta.getString("source")), tgt, meta.getString("name").substringBeforeLast('.'), ctl::check)
+        } catch (e: Stopped) {
+            throw e
         } catch (_: Exception) {
             discard()
             throw BadDocument("cant_read_file")     // "zip END header not found" helps nobody
@@ -411,7 +415,7 @@ class TranslateTask(
         val texts = doc.units.map { it.text }.distinct().filter(Translation::needsTranslation)
         if (texts.isEmpty()) {
             discard()
-            throw BadDocument("no_text")
+            throw BadDocument(if (doc is PdfDoc) "no_text_pdf" else "no_text")
         }
         val cacheFile = File(folder, "cache.json")
         val cache = try {

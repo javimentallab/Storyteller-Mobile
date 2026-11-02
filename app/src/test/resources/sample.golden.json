@@ -1,0 +1,229 @@
+{
+ "sample": {
+  "pages": 8,
+  "blocks": [
+   {
+    "page": 0,
+    "height": 600.0,
+    "top": 17.65599999999995,
+    "bottom": 25.65599999999995,
+    "size": 8.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 0,
+    "height": 600.0,
+    "top": 54.34000000000003,
+    "bottom": 74.34000000000003,
+    "size": 20.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 0,
+    "height": 600.0,
+    "top": 101.387,
+    "bottom": 168.387,
+    "size": 11.0,
+    "text": "Hacia el norte de la isla se alza un faro viejo, de piedra gris y puerta azul, que nadie ha pintado desde hace muchos años. Lo cuidaba una mujer llamada Inés, que subía cada tarde los ciento doce escalones con un candil y un cuaderno de tapas gastadas, donde anotaba los barcos, el viento y alguna que otra palabra suelta."
+   },
+   {
+    "page": 0,
+    "height": 600.0,
+    "top": 187.387,
+    "bottom": 240.387,
+    "size": 11.0,
+    "text": "Cuando el invierno cerraba el puerto, Inés se dedicaba a la traducción de cartas antiguas que le mandaban de tierra firme, y en sus margenes dejaba dibujos de gaviotas y de redes. Decía que la fiesta del pueblo era la única flor que crecía en aquellas rocas."
+   },
+   {
+    "page": 1,
+    "height": 600.0,
+    "top": 17.65599999999995,
+    "bottom": 25.65599999999995,
+    "size": 8.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 1,
+    "height": 600.0,
+    "top": 61.386999999999944,
+    "bottom": 114.387,
+    "size": 11.0,
+    "text": "Las noches de tormenta no dormía. Encendía la lámpara, comprobaba el mecanismo y se sentaba a escuchar cómo el mar golpeaba la base de la torre. Por la mañana bajaba a recoger lo que las olas traían: maderas, cuerdas, alguna botella y, una vez, un reloj sin agujas."
+   },
+   {
+    "page": 1,
+    "height": 600.0,
+    "top": 133.387,
+    "bottom": 186.387,
+    "size": 11.0,
+    "text": "Con los años llegaron otros guardianes, y más tarde las máquinas, pero el cuaderno siguió en su estante, abierto por la última página. Los niños del pueblo suben a leerlo en verano y se turnan para añadir una línea, porque dicen que el faro se apaga si nadie escribe."
+   },
+   {
+    "page": 2,
+    "height": 600.0,
+    "top": 17.65599999999995,
+    "bottom": 25.65599999999995,
+    "size": 8.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 2,
+    "height": 600.0,
+    "top": 54.34000000000003,
+    "bottom": 74.34000000000003,
+    "size": 20.0,
+    "text": "Segunda parte"
+   },
+   {
+    "page": 2,
+    "height": 600.0,
+    "top": 99.03800000000001,
+    "bottom": 113.03800000000001,
+    "size": 14.0,
+    "text": "La marea y el viento"
+   },
+   {
+    "page": 2,
+    "height": 600.0,
+    "top": 131.387,
+    "bottom": 156.387,
+    "size": 11.0,
+    "text": "Las noches de tormenta no dormía. Encendía la lámpara, comprobaba el mecanismo y se sentaba a escuchar cómo el mar golpeaba la base"
+   },
+   {
+    "page": 3,
+    "height": 600.0,
+    "top": 17.65599999999995,
+    "bottom": 25.65599999999995,
+    "size": 8.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 3,
+    "height": 600.0,
+    "top": 62.16999999999996,
+    "bottom": 137.17000000000002,
+    "size": 10.0,
+    "text": "La primera columna habla de la marea, que sube y baja dos veces al día y deja la playa limpia. Los pescadores la miran antes de salir al mar."
+   },
+   {
+    "page": 3,
+    "height": 600.0,
+    "top": 62.16999999999996,
+    "bottom": 137.17000000000002,
+    "size": 10.0,
+    "text": "La segunda columna habla del viento, que llega del oeste casi todo el año y dobla los pinos del cabo. Los pastores lo escuchan antes de subir al monte."
+   },
+   {
+    "page": 4,
+    "height": 600.0,
+    "top": 51.386999999999944,
+    "bottom": 104.387,
+    "size": 11.0,
+    "text": "Con los años llegaron otros guardianes, y más tarde las máquinas, pero el cuaderno siguió en su estante, abierto por la última página. Los niños del pueblo suben a leerlo en verano y se turnan para añadir una línea, porque dicen que el faro se apaga si nadie escribe."
+   },
+   {
+    "page": 5,
+    "height": 600.0,
+    "top": 71.38699999999994,
+    "bottom": 138.387,
+    "size": 11.0,
+    "text": "Con ajustes de separación, escala y demás cosas. La segunda línea llega con el salto. La tercera, con la comilla sencilla. La cuarta va un poco estrecha y separada. Una nota arriba y sigue."
+   },
+   {
+    "page": 7,
+    "height": 600.0,
+    "top": 17.65599999999995,
+    "bottom": 25.65599999999995,
+    "size": 8.0,
+    "text": "El faro de la isla"
+   },
+   {
+    "page": 7,
+    "height": 600.0,
+    "top": 61.386999999999944,
+    "bottom": 86.38699999999994,
+    "size": 11.0,
+    "text": "Esta línea tiene un glifo sin nombre aquí: A y sigue después."
+   },
+   {
+    "page": 7,
+    "height": 600.0,
+    "top": 290.604,
+    "bottom": 302.604,
+    "size": 12.0,
+    "text": "................................................................................Capitulo uno"
+   }
+  ],
+  "chapters": [
+   {
+    "title": "El faro de la isla",
+    "paras": [
+     [
+      "p",
+      "Hacia el norte de la isla se alza un faro viejo, de piedra gris y puerta azul, que nadie ha pintado desde hace muchos años. Lo cuidaba una mujer llamada Inés, que subía cada tarde los ciento doce escalones con un candil y un cuaderno de tapas gastadas, donde anotaba los barcos, el viento y alguna que otra palabra suelta."
+     ],
+     [
+      "p",
+      "Cuando el invierno cerraba el puerto, Inés se dedicaba a la traducción de cartas antiguas que le mandaban de tierra firme, y en sus margenes dejaba dibujos de gaviotas y de redes. Decía que la fiesta del pueblo era la única flor que crecía en aquellas rocas."
+     ],
+     [
+      "p",
+      "Las noches de tormenta no dormía. Encendía la lámpara, comprobaba el mecanismo y se sentaba a escuchar cómo el mar golpeaba la base de la torre. Por la mañana bajaba a recoger lo que las olas traían: maderas, cuerdas, alguna botella y, una vez, un reloj sin agujas."
+     ],
+     [
+      "p",
+      "Con los años llegaron otros guardianes, y más tarde las máquinas, pero el cuaderno siguió en su estante, abierto por la última página. Los niños del pueblo suben a leerlo en verano y se turnan para añadir una línea, porque dicen que el faro se apaga si nadie escribe."
+     ]
+    ]
+   },
+   {
+    "title": "Segunda parte",
+    "paras": [
+     [
+      "h",
+      "La marea y el viento"
+     ],
+     [
+      "p",
+      "Las noches de tormenta no dormía. Encendía la lámpara, comprobaba el mecanismo y se sentaba a escuchar cómo el mar golpeaba la base"
+     ],
+     [
+      "p",
+      "La primera columna habla de la marea, que sube y baja dos veces al día y deja la playa limpia. Los pescadores la miran antes de salir al mar."
+     ],
+     [
+      "p",
+      "La segunda columna habla del viento, que llega del oeste casi todo el año y dobla los pinos del cabo. Los pastores lo escuchan antes de subir al monte."
+     ],
+     [
+      "p",
+      "Con los años llegaron otros guardianes, y más tarde las máquinas, pero el cuaderno siguió en su estante, abierto por la última página. Los niños del pueblo suben a leerlo en verano y se turnan para añadir una línea, porque dicen que el faro se apaga si nadie escribe."
+     ],
+     [
+      "p",
+      "Con ajustes de separación, escala y demás cosas. La segunda línea llega con el salto. La tercera, con la comilla sencilla. La cuarta va un poco estrecha y separada. Una nota arriba y sigue."
+     ],
+     [
+      "p",
+      "Esta línea tiene un glifo sin nombre aquí: A y sigue después."
+     ],
+     [
+      "p",
+      "................................................................................Capitulo uno"
+     ]
+    ]
+   }
+  ]
+ },
+ "scan": {
+  "pages": 1,
+  "blocks": [],
+  "chapters": [
+   {
+    "title": "Escaneado",
+    "paras": []
+   }
+  ]
+ }
+}
