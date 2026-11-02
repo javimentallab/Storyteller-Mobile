@@ -20,7 +20,73 @@ object TextPrep {
     private val SENTENCE_END = Regex("(?<=[.!?…])$S+")
     private val CLAUSE_END = Regex("(?<=[,;:])$S+")
 
-    /** One sentence a piece. Long ones are cut at commas, where the reader would pause anyway. */
+    /** What closes a piece of narration, and the silence after it: the book's punctuation sets it, not the model. */
+    enum class Close(val pause: Double) { CLAUSE(0.22), SENTENCE(0.55), PARAGRAPH(0.90) }
+
+    data class Chunk(val text: String, val close: Close)
+
+    // The end of a sentence: a sign, maybe a closing quote or bracket, and a space. Not before a
+    // lower case letter ("¿Qué hora es? —dijo él", "etc. y", "Bueno… quizá").
+    private val CHUNK_SENTENCE_END = Regex("(?:(?<=[.!?…])|(?<=[.!?…][»”\"’)\\]]))$S+(?![—–-]?$S*[a-záéíóúüñ])")
+    private val ENDS_SENTENCE = Regex("[.!?…][»”\"’)\\]]*$")
+
+    /** One piece per clause, so that the pause is ours: left to XTTS, a comma gets anything from 0 to 0.8 s. */
+    private fun splitParagraph(text: String, hard: Int = 240, short: Int = 20): List<String> {
+        val raw = ArrayList<String>()
+        for (s in CHUNK_SENTENCE_END.split(text)) {
+            if (raw.isNotEmpty() && ABBR_END.containsMatchIn(raw.last())) {
+                raw[raw.size - 1] = raw.last() + " " + s
+            } else {
+                raw += s
+            }
+        }
+        val out = ArrayList<String>()
+        for (sentence in raw) {
+            val s = sentence.pyStrip()
+            if (s.isEmpty()) continue
+            val clauses = ArrayList<String>()
+            for (part in CLAUSE_END.split(s)) {
+                if (clauses.isNotEmpty() && clauses.last().length < short) {     // "Además, vivimos…"
+                    clauses[clauses.size - 1] = clauses.last() + " " + part
+                } else {
+                    clauses += part
+                }
+            }
+            for (clause in clauses) {
+                var p = clause
+                while (p.length > hard) {               // a monstrous clause: cut at a space
+                    var cut = p.lastIndexOf(' ', hard - 1)
+                    if (cut < 60) cut = hard
+                    out += p.substring(0, cut).pyStrip()
+                    p = p.substring(cut).pyStrip()
+                }
+                out += p
+            }
+        }
+        return out.filter { LETTER_OR_DIGIT.containsMatchIn(it) || ANY_LETTER.containsMatchIn(it) }
+    }
+
+    /** The pieces for the voice, like split_chunks on the desktop. Each line of the text is a paragraph. */
+    fun splitChunks(text: String): List<Chunk> {
+        val out = ArrayList<Chunk>()
+        for (paragraph in text.split("\n")) {
+            val parts = splitParagraph(paragraph)
+            for ((i, c) in parts.withIndex()) {
+                val close = when {
+                    i == parts.lastIndex -> Close.PARAGRAPH
+                    ENDS_SENTENCE.containsMatchIn(c) -> Close.SENTENCE
+                    else -> Close.CLAUSE
+                }
+                out += Chunk(c, close)
+            }
+        }
+        return out
+    }
+
+    /**
+     * One sentence a piece, for the subtitles of a transcribed audiobook: there a line per comma
+     * would be too short. Long ones are cut at commas, where the reader would pause anyway.
+     */
     fun splitSentences(text: String, target: Int = 180, hard: Int = 240, soft: Int = 170): List<String> {
         val raw = ArrayList<String>()
         for (s in SENTENCE_END.split(text.replace("\n", " "))) {
@@ -84,6 +150,8 @@ object TextPrep {
     private val COMMA_BEFORE_END = Regex("$S*,$S*([.?!])")
     private val COMMA_AFTER_END = Regex("([.?!])$S*,$S*")
     private val COMMA_AFTER_OPENING = Regex("([¿¡])$S*,$S*")
+    private val DOTS = Regex("\\.{2,}")
+    private val END_THEN_DOTS = Regex("([.?!])(?:$S*\\.)+")
     private val LEADING = Regex("^[$S,.]+".replace("[$S,.]", "(?:$S|[,.])"))
     private val TRAILING = Regex("(?:$S|,)+$")
 
@@ -94,7 +162,7 @@ object TextPrep {
         t = Regex("_{2,}").replace(t, ", ")
         t = t.replace("—", ", ").replace("–", ", ").replace("―", ", ")
         t = STRAY_HYPHEN.replace(t, ", ")
-        t = t.replace("…", ". ")
+        t = DOTS.replace(t, "…").replace("…", ". ")      // "y..." typed by hand: XTTS made things up
         t = INNER_APOSTROPHE.replace(t, "'")
         t = QUOTES.replace(t, "")
         t = BRACKETS.replace(t, ", ")
@@ -115,6 +183,7 @@ object TextPrep {
         t = COMMA_BEFORE_END.replace(t, "$1")
         t = COMMA_AFTER_END.replace(t, "$1 ")
         t = COMMA_AFTER_OPENING.replace(t, "$1")
+        t = END_THEN_DOTS.replace(t, "$1")               // 'y...".' -> "y. ." without quotes -> "y."
         t = LEADING.replace(t, "")
         t = TRAILING.replace(t, "")
         return t.pyStrip()

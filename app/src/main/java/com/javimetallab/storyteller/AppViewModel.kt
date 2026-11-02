@@ -259,7 +259,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     val tmp = File(ctx.cacheDir, "pending.epub")
                     copyToFile(uri, tmp)
                     val book = Epub.read(tmp)
-                    val pieces = book.chapters.map { TextPrep.splitSentences(it.text) }
+                    val pieces = book.chapters.map { ch -> TextPrep.splitChunks(ch.text).map { it.text } }
                     val fallback = picked?.name?.substringBeforeLast('.')?.replace('_', ' ').orEmpty()
                     EpubPreview(
                         tmp, picked?.name.orEmpty(), book.title.ifBlank { fallback }, book.chapters.size,

@@ -16,7 +16,6 @@ import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 
-private const val GAP_SECONDS = 0.20        // between sentences
 private const val SECONDS_PER_REPORT = 1.0
 
 private fun cueJson(start: Double, end: Double, i: Int, text: String) =
@@ -79,7 +78,7 @@ class NarrateTask(
         val chapters = epub.chapters
         total = chapters.size
         if (total == 0) throw IOException("no text")
-        val sentences = chapters.map { TextPrep.splitSentences(it.text) }
+        val sentences = chapters.map { TextPrep.splitChunks(it.text) }
         val allSentences = sentences.sumOf { it.size }.coerceAtLeast(1)
         sentenceCount = allSentences
         if (resume) loadPrevious()
@@ -109,35 +108,31 @@ class NarrateTask(
                     null
                 }
                 start = minOf(prev.optInt("n"), old?.length() ?: 0)
-                for (i in 0 until start) cues.put(old!!.get(i))
+                // Narrated with another way of cutting: going on by position would skip or repeat. It starts over.
+                val same = start <= list.size && (0 until start).all { old!!.getJSONObject(it).optString("text") == list[it].text }
+                if (same) for (i in 0 until start) cues.put(old!!.get(i)) else start = 0
             }
             doneSentences -= prev?.optInt("n") ?: 0
             doneSentences += start
             var writer: WavWriter? = if (rate > 0) WavWriter(wavFile, rate, if (start > 0) kept else 0) else null
-            var index = start
             try {
-                while (index < list.size) {
-                    ctl.check()
-                    val window = list.subList(index, minOf(index + parallel, list.size))
-                    val first = index
-                    // Asked for together, written in order. Nothing is kept of a window left halfway.
-                    val pieces = coroutineScope {
-                        window.mapIndexed { k, text ->
-                            async(Dispatchers.IO) {
-                                val tmp = File(temp, "${book.name}-$id-${first + k}.audio")
-                                try {
-                                    ctl.retrying {
-                                        api.speech(if (prepareText) TextPrep.forVoice(text, lang, speller::spell) else text, tmp)
-                                    }
-                                    AudioCodec.decodeAll(tmp)
-                                } finally {
-                                    tmp.delete()
-                                }
+                // Asked for ahead of time, written in order. What had got ahead when it stops is asked for again.
+                inOrder(
+                    list.size, start, parallel,
+                    work = { k ->
+                        val text = list[k].text
+                        val tmp = File(temp, "${book.name}-$id-$k.audio")
+                        try {
+                            ctl.retrying {
+                                api.speech(if (prepareText) TextPrep.forVoice(text, lang, speller::spell) else text, tmp)
                             }
-                        }.awaitAll()
-                    }
-                    ctl.check()
-                    for ((k, pcm) in pieces.withIndex()) {
+                            AudioCodec.decodeAll(tmp)
+                        } finally {
+                            tmp.delete()
+                        }
+                    },
+                    deliver = { k, pcm ->
+                        ctl.check()
                         val w = writer ?: WavWriter(wavFile, pcm.rate).also {
                             writer = it
                             rate = pcm.rate
@@ -145,32 +140,29 @@ class NarrateTask(
                         val from = w.frames.toDouble() / w.rate
                         w.append(pcm.resampledTo(w.rate).samples)
                         val to = w.frames.toDouble() / w.rate
-                        cues.put(cueJson(round3(from), round3(to), first + k, window[k]))
-                        w.silence(GAP_SECONDS)
-                    }
-                    index += window.size
-                    doneSentences += window.size
-                    val w = writer!!
-                    w.writeHeader()
-                    // Audio first, then what describes it: after a crash, resuming cuts the audio back to this.
-                    val dur = w.frames.toDouble() / w.rate
-                    Library.writeAtomic(jsonFile, JSONObject().put("title", ch.title).put("duration", round3(dur)).put("cues", cues).toString())
-                    entries[id] = JSONObject().put("id", id).put("base", base).put("title", ch.title).put("n", index)
-                        .put("duration", round3(dur)).put("done", false).put("sr", w.rate).put("frames", w.frames)
-                        .put("file", "$base.wav")
-                    saveManifest()
-                    val now = System.nanoTime() / 1_000_000
-                    repeat(window.size) { pace.addLast(now) }
-                    while (pace.size > 40) pace.removeFirst()
-                    val perSentence = if (pace.size >= 4) (pace.last() - pace.first()).toDouble() / (pace.size - 1) / 1000 else null
-                    val left = allSentences - doneSentences
-                    ctl.progress {
-                        it.copy(
-                            stage = Stage.NARRATING, pct = (doneSentences * 100 / allSentences).coerceAtMost(99),
-                            a = id, b = total, c = doneSentences, etaSec = perSentence?.let { p -> p * left },
-                        )
-                    }
-                }
+                        cues.put(cueJson(round3(from), round3(to), k, list[k].text))
+                        w.silence(list[k].close.pause)
+                        doneSentences++
+                        w.writeHeader()
+                        // Audio first, then what describes it: after a crash, resuming cuts the audio back to this.
+                        val dur = w.frames.toDouble() / w.rate
+                        Library.writeAtomic(jsonFile, JSONObject().put("title", ch.title).put("duration", round3(dur)).put("cues", cues).toString())
+                        entries[id] = JSONObject().put("id", id).put("base", base).put("title", ch.title).put("n", k + 1)
+                            .put("duration", round3(dur)).put("done", false).put("sr", w.rate).put("frames", w.frames)
+                            .put("file", "$base.wav")
+                        saveManifest()
+                        pace.addLast(System.nanoTime() / 1_000_000)
+                        while (pace.size > 40) pace.removeFirst()
+                        val perSentence = if (pace.size >= 4) (pace.last() - pace.first()).toDouble() / (pace.size - 1) / 1000 else null
+                        val left = allSentences - doneSentences
+                        ctl.progress {
+                            it.copy(
+                                stage = Stage.NARRATING, pct = (doneSentences * 100 / allSentences).coerceAtMost(99),
+                                a = id, b = total, c = doneSentences, etaSec = perSentence?.let { p -> p * left },
+                            )
+                        }
+                    },
+                )
             } finally {
                 writer?.close()
             }

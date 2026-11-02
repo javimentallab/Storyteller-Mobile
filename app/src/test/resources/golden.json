@@ -164,6 +164,570 @@
   {
    "in": "puntos suspensivos… y más",
    "out": "puntos suspensivos. y más"
+  },
+  {
+   "in": "Y entonces... no sé qué pasó.",
+   "out": "Y entonces. no sé qué pasó."
+  },
+  {
+   "in": "Dijo «y...». Luego se fue.",
+   "out": "Dijo y. Luego se fue."
+  },
+  {
+   "in": "Se quedó en y...\".",
+   "out": "Se quedó en y."
+  },
+  {
+   "in": "¿Qué?.. Nada.",
+   "out": "¿Qué? Nada."
+  },
+  {
+   "in": "Bueno… quizá mañana.",
+   "out": "Bueno. quizá mañana."
   }
- ]
+ ],
+ "chunks": [
+  {
+   "in": "Hola. Adiós.",
+   "out": [
+    [
+     "Hola.",
+     "frase"
+    ],
+    [
+     "Adiós.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.\nEl resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino. ¿Quién lo diría? ¡Nadie! Tenía en su casa una ama que pasaba de los cuarenta… y una sobrina que no llegaba a los veinte.",
+   "out": [
+    [
+     "En un lugar de la Mancha,",
+     "coma"
+    ],
+    [
+     "de cuyo nombre no quiero acordarme,",
+     "coma"
+    ],
+    [
+     "no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero,",
+     "coma"
+    ],
+    [
+     "adarga antigua, rocín flaco y galgo corredor.",
+     "frase"
+    ],
+    [
+     "Una olla de algo más vaca que carnero,",
+     "coma"
+    ],
+    [
+     "salpicón las más noches,",
+     "coma"
+    ],
+    [
+     "duelos y quebrantos los sábados,",
+     "coma"
+    ],
+    [
+     "lentejas los viernes,",
+     "coma"
+    ],
+    [
+     "algún palomino de añadidura los domingos,",
+     "coma"
+    ],
+    [
+     "consumían las tres partes de su hacienda.",
+     "parrafo"
+    ],
+    [
+     "El resto della concluían sayo de velarte,",
+     "coma"
+    ],
+    [
+     "calzas de velludo para las fiestas,",
+     "coma"
+    ],
+    [
+     "con sus pantuflos de lo mesmo,",
+     "coma"
+    ],
+    [
+     "y los días de entresemana se honraba con su vellorí de lo más fino.",
+     "frase"
+    ],
+    [
+     "¿Quién lo diría?",
+     "frase"
+    ],
+    [
+     "¡Nadie!",
+     "frase"
+    ],
+    [
+     "Tenía en su casa una ama que pasaba de los cuarenta… y una sobrina que no llegaba a los veinte.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "El Sr. Smith y la Sra. López fueron a EE. UU. con John F. Kennedy. Luego volvieron.",
+   "out": [
+    [
+     "El Sr. Smith y la Sra. López fueron a EE. UU. con John F. Kennedy.",
+     "frase"
+    ],
+    [
+     "Luego volvieron.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Dr. Who vs. Mr. Bean. Fin.",
+   "out": [
+    [
+     "Dr. Who vs. Mr. Bean.",
+     "frase"
+    ],
+    [
+     "Fin.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+   "out": [
+    [
+     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "coma"
+    ],
+    [
+     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "coma"
+    ],
+    [
+     "aaaaaaaaaaaaaaaaaaaa",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
+   "out": [
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
+   "out": [
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "coma"
+    ],
+    [
+     "una cláusula bastante larga,",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "...   ",
+   "out": []
+  },
+  {
+   "in": "",
+   "out": []
+  },
+  {
+   "in": "¿Sí? ¡No! Quizá… tal vez.\nOtra línea sin punto\nY otra.",
+   "out": [
+    [
+     "¿Sí?",
+     "frase"
+    ],
+    [
+     "¡No!",
+     "frase"
+    ],
+    [
+     "Quizá… tal vez.",
+     "parrafo"
+    ],
+    [
+     "Otra línea sin punto",
+     "parrafo"
+    ],
+    [
+     "Y otra.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Dijo: «Ven aquí»; luego, sin más, se fue — y no volvió jamás, aunque todos lo esperaron durante muchos años en la plaza del pueblo, junto a la fuente vieja, bajo los árboles que su abuelo había plantado cuando era joven y fuerte.",
+   "out": [
+    [
+     "Dijo: «Ven aquí»; luego,",
+     "coma"
+    ],
+    [
+     "sin más, se fue — y no volvió jamás,",
+     "coma"
+    ],
+    [
+     "aunque todos lo esperaron durante muchos años en la plaza del pueblo,",
+     "coma"
+    ],
+    [
+     "junto a la fuente vieja,",
+     "coma"
+    ],
+    [
+     "bajo los árboles que su abuelo había plantado cuando era joven y fuerte.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Title in English. A sentence with numbers 3.14 and 1,000 here! Is it? Yes.",
+   "out": [
+    [
+     "Title in English.",
+     "frase"
+    ],
+    [
+     "A sentence with numbers 3.14 and 1,000 here!",
+     "frase"
+    ],
+    [
+     "Is it?",
+     "frase"
+    ],
+    [
+     "Yes.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Además, vivimos aquí, en esta casa tan grande, desde hace muchos años.",
+   "out": [
+    [
+     "Además, vivimos aquí,",
+     "coma"
+    ],
+    [
+     "en esta casa tan grande,",
+     "coma"
+    ],
+    [
+     "desde hace muchos años.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "¿Qué hora es? —dijo él, y se fue sin esperar la respuesta.",
+   "out": [
+    [
+     "¿Qué hora es? —dijo él,",
+     "coma"
+    ],
+    [
+     "y se fue sin esperar la respuesta.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Bueno… quizá mañana. O pasado, ya veremos.",
+   "out": [
+    [
+     "Bueno… quizá mañana.",
+     "frase"
+    ],
+    [
+     "O pasado, ya veremos.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Primera línea del párrafo, con coma.\nSegunda línea. Con dos frases.\n\nTercera.",
+   "out": [
+    [
+     "Primera línea del párrafo,",
+     "coma"
+    ],
+    [
+     "con coma.",
+     "parrafo"
+    ],
+    [
+     "Segunda línea.",
+     "frase"
+    ],
+    [
+     "Con dos frases.",
+     "parrafo"
+    ],
+    [
+     "Tercera.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Dijo: «Ya está.» Y se fue. (Nadie lo vio.) Después volvió.",
+   "out": [
+    [
+     "Dijo: «Ya está.»",
+     "frase"
+    ],
+    [
+     "Y se fue.",
+     "frase"
+    ],
+    [
+     "(Nadie lo vio.)",
+     "frase"
+    ],
+    [
+     "Después volvió.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "El Sr. Smith y el Dr. Pérez fueron a EE. UU. con John F. Kennedy, y volvieron.",
+   "out": [
+    [
+     "El Sr. Smith y el Dr. Pérez fueron a EE. UU. con John F. Kennedy,",
+     "coma"
+    ],
+    [
+     "y volvieron.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Costaba 3,50 euros, o $74.99; era caro: muy caro.",
+   "out": [
+    [
+     "Costaba 3,50 euros, o $74.99;",
+     "coma"
+    ],
+    [
+     "era caro: muy caro.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "etc. y más cosas, sin duda. ¡Qué bien! ¿Verdad?",
+   "out": [
+    [
+     "etc. y más cosas, sin duda.",
+     "frase"
+    ],
+    [
+     "¡Qué bien!",
+     "frase"
+    ],
+    [
+     "¿Verdad?",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.",
+   "out": [
+    [
+     "uno, dos, tres, cuatro,",
+     "coma"
+    ],
+    [
+     "cinco, seis, siete, ocho,",
+     "coma"
+    ],
+    [
+     "nueve, diez.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra fin.",
+   "out": [
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "fin.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y algo más.",
+   "out": [
+    [
+     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "coma"
+    ],
+    [
+     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y algo más.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": ", , .",
+   "out": []
+  },
+  {
+   "in": "",
+   "out": []
+  }
+ ],
+ "pauses": {
+  "coma": 0.22,
+  "frase": 0.55,
+  "parrafo": 0.9
+ }
 }

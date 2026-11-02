@@ -37,6 +37,27 @@ class EngineTest {
     }
 
     @Test
+    fun chunksLikeTheDesktopEngine() {
+        val close = mapOf("coma" to TextPrep.Close.CLAUSE, "frase" to TextPrep.Close.SENTENCE, "parrafo" to TextPrep.Close.PARAGRAPH)
+        val cases = golden.getJSONArray("chunks")
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val want = c.getJSONArray("out").let { a ->
+                (0 until a.length()).map { k -> TextPrep.Chunk(a.getJSONArray(k).getString(0), close.getValue(a.getJSONArray(k).getString(1))) }
+            }
+            assertEquals("case $i: ${c.getString("in")}", want, TextPrep.splitChunks(c.getString("in")))
+        }
+        assertTrue(cases.length() > 10)
+        val pauses = golden.getJSONObject("pauses")
+        for ((key, value) in close) assertEquals(key, pauses.getDouble(key), value.pause, 0.0)
+    }
+
+    @Test
+    fun aNonLatinBookIsNotLeftWithoutText() {
+        assertEquals(listOf("Привет, мир.", "Хорошо."), TextPrep.splitChunks("Привет, мир. Хорошо.").map { it.text })
+    }
+
+    @Test
     fun punctuationLikeTheDesktopEngine() {
         val cases = golden.getJSONArray("punct")
         for (i in 0 until cases.length()) {
