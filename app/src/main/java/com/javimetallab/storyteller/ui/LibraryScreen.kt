@@ -7,6 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -114,6 +116,7 @@ private fun ActionRow(vm: AppViewModel) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun BookCard(vm: AppViewModel, b: BookSummary, active: Boolean) {
     var menu by remember { mutableStateOf(false) }
@@ -146,17 +149,26 @@ private fun BookCard(vm: AppViewModel, b: BookSummary, active: Boolean) {
                 inLine != null -> Text(stringResource(R.string.book_in_line), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
                 !b.complete -> Text(stringResource(R.string.book_partial, b.progress), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             }
-            when {
-                active -> {}
-                inLine != null -> TextButton(onClick = { vm.switchToJob(inLine.id) }, modifier = Modifier.padding(top = 2.dp)) {
-                    Text(stringResource(R.string.job_switch))
+            // Wraps: three buttons need about 300 dp, and a 360 dp phone leaves 268 here.
+            FlowRow {
+                // What is narrated can be heard while the rest is being narrated or waits its turn.
+                if (b.chapters > 0) {
+                    TextButton(onClick = { vm.openBook(b.id, b.title) }, modifier = Modifier.padding(top = 2.dp)) {
+                        Text(stringResource(R.string.listen))
+                    }
                 }
-                b.resumable && running != null -> Row {
-                    TextButton(onClick = { vm.switchToBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_switch)) }
-                    TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_add_to_line)) }
-                }
-                b.resumable -> TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) {
-                    Text(stringResource(R.string.resume))
+                when {
+                    active -> {}
+                    inLine != null -> TextButton(onClick = { vm.switchToJob(inLine.id) }, modifier = Modifier.padding(top = 2.dp)) {
+                        Text(stringResource(R.string.job_switch))
+                    }
+                    b.resumable && running != null -> {
+                        TextButton(onClick = { vm.switchToBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_switch)) }
+                        TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) { Text(stringResource(R.string.job_add_to_line)) }
+                    }
+                    b.resumable -> TextButton(onClick = { vm.resumeBook(b) }, modifier = Modifier.padding(top = 2.dp)) {
+                        Text(stringResource(R.string.resume))
+                    }
                 }
             }
         }

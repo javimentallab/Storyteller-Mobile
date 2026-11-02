@@ -13,6 +13,7 @@
     </plurals>
     <string name="book_working">● En marcha</string>
     <string name="book_partial">⏸ A medias · %1$d %%</string>
+    <string name="listen">Escuchar</string>
     <string name="resume">Reanudar</string>
     <string name="regenerate">Narrar de nuevo</string>
     <string name="more_options">Más opciones</string>

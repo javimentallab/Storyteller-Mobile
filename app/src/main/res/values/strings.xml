@@ -15,6 +15,7 @@
     </plurals>
     <string name="book_working">● In progress</string>
     <string name="book_partial">⏸ Unfinished · %1$d %%</string>
+    <string name="listen">Listen</string>
     <string name="resume">Resume</string>
     <string name="regenerate">Narrate again</string>
     <string name="more_options">More options</string>
