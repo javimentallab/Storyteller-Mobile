@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">Библиотека</string>
+    <string name="library_empty">Книг пока нет. Чтобы начать, озвучьте EPUB или импортируйте аудиокнигу.</string>
+    <string name="narrate_epub">Озвучить EPUB</string>
+    <string name="import_audiobook">Импорт аудиокниги</string>
+    <string name="translate">Перевод</string>
+    <string name="models">Модели</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d глава · %2$s</item>
+        <item quantity="few">%1$d главы · %2$s</item>
+        <item quantity="many">%1$d глав · %2$s</item>
+        <item quantity="other">%1$d главы · %2$s</item>
+    </plurals>
+    <string name="book_working">● В работе</string>
+    <string name="book_partial">⏸ Не закончено · %1$d %%</string>
+    <string name="listen">Слушать</string>
+    <string name="resume">Продолжить</string>
+    <string name="regenerate">Озвучить заново</string>
+    <string name="more_options">Другие действия</string>
+    <string name="confirm_delete">Удалить «%1$s» с этого телефона? Аудио будет потеряно навсегда.</string>
+    <string name="confirm_regenerate">Озвучить «%1$s» заново с начала? Уже озвученное будет потеряно.</string>
+    <string name="confirm_cancel_job">Отменить «%1$s»? Всё сделанное до сих пор будет удалено.</string>
+    <string name="delete">Удалить</string>
+    <string name="cancel">Отмена</string>
+    <string name="keep_going">Продолжить</string>
+    <string name="back">Назад</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">Озвучивание, транскрипция и перевод</string>
+    <string name="done_channel">Завершено</string>
+    <string name="job_finished">Завершено</string>
+    <string name="job_failed">Остановилось на полпути. Сделанное сохранено.</string>
+    <string name="stop_and_save">Остановить и сохранить</string>
+    <string name="job_queued">Ждёт своей очереди…</string>
+    <string name="job_copying">Копирование файла…</string>
+    <string name="job_reading">Чтение документа…</string>
+    <string name="job_narrating">Глава %1$d/%2$d · фраза %3$d</string>
+    <string name="job_encoding">Сжатие главы…</string>
+    <string name="job_transcribing">Транскрипция… %1$s из %2$s</string>
+    <string name="job_translating">Перевод… %1$d/%2$d</string>
+    <string name="job_saving">Сохранение…</string>
+    <string name="job_stopping">Остановка…</string>
+    <string name="job_waiting">сервис занят, новая попытка через %1$d с</string>
+    <string name="eta_calculating">подсчёт оставшегося времени…</string>
+    <string name="eta_less_minute">осталось меньше 1 мин</string>
+    <string name="eta_minutes">осталось ~%1$d мин</string>
+    <string name="eta_hours">осталось ~%1$d ч %2$d мин</string>
+    <string name="eta_until">%1$s (примерно до %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">Модели не работают на телефоне. Для каждой задачи выберите сервис, который её выполнит: публичный с вашим ключом доступа или собственный. Ваш текст и аудио отправляются в выбранный сервис.</string>
+    <string name="section_narration">Озвучивание</string>
+    <string name="section_narration_help">Текст в речь. API как у OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">Транскрипция</string>
+    <string name="section_transcription_help">Речь в текст, для импортированных аудиокниг. API как у OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">Перевод</string>
+    <string name="section_translation_help">Любая чат-модель. API как у OpenAI: /v1/chat/completions (также Ollama и llama.cpp)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Ключ доступа</string>
+    <string name="field_key_hint">Оставьте пустым, если у сервиса его нет</string>
+    <string name="field_model">Модель</string>
+    <string name="field_voice">Голос</string>
+    <string name="field_format">Формат аудио</string>
+    <string name="field_parallel">Запросов одновременно</string>
+    <string name="field_parallel_help">Больше — быстрее, если сервис это позволяет.</string>
+    <string name="search_models">Посмотреть доступные модели</string>
+    <string name="search_voices">Посмотреть доступные голоса</string>
+    <string name="show_key">Показать ключ</string>
+    <string name="hide_key">Скрыть ключ</string>
+    <string name="test">Проверить</string>
+    <string name="testing">Проверка…</string>
+    <string name="test_ok">Работает.</string>
+    <string name="test_narration_ok">Работает: %1$s с аудио.</string>
+    <string name="test_translation_ok">Работает: «%1$s»</string>
+    <string name="http_status">Ошибка %1$d</string>
+    <string name="cleartext_warning">Этот адрес не в вашей домашней сети и не использует HTTPS: текст будет передаваться без шифрования, а ключ не отправляется, поэтому сервис, которому он нужен, вернёт ошибку.</string>
+    <string name="needs_model">Сначала выберите, какая модель это делает.</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">Озвучить EPUB</string>
+    <string name="choose_epub">Выбрать EPUB…</string>
+    <string name="reading_file">Чтение…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d глава</item>
+        <item quantity="few">%1$d главы</item>
+        <item quantity="many">%1$d глав</item>
+        <item quantity="other">%1$d главы</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · фраз: %2$d · символов: %3$d</string>
+    <string name="narrate_goes_to">В %2$s будет отправлено символов текста: %1$d. Если сервис берёт плату за использование, он их учтёт.</string>
+    <string name="prepare_text">Подготовить текст для голоса</string>
+    <string name="prepare_text_help">Числа прописью, сокращения и необычная пунктуация. Это нужно многим открытым голосам. Субтитры не меняются.</string>
+    <string name="no_chapters">В этом EPUB не найден текст.</string>
+    <string name="start">Начать</string>
+
+    <!-- Import -->
+    <string name="import_title">Импорт аудиокниги</string>
+    <string name="import_help">Она копируется на телефон и транскрибируется, чтобы создать синхронные субтитры. Аудио отправляется в выбранный сервис частями по две минуты.</string>
+    <string name="choose_audio">Выбрать аудио…</string>
+    <string name="audio_language">Язык аудио</string>
+    <string name="detect_language">Определить автоматически</string>
+
+    <!-- Translate -->
+    <string name="translate_title">Перевод документа</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, субтитры (SRT, VTT) или текст (TXT, MD). Курсив и жирный шрифт внутри фразы теряются. PDF превращается в переведённый EPUB без макета.</string>
+    <string name="choose_document">Выбрать документ…</string>
+    <string name="from_language">С языка</string>
+    <string name="to_language">На язык</string>
+    <string name="same_language">Оба языка одинаковые.</string>
+    <string name="translations_list">Переводы</string>
+    <string name="translation_done">Завершён</string>
+    <string name="translation_partial">Не закончен · %1$d из %2$d</string>
+    <string name="translation_partial_short">Не закончен</string>
+    <string name="translation_running">Перевод…</string>
+    <string name="save_to_phone">Сохранить как…</string>
+    <string name="saved_to_phone">Сохранено.</string>
+    <string name="confirm_delete_translation">Удалить перевод «%1$s»?</string>
+
+    <!-- Player -->
+    <string name="live">● Вживую</string>
+    <string name="waiting_more">Ожидание продолжения озвучки…</string>
+    <string name="section_n">Раздел %1$d</string>
+    <string name="go_to_chapter">Перейти к главе</string>
+    <string name="go_to_position">Перейти к позиции</string>
+    <string name="position_hint">мм:сс или секунды</string>
+    <string name="bad_position">Напишите в виде мм:сс или в секундах.</string>
+    <string name="go">Перейти</string>
+    <string name="play">Воспроизвести</string>
+    <string name="pause">Пауза</string>
+    <string name="back_10">Назад на 10 секунд</string>
+    <string name="forward_10">Вперёд на 10 секунд</string>
+    <string name="previous_chapter">Предыдущая глава</string>
+    <string name="next_chapter">Следующая глава</string>
+    <string name="no_text_yet">Для этой части пока нет текста.</string>
+    <string name="cant_open_book">Не удаётся открыть эту книгу.</string>
+    <string name="playback_error">Не удаётся воспроизвести эту главу.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">Сервис отклонил ключ доступа. Проверьте его в разделе «Модели».</string>
+    <string name="err_not_found">У сервиса этого нет. Проверьте URL и модель в разделе «Модели».</string>
+    <string name="err_rate_limit">Сервис сообщает о слишком большом числе запросов, даже после ожидания. Сделанное сохранено: продолжите позже.</string>
+    <string name="err_bad_request">Сервис отклонил запрос. Проверьте модель и голос в разделе «Модели».</string>
+    <string name="err_server">У сервиса собственная проблема. Сделанное сохранено: продолжите позже.</string>
+    <string name="err_bad_answer">Сервис дал ответ, который это приложение не может прочитать. Этот URL относится к нужному типу API?</string>
+    <string name="err_network">Не удаётся связаться с сервисом. Сделанное сохранено: продолжите позже.</string>
+    <string name="err_bad_type">Это приложение не может переводить такой тип файлов.</string>
+    <string name="err_cant_read_file">Не удаётся прочитать этот файл.</string>
+    <string name="err_no_text">В этом документе нет текста для перевода.</string>
+    <string name="err_no_text_pdf">В этом PDF нет текста для перевода. Вероятно, он отсканирован, а приложение не читает изображения.</string>
+    <string name="err_generic">Что-то пошло не так (%1$s).</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">Язык</string>
+    <string name="field_language_help">Язык, на котором читается книга. Выберите также голос, который хорошо на нём звучит.</string>
+    <string name="qc_title">Проверять и переделывать фразы, которые звучат неверно</string>
+    <string name="qc_help">Каждая фраза отправляется в сервис транскрипции и, если не совпадает с текстом, запрашивается заново. Медленнее. Нужен URL транскрипции.</string>
+    <string name="voice_upload">Загрузить голос…</string>
+    <string name="voice_uploading">Загрузка голоса…</string>
+    <string name="voice_upload_help">Чистая запись длиной от 5 до 12 с. Её принимает только собственный сервер Storyteller (st_server).</string>
+    <string name="voice_upload_send">Загрузить</string>
+    <string name="voice_upload_unsupported">Этот сервис не принимает голоса: это умеет только собственный сервер Storyteller (st_server).</string>
+    <string name="voice_name">Название голоса</string>
+    <string name="pron_title">Словарь произношения</string>
+    <string name="pron_help">Как читаются некоторые слова, язык: %1$s. У каждого языка свой словарь: смените язык в разделе «Модели».</string>
+    <string name="pron_words">Слова: слово = как произносится, по одному в строке</string>
+    <string name="pron_letters">Аббревиатуры, читаемые по буквам</string>
+    <string name="pron_as_words">Аббревиатуры, читаемые как слово</string>
+    <string name="pron_save">Сохранить</string>
+    <string name="fetch_title">Перенести книги с компьютера</string>
+    <string name="fetch_help">С собственного сервера Storyteller (st_server), по URL озвучивания. Приходят только готовые главы; приложение на компьютере остаётся без изменений.</string>
+    <string name="fetch_loading">Запрос к серверу…</string>
+    <string name="fetch_empty">На этом сервере пока нет готовых глав.</string>
+    <string name="fetch_unsupported">В этом сервисе нет книг: они есть только на собственном сервере Storyteller (st_server).</string>
+    <string name="fetch_summary">Глав: %1$d из %2$d · %3$s</string>
+    <string name="fetch_have_it">Уже здесь</string>
+    <string name="fetch_bring">Перенести</string>
+
+    <string name="job_switch">Переключиться</string>
+    <string name="job_add_to_line">В очередь</string>
+    <string name="job_waiting_turn">Ожидание: %1$s</string>
+    <string name="book_in_line">● Ждёт своей очереди</string>
+
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="report_content">Пожаловаться на контент</string>
+    <string name="translate_goes_to">Текст документа отправляется в %1$s — выбранный вами ИИ-сервис. Если он берёт плату за использование, он её учтёт.</string>
+    <string name="voice_upload_permission">Загружайте только свой голос или голос человека, который дал вам разрешение. Не выдавайте себя за другого человека.</string>
+</resources>

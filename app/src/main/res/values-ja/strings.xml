@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">ライブラリ</string>
+    <string name="library_empty">まだ本がありません。EPUB を朗読するか、オーディオブックをインポートして始めましょう。</string>
+    <string name="narrate_epub">EPUB を朗読</string>
+    <string name="import_audiobook">オーディオブックをインポート</string>
+    <string name="translate">翻訳</string>
+    <string name="models">モデル</string>
+    <plurals name="book_chapters">
+        <item quantity="other">%1$d 章 · %2$s</item>
+    </plurals>
+    <string name="book_working">● 処理中</string>
+    <string name="book_partial">⏸ 未完了 · %1$d %%</string>
+    <string name="listen">聴く</string>
+    <string name="resume">再開</string>
+    <string name="regenerate">もう一度朗読</string>
+    <string name="more_options">その他のオプション</string>
+    <string name="confirm_delete">「%1$s」をこのスマートフォンから削除しますか？音声は完全に失われます。</string>
+    <string name="confirm_regenerate">「%1$s」を最初から朗読し直しますか？朗読済みの部分は失われます。</string>
+    <string name="confirm_cancel_job">「%1$s」をキャンセルしますか？ここまでの作業は破棄されます。</string>
+    <string name="delete">削除</string>
+    <string name="cancel">キャンセル</string>
+    <string name="keep_going">続ける</string>
+    <string name="back">戻る</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">朗読、文字起こし、翻訳</string>
+    <string name="done_channel">完了</string>
+    <string name="job_finished">完了</string>
+    <string name="job_failed">途中で止まりました。完了した部分は保存されています。</string>
+    <string name="stop_and_save">停止して保存</string>
+    <string name="job_queued">順番待ち…</string>
+    <string name="job_copying">ファイルをコピー中…</string>
+    <string name="job_reading">ドキュメントを読み込み中…</string>
+    <string name="job_narrating">第 %1$d/%2$d 章 · 文 %3$d</string>
+    <string name="job_encoding">章を圧縮中…</string>
+    <string name="job_transcribing">文字起こし中… %1$s / %2$s</string>
+    <string name="job_translating">翻訳中… %1$d/%2$d</string>
+    <string name="job_saving">保存中…</string>
+    <string name="job_stopping">停止中…</string>
+    <string name="job_waiting">サービスが混雑しています。%1$d 秒後に再試行します</string>
+    <string name="eta_calculating">残り時間を計算中…</string>
+    <string name="eta_less_minute">残り 1 分未満</string>
+    <string name="eta_minutes">残り約 %1$d 分</string>
+    <string name="eta_hours">残り約 %1$d 時間 %2$d 分</string>
+    <string name="eta_until">%1$s（%2$s ごろ）</string>
+
+    <!-- Models -->
+    <string name="models_intro">モデルはスマートフォン上では動きません。作業ごとに、それを行うサービスを選んでください：アクセスキーを使う公開サービスか、ご自身のサービスです。テキストと音声は選んだサービスに送られます。</string>
+    <string name="section_narration">朗読</string>
+    <string name="section_narration_help">テキストから音声へ。OpenAI のような API：/v1/audio/speech</string>
+    <string name="section_transcription">文字起こし</string>
+    <string name="section_transcription_help">音声からテキストへ。インポートしたオーディオブック用。OpenAI のような API：/v1/audio/transcriptions</string>
+    <string name="section_translation">翻訳</string>
+    <string name="section_translation_help">任意のチャットモデル。OpenAI のような API：/v1/chat/completions（Ollama や llama.cpp も可）</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">アクセスキー</string>
+    <string name="field_key_hint">サービスにキーがなければ空のままにします</string>
+    <string name="field_model">モデル</string>
+    <string name="field_voice">音声</string>
+    <string name="field_format">音声形式</string>
+    <string name="field_parallel">同時リクエスト数</string>
+    <string name="field_parallel_help">サービスが許せば、多いほど速くなります。</string>
+    <string name="search_models">使えるモデルを見る</string>
+    <string name="search_voices">使える音声を見る</string>
+    <string name="show_key">キーを表示</string>
+    <string name="hide_key">キーを隠す</string>
+    <string name="test">試す</string>
+    <string name="testing">試行中…</string>
+    <string name="test_ok">動作しています。</string>
+    <string name="test_narration_ok">動作しています：音声 %1$s 秒。</string>
+    <string name="test_translation_ok">動作しています：「%1$s」</string>
+    <string name="http_status">エラー %1$d</string>
+    <string name="cleartext_warning">このアドレスはホームネットワーク内になく、HTTPS も使っていません。テキストは暗号化されずに送られ、キーは送信されないため、キーが必要なサービスではエラーになります。</string>
+    <string name="needs_model">まず、これを行うモデルを選んでください。</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">EPUB を朗読</string>
+    <string name="choose_epub">EPUB を選択…</string>
+    <string name="reading_file">読み込み中…</string>
+    <plurals name="chapter_count">
+        <item quantity="other">%1$d 章</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d 文 · %3$d 文字</string>
+    <string name="narrate_goes_to">%1$d 文字のテキストが %2$s に送られます。そのサービスが従量課金なら、その分が請求されます。</string>
+    <string name="prepare_text">音声用にテキストを整える</string>
+    <string name="prepare_text_help">数字の読み、略語、特殊な句読点を処理します。多くのオープンな音声に必要です。字幕は変わりません。</string>
+    <string name="no_chapters">この EPUB にテキストが見つかりません。</string>
+    <string name="start">開始</string>
+
+    <!-- Import -->
+    <string name="import_title">オーディオブックをインポート</string>
+    <string name="import_help">スマートフォンにコピーされ、同期字幕を作るために文字起こしされます。音声は 2 分ずつ、選んだサービスに送られます。</string>
+    <string name="choose_audio">音声を選択…</string>
+    <string name="audio_language">音声の言語</string>
+    <string name="detect_language">自動検出</string>
+
+    <!-- Translate -->
+    <string name="translate_title">ドキュメントを翻訳</string>
+    <string name="translate_help">EPUB、PDF、Word、PowerPoint、Excel、字幕（SRT、VTT）、テキスト（TXT、MD）。文中の斜体と太字は失われます。PDF はレイアウトなしの翻訳済み EPUB として出力されます。</string>
+    <string name="choose_document">ドキュメントを選択…</string>
+    <string name="from_language">翻訳元</string>
+    <string name="to_language">翻訳先</string>
+    <string name="same_language">2 つの言語が同じです。</string>
+    <string name="translations_list">翻訳</string>
+    <string name="translation_done">完了</string>
+    <string name="translation_partial">未完了 · %1$d / %2$d</string>
+    <string name="translation_partial_short">未完了</string>
+    <string name="translation_running">翻訳中…</string>
+    <string name="save_to_phone">名前を付けて保存…</string>
+    <string name="saved_to_phone">保存しました。</string>
+    <string name="confirm_delete_translation">「%1$s」の翻訳を削除しますか？</string>
+
+    <!-- Player -->
+    <string name="live">● ライブ</string>
+    <string name="waiting_more">朗読の続きを待っています…</string>
+    <string name="section_n">セクション %1$d</string>
+    <string name="go_to_chapter">章へ移動</string>
+    <string name="go_to_position">位置へ移動</string>
+    <string name="position_hint">分:秒 または秒数</string>
+    <string name="bad_position">分:秒 または秒数で入力してください。</string>
+    <string name="go">移動</string>
+    <string name="play">再生</string>
+    <string name="pause">一時停止</string>
+    <string name="back_10">10 秒戻る</string>
+    <string name="forward_10">10 秒進む</string>
+    <string name="previous_chapter">前の章</string>
+    <string name="next_chapter">次の章</string>
+    <string name="no_text_yet">この部分にはまだテキストがありません。</string>
+    <string name="cant_open_book">この本を開けません。</string>
+    <string name="playback_error">この章を再生できません。</string>
+
+    <!-- Errors -->
+    <string name="err_auth">サービスがアクセスキーを拒否しました。「モデル」で確認してください。</string>
+    <string name="err_not_found">サービスにそれがありません。「モデル」で URL とモデルを確認してください。</string>
+    <string name="err_rate_limit">待機後もリクエストが多すぎるとサービスが言っています。完了した部分は保存済みです。後で再開してください。</string>
+    <string name="err_bad_request">サービスがリクエストを拒否しました。「モデル」でモデルと音声を確認してください。</string>
+    <string name="err_server">サービス側で問題が起きています。完了した部分は保存済みです。後で再開してください。</string>
+    <string name="err_bad_answer">サービスの応答をこのアプリが読み取れません。その URL の API の種類は正しいですか？</string>
+    <string name="err_network">サービスに接続できません。完了した部分は保存済みです。後で再開してください。</string>
+    <string name="err_bad_type">このアプリはその種類のファイルを翻訳できません。</string>
+    <string name="err_cant_read_file">そのファイルを読み込めません。</string>
+    <string name="err_no_text">そのドキュメントには翻訳するテキストがありません。</string>
+    <string name="err_no_text_pdf">この PDF には翻訳するテキストがありません。スキャンされたものと思われ、このアプリは画像を読み取りません。</string>
+    <string name="err_generic">問題が発生しました（%1$s）。</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">言語</string>
+    <string name="field_language_help">本を読み上げる言語です。その言語で自然に聞こえる音声も選んでください。</string>
+    <string name="qc_title">おかしく聞こえる文を確認してやり直す</string>
+    <string name="qc_help">各文を文字起こしサービスに送り、テキストと一致しなければ再度リクエストします。遅くなります。文字起こしの URL が必要です。</string>
+    <string name="voice_upload">音声をアップロード…</string>
+    <string name="voice_uploading">音声をアップロード中…</string>
+    <string name="voice_upload_help">5〜12 秒のきれいな録音。受け付けるのは Storyteller 独自のサーバー（st_server）だけです。</string>
+    <string name="voice_upload_send">アップロード</string>
+    <string name="voice_upload_unsupported">このサービスは音声を受け付けません。受け付けるのは Storyteller 独自のサーバー（st_server）だけです。</string>
+    <string name="voice_name">音声の名前</string>
+    <string name="pron_title">発音辞書</string>
+    <string name="pron_help">%1$s での一部の単語の読み方です。言語ごとに辞書があります。「モデル」で言語を変更してください。</string>
+    <string name="pron_words">単語：単語 = 読み方、1 行に 1 つ</string>
+    <string name="pron_letters">1 文字ずつ読む略語</string>
+    <string name="pron_as_words">単語として読む略語</string>
+    <string name="pron_save">保存</string>
+    <string name="fetch_title">パソコンから本を取り込む</string>
+    <string name="fetch_help">Storyteller 独自のサーバー（st_server）から、朗読の URL で取り込みます。完了した章だけが届き、パソコンのアプリはそのままです。</string>
+    <string name="fetch_loading">サーバーに問い合わせ中…</string>
+    <string name="fetch_empty">そのサーバーにはまだ完了した章がありません。</string>
+    <string name="fetch_unsupported">このサービスに本はありません。本があるのは Storyteller 独自のサーバー（st_server）だけです。</string>
+    <string name="fetch_summary">%1$d / %2$d 章 · %3$s</string>
+    <string name="fetch_have_it">取り込み済み</string>
+    <string name="fetch_bring">取り込む</string>
+
+    <string name="job_switch">これに切り替える</string>
+    <string name="job_add_to_line">順番待ちに追加</string>
+    <string name="job_waiting_turn">待機中：%1$s</string>
+    <string name="book_in_line">● 順番待ち</string>
+
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="report_content">コンテンツを報告</string>
+    <string name="translate_goes_to">文書のテキストは、選んだ AI サービスである %1$s に送られます。従量課金のサービスなら、その分が請求されます。</string>
+    <string name="voice_upload_permission">アップロードするのはご自身の声か、本人の許可を得た声だけにしてください。他人になりすますために使わないでください。</string>
+</resources>

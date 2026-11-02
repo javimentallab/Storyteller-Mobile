@@ -1,0 +1,1 @@
+Czytaj EPUB-y z napisami zsynchronizowanymi, przez wybraną usługę głosową.

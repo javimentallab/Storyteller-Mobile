@@ -1,0 +1,10 @@
+<p>Storyteller Mobile trasforma un EPUB in un audiolibro narrato con voce neurale e lo riproduce con sottotitoli che seguono l'audio. Importa anche audiolibri e li trascrive per creare quei sottotitoli, e traduce libri e documenti.</p>
+<p>Nessun modello gira sul telefono, quindi l'app resta leggera. Per ogni attività scegli il servizio: uno pubblico con la tua chiave di accesso o uno tuo nella tua rete. Va bene qualsiasi servizio con un'API come quella di OpenAI, anche Ollama e llama.cpp per tradurre. Nessun servizio è incluso: ti serve uno tuo o un account su uno pubblico, che può far pagare in base all'uso.</p>
+<ul>
+<li><b>Narra</b> un EPUB nella lingua e con la voce che scegli. Riprendi da dove si è fermato e ascolta mentre narra. Un controllo facoltativo rifà le frasi che suonano male, e ogni lingua ha il suo dizionario di pronuncia.</li>
+<li><b>Importa</b> un audiolibro: viene copiato sul telefono e trascritto a pezzi per creare i sottotitoli sincronizzati.</li>
+<li><b>Traduci</b> EPUB, PDF, Word, PowerPoint, Excel, sottotitoli e testo. Un PDF esce come EPUB tradotto, senza impaginazione.</li>
+<li><b>Ascolta</b> con capitoli, salti a qualsiasi posizione e riproduzione in background.</li>
+</ul>
+<p>Il tuo testo e il tuo audio vanno solo ai servizi che scegli, e chi li gestisce può vedere ciò che invii. Le chiavi di accesso sono salvate cifrate sul telefono. Niente account, pubblicità o statistiche.</p>
+<p>Disponibile in inglese, spagnolo, portoghese, francese, tedesco, italiano, olandese, polacco, russo, ucraino, cinese, giapponese, coreano, thailandese e hindi.</p>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">Storyteller</string>
+    <string name="app_name" translatable="false">Storyteller Mobile</string>
 
     <!-- Library -->
     <string name="library">Library</string>
@@ -75,7 +75,7 @@
     <string name="test_narration_ok">It works: %1$s s of audio.</string>
     <string name="test_translation_ok">It works: «%1$s»</string>
     <string name="http_status">Error %1$d</string>
-    <string name="cleartext_warning">This address isn\'t on your home network and doesn\'t use HTTPS: your key and your text would travel unencrypted.</string>
+    <string name="cleartext_warning">This address isn\'t on your home network and doesn\'t use HTTPS: your text would travel unencrypted, and your key isn\'t sent, so a service that asks for one will give an error.</string>
     <string name="needs_model">Choose first which model does this.</string>
 
     <!-- Narrate -->
@@ -102,7 +102,7 @@
 
     <!-- Translate -->
     <string name="translate_title">Translate a document</string>
-    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, subtitles (SRT, VTT) or text (TXT, MD). Cursive and bold inside a sentence are lost. A PDF comes out as a translated EPUB, without its layout.</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, subtitles (SRT, VTT) or text (TXT, MD). Italics and bold inside a sentence are lost. A PDF comes out as a translated EPUB, without its layout.</string>
     <string name="choose_document">Choose document…</string>
     <string name="from_language">From</string>
     <string name="to_language">To</string>
@@ -179,4 +179,9 @@
     <string name="job_add_to_line">Add to the line</string>
     <string name="job_waiting_turn">Waiting: %1$s</string>
     <string name="book_in_line">● Waiting its turn</string>
+
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="report_content">Report content</string>
+    <string name="translate_goes_to">The text of the document goes to %1$s, the AI service you chose. If it charges by use, it charges for it.</string>
+    <string name="voice_upload_permission">Upload only your own voice, or one whose owner has given you permission. Don\'t use it to pass yourself off as someone else.</string>
 </resources>

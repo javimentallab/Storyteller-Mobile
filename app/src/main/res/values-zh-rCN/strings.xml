@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">书库</string>
+    <string name="library_empty">还没有书。朗读一本 EPUB 或导入一本有声书即可开始。</string>
+    <string name="narrate_epub">朗读 EPUB</string>
+    <string name="import_audiobook">导入有声书</string>
+    <string name="translate">翻译</string>
+    <string name="models">模型</string>
+    <plurals name="book_chapters">
+        <item quantity="other">%1$d 章 · %2$s</item>
+    </plurals>
+    <string name="book_working">● 进行中</string>
+    <string name="book_partial">⏸ 未完成 · %1$d %%</string>
+    <string name="listen">收听</string>
+    <string name="resume">继续</string>
+    <string name="regenerate">重新朗读</string>
+    <string name="more_options">更多选项</string>
+    <string name="confirm_delete">要从此手机删除“%1$s”吗？其音频将永久丢失。</string>
+    <string name="confirm_regenerate">要从头重新朗读“%1$s”吗？已朗读的内容将丢失。</string>
+    <string name="confirm_cancel_job">要取消“%1$s”吗？目前已完成的内容将被丢弃。</string>
+    <string name="delete">删除</string>
+    <string name="cancel">取消</string>
+    <string name="keep_going">继续</string>
+    <string name="back">返回</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">朗读、转录和翻译</string>
+    <string name="done_channel">已完成</string>
+    <string name="job_finished">已完成</string>
+    <string name="job_failed">中途停止了。已完成的部分已保存。</string>
+    <string name="stop_and_save">停止并保存</string>
+    <string name="job_queued">正在排队…</string>
+    <string name="job_copying">正在复制文件…</string>
+    <string name="job_reading">正在读取文档…</string>
+    <string name="job_narrating">第 %1$d/%2$d 章 · 第 %3$d 句</string>
+    <string name="job_encoding">正在压缩本章…</string>
+    <string name="job_transcribing">正在转录… %1$s / %2$s</string>
+    <string name="job_translating">正在翻译… %1$d/%2$d</string>
+    <string name="job_saving">正在保存…</string>
+    <string name="job_stopping">正在停止…</string>
+    <string name="job_waiting">服务繁忙，%1$d 秒后重试</string>
+    <string name="eta_calculating">正在计算剩余时间…</string>
+    <string name="eta_less_minute">剩余不到 1 分钟</string>
+    <string name="eta_minutes">剩余约 %1$d 分钟</string>
+    <string name="eta_hours">剩余约 %1$d 小时 %2$d 分钟</string>
+    <string name="eta_until">%1$s（约到 %2$s）</string>
+
+    <!-- Models -->
+    <string name="models_intro">模型不在手机上运行。请为每项工作选择处理它的服务：使用你的访问密钥的公共服务，或你自己的服务。你的文本和音频会发送到你选择的服务。</string>
+    <string name="section_narration">朗读</string>
+    <string name="section_narration_help">文字转语音。类似 OpenAI 的 API：/v1/audio/speech</string>
+    <string name="section_transcription">转录</string>
+    <string name="section_transcription_help">语音转文字，用于导入的有声书。类似 OpenAI 的 API：/v1/audio/transcriptions</string>
+    <string name="section_translation">翻译</string>
+    <string name="section_translation_help">任意聊天模型。类似 OpenAI 的 API：/v1/chat/completions（Ollama 和 llama.cpp 也可以）</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">访问密钥</string>
+    <string name="field_key_hint">如果服务没有密钥，请留空</string>
+    <string name="field_model">模型</string>
+    <string name="field_voice">语音</string>
+    <string name="field_format">音频格式</string>
+    <string name="field_parallel">同时请求数</string>
+    <string name="field_parallel_help">越多越快，前提是服务允许。</string>
+    <string name="search_models">查看可用模型</string>
+    <string name="search_voices">查看可用语音</string>
+    <string name="show_key">显示密钥</string>
+    <string name="hide_key">隐藏密钥</string>
+    <string name="test">试试</string>
+    <string name="testing">正在尝试…</string>
+    <string name="test_ok">可以使用。</string>
+    <string name="test_narration_ok">可以使用：%1$s 秒音频。</string>
+    <string name="test_translation_ok">可以使用：“%1$s”</string>
+    <string name="http_status">错误 %1$d</string>
+    <string name="cleartext_warning">此地址不在你的家庭网络中，也未使用 HTTPS：你的文本将以未加密的方式传输；你的密钥不会发送，因此需要密钥的服务会返回错误。</string>
+    <string name="needs_model">请先选择由哪个模型来完成。</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">朗读 EPUB</string>
+    <string name="choose_epub">选择 EPUB…</string>
+    <string name="reading_file">正在读取…</string>
+    <plurals name="chapter_count">
+        <item quantity="other">%1$d 章</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d 句 · %3$d 个字符</string>
+    <string name="narrate_goes_to">%1$d 个字符的文本将发送到 %2$s。如果该服务按用量收费，这些都会计费。</string>
+    <string name="prepare_text">为语音准备文本</string>
+    <string name="prepare_text_help">把数字写成文字，处理缩写和特殊标点。许多开放语音都需要这样做。字幕不会改变。</string>
+    <string name="no_chapters">在此 EPUB 中未找到文本。</string>
+    <string name="start">开始</string>
+
+    <!-- Import -->
+    <string name="import_title">导入有声书</string>
+    <string name="import_help">它会被复制到手机并转录，以生成同步字幕。音频会以每段两分钟发送到你选择的服务。</string>
+    <string name="choose_audio">选择音频…</string>
+    <string name="audio_language">音频语言</string>
+    <string name="detect_language">自动检测</string>
+
+    <!-- Translate -->
+    <string name="translate_title">翻译文档</string>
+    <string name="translate_help">EPUB、PDF、Word、PowerPoint、Excel、字幕（SRT、VTT）或文本（TXT、MD）。句子内的斜体和粗体会丢失。PDF 会输出为翻译后的 EPUB，不保留版式。</string>
+    <string name="choose_document">选择文档…</string>
+    <string name="from_language">从</string>
+    <string name="to_language">到</string>
+    <string name="same_language">两种语言相同。</string>
+    <string name="translations_list">翻译</string>
+    <string name="translation_done">已完成</string>
+    <string name="translation_partial">未完成 · %1$d / %2$d</string>
+    <string name="translation_partial_short">未完成</string>
+    <string name="translation_running">正在翻译…</string>
+    <string name="save_to_phone">另存为…</string>
+    <string name="saved_to_phone">已保存。</string>
+    <string name="confirm_delete_translation">要删除“%1$s”的翻译吗？</string>
+
+    <!-- Player -->
+    <string name="live">● 实时</string>
+    <string name="waiting_more">正在等待更多朗读内容…</string>
+    <string name="section_n">第 %1$d 节</string>
+    <string name="go_to_chapter">转到章节</string>
+    <string name="go_to_position">转到位置</string>
+    <string name="position_hint">分:秒 或 秒数</string>
+    <string name="bad_position">请写成 分:秒 或秒数。</string>
+    <string name="go">转到</string>
+    <string name="play">播放</string>
+    <string name="pause">暂停</string>
+    <string name="back_10">后退 10 秒</string>
+    <string name="forward_10">前进 10 秒</string>
+    <string name="previous_chapter">上一章</string>
+    <string name="next_chapter">下一章</string>
+    <string name="no_text_yet">这一部分还没有文本。</string>
+    <string name="cant_open_book">无法打开这本书。</string>
+    <string name="playback_error">无法播放此章节。</string>
+
+    <!-- Errors -->
+    <string name="err_auth">服务拒绝了访问密钥。请在“模型”中检查。</string>
+    <string name="err_not_found">服务上没有这项内容。请在“模型”中检查 URL 和模型。</string>
+    <string name="err_rate_limit">即使等待后，服务仍提示请求过多。已完成的部分已保存：稍后继续。</string>
+    <string name="err_bad_request">服务拒绝了请求。请在“模型”中检查模型和语音。</string>
+    <string name="err_server">服务本身出了问题。已完成的部分已保存：稍后继续。</string>
+    <string name="err_bad_answer">服务给出了此应用无法读取的回应。这个 URL 的 API 类型正确吗？</string>
+    <string name="err_network">无法连接到服务。已完成的部分已保存：稍后继续。</string>
+    <string name="err_bad_type">此应用无法翻译这种类型的文件。</string>
+    <string name="err_cant_read_file">无法读取该文件。</string>
+    <string name="err_no_text">该文档中没有可翻译的文本。</string>
+    <string name="err_no_text_pdf">此 PDF 没有可翻译的文本。它可能是扫描件，而此应用不读取图片。</string>
+    <string name="err_generic">出了点问题（%1$s）。</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">语言</string>
+    <string name="field_language_help">朗读这本书所用的语言。也请选择在该语言中听起来不错的语音。</string>
+    <string name="qc_title">检查并重做听起来不对的句子</string>
+    <string name="qc_help">每句话都会发送到转录服务，如果与文本不符，就重新请求。速度更慢。需要转录 URL。</string>
+    <string name="voice_upload">上传语音…</string>
+    <string name="voice_uploading">正在上传语音…</string>
+    <string name="voice_upload_help">5 到 12 秒的干净录音。只有 Storyteller 自己的服务器（st_server）接受。</string>
+    <string name="voice_upload_send">上传</string>
+    <string name="voice_upload_unsupported">此服务不接受语音：只有 Storyteller 自己的服务器（st_server）才接受。</string>
+    <string name="voice_name">语音名称</string>
+    <string name="pron_title">发音词典</string>
+    <string name="pron_help">某些词在 %1$s 中的读法。每种语言都有自己的词典：请在“模型”中更改语言。</string>
+    <string name="pron_words">词语：词语 = 读法，每行一个</string>
+    <string name="pron_letters">逐字母读的缩写</string>
+    <string name="pron_as_words">按单词读的缩写</string>
+    <string name="pron_save">保存</string>
+    <string name="fetch_title">从电脑获取书籍</string>
+    <string name="fetch_help">来自 Storyteller 自己的服务器（st_server），使用朗读 URL。只会获取已完成的章节;电脑上的应用保持不变。</string>
+    <string name="fetch_loading">正在询问服务器…</string>
+    <string name="fetch_empty">该服务器还没有已完成的章节。</string>
+    <string name="fetch_unsupported">此服务没有书籍：只有 Storyteller 自己的服务器（st_server）才有。</string>
+    <string name="fetch_summary">%1$d / %2$d 章 · %3$s</string>
+    <string name="fetch_have_it">已在此处</string>
+    <string name="fetch_bring">获取</string>
+
+    <string name="job_switch">切换到此项</string>
+    <string name="job_add_to_line">加入队列</string>
+    <string name="job_waiting_turn">等待中：%1$s</string>
+    <string name="book_in_line">● 正在排队</string>
+
+    <string name="privacy_policy">隐私政策</string>
+    <string name="report_content">举报内容</string>
+    <string name="translate_goes_to">文档文本会发送到 %1$s，即你选择的 AI 服务。如果它按用量收费，这些都会计费。</string>
+    <string name="voice_upload_permission">只上传你自己的声音，或已获本人许可的声音。不要用它冒充他人。</string>
+</resources>

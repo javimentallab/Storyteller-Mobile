@@ -61,6 +61,9 @@ object Format {
         return uri.scheme != "https" && !isPrivateHost(uri.host.orEmpty())
     }
 
+    /** An access key spends the user's money: it never goes in the clear beyond the home network. */
+    fun mayCarryKey(url: String): Boolean = !isUnsafeUrl(url)
+
     /** The name to show for a service, also when the URL was typed without http://. */
     fun host(url: String): String = try {
         URI(apiBase(url) ?: url).host.orEmpty()
@@ -68,17 +71,38 @@ object Format {
         ""
     }
 
+    private val PRIVATE_SUFFIXES = listOf(".localhost", ".local", ".lan", ".home", ".internal", ".intranet", ".home.arpa", ".ts.net")
+
     private fun isPrivateHost(host: String): Boolean {
-        val h = host.lowercase()
-        if (h == "localhost" || h.endsWith(".local") || h.endsWith(".lan") || h.endsWith(".home.arpa")) return true
-        val p = h.split(".").map { it.toIntOrNull() }
+        val h = host.lowercase().trimEnd('.')
+        if (h.startsWith("[")) {
+            val ip = h.removeSurrounding("[", "]")
+            return ip == "::1" || ip.startsWith("fc") || ip.startsWith("fd") || Regex("fe[89ab].*").matches(ip)
+        }
+        // "nas", "mint": a name with no dot only exists at home. "134744072" is a public address in disguise.
+        if (h.isNotEmpty() && '.' !in h && h.any { it.isLetter() } && !h.startsWith("0x")) return true
+        if (h == "localhost" || PRIVATE_SUFFIXES.any { h.endsWith(it) }) return true
+        val parts = h.split(".")
+        if (parts.any { it.length > 1 && it.startsWith("0") }) return false     // read as octal: 010.0.0.1 is 8.0.0.1
+        val p = parts.map { it.toIntOrNull() }
         if (p.size != 4 || p.any { it == null || it !in 0..255 }) return false
         val (a, b) = p[0]!! to p[1]!!
         return a == 10 || a == 127 || (a == 192 && b == 168) || (a == 172 && b in 16..31) ||
             (a == 169 && b == 254) || (a == 100 && b in 64..127) // the last one: Tailscale and the like
     }
 
-    /** The cue that is playing at this moment: the last one that has started. -1 before the first. */
+    enum class CueScroll { NONE, TOP, FOLLOW }
+
+    /** What the list of sentences does: no list, nothing; no sentence playing, back to the top; a sentence
+     *  playing, go to it, unless the user touched the list a moment ago and is reading elsewhere. */
+    fun cueScroll(cues: Int, active: Int, sinceTouchMs: Long, pauseMs: Long): CueScroll = when {
+        cues == 0 -> CueScroll.NONE
+        active < 0 -> CueScroll.TOP
+        sinceTouchMs > pauseMs -> CueScroll.FOLLOW
+        else -> CueScroll.NONE
+    }
+
+    /** The cue that is playing at this moment: the last one that has started. -1 before the first.*/
     fun cueAt(cues: List<Cue>, seconds: Double): Int {
         var lo = 0
         var hi = cues.size - 1

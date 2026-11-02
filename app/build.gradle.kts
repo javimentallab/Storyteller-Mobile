@@ -86,6 +86,8 @@ dependencies {
     implementation(libs.media3.exoplayer)
     implementation(libs.media3.session)
     implementation(libs.jsoup)
+    // Media3 asks for an older Guava, with a known vulnerability; this version wins over it.
+    implementation(libs.guava)
     // Bouncy Castle is 11 MB of jars, and only opens PDFs locked to a certificate.
     implementation(libs.pdfbox.android) {
         exclude(group = "org.bouncycastle")

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">Бібліотека</string>
+    <string name="library_empty">Книг поки немає. Щоб почати, озвучте EPUB або імпортуйте аудіокнигу.</string>
+    <string name="narrate_epub">Озвучити EPUB</string>
+    <string name="import_audiobook">Імпорт аудіокниги</string>
+    <string name="translate">Переклад</string>
+    <string name="models">Моделі</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d розділ · %2$s</item>
+        <item quantity="few">%1$d розділи · %2$s</item>
+        <item quantity="many">%1$d розділів · %2$s</item>
+        <item quantity="other">%1$d розділу · %2$s</item>
+    </plurals>
+    <string name="book_working">● У роботі</string>
+    <string name="book_partial">⏸ Не завершено · %1$d %%</string>
+    <string name="listen">Слухати</string>
+    <string name="resume">Продовжити</string>
+    <string name="regenerate">Озвучити знову</string>
+    <string name="more_options">Інші дії</string>
+    <string name="confirm_delete">Видалити «%1$s» з цього телефона? Аудіо буде втрачено назавжди.</string>
+    <string name="confirm_regenerate">Озвучити «%1$s» знову з початку? Уже озвучене буде втрачено.</string>
+    <string name="confirm_cancel_job">Скасувати «%1$s»? Усе зроблене досі буде відкинуто.</string>
+    <string name="delete">Видалити</string>
+    <string name="cancel">Скасувати</string>
+    <string name="keep_going">Продовжити</string>
+    <string name="back">Назад</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">Озвучення, транскрипція та переклад</string>
+    <string name="done_channel">Завершено</string>
+    <string name="job_finished">Завершено</string>
+    <string name="job_failed">Зупинилося на півдорозі. Зроблене збережено.</string>
+    <string name="stop_and_save">Зупинити й зберегти</string>
+    <string name="job_queued">Чекає своєї черги…</string>
+    <string name="job_copying">Копіювання файлу…</string>
+    <string name="job_reading">Читання документа…</string>
+    <string name="job_narrating">Розділ %1$d/%2$d · фраза %3$d</string>
+    <string name="job_encoding">Стиснення розділу…</string>
+    <string name="job_transcribing">Транскрипція… %1$s із %2$s</string>
+    <string name="job_translating">Переклад… %1$d/%2$d</string>
+    <string name="job_saving">Збереження…</string>
+    <string name="job_stopping">Зупинення…</string>
+    <string name="job_waiting">сервіс зайнятий, нова спроба через %1$d с</string>
+    <string name="eta_calculating">підрахунок часу, що залишився…</string>
+    <string name="eta_less_minute">залишилося менше 1 хв</string>
+    <string name="eta_minutes">залишилося ~%1$d хв</string>
+    <string name="eta_hours">залишилося ~%1$d год %2$d хв</string>
+    <string name="eta_until">%1$s (приблизно до %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">Моделі не працюють на телефоні. Для кожного завдання виберіть сервіс, який його виконає: публічний із вашим ключем доступу або власний. Ваш текст і аудіо надсилаються до вибраного сервісу.</string>
+    <string name="section_narration">Озвучення</string>
+    <string name="section_narration_help">Текст у мовлення. API, як в OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">Транскрипція</string>
+    <string name="section_transcription_help">Мовлення в текст, для імпортованих аудіокниг. API, як в OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">Переклад</string>
+    <string name="section_translation_help">Будь-яка чат-модель. API, як в OpenAI: /v1/chat/completions (також Ollama і llama.cpp)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Ключ доступу</string>
+    <string name="field_key_hint">Залиште порожнім, якщо в сервісу його немає</string>
+    <string name="field_model">Модель</string>
+    <string name="field_voice">Голос</string>
+    <string name="field_format">Формат аудіо</string>
+    <string name="field_parallel">Запитів одночасно</string>
+    <string name="field_parallel_help">Більше — швидше, якщо сервіс це дозволяє.</string>
+    <string name="search_models">Переглянути доступні моделі</string>
+    <string name="search_voices">Переглянути доступні голоси</string>
+    <string name="show_key">Показати ключ</string>
+    <string name="hide_key">Сховати ключ</string>
+    <string name="test">Перевірити</string>
+    <string name="testing">Перевірка…</string>
+    <string name="test_ok">Працює.</string>
+    <string name="test_narration_ok">Працює: %1$s с аудіо.</string>
+    <string name="test_translation_ok">Працює: «%1$s»</string>
+    <string name="http_status">Помилка %1$d</string>
+    <string name="cleartext_warning">Ця адреса не у вашій домашній мережі й не використовує HTTPS: текст передаватиметься без шифрування, а ключ не надсилається, тому сервіс, якому він потрібен, поверне помилку.</string>
+    <string name="needs_model">Спочатку виберіть, яка модель це робить.</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">Озвучити EPUB</string>
+    <string name="choose_epub">Вибрати EPUB…</string>
+    <string name="reading_file">Читання…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d розділ</item>
+        <item quantity="few">%1$d розділи</item>
+        <item quantity="many">%1$d розділів</item>
+        <item quantity="other">%1$d розділу</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · фраз: %2$d · символів: %3$d</string>
+    <string name="narrate_goes_to">До %2$s буде надіслано символів тексту: %1$d. Якщо сервіс бере плату за використання, він їх урахує.</string>
+    <string name="prepare_text">Підготувати текст для голосу</string>
+    <string name="prepare_text_help">Числа словами, скорочення та незвична пунктуація. Це потрібно багатьом відкритим голосам. Субтитри не змінюються.</string>
+    <string name="no_chapters">У цьому EPUB не знайдено тексту.</string>
+    <string name="start">Почати</string>
+
+    <!-- Import -->
+    <string name="import_title">Імпорт аудіокниги</string>
+    <string name="import_help">Її копіюють на телефон і транскрибують, щоб створити синхронні субтитри. Аудіо надсилається до вибраного сервісу частинами по дві хвилини.</string>
+    <string name="choose_audio">Вибрати аудіо…</string>
+    <string name="audio_language">Мова аудіо</string>
+    <string name="detect_language">Визначити автоматично</string>
+
+    <!-- Translate -->
+    <string name="translate_title">Переклад документа</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, субтитри (SRT, VTT) або текст (TXT, MD). Курсив і жирний шрифт усередині фрази втрачаються. PDF стає перекладеним EPUB без макета.</string>
+    <string name="choose_document">Вибрати документ…</string>
+    <string name="from_language">З мови</string>
+    <string name="to_language">На мову</string>
+    <string name="same_language">Обидві мови однакові.</string>
+    <string name="translations_list">Переклади</string>
+    <string name="translation_done">Завершено</string>
+    <string name="translation_partial">Не завершено · %1$d із %2$d</string>
+    <string name="translation_partial_short">Не завершено</string>
+    <string name="translation_running">Переклад…</string>
+    <string name="save_to_phone">Зберегти як…</string>
+    <string name="saved_to_phone">Збережено.</string>
+    <string name="confirm_delete_translation">Видалити переклад «%1$s»?</string>
+
+    <!-- Player -->
+    <string name="live">● Наживо</string>
+    <string name="waiting_more">Очікування продовження озвучення…</string>
+    <string name="section_n">Секція %1$d</string>
+    <string name="go_to_chapter">Перейти до розділу</string>
+    <string name="go_to_position">Перейти до позиції</string>
+    <string name="position_hint">хх:сс або секунди</string>
+    <string name="bad_position">Напишіть у вигляді хх:сс або в секундах.</string>
+    <string name="go">Перейти</string>
+    <string name="play">Відтворити</string>
+    <string name="pause">Пауза</string>
+    <string name="back_10">Назад на 10 секунд</string>
+    <string name="forward_10">Уперед на 10 секунд</string>
+    <string name="previous_chapter">Попередній розділ</string>
+    <string name="next_chapter">Наступний розділ</string>
+    <string name="no_text_yet">Для цієї частини ще немає тексту.</string>
+    <string name="cant_open_book">Не вдається відкрити цю книгу.</string>
+    <string name="playback_error">Не вдається відтворити цей розділ.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">Сервіс відхилив ключ доступу. Перевірте його в розділі «Моделі».</string>
+    <string name="err_not_found">У сервісі цього немає. Перевірте URL і модель у розділі «Моделі».</string>
+    <string name="err_rate_limit">Сервіс повідомляє про забагато запитів, навіть після очікування. Зроблене збережено: продовжте пізніше.</string>
+    <string name="err_bad_request">Сервіс відхилив запит. Перевірте модель і голос у розділі «Моделі».</string>
+    <string name="err_server">У сервісі власна проблема. Зроблене збережено: продовжте пізніше.</string>
+    <string name="err_bad_answer">Сервіс дав відповідь, яку цей застосунок не може прочитати. Цей URL належить до потрібного типу API?</string>
+    <string name="err_network">Не вдається зв\'язатися із сервісом. Зроблене збережено: продовжте пізніше.</string>
+    <string name="err_bad_type">Цей застосунок не може перекладати такий тип файлів.</string>
+    <string name="err_cant_read_file">Не вдається прочитати цей файл.</string>
+    <string name="err_no_text">У цьому документі немає тексту для перекладу.</string>
+    <string name="err_no_text_pdf">У цьому PDF немає тексту для перекладу. Імовірно, він відсканований, а застосунок не читає зображення.</string>
+    <string name="err_generic">Щось пішло не так (%1$s).</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">Мова</string>
+    <string name="field_language_help">Мова, якою читається книга. Виберіть також голос, який добре нею звучить.</string>
+    <string name="qc_title">Перевіряти й переробляти фрази, що звучать неправильно</string>
+    <string name="qc_help">Кожна фраза надсилається до сервісу транскрипції і, якщо не збігається з текстом, запитується знову. Повільніше. Потрібен URL транскрипції.</string>
+    <string name="voice_upload">Завантажити голос…</string>
+    <string name="voice_uploading">Завантаження голосу…</string>
+    <string name="voice_upload_help">Чистий запис від 5 до 12 с. Його приймає лише власний сервер Storyteller (st_server).</string>
+    <string name="voice_upload_send">Завантажити</string>
+    <string name="voice_upload_unsupported">Цей сервіс не приймає голоси: це вміє лише власний сервер Storyteller (st_server).</string>
+    <string name="voice_name">Назва голосу</string>
+    <string name="pron_title">Словник вимови</string>
+    <string name="pron_help">Як читаються деякі слова, мова: %1$s. Кожна мова має свій словник: змініть мову в розділі «Моделі».</string>
+    <string name="pron_words">Слова: слово = як вимовляється, по одному в рядку</string>
+    <string name="pron_letters">Абревіатури, що читаються за літерами</string>
+    <string name="pron_as_words">Абревіатури, що читаються як слово</string>
+    <string name="pron_save">Зберегти</string>
+    <string name="fetch_title">Перенести книги з комп\'ютера</string>
+    <string name="fetch_help">Із власного сервера Storyteller (st_server), за URL озвучення. Надходять лише готові розділи; застосунок на комп\'ютері залишається без змін.</string>
+    <string name="fetch_loading">Запит до сервера…</string>
+    <string name="fetch_empty">На цьому сервері ще немає готових розділів.</string>
+    <string name="fetch_unsupported">У цьому сервісі немає книг: вони є лише на власному сервері Storyteller (st_server).</string>
+    <string name="fetch_summary">Розділів: %1$d із %2$d · %3$s</string>
+    <string name="fetch_have_it">Уже тут</string>
+    <string name="fetch_bring">Перенести</string>
+
+    <string name="job_switch">Перемкнутися</string>
+    <string name="job_add_to_line">У чергу</string>
+    <string name="job_waiting_turn">Очікування: %1$s</string>
+    <string name="book_in_line">● Чекає своєї черги</string>
+
+    <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="report_content">Поскаржитися на вміст</string>
+    <string name="translate_goes_to">Текст документа надсилається до %1$s — вибраного вами сервісу ШІ. Якщо він бере плату за використання, він її врахує.</string>
+    <string name="voice_upload_permission">Завантажуйте лише свій голос або голос людини, яка дала вам дозвіл. Не видавайте себе за іншу людину.</string>
+</resources>

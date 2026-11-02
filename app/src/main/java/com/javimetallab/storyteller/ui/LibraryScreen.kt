@@ -67,6 +67,7 @@ fun LibraryScreen(vm: AppViewModel) {
             IconButton(onClick = { vm.go(Screen.Models) }) {
                 Icon(Icons.Filled.Tune, stringResource(R.string.models), tint = Muted)
             }
+            LibraryMenu(vm)
         }
         job?.let { JobPanel(vm, it, queued) }
         ActionRow(vm)
@@ -92,6 +93,32 @@ fun LibraryScreen(vm: AppViewModel) {
 }
 
 @Composable
+private fun LibraryMenu(vm: AppViewModel) {
+    var open by remember { mutableStateOf(false) }
+    Box {
+        IconButton(onClick = { open = true }) {
+            Icon(Icons.Filled.MoreVert, stringResource(R.string.more_options), tint = Muted)
+        }
+        DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+            DropdownMenuItem(
+                text = { Text(stringResource(R.string.report_content)) },
+                onClick = {
+                    open = false
+                    vm.openReportForm()
+                },
+            )
+            DropdownMenuItem(
+                text = { Text(stringResource(R.string.privacy_policy)) },
+                onClick = {
+                    open = false
+                    vm.openPrivacyPolicy()
+                },
+            )
+        }
+    }
+}
+
+@Composable
 private fun ActionRow(vm: AppViewModel) {
     TextButton(
         onClick = { vm.go(Screen.Fetch) },
@@ -107,11 +134,13 @@ private fun ActionRow(vm: AppViewModel) {
             modifier = Modifier.weight(1f),
             border = BorderStroke(1.dp, Line),
             shape = RoundedCornerShape(10.dp),
+            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
         ) { Text(stringResource(R.string.import_audiobook), color = Ink, maxLines = 2, textAlign = TextAlign.Center, fontSize = 13.sp) }
         OutlinedButton(
             onClick = { vm.go(Screen.Translate) },
             border = BorderStroke(1.dp, Line),
             shape = RoundedCornerShape(10.dp),
+            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
         ) { Text(stringResource(R.string.translate), color = Ink, maxLines = 1, fontSize = 13.sp) }
     }
 }

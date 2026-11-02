@@ -283,10 +283,10 @@ private class EpubDoc(file: File, private val tgt: String) : Doc {
             if (d.parent() == null) continue
             if (lname(d) in KEEP_INLINE && d.parents().none { lname(it) in KEEP_INLINE }) {
                 d.remove()
-                front += d
+                front.add(d)
             } else if (isNote(d) && d.parents().none { isNote(it) }) {
                 d.remove()
-                end += d
+                end.add(d)
             }
         }
         var target = el

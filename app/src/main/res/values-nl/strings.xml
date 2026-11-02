@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">Bibliotheek</string>
+    <string name="library_empty">Nog geen boeken. Laat een EPUB voorlezen of importeer een luisterboek om te beginnen.</string>
+    <string name="narrate_epub">EPUB voorlezen</string>
+    <string name="import_audiobook">Luisterboek importeren</string>
+    <string name="translate">Vertalen</string>
+    <string name="models">Modellen</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d hoofdstuk · %2$s</item>
+        <item quantity="other">%1$d hoofdstukken · %2$s</item>
+    </plurals>
+    <string name="book_working">● Bezig</string>
+    <string name="book_partial">⏸ Onvoltooid · %1$d %%</string>
+    <string name="listen">Luisteren</string>
+    <string name="resume">Hervatten</string>
+    <string name="regenerate">Opnieuw voorlezen</string>
+    <string name="more_options">Meer opties</string>
+    <string name="confirm_delete">«%1$s» van deze telefoon verwijderen? De audio is dan voorgoed weg.</string>
+    <string name="confirm_regenerate">«%1$s» opnieuw voorlezen vanaf het begin? Wat nu is voorgelezen gaat verloren.</string>
+    <string name="confirm_cancel_job">«%1$s» annuleren? Wat tot nu toe klaar is, wordt weggegooid.</string>
+    <string name="delete">Verwijderen</string>
+    <string name="cancel">Annuleren</string>
+    <string name="keep_going">Doorgaan</string>
+    <string name="back">Terug</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">Voorlezen, transcriberen en vertalen</string>
+    <string name="done_channel">Klaar</string>
+    <string name="job_finished">Klaar</string>
+    <string name="job_failed">Halverwege gestopt. Wat klaar is, is opgeslagen.</string>
+    <string name="stop_and_save">Stoppen en opslaan</string>
+    <string name="job_queued">Wacht op zijn beurt…</string>
+    <string name="job_copying">Bestand kopiëren…</string>
+    <string name="job_reading">Document lezen…</string>
+    <string name="job_narrating">Hoofdstuk %1$d/%2$d · zin %3$d</string>
+    <string name="job_encoding">Hoofdstuk comprimeren…</string>
+    <string name="job_transcribing">Transcriberen… %1$s van %2$s</string>
+    <string name="job_translating">Vertalen… %1$d/%2$d</string>
+    <string name="job_saving">Opslaan…</string>
+    <string name="job_stopping">Stoppen…</string>
+    <string name="job_waiting">de dienst is bezet, nieuwe poging over %1$d s</string>
+    <string name="eta_calculating">resterende tijd berekenen…</string>
+    <string name="eta_less_minute">nog minder dan 1 min</string>
+    <string name="eta_minutes">nog ~%1$d min</string>
+    <string name="eta_hours">nog ~%1$d u %2$d min</string>
+    <string name="eta_until">%1$s (rond %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">De modellen draaien niet op de telefoon. Kies voor elke taak de dienst die het doet: een openbare met je toegangssleutel of een eigen dienst. Je tekst en audio gaan naar de dienst die je kiest.</string>
+    <string name="section_narration">Voorlezen</string>
+    <string name="section_narration_help">Tekst naar spraak. Een API zoals die van OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">Transcriptie</string>
+    <string name="section_transcription_help">Spraak naar tekst, voor geïmporteerde luisterboeken. Een API zoals die van OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">Vertaling</string>
+    <string name="section_translation_help">Elk chatmodel. Een API zoals die van OpenAI: /v1/chat/completions (ook Ollama en llama.cpp)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Toegangssleutel</string>
+    <string name="field_key_hint">Laat leeg als de dienst er geen heeft</string>
+    <string name="field_model">Model</string>
+    <string name="field_voice">Stem</string>
+    <string name="field_format">Audioformaat</string>
+    <string name="field_parallel">Verzoeken tegelijk</string>
+    <string name="field_parallel_help">Meer is sneller, als de dienst het toestaat.</string>
+    <string name="search_models">Bekijk welke modellen er zijn</string>
+    <string name="search_voices">Bekijk welke stemmen er zijn</string>
+    <string name="show_key">Sleutel tonen</string>
+    <string name="hide_key">Sleutel verbergen</string>
+    <string name="test">Proberen</string>
+    <string name="testing">Bezig met proberen…</string>
+    <string name="test_ok">Het werkt.</string>
+    <string name="test_narration_ok">Het werkt: %1$s s audio.</string>
+    <string name="test_translation_ok">Het werkt: «%1$s»</string>
+    <string name="http_status">Fout %1$d</string>
+    <string name="cleartext_warning">Dit adres zit niet op je thuisnetwerk en gebruikt geen HTTPS: je tekst zou onversleuteld reizen en je sleutel wordt niet verstuurd, dus een dienst die er een vraagt, geeft een fout.</string>
+    <string name="needs_model">Kies eerst welk model dit doet.</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">Een EPUB voorlezen</string>
+    <string name="choose_epub">EPUB kiezen…</string>
+    <string name="reading_file">Lezen…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d hoofdstuk</item>
+        <item quantity="other">%1$d hoofdstukken</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d zinnen · %3$d tekens</string>
+    <string name="narrate_goes_to">%1$d tekens tekst worden naar %2$s gestuurd. Als die dienst per gebruik rekent, rekent hij ze aan.</string>
+    <string name="prepare_text">Tekst voorbereiden voor de stem</string>
+    <string name="prepare_text_help">Getallen in woorden, afkortingen en vreemde leestekens. Veel open stemmen hebben het nodig. De ondertitels veranderen niet.</string>
+    <string name="no_chapters">Geen tekst gevonden in deze EPUB.</string>
+    <string name="start">Starten</string>
+
+    <!-- Import -->
+    <string name="import_title">Een luisterboek importeren</string>
+    <string name="import_help">Het wordt naar de telefoon gekopieerd en getranscribeerd om de synchrone ondertitels te maken. De audio gaat in stukken van twee minuten naar de gekozen dienst.</string>
+    <string name="choose_audio">Audio kiezen…</string>
+    <string name="audio_language">Taal van de audio</string>
+    <string name="detect_language">Automatisch herkennen</string>
+
+    <!-- Translate -->
+    <string name="translate_title">Een document vertalen</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, ondertitels (SRT, VTT) of tekst (TXT, MD). Cursief en vet binnen een zin gaan verloren. Een PDF wordt een vertaalde EPUB, zonder opmaak.</string>
+    <string name="choose_document">Document kiezen…</string>
+    <string name="from_language">Van</string>
+    <string name="to_language">Naar</string>
+    <string name="same_language">De twee talen zijn hetzelfde.</string>
+    <string name="translations_list">Vertalingen</string>
+    <string name="translation_done">Klaar</string>
+    <string name="translation_partial">Onvoltooid · %1$d van %2$d</string>
+    <string name="translation_partial_short">Onvoltooid</string>
+    <string name="translation_running">Vertalen…</string>
+    <string name="save_to_phone">Opslaan als…</string>
+    <string name="saved_to_phone">Opgeslagen.</string>
+    <string name="confirm_delete_translation">De vertaling van «%1$s» verwijderen?</string>
+
+    <!-- Player -->
+    <string name="live">● Live</string>
+    <string name="waiting_more">Wachten op meer voorlezing…</string>
+    <string name="section_n">Sectie %1$d</string>
+    <string name="go_to_chapter">Ga naar hoofdstuk</string>
+    <string name="go_to_position">Ga naar positie</string>
+    <string name="position_hint">mm:ss of seconden</string>
+    <string name="bad_position">Schrijf het als mm:ss of in seconden.</string>
+    <string name="go">Ga</string>
+    <string name="play">Afspelen</string>
+    <string name="pause">Pauzeren</string>
+    <string name="back_10">10 seconden terug</string>
+    <string name="forward_10">10 seconden vooruit</string>
+    <string name="previous_chapter">Vorig hoofdstuk</string>
+    <string name="next_chapter">Volgend hoofdstuk</string>
+    <string name="no_text_yet">Nog geen tekst voor dit deel.</string>
+    <string name="cant_open_book">Dit boek kan niet worden geopend.</string>
+    <string name="playback_error">Dit hoofdstuk kan niet worden afgespeeld.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">De dienst heeft de toegangssleutel geweigerd. Controleer die bij Modellen.</string>
+    <string name="err_not_found">De dienst heeft dat niet. Controleer de URL en het model bij Modellen.</string>
+    <string name="err_rate_limit">De dienst meldt te veel verzoeken, zelfs na wachten. Wat klaar is, is opgeslagen: hervat het later.</string>
+    <string name="err_bad_request">De dienst heeft het verzoek geweigerd. Controleer het model en de stem bij Modellen.</string>
+    <string name="err_server">De dienst heeft zelf een probleem. Wat klaar is, is opgeslagen: hervat het later.</string>
+    <string name="err_bad_answer">De dienst gaf een antwoord dat deze app niet kan lezen. Hoort die URL bij het juiste soort API?</string>
+    <string name="err_network">De dienst is niet bereikbaar. Wat klaar is, is opgeslagen: hervat het later.</string>
+    <string name="err_bad_type">Deze app kan dat bestandstype niet vertalen.</string>
+    <string name="err_cant_read_file">Dat bestand kan niet worden gelezen.</string>
+    <string name="err_no_text">Dat document bevat geen tekst om te vertalen.</string>
+    <string name="err_no_text_pdf">Deze PDF bevat geen tekst om te vertalen. Hij is waarschijnlijk gescand, en de app leest geen afbeeldingen.</string>
+    <string name="err_generic">Er ging iets mis (%1$s).</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">Taal</string>
+    <string name="field_language_help">De taal waarin het boek wordt gelezen. Kies ook een stem die er goed in klinkt.</string>
+    <string name="qc_title">Zinnen die verkeerd klinken controleren en opnieuw doen</string>
+    <string name="qc_help">Elke zin gaat naar de transcriptiedienst en wordt opnieuw gevraagd als hij niet met de tekst overeenkomt. Langzamer. De transcriptie-URL is nodig.</string>
+    <string name="voice_upload">Stem uploaden…</string>
+    <string name="voice_uploading">Stem uploaden…</string>
+    <string name="voice_upload_help">Een schone opname van 5 tot 12 s. Alleen de eigen server van Storyteller (st_server) neemt die aan.</string>
+    <string name="voice_upload_send">Uploaden</string>
+    <string name="voice_upload_unsupported">Deze dienst neemt geen stemmen aan: dat doet alleen de eigen server van Storyteller (st_server).</string>
+    <string name="voice_name">Naam van de stem</string>
+    <string name="pron_title">Uitspraakwoordenboek</string>
+    <string name="pron_help">Hoe sommige woorden worden gelezen in het %1$s. Elke taal heeft haar eigen woordenboek: wijzig de taal bij Modellen.</string>
+    <string name="pron_words">Woorden: woord = hoe je het zegt, één per regel</string>
+    <string name="pron_letters">Afkortingen die letter voor letter worden gelezen</string>
+    <string name="pron_as_words">Afkortingen die als woord worden gelezen</string>
+    <string name="pron_save">Opslaan</string>
+    <string name="fetch_title">Boeken van de computer halen</string>
+    <string name="fetch_help">Van de eigen server van Storyteller (st_server), op de voorlees-URL. Alleen voltooide hoofdstukken komen mee; de computer-app blijft zoals hij is.</string>
+    <string name="fetch_loading">De server vragen…</string>
+    <string name="fetch_empty">Die server heeft nog geen voltooide hoofdstukken.</string>
+    <string name="fetch_unsupported">Deze dienst heeft geen boeken: alleen de eigen server van Storyteller (st_server) heeft die.</string>
+    <string name="fetch_summary">%1$d van %2$d hoofdstukken · %3$s</string>
+    <string name="fetch_have_it">Al hier</string>
+    <string name="fetch_bring">Ophalen</string>
+
+    <string name="job_switch">Hiernaar wisselen</string>
+    <string name="job_add_to_line">In de wachtrij</string>
+    <string name="job_waiting_turn">Wachtend: %1$s</string>
+    <string name="book_in_line">● Wacht op zijn beurt</string>
+
+    <string name="privacy_policy">Privacybeleid</string>
+    <string name="report_content">Inhoud melden</string>
+    <string name="translate_goes_to">De tekst van het document gaat naar %1$s, de AI-dienst die je hebt gekozen. Als die per gebruik rekent, rekent hij hem aan.</string>
+    <string name="voice_upload_permission">Upload alleen je eigen stem of die van iemand die je toestemming heeft gegeven. Gebruik hem niet om je als iemand anders voor te doen.</string>
+</resources>

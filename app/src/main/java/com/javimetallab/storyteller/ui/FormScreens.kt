@@ -11,6 +11,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -199,6 +202,10 @@ fun TranslateScreen(vm: AppViewModel) {
                 Picker(stringResource(R.string.from_language), Translation.LANGUAGES, src, { languageName(it) }) { src = it }
                 Picker(stringResource(R.string.to_language), Translation.LANGUAGES, tgt, { languageName(it) }) { tgt = it }
                 if (src == tgt) Text(stringResource(R.string.same_language), color = Danger, fontSize = 13.sp)
+                Text(
+                    stringResource(R.string.translate_goes_to, Format.host(vm.endpoint(Capability.TRANSLATION).url)),
+                    color = Muted, fontSize = 13.sp, modifier = Modifier.padding(top = 10.dp),
+                )
                 PrimaryButton(
                     stringResource(R.string.start),
                     enabled = file != null && src != tgt,
@@ -220,6 +227,7 @@ fun TranslateScreen(vm: AppViewModel) {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun TranslationCard(vm: AppViewModel, t: TranslationItem, running: Boolean) {
     var confirm by remember { mutableStateOf(false) }
@@ -244,14 +252,22 @@ private fun TranslationCard(vm: AppViewModel, t: TranslationItem, running: Boole
             color = if (t.state == "done" && !running) Muted else Amber, fontSize = 13.sp, modifier = Modifier.padding(vertical = 2.dp),
         )
         if (!running) {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+            // Wraps instead of cutting a word in two: with three buttons in some languages they don't fit in a row.
+            FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                val tight = PaddingValues(horizontal = 8.dp)
                 if (t.state != "done") {
-                    TextButton(onClick = { vm.resumeTranslation(t) }) { Text(stringResource(R.string.resume)) }
+                    TextButton(onClick = { vm.resumeTranslation(t) }, contentPadding = tight) {
+                        Text(stringResource(R.string.resume), maxLines = 1, softWrap = false)
+                    }
                 }
                 if (t.outputSize > 0) {
-                    TextButton(onClick = { saver.launch(t.outputName) }) { Text(stringResource(R.string.save_to_phone)) }
+                    TextButton(onClick = { saver.launch(t.outputName) }, contentPadding = tight) {
+                        Text(stringResource(R.string.save_to_phone), maxLines = 1, softWrap = false)
+                    }
                 }
-                TextButton(onClick = { confirm = true }) { Text(stringResource(R.string.delete), color = Danger) }
+                TextButton(onClick = { confirm = true }, contentPadding = tight) {
+                    Text(stringResource(R.string.delete), color = Danger, maxLines = 1, softWrap = false)
+                }
             }
         }
     }

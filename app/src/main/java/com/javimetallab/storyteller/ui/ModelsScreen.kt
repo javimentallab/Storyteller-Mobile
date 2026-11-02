@@ -230,10 +230,13 @@ private fun VoiceUpload(vm: AppViewModel, e: Endpoint, enabled: Boolean, onUploa
         onDismissRequest = { picked = null },
         title = { Text(stringResource(R.string.voice_upload)) },
         text = {
-            OutlinedTextField(
-                value = name, onValueChange = { name = it.trim() },
-                label = { Text(stringResource(R.string.voice_name)) }, singleLine = true,
-            )
+            Column {
+                OutlinedTextField(
+                    value = name, onValueChange = { name = it.trim() },
+                    label = { Text(stringResource(R.string.voice_name)) }, singleLine = true,
+                )
+                Text(stringResource(R.string.voice_upload_permission), color = Muted, fontSize = 13.sp, modifier = Modifier.padding(top = 10.dp))
+            }
         },
         confirmButton = {
             TextButton(enabled = name.isNotBlank(), onClick = {

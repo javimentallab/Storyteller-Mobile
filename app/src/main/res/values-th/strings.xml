@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">คลังหนังสือ</string>
+    <string name="library_empty">ยังไม่มีหนังสือ เริ่มด้วยการอ่านออกเสียง EPUB หรือนำเข้าหนังสือเสียง</string>
+    <string name="narrate_epub">อ่าน EPUB</string>
+    <string name="import_audiobook">นำเข้าหนังสือเสียง</string>
+    <string name="translate">แปล</string>
+    <string name="models">โมเดล</string>
+    <plurals name="book_chapters">
+        <item quantity="other">%1$d บท · %2$s</item>
+    </plurals>
+    <string name="book_working">● กำลังทำ</string>
+    <string name="book_partial">⏸ ยังไม่เสร็จ · %1$d %%</string>
+    <string name="listen">ฟัง</string>
+    <string name="resume">ทำต่อ</string>
+    <string name="regenerate">อ่านใหม่</string>
+    <string name="more_options">ตัวเลือกเพิ่มเติม</string>
+    <string name="confirm_delete">ลบ \"%1$s\" ออกจากโทรศัพท์เครื่องนี้ไหม เสียงจะหายไปอย่างถาวร</string>
+    <string name="confirm_regenerate">อ่าน \"%1$s\" ใหม่ตั้งแต่ต้นไหม ส่วนที่อ่านแล้วจะหายไป</string>
+    <string name="confirm_cancel_job">ยกเลิก \"%1$s\" ไหม สิ่งที่ทำไปแล้วจะถูกทิ้ง</string>
+    <string name="delete">ลบ</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="keep_going">ทำต่อไป</string>
+    <string name="back">กลับ</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">การอ่าน การถอดเสียง และการแปล</string>
+    <string name="done_channel">เสร็จแล้ว</string>
+    <string name="job_finished">เสร็จแล้ว</string>
+    <string name="job_failed">หยุดกลางคัน ส่วนที่ทำแล้วถูกบันทึกไว้</string>
+    <string name="stop_and_save">หยุดและบันทึก</string>
+    <string name="job_queued">กำลังรอคิว…</string>
+    <string name="job_copying">กำลังคัดลอกไฟล์…</string>
+    <string name="job_reading">กำลังอ่านเอกสาร…</string>
+    <string name="job_narrating">บท %1$d/%2$d · ประโยค %3$d</string>
+    <string name="job_encoding">กำลังบีบอัดบท…</string>
+    <string name="job_transcribing">กำลังถอดเสียง… %1$s จาก %2$s</string>
+    <string name="job_translating">กำลังแปล… %1$d/%2$d</string>
+    <string name="job_saving">กำลังบันทึก…</string>
+    <string name="job_stopping">กำลังหยุด…</string>
+    <string name="job_waiting">บริการไม่ว่าง จะลองใหม่ใน %1$d วินาที</string>
+    <string name="eta_calculating">กำลังคำนวณเวลาที่เหลือ…</string>
+    <string name="eta_less_minute">เหลือไม่ถึง 1 นาที</string>
+    <string name="eta_minutes">เหลือประมาณ %1$d นาที</string>
+    <string name="eta_hours">เหลือประมาณ %1$d ชม. %2$d นาที</string>
+    <string name="eta_until">%1$s (ถึงประมาณ %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">โมเดลไม่ได้ทำงานบนโทรศัพท์ เลือกบริการสำหรับแต่ละงาน จะเป็นบริการสาธารณะที่ใช้คีย์การเข้าถึงของคุณ หรือบริการของคุณเองก็ได้ ข้อความและเสียงของคุณจะส่งไปยังบริการที่คุณเลือก</string>
+    <string name="section_narration">การอ่านออกเสียง</string>
+    <string name="section_narration_help">ข้อความเป็นเสียง API แบบเดียวกับ OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">การถอดเสียง</string>
+    <string name="section_transcription_help">เสียงเป็นข้อความ สำหรับหนังสือเสียงที่นำเข้า API แบบเดียวกับ OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">การแปล</string>
+    <string name="section_translation_help">โมเดลแชตใดก็ได้ API แบบเดียวกับ OpenAI: /v1/chat/completions (รวมถึง Ollama และ llama.cpp)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">คีย์การเข้าถึง</string>
+    <string name="field_key_hint">เว้นว่างไว้หากบริการไม่มีคีย์</string>
+    <string name="field_model">โมเดล</string>
+    <string name="field_voice">เสียง</string>
+    <string name="field_format">รูปแบบเสียง</string>
+    <string name="field_parallel">คำขอพร้อมกัน</string>
+    <string name="field_parallel_help">ยิ่งมากยิ่งเร็ว หากบริการอนุญาต</string>
+    <string name="search_models">ดูโมเดลที่มี</string>
+    <string name="search_voices">ดูเสียงที่มี</string>
+    <string name="show_key">แสดงคีย์</string>
+    <string name="hide_key">ซ่อนคีย์</string>
+    <string name="test">ลองใช้</string>
+    <string name="testing">กำลังลอง…</string>
+    <string name="test_ok">ใช้งานได้</string>
+    <string name="test_narration_ok">ใช้งานได้: เสียง %1$s วินาที</string>
+    <string name="test_translation_ok">ใช้งานได้: \"%1$s\"</string>
+    <string name="http_status">ข้อผิดพลาด %1$d</string>
+    <string name="cleartext_warning">ที่อยู่นี้ไม่ได้อยู่ในเครือข่ายที่บ้านและไม่ได้ใช้ HTTPS ข้อความของคุณจะถูกส่งโดยไม่เข้ารหัส และจะไม่ส่งคีย์ ดังนั้นบริการที่ต้องใช้คีย์จะแจ้งข้อผิดพลาด</string>
+    <string name="needs_model">เลือกก่อนว่าโมเดลใดจะทำงานนี้</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">อ่าน EPUB</string>
+    <string name="choose_epub">เลือก EPUB…</string>
+    <string name="reading_file">กำลังอ่าน…</string>
+    <plurals name="chapter_count">
+        <item quantity="other">%1$d บท</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d ประโยค · %3$d อักขระ</string>
+    <string name="narrate_goes_to">ข้อความ %1$d อักขระจะถูกส่งไปยัง %2$s หากบริการนั้นคิดเงินตามการใช้งาน จะคิดเงินส่วนนี้ด้วย</string>
+    <string name="prepare_text">เตรียมข้อความสำหรับเสียง</string>
+    <string name="prepare_text_help">ตัวเลขเป็นคำ คำย่อ และเครื่องหมายแปลก ๆ เสียงแบบเปิดจำนวนมากต้องใช้ คำบรรยายจะไม่เปลี่ยน</string>
+    <string name="no_chapters">ไม่พบข้อความใน EPUB นี้</string>
+    <string name="start">เริ่ม</string>
+
+    <!-- Import -->
+    <string name="import_title">นำเข้าหนังสือเสียง</string>
+    <string name="import_help">ไฟล์จะถูกคัดลอกไปยังโทรศัพท์และถอดเสียงเพื่อสร้างคำบรรยายที่ตรงจังหวะ เสียงจะส่งไปยังบริการที่คุณเลือกเป็นช่วงละสองนาที</string>
+    <string name="choose_audio">เลือกเสียง…</string>
+    <string name="audio_language">ภาษาของเสียง</string>
+    <string name="detect_language">ตรวจหาอัตโนมัติ</string>
+
+    <!-- Translate -->
+    <string name="translate_title">แปลเอกสาร</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, คำบรรยาย (SRT, VTT) หรือข้อความ (TXT, MD) ตัวเอียงและตัวหนาในประโยคจะหายไป PDF จะออกมาเป็น EPUB ที่แปลแล้วโดยไม่มีเลย์เอาต์เดิม</string>
+    <string name="choose_document">เลือกเอกสาร…</string>
+    <string name="from_language">จาก</string>
+    <string name="to_language">เป็น</string>
+    <string name="same_language">ทั้งสองภาษาเหมือนกัน</string>
+    <string name="translations_list">คำแปล</string>
+    <string name="translation_done">เสร็จแล้ว</string>
+    <string name="translation_partial">ยังไม่เสร็จ · %1$d จาก %2$d</string>
+    <string name="translation_partial_short">ยังไม่เสร็จ</string>
+    <string name="translation_running">กำลังแปล…</string>
+    <string name="save_to_phone">บันทึกเป็น…</string>
+    <string name="saved_to_phone">บันทึกแล้ว</string>
+    <string name="confirm_delete_translation">ลบคำแปลของ \"%1$s\" ไหม</string>
+
+    <!-- Player -->
+    <string name="live">● สด</string>
+    <string name="waiting_more">กำลังรอการอ่านเพิ่มเติม…</string>
+    <string name="section_n">ส่วนที่ %1$d</string>
+    <string name="go_to_chapter">ไปที่บท</string>
+    <string name="go_to_position">ไปที่ตำแหน่ง</string>
+    <string name="position_hint">นาที:วินาที หรือวินาที</string>
+    <string name="bad_position">เขียนเป็น นาที:วินาที หรือเป็นวินาที</string>
+    <string name="go">ไป</string>
+    <string name="play">เล่น</string>
+    <string name="pause">หยุดชั่วคราว</string>
+    <string name="back_10">ย้อนกลับ 10 วินาที</string>
+    <string name="forward_10">ไปข้างหน้า 10 วินาที</string>
+    <string name="previous_chapter">บทก่อนหน้า</string>
+    <string name="next_chapter">บทถัดไป</string>
+    <string name="no_text_yet">ส่วนนี้ยังไม่มีข้อความ</string>
+    <string name="cant_open_book">เปิดหนังสือเล่มนี้ไม่ได้</string>
+    <string name="playback_error">เล่นบทนี้ไม่ได้</string>
+
+    <!-- Errors -->
+    <string name="err_auth">บริการปฏิเสธคีย์การเข้าถึง ตรวจสอบได้ในโมเดล</string>
+    <string name="err_not_found">บริการไม่มีสิ่งนั้น ตรวจสอบ URL และโมเดลในโมเดล</string>
+    <string name="err_rate_limit">บริการแจ้งว่ามีคำขอมากเกินไป แม้จะรอแล้ว ส่วนที่ทำแล้วถูกบันทึกไว้ ทำต่อภายหลังได้</string>
+    <string name="err_bad_request">บริการปฏิเสธคำขอ ตรวจสอบโมเดลและเสียงในโมเดล</string>
+    <string name="err_server">บริการมีปัญหาของตัวเอง ส่วนที่ทำแล้วถูกบันทึกไว้ ทำต่อภายหลังได้</string>
+    <string name="err_bad_answer">บริการตอบกลับในแบบที่แอปนี้อ่านไม่ได้ URL นั้นเป็น API ชนิดที่ถูกต้องหรือไม่</string>
+    <string name="err_network">ติดต่อบริการไม่ได้ ส่วนที่ทำแล้วถูกบันทึกไว้ ทำต่อภายหลังได้</string>
+    <string name="err_bad_type">แอปนี้แปลไฟล์ชนิดนั้นไม่ได้</string>
+    <string name="err_cant_read_file">อ่านไฟล์นั้นไม่ได้</string>
+    <string name="err_no_text">เอกสารนั้นไม่มีข้อความให้แปล</string>
+    <string name="err_no_text_pdf">PDF นี้ไม่มีข้อความให้แปล อาจเป็นไฟล์สแกน และแอปไม่อ่านรูปภาพ</string>
+    <string name="err_generic">เกิดข้อผิดพลาด (%1$s)</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">ภาษา</string>
+    <string name="field_language_help">ภาษาที่ใช้อ่านหนังสือ เลือกเสียงที่ฟังดีในภาษานั้นด้วย</string>
+    <string name="qc_title">ตรวจและทำประโยคที่ฟังผิดใหม่</string>
+    <string name="qc_help">แต่ละประโยคจะส่งไปยังบริการถอดเสียง และถ้าไม่ตรงกับข้อความจะขอใหม่ ช้าลง ต้องมี URL ของการถอดเสียง</string>
+    <string name="voice_upload">อัปโหลดเสียง…</string>
+    <string name="voice_uploading">กำลังอัปโหลดเสียง…</string>
+    <string name="voice_upload_help">การบันทึกที่สะอาดยาว 5 ถึง 12 วินาที รับเฉพาะเซิร์ฟเวอร์ของ Storyteller เอง (st_server)</string>
+    <string name="voice_upload_send">อัปโหลด</string>
+    <string name="voice_upload_unsupported">บริการนี้ไม่รับเสียง มีเฉพาะเซิร์ฟเวอร์ของ Storyteller เอง (st_server) ที่รับ</string>
+    <string name="voice_name">ชื่อเสียง</string>
+    <string name="pron_title">พจนานุกรมการออกเสียง</string>
+    <string name="pron_help">วิธีอ่านบางคำในภาษา %1$s แต่ละภาษามีพจนานุกรมของตัวเอง เปลี่ยนภาษาได้ในโมเดล</string>
+    <string name="pron_words">คำ: คำ = วิธีออกเสียง บรรทัดละหนึ่งคำ</string>
+    <string name="pron_letters">คำย่อที่อ่านทีละตัวอักษร</string>
+    <string name="pron_as_words">คำย่อที่อ่านเป็นคำ</string>
+    <string name="pron_save">บันทึก</string>
+    <string name="fetch_title">นำหนังสือจากคอมพิวเตอร์</string>
+    <string name="fetch_help">จากเซิร์ฟเวอร์ของ Storyteller เอง (st_server) ที่ URL ของการอ่าน มาเฉพาะบทที่เสร็จแล้ว แอปบนคอมพิวเตอร์ยังคงเดิม</string>
+    <string name="fetch_loading">กำลังถามเซิร์ฟเวอร์…</string>
+    <string name="fetch_empty">เซิร์ฟเวอร์นั้นยังไม่มีบทที่เสร็จแล้ว</string>
+    <string name="fetch_unsupported">บริการนี้ไม่มีหนังสือ มีเฉพาะเซิร์ฟเวอร์ของ Storyteller เอง (st_server)</string>
+    <string name="fetch_summary">%1$d จาก %2$d บท · %3$s</string>
+    <string name="fetch_have_it">มีอยู่แล้ว</string>
+    <string name="fetch_bring">นำมา</string>
+
+    <string name="job_switch">สลับมาที่นี่</string>
+    <string name="job_add_to_line">เข้าคิว</string>
+    <string name="job_waiting_turn">กำลังรอ: %1$s</string>
+    <string name="book_in_line">● กำลังรอคิว</string>
+
+    <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="report_content">รายงานเนื้อหา</string>
+    <string name="translate_goes_to">ข้อความในเอกสารจะถูกส่งไปยัง %1$s ซึ่งเป็นบริการ AI ที่คุณเลือก หากบริการนั้นคิดเงินตามการใช้งาน จะคิดเงินส่วนนี้ด้วย</string>
+    <string name="voice_upload_permission">อัปโหลดเฉพาะเสียงของคุณเอง หรือเสียงที่เจ้าของอนุญาตแล้ว อย่าใช้เพื่อแอบอ้างเป็นผู้อื่น</string>
+</resources>

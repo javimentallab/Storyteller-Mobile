@@ -73,7 +73,7 @@
     <string name="test_narration_ok">Funciona: %1$s s de audio.</string>
     <string name="test_translation_ok">Funciona: «%1$s»</string>
     <string name="http_status">Error %1$d</string>
-    <string name="cleartext_warning">Esta dirección no es de tu red de casa y no usa HTTPS: tu clave y tu texto viajarían sin cifrar.</string>
+    <string name="cleartext_warning">Esta dirección no es de tu red de casa y no usa HTTPS: tu texto viajaría sin cifrar y tu clave no se envía, así que un servicio que la pida dará error.</string>
     <string name="needs_model">Elige primero qué modelo hace esto.</string>
 
     <!-- Narrar -->
@@ -177,4 +177,9 @@
     <string name="job_add_to_line">Poner a la cola</string>
     <string name="job_waiting_turn">En cola: %1$s</string>
     <string name="book_in_line">● Esperando su turno</string>
+
+    <string name="privacy_policy">Política de privacidad</string>
+    <string name="report_content">Denunciar contenido</string>
+    <string name="translate_goes_to">El texto del documento va a %1$s, el servicio de IA que has elegido. Si cobra por uso, lo cobrará.</string>
+    <string name="voice_upload_permission">Sube solo tu propia voz o una cuyo dueño te haya dado permiso. No la uses para hacerte pasar por otra persona.</string>
 </resources>

@@ -23,3 +23,6 @@ keystore.properties
 
 # Python
 __pycache__/
+
+# Left empty by --write-locks; only app/gradle.lockfile matters
+settings-gradle.lockfile

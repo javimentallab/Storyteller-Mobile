@@ -49,6 +49,7 @@ import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -69,6 +70,7 @@ import com.javimetallab.storyteller.data.Chapter
 import com.javimetallab.storyteller.data.Format
 import com.javimetallab.storyteller.player.PlayerUi
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 
 private const val SCROLL_PAUSE_MS = 4_500L
 private val SPEEDS = listOf(0.75f, 1f, 1.25f, 1.5f, 1.75f, 2f)
@@ -107,6 +109,13 @@ fun PlayerScreen(vm: AppViewModel) {
                         onClick = {
                             menu = false
                             askPosition = true
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.report_content)) },
+                        onClick = {
+                            menu = false
+                            vm.openReportForm()
                         },
                     )
                 }
@@ -170,16 +179,15 @@ private fun CueList(ui: PlayerUi, vm: AppViewModel, modifier: Modifier) {
             }
         }
     }
-    // Follows the sentence, but gives way for a moment when the user is reading elsewhere.
-    LaunchedEffect(ui.activeCue, ui.index) {
-        val i = ui.activeCue
-        if (i >= 0 && SystemClock.uptimeMillis() - lastTouch > SCROLL_PAUSE_MS) {
-            val third = list.layoutInfo.viewportSize.height / 3
-            list.animateScrollToItem(i, -third)
-        }
-    }
-    LaunchedEffect(ui.index) {
-        if (ui.activeCue < 0) list.scrollToItem(0)
+    // Follows the sentence, but gives way for a moment when the user is reading elsewhere. One effect, and
+    // nothing asked of the list before its first layout: scrolls that wait for that layout aren't cancelled
+    // with their effect, so the late one (back to the top) would undo the one going to the sentence, and
+    // with the book paused nothing would ever bring it back.
+    LaunchedEffect(ui.activeCue, ui.index, ui.cues.isEmpty()) {
+        val move = Format.cueScroll(ui.cues.size, ui.activeCue, SystemClock.uptimeMillis() - lastTouch, SCROLL_PAUSE_MS)
+        if (move == Format.CueScroll.NONE) return@LaunchedEffect
+        val height = snapshotFlow { list.layoutInfo.viewportSize.height }.first { it > 0 }
+        if (move == Format.CueScroll.TOP) list.scrollToItem(0) else list.animateScrollToItem(ui.activeCue, -height / 3)
     }
     if (ui.cues.isEmpty()) {
         Box(modifier.fillMaxWidth()) {

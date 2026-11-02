@@ -26,6 +26,7 @@ import com.javimetallab.storyteller.ui.NarrateScreen
 import com.javimetallab.storyteller.ui.PlayerScreen
 import com.javimetallab.storyteller.ui.StorytellerTheme
 import com.javimetallab.storyteller.ui.TranslateScreen
+import com.javimetallab.storyteller.ui.WebScreen
 
 class MainActivity : ComponentActivity() {
     private val askNotifications = registerForActivityResult(ActivityResultContracts.RequestPermission()) {}
@@ -46,14 +47,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             StorytellerTheme {
                 val vm: AppViewModel = viewModel()
-                val screen by vm.screen.collectAsStateWithLifecycle()
+                val current by vm.screen.collectAsStateWithLifecycle()
                 LifecycleStartEffect(vm) {
                     vm.setForeground(true)
                     onStopOrDispose { vm.setForeground(false) }
                 }
-                BackHandler(enabled = vm.canGoBack()) { vm.back() }
+                // Reads `current` here so that this is evaluated again on every screen change.
+                BackHandler(enabled = current != Screen.Library && vm.canGoBack()) { vm.back() }
                 AppFrame(vm) {
-                    when (screen) {
+                    when (val screen = current) {
                         Screen.Library -> LibraryScreen(vm)
                         Screen.Player -> PlayerScreen(vm)
                         Screen.Narrate -> NarrateScreen(vm)
@@ -62,6 +64,7 @@ class MainActivity : ComponentActivity() {
                         Screen.Models -> ModelsScreen(vm)
                         Screen.Pron -> PronScreen(vm)
                         Screen.Fetch -> FetchScreen(vm)
+                        is Screen.Web -> WebScreen(vm, screen)
                     }
                 }
             }

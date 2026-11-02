@@ -58,7 +58,7 @@ class ModelApi(private val endpoint: Endpoint) {
         c.connectTimeout = 15_000
         c.readTimeout = readTimeout
         c.instanceFollowRedirects = false       // the key must not follow a redirect somewhere else
-        if (endpoint.key.isNotBlank()) c.setRequestProperty("Authorization", "Bearer ${endpoint.key.trim()}")
+        if (endpoint.key.isNotBlank() && Format.mayCarryKey(base)) c.setRequestProperty("Authorization", "Bearer ${endpoint.key.trim()}")
         c.setRequestProperty("User-Agent", "Storyteller")
         open.add(c)
         return c

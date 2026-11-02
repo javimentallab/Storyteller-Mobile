@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">लाइब्रेरी</string>
+    <string name="library_empty">अभी कोई किताब नहीं है। शुरू करने के लिए कोई EPUB सुनाएँ या ऑडियोबुक आयात करें।</string>
+    <string name="narrate_epub">EPUB सुनाएँ</string>
+    <string name="import_audiobook">ऑडियोबुक आयात करें</string>
+    <string name="translate">अनुवाद</string>
+    <string name="models">मॉडल</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d अध्याय · %2$s</item>
+        <item quantity="other">%1$d अध्याय · %2$s</item>
+    </plurals>
+    <string name="book_working">● चल रहा है</string>
+    <string name="book_partial">⏸ अधूरा · %1$d %%</string>
+    <string name="listen">सुनें</string>
+    <string name="resume">जारी रखें</string>
+    <string name="regenerate">फिर से सुनाएँ</string>
+    <string name="more_options">और विकल्प</string>
+    <string name="confirm_delete">«%1$s» को इस फ़ोन से हटाएँ? इसका ऑडियो हमेशा के लिए खो जाएगा।</string>
+    <string name="confirm_regenerate">«%1$s» को शुरू से फिर सुनाएँ? अभी तक सुनाया गया हिस्सा खो जाएगा।</string>
+    <string name="confirm_cancel_job">«%1$s» रद्द करें? अब तक किया गया काम हटा दिया जाएगा।</string>
+    <string name="delete">हटाएँ</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="keep_going">जारी रखें</string>
+    <string name="back">वापस</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">सुनाना, लिप्यंतरण और अनुवाद</string>
+    <string name="done_channel">पूरा हुआ</string>
+    <string name="job_finished">पूरा हुआ</string>
+    <string name="job_failed">बीच में रुक गया। जो हो चुका है वह सहेजा गया है।</string>
+    <string name="stop_and_save">रोकें और सहेजें</string>
+    <string name="job_queued">अपनी बारी का इंतज़ार…</string>
+    <string name="job_copying">फ़ाइल कॉपी हो रही है…</string>
+    <string name="job_reading">दस्तावेज़ पढ़ा जा रहा है…</string>
+    <string name="job_narrating">अध्याय %1$d/%2$d · वाक्य %3$d</string>
+    <string name="job_encoding">अध्याय संपीड़ित हो रहा है…</string>
+    <string name="job_transcribing">लिप्यंतरण हो रहा है… %2$s में से %1$s</string>
+    <string name="job_translating">अनुवाद हो रहा है… %1$d/%2$d</string>
+    <string name="job_saving">सहेजा जा रहा है…</string>
+    <string name="job_stopping">रोका जा रहा है…</string>
+    <string name="job_waiting">सेवा व्यस्त है, %1$d सेकंड में फिर कोशिश होगी</string>
+    <string name="eta_calculating">बचा हुआ समय निकाला जा रहा है…</string>
+    <string name="eta_less_minute">1 मिनट से कम बचा है</string>
+    <string name="eta_minutes">लगभग %1$d मिनट बचे हैं</string>
+    <string name="eta_hours">लगभग %1$d घंटे %2$d मिनट बचे हैं</string>
+    <string name="eta_until">%1$s (लगभग %2$s तक)</string>
+
+    <!-- Models -->
+    <string name="models_intro">मॉडल फ़ोन पर नहीं चलते। हर काम के लिए वह सेवा चुनें जो उसे करेगी: आपकी एक्सेस कुंजी वाली सार्वजनिक सेवा या आपकी अपनी। आपका टेक्स्ट और ऑडियो आपकी चुनी हुई सेवा को जाता है।</string>
+    <string name="section_narration">सुनाना</string>
+    <string name="section_narration_help">टेक्स्ट से आवाज़। OpenAI जैसा API: /v1/audio/speech</string>
+    <string name="section_transcription">लिप्यंतरण</string>
+    <string name="section_transcription_help">आवाज़ से टेक्स्ट, आयात की गई ऑडियोबुक के लिए। OpenAI जैसा API: /v1/audio/transcriptions</string>
+    <string name="section_translation">अनुवाद</string>
+    <string name="section_translation_help">कोई भी चैट मॉडल। OpenAI जैसा API: /v1/chat/completions (Ollama और llama.cpp भी)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">एक्सेस कुंजी</string>
+    <string name="field_key_hint">अगर सेवा में कुंजी नहीं है तो खाली छोड़ दें</string>
+    <string name="field_model">मॉडल</string>
+    <string name="field_voice">आवाज़</string>
+    <string name="field_format">ऑडियो प्रारूप</string>
+    <string name="field_parallel">एक साथ अनुरोध</string>
+    <string name="field_parallel_help">ज़्यादा यानी तेज़, अगर सेवा अनुमति दे।</string>
+    <string name="search_models">उपलब्ध मॉडल देखें</string>
+    <string name="search_voices">उपलब्ध आवाज़ें देखें</string>
+    <string name="show_key">कुंजी दिखाएँ</string>
+    <string name="hide_key">कुंजी छिपाएँ</string>
+    <string name="test">आज़माएँ</string>
+    <string name="testing">आज़माया जा रहा है…</string>
+    <string name="test_ok">यह काम करता है।</string>
+    <string name="test_narration_ok">यह काम करता है: %1$s सेकंड ऑडियो।</string>
+    <string name="test_translation_ok">यह काम करता है: «%1$s»</string>
+    <string name="http_status">त्रुटि %1$d</string>
+    <string name="cleartext_warning">यह पता आपके घरेलू नेटवर्क पर नहीं है और HTTPS का उपयोग नहीं करता: आपका टेक्स्ट बिना एन्क्रिप्शन के जाएगा और आपकी कुंजी नहीं भेजी जाती, इसलिए जिस सेवा को कुंजी चाहिए वह त्रुटि देगी।</string>
+    <string name="needs_model">पहले चुनें कि यह काम कौन सा मॉडल करेगा।</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">EPUB सुनाएँ</string>
+    <string name="choose_epub">EPUB चुनें…</string>
+    <string name="reading_file">पढ़ा जा रहा है…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d अध्याय</item>
+        <item quantity="other">%1$d अध्याय</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d वाक्य · %3$d अक्षर</string>
+    <string name="narrate_goes_to">टेक्स्ट के %1$d अक्षर %2$s को भेजे जाएँगे। अगर वह सेवा उपयोग के हिसाब से शुल्क लेती है, तो इनका शुल्क लगेगा।</string>
+    <string name="prepare_text">आवाज़ के लिए टेक्स्ट तैयार करें</string>
+    <string name="prepare_text_help">अंक शब्दों में, संक्षिप्त रूप और असामान्य विराम चिह्न। कई खुली आवाज़ों को इसकी ज़रूरत होती है। उपशीर्षक नहीं बदलते।</string>
+    <string name="no_chapters">इस EPUB में कोई टेक्स्ट नहीं मिला।</string>
+    <string name="start">शुरू करें</string>
+
+    <!-- Import -->
+    <string name="import_title">ऑडियोबुक आयात करें</string>
+    <string name="import_help">इसे फ़ोन पर कॉपी करके लिप्यंतरित किया जाता है ताकि समन्वित उपशीर्षक बनें। ऑडियो दो-दो मिनट के टुकड़ों में चुनी हुई सेवा को जाता है।</string>
+    <string name="choose_audio">ऑडियो चुनें…</string>
+    <string name="audio_language">ऑडियो की भाषा</string>
+    <string name="detect_language">अपने आप पहचानें</string>
+
+    <!-- Translate -->
+    <string name="translate_title">दस्तावेज़ का अनुवाद करें</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, उपशीर्षक (SRT, VTT) या टेक्स्ट (TXT, MD)। वाक्य के भीतर का तिरछा और मोटा लेखन खो जाता है। PDF बिना लेआउट के अनूदित EPUB के रूप में निकलता है।</string>
+    <string name="choose_document">दस्तावेज़ चुनें…</string>
+    <string name="from_language">से</string>
+    <string name="to_language">में</string>
+    <string name="same_language">दोनों भाषाएँ एक जैसी हैं।</string>
+    <string name="translations_list">अनुवाद</string>
+    <string name="translation_done">पूरा हुआ</string>
+    <string name="translation_partial">अधूरा · %2$d में से %1$d</string>
+    <string name="translation_partial_short">अधूरा</string>
+    <string name="translation_running">अनुवाद हो रहा है…</string>
+    <string name="save_to_phone">इस रूप में सहेजें…</string>
+    <string name="saved_to_phone">सहेजा गया।</string>
+    <string name="confirm_delete_translation">«%1$s» का अनुवाद हटाएँ?</string>
+
+    <!-- Player -->
+    <string name="live">● लाइव</string>
+    <string name="waiting_more">और सुनाए जाने का इंतज़ार…</string>
+    <string name="section_n">खंड %1$d</string>
+    <string name="go_to_chapter">अध्याय पर जाएँ</string>
+    <string name="go_to_position">स्थान पर जाएँ</string>
+    <string name="position_hint">मि:से या सेकंड</string>
+    <string name="bad_position">इसे मि:से या सेकंड में लिखें।</string>
+    <string name="go">जाएँ</string>
+    <string name="play">चलाएँ</string>
+    <string name="pause">रोकें</string>
+    <string name="back_10">10 सेकंड पीछे</string>
+    <string name="forward_10">10 सेकंड आगे</string>
+    <string name="previous_chapter">पिछला अध्याय</string>
+    <string name="next_chapter">अगला अध्याय</string>
+    <string name="no_text_yet">इस हिस्से के लिए अभी कोई टेक्स्ट नहीं है।</string>
+    <string name="cant_open_book">यह किताब नहीं खुल सकती।</string>
+    <string name="playback_error">यह अध्याय नहीं चल सकता।</string>
+
+    <!-- Errors -->
+    <string name="err_auth">सेवा ने एक्सेस कुंजी अस्वीकार कर दी। इसे मॉडल में जाँचें।</string>
+    <string name="err_not_found">सेवा के पास यह नहीं है। मॉडल में URL और मॉडल जाँचें।</string>
+    <string name="err_rate_limit">सेवा कहती है कि इंतज़ार के बाद भी बहुत ज़्यादा अनुरोध हैं। जो हो चुका है वह सहेजा गया है: बाद में जारी रखें।</string>
+    <string name="err_bad_request">सेवा ने अनुरोध अस्वीकार कर दिया। मॉडल में मॉडल और आवाज़ जाँचें।</string>
+    <string name="err_server">सेवा में ही कोई समस्या है। जो हो चुका है वह सहेजा गया है: बाद में जारी रखें।</string>
+    <string name="err_bad_answer">सेवा ने ऐसा जवाब दिया जिसे यह ऐप पढ़ नहीं सकता। क्या वह URL सही तरह के API का है?</string>
+    <string name="err_network">सेवा तक नहीं पहुँचा जा सका। जो हो चुका है वह सहेजा गया है: बाद में जारी रखें।</string>
+    <string name="err_bad_type">यह ऐप उस तरह की फ़ाइल का अनुवाद नहीं कर सकता।</string>
+    <string name="err_cant_read_file">वह फ़ाइल पढ़ी नहीं जा सकती।</string>
+    <string name="err_no_text">उस दस्तावेज़ में अनुवाद के लिए टेक्स्ट नहीं है।</string>
+    <string name="err_no_text_pdf">इस PDF में अनुवाद के लिए टेक्स्ट नहीं है। शायद यह स्कैन किया हुआ है, और ऐप चित्र नहीं पढ़ता।</string>
+    <string name="err_generic">कुछ गलत हो गया (%1$s)।</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">भाषा</string>
+    <string name="field_language_help">वह भाषा जिसमें किताब पढ़ी जाती है। ऐसी आवाज़ भी चुनें जो उसमें अच्छी लगे।</string>
+    <string name="qc_title">गलत लगने वाले वाक्य जाँचें और दोबारा बनाएँ</string>
+    <string name="qc_help">हर वाक्य लिप्यंतरण सेवा को जाता है और अगर टेक्स्ट से मेल नहीं खाता तो फिर से माँगा जाता है। धीमा। इसके लिए लिप्यंतरण URL चाहिए।</string>
+    <string name="voice_upload">आवाज़ अपलोड करें…</string>
+    <string name="voice_uploading">आवाज़ अपलोड हो रही है…</string>
+    <string name="voice_upload_help">5 से 12 सेकंड की साफ़ रिकॉर्डिंग। इसे सिर्फ़ Storyteller का अपना सर्वर (st_server) लेता है।</string>
+    <string name="voice_upload_send">अपलोड करें</string>
+    <string name="voice_upload_unsupported">यह सेवा आवाज़ें नहीं लेती: सिर्फ़ Storyteller का अपना सर्वर (st_server) लेता है।</string>
+    <string name="voice_name">आवाज़ का नाम</string>
+    <string name="pron_title">उच्चारण शब्दकोश</string>
+    <string name="pron_help">%1$s में कुछ शब्द कैसे पढ़े जाते हैं। हर भाषा का अपना शब्दकोश है: भाषा मॉडल में बदलें।</string>
+    <string name="pron_words">शब्द: शब्द = कैसे बोला जाता है, हर पंक्ति में एक</string>
+    <string name="pron_letters">अक्षर-दर-अक्षर पढ़े जाने वाले संक्षिप्त रूप</string>
+    <string name="pron_as_words">शब्द की तरह पढ़े जाने वाले संक्षिप्त रूप</string>
+    <string name="pron_save">सहेजें</string>
+    <string name="fetch_title">कंप्यूटर से किताबें लाएँ</string>
+    <string name="fetch_help">Storyteller के अपने सर्वर (st_server) से, सुनाने वाले URL पर। सिर्फ़ पूरे हुए अध्याय आते हैं; कंप्यूटर का ऐप जैसा है वैसा ही रहता है।</string>
+    <string name="fetch_loading">सर्वर से पूछा जा रहा है…</string>
+    <string name="fetch_empty">उस सर्वर पर अभी कोई पूरा अध्याय नहीं है।</string>
+    <string name="fetch_unsupported">इस सेवा में किताबें नहीं हैं: वे सिर्फ़ Storyteller के अपने सर्वर (st_server) पर हैं।</string>
+    <string name="fetch_summary">%2$d में से %1$d अध्याय · %3$s</string>
+    <string name="fetch_have_it">पहले से यहाँ है</string>
+    <string name="fetch_bring">लाएँ</string>
+
+    <string name="job_switch">इस पर जाएँ</string>
+    <string name="job_add_to_line">कतार में जोड़ें</string>
+    <string name="job_waiting_turn">प्रतीक्षा में: %1$s</string>
+    <string name="book_in_line">● अपनी बारी का इंतज़ार</string>
+
+    <string name="privacy_policy">निजता नीति</string>
+    <string name="report_content">सामग्री की रिपोर्ट करें</string>
+    <string name="translate_goes_to">दस्तावेज़ का टेक्स्ट %1$s को भेजा जाता है, जो आपकी चुनी हुई AI सेवा है। अगर वह उपयोग के हिसाब से शुल्क लेती है, तो इसका शुल्क लगेगा।</string>
+    <string name="voice_upload_permission">सिर्फ़ अपनी आवाज़ या ऐसी आवाज़ अपलोड करें जिसके मालिक ने अनुमति दी हो। इसका उपयोग किसी और का रूप धरने के लिए न करें।</string>
+</resources>

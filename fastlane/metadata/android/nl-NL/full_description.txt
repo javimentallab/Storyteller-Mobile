@@ -1,0 +1,10 @@
+<p>Storyteller Mobile maakt van een EPUB een luisterboek met een neurale stem en speelt het af met ondertitels die de audio volgen. Het importeert ook luisterboeken en transcribeert ze voor die ondertitels, en het vertaalt boeken en documenten.</p>
+<p>Op de telefoon draait geen model, dus de app blijft klein. Voor elke taak kies je de dienst: een openbare met je toegangssleutel of een eigen dienst op je netwerk. Alles met een API zoals die van OpenAI werkt, om te vertalen ook Ollama en llama.cpp. Er is geen dienst inbegrepen: je hebt een eigen dienst nodig of een account bij een openbare, die per gebruik kan rekenen.</p>
+<ul>
+<li><b>Voorlezen</b>: een EPUB in de taal en met de stem die je kiest. Hervat waar het stopte en luister terwijl er wordt voorgelezen. Een optionele controle doet zinnen die verkeerd klinken opnieuw, en elke taal heeft een uitspraakwoordenboek.</li>
+<li><b>Importeren</b>: een luisterboek wordt naar de telefoon gekopieerd en in stukken getranscribeerd om de synchrone ondertitels te maken.</li>
+<li><b>Vertalen</b>: EPUB, PDF, Word, PowerPoint, Excel, ondertitels en tekst. Een PDF wordt een vertaalde EPUB, zonder opmaak.</li>
+<li><b>Luisteren</b>: met hoofdstukken, sprongen naar elke positie en afspelen op de achtergrond.</li>
+</ul>
+<p>Je tekst en audio gaan alleen naar de diensten die je kiest, en wie ze beheert kan zien wat je stuurt. Toegangssleutels worden versleuteld op de telefoon bewaard. Geen accounts, advertenties of analyses.</p>
+<p>Beschikbaar in het Engels, Spaans, Portugees, Frans, Duits, Italiaans, Nederlands, Pools, Russisch, Oekraïens, Chinees, Japans, Koreaans, Thai en Hindi.</p>

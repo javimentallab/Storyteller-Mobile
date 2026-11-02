@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Library -->
+    <string name="library">Biblioteca</string>
+    <string name="library_empty">Ainda não há livros. Narre um EPUB ou importe um audiolivro para começar.</string>
+    <string name="narrate_epub">Narrar EPUB</string>
+    <string name="import_audiobook">Importar audiolivro</string>
+    <string name="translate">Traduzir</string>
+    <string name="models">Modelos</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d capítulo · %2$s</item>
+        <item quantity="other">%1$d capítulos · %2$s</item>
+    </plurals>
+    <string name="book_working">● Em andamento</string>
+    <string name="book_partial">⏸ Incompleto · %1$d %%</string>
+    <string name="listen">Ouvir</string>
+    <string name="resume">Retomar</string>
+    <string name="regenerate">Narrar de novo</string>
+    <string name="more_options">Mais opções</string>
+    <string name="confirm_delete">Excluir «%1$s» deste telefone? O áudio será perdido para sempre.</string>
+    <string name="confirm_regenerate">Narrar «%1$s» de novo desde o início? O que já foi narrado será perdido.</string>
+    <string name="confirm_cancel_job">Cancelar «%1$s»? O que foi feito até agora será descartado.</string>
+    <string name="delete">Excluir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="keep_going">Continuar</string>
+    <string name="back">Voltar</string>
+
+    <!-- Jobs -->
+    <string name="work_channel">Narrando, transcrevendo e traduzindo</string>
+    <string name="done_channel">Concluído</string>
+    <string name="job_finished">Concluído</string>
+    <string name="job_failed">Parou no meio. O que foi feito está salvo.</string>
+    <string name="stop_and_save">Parar e salvar</string>
+    <string name="job_queued">Aguardando a vez…</string>
+    <string name="job_copying">Copiando o arquivo…</string>
+    <string name="job_reading">Lendo o documento…</string>
+    <string name="job_narrating">Capítulo %1$d/%2$d · frase %3$d</string>
+    <string name="job_encoding">Comprimindo o capítulo…</string>
+    <string name="job_transcribing">Transcrevendo… %1$s de %2$s</string>
+    <string name="job_translating">Traduzindo… %1$d/%2$d</string>
+    <string name="job_saving">Salvando…</string>
+    <string name="job_stopping">Parando…</string>
+    <string name="job_waiting">o serviço está ocupado, nova tentativa em %1$d s</string>
+    <string name="eta_calculating">calculando o tempo restante…</string>
+    <string name="eta_less_minute">falta menos de 1 min</string>
+    <string name="eta_minutes">faltam ~%1$d min</string>
+    <string name="eta_hours">faltam ~%1$d h %2$d min</string>
+    <string name="eta_until">%1$s (por volta de %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">Os modelos não rodam no telefone. Para cada tarefa, escolha o serviço que a faz: um público com sua chave de acesso ou um seu. Seu texto e seu áudio vão para o serviço que você escolher.</string>
+    <string name="section_narration">Narração</string>
+    <string name="section_narration_help">Texto para fala. Uma API como a da OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">Transcrição</string>
+    <string name="section_transcription_help">Fala para texto, para audiolivros importados. Uma API como a da OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">Tradução</string>
+    <string name="section_translation_help">Qualquer modelo de chat. Uma API como a da OpenAI: /v1/chat/completions (Ollama e llama.cpp também)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Chave de acesso</string>
+    <string name="field_key_hint">Deixe vazio se o serviço não tiver</string>
+    <string name="field_model">Modelo</string>
+    <string name="field_voice">Voz</string>
+    <string name="field_format">Formato de áudio</string>
+    <string name="field_parallel">Pedidos simultâneos</string>
+    <string name="field_parallel_help">Mais é mais rápido, se o serviço permitir.</string>
+    <string name="search_models">Ver os modelos disponíveis</string>
+    <string name="search_voices">Ver as vozes disponíveis</string>
+    <string name="show_key">Mostrar a chave</string>
+    <string name="hide_key">Ocultar a chave</string>
+    <string name="test">Testar</string>
+    <string name="testing">Testando…</string>
+    <string name="test_ok">Funciona.</string>
+    <string name="test_narration_ok">Funciona: %1$s s de áudio.</string>
+    <string name="test_translation_ok">Funciona: «%1$s»</string>
+    <string name="http_status">Erro %1$d</string>
+    <string name="cleartext_warning">Este endereço não está na sua rede doméstica e não usa HTTPS: seu texto viajaria sem criptografia e sua chave não é enviada, então um serviço que a exija vai dar erro.</string>
+    <string name="needs_model">Escolha primeiro qual modelo faz isto.</string>
+
+    <!-- Narrate -->
+    <string name="narrate_title">Narrar um EPUB</string>
+    <string name="choose_epub">Escolher EPUB…</string>
+    <string name="reading_file">Lendo…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d capítulo</item>
+        <item quantity="other">%1$d capítulos</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d frases · %3$d caracteres</string>
+    <string name="narrate_goes_to">%1$d caracteres de texto serão enviados para %2$s. Se o serviço cobrar pelo uso, vai cobrar por eles.</string>
+    <string name="prepare_text">Preparar o texto para a voz</string>
+    <string name="prepare_text_help">Números por extenso, abreviações e pontuação estranha. Muitas vozes abertas precisam disso. As legendas não mudam.</string>
+    <string name="no_chapters">Nenhum texto encontrado neste EPUB.</string>
+    <string name="start">Começar</string>
+
+    <!-- Import -->
+    <string name="import_title">Importar um audiolivro</string>
+    <string name="import_help">É copiado para o telefone e transcrito para criar as legendas sincronizadas. O áudio vai para o serviço escolhido, em partes de dois minutos.</string>
+    <string name="choose_audio">Escolher áudio…</string>
+    <string name="audio_language">Idioma do áudio</string>
+    <string name="detect_language">Detectar automaticamente</string>
+
+    <!-- Translate -->
+    <string name="translate_title">Traduzir um documento</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, legendas (SRT, VTT) ou texto (TXT, MD). Itálico e negrito dentro de uma frase se perdem. Um PDF sai como EPUB traduzido, sem o layout.</string>
+    <string name="choose_document">Escolher documento…</string>
+    <string name="from_language">De</string>
+    <string name="to_language">Para</string>
+    <string name="same_language">Os dois idiomas são iguais.</string>
+    <string name="translations_list">Traduções</string>
+    <string name="translation_done">Concluída</string>
+    <string name="translation_partial">Incompleta · %1$d de %2$d</string>
+    <string name="translation_partial_short">Incompleta</string>
+    <string name="translation_running">Traduzindo…</string>
+    <string name="save_to_phone">Salvar como…</string>
+    <string name="saved_to_phone">Salvo.</string>
+    <string name="confirm_delete_translation">Excluir a tradução de «%1$s»?</string>
+
+    <!-- Player -->
+    <string name="live">● Ao vivo</string>
+    <string name="waiting_more">Aguardando mais narração…</string>
+    <string name="section_n">Seção %1$d</string>
+    <string name="go_to_chapter">Ir para o capítulo</string>
+    <string name="go_to_position">Ir para a posição</string>
+    <string name="position_hint">mm:ss ou segundos</string>
+    <string name="bad_position">Escreva como mm:ss ou em segundos.</string>
+    <string name="go">Ir</string>
+    <string name="play">Reproduzir</string>
+    <string name="pause">Pausar</string>
+    <string name="back_10">Voltar 10 segundos</string>
+    <string name="forward_10">Avançar 10 segundos</string>
+    <string name="previous_chapter">Capítulo anterior</string>
+    <string name="next_chapter">Próximo capítulo</string>
+    <string name="no_text_yet">Ainda não há texto para esta parte.</string>
+    <string name="cant_open_book">Não é possível abrir este livro.</string>
+    <string name="playback_error">Não é possível reproduzir este capítulo.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">O serviço recusou a chave de acesso. Confira em Modelos.</string>
+    <string name="err_not_found">O serviço não tem isso. Confira a URL e o modelo em Modelos.</string>
+    <string name="err_rate_limit">O serviço diz que há pedidos demais, mesmo depois de esperar. O que foi feito está salvo: retome mais tarde.</string>
+    <string name="err_bad_request">O serviço recusou o pedido. Confira o modelo e a voz em Modelos.</string>
+    <string name="err_server">O serviço está com um problema. O que foi feito está salvo: retome mais tarde.</string>
+    <string name="err_bad_answer">O serviço deu uma resposta que este app não entende. Essa URL é do tipo certo de API?</string>
+    <string name="err_network">Não foi possível acessar o serviço. O que foi feito está salvo: retome mais tarde.</string>
+    <string name="err_bad_type">Este app não traduz esse tipo de arquivo.</string>
+    <string name="err_cant_read_file">Não é possível ler esse arquivo.</string>
+    <string name="err_no_text">Esse documento não tem texto para traduzir.</string>
+    <string name="err_no_text_pdf">Este PDF não tem texto para traduzir. Provavelmente é digitalizado, e o app não lê imagens.</string>
+    <string name="err_generic">Algo deu errado (%1$s).</string>
+
+    <!-- Language, QC, dictionary, voices and books, like on the desktop -->
+    <string name="field_language">Idioma</string>
+    <string name="field_language_help">O idioma em que o livro é lido. Escolha também uma voz que soe bem nele.</string>
+    <string name="qc_title">Verificar e refazer frases que soam mal</string>
+    <string name="qc_help">Cada frase vai para o serviço de transcrição e, se não coincidir com o texto, é pedida de novo. Mais lento. Precisa da URL de transcrição.</string>
+    <string name="voice_upload">Enviar uma voz…</string>
+    <string name="voice_uploading">Enviando a voz…</string>
+    <string name="voice_upload_help">Uma gravação limpa de 5 a 12 s. Só o servidor do próprio Storyteller (st_server) aceita.</string>
+    <string name="voice_upload_send">Enviar</string>
+    <string name="voice_upload_unsupported">Este serviço não aceita vozes: só o servidor do próprio Storyteller (st_server) aceita.</string>
+    <string name="voice_name">Nome da voz</string>
+    <string name="pron_title">Dicionário de pronúncia</string>
+    <string name="pron_help">Como algumas palavras são lidas em %1$s. Cada idioma tem o seu: mude o idioma em Modelos.</string>
+    <string name="pron_words">Palavras: palavra = como se diz, uma por linha</string>
+    <string name="pron_letters">Siglas lidas letra por letra</string>
+    <string name="pron_as_words">Siglas lidas como palavra</string>
+    <string name="pron_save">Salvar</string>
+    <string name="fetch_title">Trazer livros do computador</string>
+    <string name="fetch_help">Do servidor do próprio Storyteller (st_server), na URL de narração. Só vêm os capítulos concluídos; o app do computador fica como está.</string>
+    <string name="fetch_loading">Perguntando ao servidor…</string>
+    <string name="fetch_empty">Esse servidor ainda não tem capítulos concluídos.</string>
+    <string name="fetch_unsupported">Este serviço não tem livros: só o servidor do próprio Storyteller (st_server) tem.</string>
+    <string name="fetch_summary">%1$d de %2$d capítulos · %3$s</string>
+    <string name="fetch_have_it">Já está aqui</string>
+    <string name="fetch_bring">Trazer</string>
+
+    <string name="job_switch">Mudar para este</string>
+    <string name="job_add_to_line">Colocar na fila</string>
+    <string name="job_waiting_turn">Aguardando: %1$s</string>
+    <string name="book_in_line">● Aguardando a vez</string>
+
+    <string name="privacy_policy">Política de privacidade</string>
+    <string name="report_content">Denunciar conteúdo</string>
+    <string name="translate_goes_to">O texto do documento vai para %1$s, o serviço de IA que você escolheu. Se ele cobrar pelo uso, vai cobrar por isso.</string>
+    <string name="voice_upload_permission">Envie só a sua própria voz ou uma cujo dono tenha dado permissão. Não a use para se passar por outra pessoa.</string>
+</resources>

@@ -55,6 +55,9 @@ sealed interface Screen {
     data object Models : Screen
     data object Pron : Screen
     data object Fetch : Screen
+
+    /** A page inside the app: [title] is a string resource. */
+    data class Web(val title: Int, val url: String) : Screen
 }
 
 data class PickedFile(val uri: Uri, val name: String, val size: Long)
