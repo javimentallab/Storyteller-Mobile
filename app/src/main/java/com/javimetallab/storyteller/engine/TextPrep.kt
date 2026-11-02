@@ -26,9 +26,15 @@ object TextPrep {
     data class Chunk(val text: String, val close: Close)
 
     // The end of a sentence: a sign, maybe a closing quote or bracket, and a space. Not before a
-    // lower case letter ("¿Qué hora es? —dijo él", "etc. y", "Bueno… quizá").
-    private val CHUNK_SENTENCE_END = Regex("(?:(?<=[.!?…])|(?<=[.!?…][»”\"’)\\]]))$S+(?![—–-]?$S*[a-záéíóúüñ])")
-    private val ENDS_SENTENCE = Regex("[.!?…][»”\"’)\\]]*$")
+    // lower case letter ("¿Qué hora es? —dijo él", "etc. y", "Bueno… quizá"). Chinese and Japanese
+    // have no space after the sign: without cutting there, a whole paragraph would go in one piece.
+    private val CHUNK_SENTENCE_END = Regex(
+        "(?:(?<=[.!?…।؟])|(?<=[.!?…।؟][»”\"’)\\]]))$S+(?![—–-]?$S*[a-záéíóúüñ])" +
+            "|(?:(?<=[。！？])(?![」』”）])|(?<=[。！？][」』”）]))$S*",
+    )
+    private val ENDS_SENTENCE = Regex("[.!?…。！？।؟][»”\"’)\\]」』）]*$")
+    private val CHUNK_CLAUSE_END = Regex("(?<=[,;:،؛])$S+|(?<=[，、；：])$S*")
+    private const val TIGHT_CLAUSE_END = "，、；："   // no space is written after these
 
     /** One piece per clause, so that the pause is ours: left to XTTS, a comma gets anything from 0 to 0.8 s. */
     private fun splitParagraph(text: String, hard: Int = 240, short: Int = 20): List<String> {
@@ -45,9 +51,10 @@ object TextPrep {
             val s = sentence.pyStrip()
             if (s.isEmpty()) continue
             val clauses = ArrayList<String>()
-            for (part in CLAUSE_END.split(s)) {
+            for (part in CHUNK_CLAUSE_END.split(s)) {
                 if (clauses.isNotEmpty() && clauses.last().length < short) {     // "Además, vivimos…"
-                    clauses[clauses.size - 1] = clauses.last() + " " + part
+                    val space = if (clauses.last().last() in TIGHT_CLAUSE_END) "" else " "
+                    clauses[clauses.size - 1] = clauses.last() + space + part
                 } else {
                     clauses += part
                 }

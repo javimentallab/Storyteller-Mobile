@@ -23,7 +23,7 @@ object Epub {
         "p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "li", "blockquote", "td", "th", "dt", "dd", "pre",
         "figcaption", "caption", "section", "aside", "header", "footer", "tr",
     )
-    private const val END_PUNCT = ".?!…:;,»\"”’)]"
+    private const val END_PUNCT = ".?!…:;,»\"”’)]。！？：；，、」』）।؟،؛"
     private val HAS_TEXT = Regex("[A-Za-z\\u00C0-\\u024F0-9\\p{L}]")
     private val SPACE_BEFORE = Regex("\\s+([,.;:!?)\\]»”])")
     private val SPACE_AFTER = Regex("([(\\[«“¿¡])\\s+")
