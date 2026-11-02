@@ -16,7 +16,7 @@ For anything big, open an issue first so we can agree on the approach.
 ./gradlew testDebugUnitTest assembleDebug
 ```
 
-It needs JDK 21.
+It needs JDK 21 and the Android SDK with platform 36: set `ANDROID_HOME`, or `sdk.dir` in `local.properties`.
 
 - **Tests:** anything important that you add comes with a test.
 - **Dependencies:** a new one needs a permissive licence (MIT, BSD, Apache…). Check it before adding it, and add it to `NOTICE`. After changing dependencies, refresh `app/gradle.lockfile`, the list that Trivy reads: `./gradlew -I gradle/dependency-lock.init.gradle :app:dependencies --write-locks`.
