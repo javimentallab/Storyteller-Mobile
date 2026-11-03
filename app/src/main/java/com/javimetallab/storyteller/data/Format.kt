@@ -1,10 +1,25 @@
 package com.javimetallab.storyteller.data
 
 import java.net.URI
+import java.text.NumberFormat
+import java.util.Locale
 
 /** Plain functions with no Android in them, covered by the unit tests. */
 object Format {
     private val ENDPOINTS = listOf("/audio/speech", "/audio/transcriptions", "/chat/completions", "/models")
+
+    /** The desktop player's speeds: 0.75 to 2 in steps of 0.05. Made from whole hundredths, so that each is exactly the number it reads. */
+    val SPEEDS: List<Float> = List(26) { (75 + 5 * it) / 100f }
+
+    /** "1×", "1.1×" or "1,25×": no zeros at the end, and the decimal mark of the user's language. */
+    fun speedLabel(speed: Float, locale: Locale = Locale.getDefault()): String =
+        NumberFormat.getNumberInstance(locale).apply { maximumFractionDigits = 2 }.format(speed.toDouble()) + "×"
+
+    /** Where a scrolling list of equal rows has to stand to show this row in the middle of what is visible. */
+    fun centredScroll(row: Int, rows: Int, contentPx: Int, viewportPx: Int): Int {
+        val middle = (2 * row + 1) * contentPx / (2 * rows)
+        return (middle - viewportPx / 2).coerceIn(0, (contentPx - viewportPx).coerceAtLeast(0))
+    }
 
     /** "1:05", or "1:02:05" from one hour on: an imported audiobook is one very long chapter. */
     fun time(ms: Long): String {

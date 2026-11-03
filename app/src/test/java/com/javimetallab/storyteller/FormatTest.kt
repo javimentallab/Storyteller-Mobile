@@ -8,6 +8,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import java.util.Locale
 
 class FormatTest {
     @Test
@@ -109,6 +110,49 @@ class FormatTest {
         assertTrue(Links.staysInside(Links.REPORT_FORM, Links.REPORT_FORM + "?usp=form_confirm"))
         assertFalse(Links.staysInside(Links.REPORT_FORM, "https://accounts.google.com/"))
         assertFalse(Links.staysInside(Links.REPORT_FORM, "https://docs.google.com/forms/d/e/OTHER/viewform"))
+    }
+
+    /** The list of the desktop player, `_speeds` in storyteller.py: both apps offer the same speeds. */
+    @Test
+    fun theSpeedsAreTheDesktopOnes() {
+        val desktop = listOf(
+            0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f,
+            1.4f, 1.45f, 1.5f, 1.55f, 1.6f, 1.65f, 1.7f, 1.75f, 1.8f, 1.85f, 1.9f, 1.95f, 2f,
+        )
+        assertEquals(desktop, Format.SPEEDS)
+        // A speed saved by version 1.0, with its shorter list, must still be found.
+        assertTrue(Format.SPEEDS.containsAll(listOf(0.75f, 1f, 1.25f, 1.5f, 1.75f, 2f)))
+    }
+
+    @Test
+    fun speedsAreWrittenAsInTheUsersLanguage() {
+        val spanish = Locale.forLanguageTag("es")
+        assertEquals("1×", Format.speedLabel(1f, spanish))
+        assertEquals("2×", Format.speedLabel(2f, spanish))
+        assertEquals("0,75×", Format.speedLabel(0.75f, spanish))
+        assertEquals("1,05×", Format.speedLabel(1.05f, spanish))
+        assertEquals("1,1×", Format.speedLabel(1.1f, spanish))       // no zero at the end, as on the desktop
+        assertEquals("1.25×", Format.speedLabel(1.25f, Locale.ENGLISH))
+        // Every language of the app, every speed: its decimal mark, ordinary digits, and never longer than "1,25×".
+        val marks = mapOf(
+            "en" to ".", "es" to ",", "pt" to ",", "fr" to ",", "de" to ",", "it" to ",", "nl" to ",", "pl" to ",",
+            "ru" to ",", "uk" to ",", "zh-CN" to ".", "ja" to ".", "ko" to ".", "th" to ".", "hi" to ".",
+        )
+        for ((tag, mark) in marks) for (s in Format.SPEEDS) {
+            val plain = "%.2f".format(Locale.ROOT, s).trimEnd('0').trimEnd('.')
+            val label = Format.speedLabel(s, Locale.forLanguageTag(tag))
+            assertEquals("$tag $s", plain.replace(".", mark) + "×", label)
+            assertTrue(label, label.length <= 5)
+        }
+    }
+
+    @Test
+    fun theSpeedMenuOpensWithTheCurrentOneInTheMiddle() {
+        // 26 rows of 100 px with 400 px in view.
+        assertEquals(350, Format.centredScroll(5, 26, 2600, 400))    // the row of 1×: 500-600, in the middle of 350-750
+        assertEquals(0, Format.centredScroll(0, 26, 2600, 400))      // nothing above the first
+        assertEquals(2200, Format.centredScroll(25, 26, 2600, 400))  // nor below the last
+        assertEquals(0, Format.centredScroll(25, 26, 2600, 3000))    // everything fits
     }
 
     private val cues = listOf(Cue(1.0, 2.0, "a"), Cue(2.5, 3.0, "b"), Cue(3.0, 4.0, "c"))

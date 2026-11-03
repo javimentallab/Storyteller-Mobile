@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -56,6 +58,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -73,7 +76,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 
 private const val SCROLL_PAUSE_MS = 4_500L
-private val SPEEDS = listOf(0.75f, 1f, 1.25f, 1.5f, 1.75f, 2f)
 
 /** "23 · 18. Find the Sweet Spot". The number is the section's in the EPUB, not its place in the list. */
 @Composable
@@ -81,8 +83,6 @@ private fun chapterLabel(c: Chapter): String {
     val title = if (Format.chapterTitleIsGeneric(c.title)) stringResource(R.string.section_n, c.id) else c.title.trim()
     return "${c.id} · $title"
 }
-
-private fun speedLabel(s: Float) = (if (s == s.toInt().toFloat()) s.toInt().toString() else s.toString()) + "×"
 
 @Composable
 fun PlayerScreen(vm: AppViewModel) {
@@ -224,7 +224,6 @@ private fun CueList(ui: PlayerUi, vm: AppViewModel, modifier: Modifier) {
 private fun Controls(ui: PlayerUi, vm: AppViewModel) {
     var dragging by remember { mutableStateOf(false) }
     var dragValue by remember { mutableFloatStateOf(0f) }
-    var speedMenu by remember { mutableStateOf(false) }
     val duration = ui.durationMs.coerceAtLeast(1)
     val shownPos = if (dragging) dragValue.toLong() else ui.positionMs
 
@@ -282,23 +281,42 @@ private fun Controls(ui: PlayerUi, vm: AppViewModel) {
             IconButton(onClick = { vm.player.goToChapter(ui.index + 1) }, enabled = hasNext) {
                 Icon(Icons.Filled.SkipNext, stringResource(R.string.next_chapter), tint = if (hasNext) Ink else Line)
             }
-            Box {
-                OutlinedButton(
-                    onClick = { speedMenu = true },
-                    border = BorderStroke(1.dp, Line),
-                    contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
-                ) { Text(speedLabel(ui.speed), color = Ink, fontWeight = FontWeight.Medium) }
-                DropdownMenu(expanded = speedMenu, onDismissRequest = { speedMenu = false }) {
-                    for (s in SPEEDS) {
-                        DropdownMenuItem(
-                            text = { Text(speedLabel(s), color = if (s == ui.speed) Amber else Ink) },
-                            onClick = {
-                                speedMenu = false
-                                vm.player.setSpeed(s)
-                            },
-                        )
-                    }
-                }
+            SpeedPicker(ui.speed, vm.player::setSpeed)
+        }
+    }
+}
+
+/** The list is long: it takes half the screen at most and opens with the current speed in the middle. */
+@Composable
+private fun SpeedPicker(speed: Float, onPick: (Float) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    val scroll = rememberScrollState()
+    LaunchedEffect(open) {
+        val row = Format.SPEEDS.indexOf(speed)
+        if (!open || row < 0) return@LaunchedEffect
+        val viewport = snapshotFlow { scroll.viewportSize }.first { it > 0 }
+        scroll.scrollTo(Format.centredScroll(row, Format.SPEEDS.size, scroll.maxValue + viewport, viewport))
+    }
+    Box {
+        OutlinedButton(
+            onClick = { open = true },
+            border = BorderStroke(1.dp, Line),
+            contentPadding = PaddingValues(horizontal = 6.dp, vertical = 4.dp),
+        ) { Text(Format.speedLabel(speed), color = Ink, fontWeight = FontWeight.Medium, maxLines = 1, softWrap = false) }
+        DropdownMenu(
+            expanded = open,
+            onDismissRequest = { open = false },
+            modifier = Modifier.heightIn(max = LocalConfiguration.current.screenHeightDp.dp / 2),
+            scrollState = scroll,
+        ) {
+            for (s in Format.SPEEDS) {
+                DropdownMenuItem(
+                    text = { Text(Format.speedLabel(s), color = if (s == speed) Amber else Ink) },
+                    onClick = {
+                        open = false
+                        onPick(s)
+                    },
+                )
             }
         }
     }
