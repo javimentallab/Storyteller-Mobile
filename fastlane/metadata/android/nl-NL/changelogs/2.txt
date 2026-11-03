@@ -1,0 +1,1 @@
+De speler biedt nu 26 snelheden, van 0,75× tot 2× in stappen van 0,05.

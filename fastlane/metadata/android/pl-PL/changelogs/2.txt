@@ -1,0 +1,1 @@
+Odtwarzacz oferuje teraz 26 prędkości, od 0,75× do 2× co 0,05.

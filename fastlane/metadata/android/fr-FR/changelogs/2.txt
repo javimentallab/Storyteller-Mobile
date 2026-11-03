@@ -1,0 +1,1 @@
+Le lecteur propose désormais 26 vitesses, de 0,75× à 2× par pas de 0,05.

@@ -1,0 +1,1 @@
+Der Player bietet jetzt 26 Geschwindigkeiten, von 0,75× bis 2× in Schritten von 0,05.
