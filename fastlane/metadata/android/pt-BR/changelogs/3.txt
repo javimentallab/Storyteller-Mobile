@@ -1,0 +1,1 @@
+A narração lê de forma contínua: cada frase vai inteira para a voz, com as pausas do livro. O player mostra a página atual e volta a seguir a voz cinco segundos depois de rolar o texto. Capítulos narrados e o ponto de escuta não se perdem mais ao retomar ou ao trazer um livro do computador.

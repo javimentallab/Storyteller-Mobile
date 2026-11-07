@@ -1,0 +1,1 @@
+Die Erzählung liest flüssig: Jeder Satz geht ganz an die Stimme, mit den Pausen des Buches. Der Player zeigt die aktuelle Seite und folgt der Stimme fünf Sekunden nach dem Scrollen wieder. Beim Fortsetzen oder beim Holen eines Buches vom Computer gehen keine erzählten Kapitel und keine Leseposition mehr verloren.

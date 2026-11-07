@@ -1,0 +1,1 @@
+Narration reads on: each sentence goes to the voice whole, with the book's pauses. The player shows the page you are on and follows the voice again five seconds after you scroll. Narrated chapters and your place in a book are no longer lost when resuming or when bringing a book from the computer.

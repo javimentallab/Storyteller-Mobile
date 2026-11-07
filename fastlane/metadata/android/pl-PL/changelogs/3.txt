@@ -1,0 +1,1 @@
+Narracja czyta płynnie: każde zdanie trafia do głosu w całości, z pauzami z książki. Odtwarzacz pokazuje bieżącą stronę i po pięciu sekundach od przewinięcia znów podąża za głosem. Narrowane rozdziały i miejsce słuchania nie giną już przy wznawianiu ani przy pobieraniu książki z komputera.

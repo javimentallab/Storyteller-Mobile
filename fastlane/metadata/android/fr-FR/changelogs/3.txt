@@ -1,0 +1,1 @@
+La narration lit d'une traite : chaque phrase est envoyée entière à la voix, avec les pauses du livre. Le lecteur affiche la page en cours et suit de nouveau la voix cinq secondes après un défilement. Les chapitres narrés et la position d'écoute ne se perdent plus en reprenant ou en récupérant un livre depuis l'ordinateur.

@@ -1,0 +1,1 @@
+La narración lee de seguido: cada frase va entera a la voz, con las pausas del libro. El reproductor muestra la página por la que vas y vuelve a seguir la voz cinco segundos después de desplazar el texto. Ya no se pierden capítulos narrados ni el punto de escucha al reanudar o al traer un libro del ordenador.
