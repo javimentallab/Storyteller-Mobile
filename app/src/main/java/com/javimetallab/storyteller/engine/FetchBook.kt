@@ -44,11 +44,20 @@ class FetchBookTask(private val context: Context, private val remote: RemoteBook
             done += f.size
         }
         Library.writeAtomic(File(book, "title.txt"), remote.title)
+        // What arrived wins chapter by chapter; what only this phone has stays.
+        val local = try {
+            Library.readIndex(book)
+        } catch (_: java.io.IOException) {
+            null                                    // unreadable here: what arrived is all there is
+        }
+        val index = Library.mergeIndex(local, remote.manifest)
+        val doneChapters = (0 until index.length()).count { index.optJSONObject(it)?.optBoolean("done") == true }
         val state = JSONObject(remote.state.toString())
         if (!state.has("total")) state.put("total", remote.total)
-        if (!state.has("complete")) state.put("complete", remote.manifest.length() >= remote.total)
+        val chapterTotal = state.optInt("total", remote.total)
+        state.put("complete", state.optBoolean("complete") || (chapterTotal > 0 && doneChapters >= chapterTotal))
         Library.writeAtomic(File(book, "gen_state.json"), state.toString())
-        Library.writeAtomic(File(book, "manifest.json"), remote.manifest.toString())
+        Library.writeAtomic(File(book, "manifest.json"), index.toString())
         Work.changed.value = Work.changed.value + 1
     }
 }
