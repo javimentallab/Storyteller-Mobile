@@ -187,4 +187,6 @@
     <string name="report_content">Пожаловаться на контент</string>
     <string name="translate_goes_to">Текст документа отправляется в %1$s — выбранный вами ИИ-сервис. Если он берёт плату за использование, он её учтёт.</string>
     <string name="voice_upload_permission">Загружайте только свой голос или голос человека, который дал вам разрешение. Не выдавайте себя за другого человека.</string>
+    <string name="page_real">Стр. %1$s из %2$d · %3$d %%</string>
+    <string name="page_approx">Стр. ≈%1$s из %2$d (примерно) · %3$d %%</string>
 </resources>

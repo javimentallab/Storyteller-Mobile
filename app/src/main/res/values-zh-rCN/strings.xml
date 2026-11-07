@@ -181,4 +181,6 @@
     <string name="report_content">举报内容</string>
     <string name="translate_goes_to">文档文本会发送到 %1$s，即你选择的 AI 服务。如果它按用量收费，这些都会计费。</string>
     <string name="voice_upload_permission">只上传你自己的声音，或已获本人许可的声音。不要用它冒充他人。</string>
+    <string name="page_real">第 %1$s 页，共 %2$d 页 · %3$d%%</string>
+    <string name="page_approx">约第 %1$s 页，共 %2$d 页（估算） · %3$d%%</string>
 </resources>

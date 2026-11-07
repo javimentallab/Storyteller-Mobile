@@ -183,4 +183,6 @@
     <string name="report_content">Inhoud melden</string>
     <string name="translate_goes_to">De tekst van het document gaat naar %1$s, de AI-dienst die je hebt gekozen. Als die per gebruik rekent, rekent hij hem aan.</string>
     <string name="voice_upload_permission">Upload alleen je eigen stem of die van iemand die je toestemming heeft gegeven. Gebruik hem niet om je als iemand anders voor te doen.</string>
+    <string name="page_real">Pag. %1$s van %2$d · %3$d %%</string>
+    <string name="page_approx">Pag. ≈%1$s van %2$d (ongeveer) · %3$d %%</string>
 </resources>

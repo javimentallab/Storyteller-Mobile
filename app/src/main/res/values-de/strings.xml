@@ -183,4 +183,6 @@
     <string name="report_content">Inhalt melden</string>
     <string name="translate_goes_to">Der Text des Dokuments geht an %1$s, den von dir gewählten KI-Dienst. Wenn er nach Nutzung abrechnet, berechnet er ihn.</string>
     <string name="voice_upload_permission">Lade nur deine eigene Stimme hoch oder eine, für die dir die Person die Erlaubnis gegeben hat. Gib dich damit nicht als jemand anderes aus.</string>
+    <string name="page_real">Seite %1$s von %2$d · %3$d %%</string>
+    <string name="page_approx">Seite ≈%1$s von %2$d (ungefähr) · %3$d %%</string>
 </resources>

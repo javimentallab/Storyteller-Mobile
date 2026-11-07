@@ -181,4 +181,6 @@
     <string name="report_content">コンテンツを報告</string>
     <string name="translate_goes_to">文書のテキストは、選んだ AI サービスである %1$s に送られます。従量課金のサービスなら、その分が請求されます。</string>
     <string name="voice_upload_permission">アップロードするのはご自身の声か、本人の許可を得た声だけにしてください。他人になりすますために使わないでください。</string>
+    <string name="page_real">%2$dページ中%1$sページ · %3$d%%</string>
+    <string name="page_approx">%2$dページ中約%1$sページ（概算） · %3$d%%</string>
 </resources>

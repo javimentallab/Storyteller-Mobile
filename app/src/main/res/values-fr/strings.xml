@@ -183,4 +183,6 @@
     <string name="report_content">Signaler un contenu</string>
     <string name="translate_goes_to">Le texte du document va à %1$s, le service d\'IA que vous avez choisi. S\'il facture à l\'usage, il le facturera.</string>
     <string name="voice_upload_permission">N\'envoyez que votre propre voix, ou celle d\'une personne qui vous a donné son accord. Ne l\'utilisez pas pour vous faire passer pour quelqu\'un d\'autre.</string>
+    <string name="page_real">Page %1$s sur %2$d · %3$d %%</string>
+    <string name="page_approx">Page ≈%1$s sur %2$d (approx.) · %3$d %%</string>
 </resources>
