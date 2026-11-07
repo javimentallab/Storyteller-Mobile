@@ -87,7 +87,7 @@ class Control(private val update: ((JobState) -> JobState) -> Unit) {
     }
 
     /** A busy service or a cut connection isn't the end: wait and ask again. A refusal is. */
-    suspend fun <T> retrying(block: () -> T): T {
+    suspend fun <T> retrying(tries: Int = MAX_TRIES, maxWaitMs: Long = Long.MAX_VALUE, block: () -> T): T {
         var attempt = 0
         while (true) {
             check()
@@ -98,8 +98,8 @@ class Control(private val update: ((JobState) -> JobState) -> Unit) {
                 val retry = (e as? ModelException)?.let { if (it.retriable) it.retryAfterMs ?: 0L else null }
                     ?: if (e is ModelException) throw e else 0L
                 attempt++
-                if (attempt >= MAX_TRIES) throw e
-                val wait = maxOf(retry, 2_000L * attempt * attempt)
+                if (attempt >= tries) throw e
+                val wait = minOf(maxWaitMs, maxOf(retry, 2_000L * attempt * attempt))
                 update { it.copy(waitingMs = wait) }
                 delay(wait)
                 update { it.copy(waitingMs = 0) }

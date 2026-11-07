@@ -13,6 +13,9 @@ import kotlin.math.sqrt
 object Qc {
     const val THRESHOLD = 0.85
     const val RETRIES = 2
+    /** Asking the listener when it is out of memory (503) or unreachable: 1 + 3 retries, as on the desktop. */
+    const val BUSY_TRIES = 4
+    const val BUSY_MAX_WAIT_MS = 60_000L
     private const val TAIL_MAX = 0.30       // seconds of voice allowed after the last word heard
 
     data class Verdict(val recall: Double, val ok: Boolean, val score: Double, val reason: String)

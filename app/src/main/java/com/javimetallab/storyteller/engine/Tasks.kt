@@ -141,7 +141,12 @@ class NarrateTask(
                                 }
                                 val said = try {
                                     AudioCodec.writeWav(heard, pcm.samples, pcm.samples.size, pcm.rate)
-                                    listener.transcribe(heard, Languages.forWhisper(lang), if (lang == "es") "Lectura de un libro." else ".")
+                                    // Sin memoria (503) o sin conexión: esperar y volver a preguntar antes
+                                    // de dejar la frase sin revisar (253 en un libro, 7-nov). Como el escritorio:
+                                    // 3 reintentos y Retry-After con tope de 60 s.
+                                    ctl.retrying(tries = Qc.BUSY_TRIES, maxWaitMs = Qc.BUSY_MAX_WAIT_MS) {
+                                        listener.transcribe(heard, Languages.forWhisper(lang), if (lang == "es") "Lectura de un libro." else ".")
+                                    }
                                 } catch (e: IOException) {
                                     ctl.check()
                                     if (best == null) best = pcm      // nobody to ask: what was generated stays
