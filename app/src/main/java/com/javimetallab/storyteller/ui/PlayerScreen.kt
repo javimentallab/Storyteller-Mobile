@@ -59,6 +59,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -167,15 +168,39 @@ private fun ChapterBar(ui: PlayerUi, onOpen: () -> Unit) {
                 ui.live -> stringResource(R.string.live)
                 else -> null
             }
-            if (page != null || status != null) {
-                Row {
-                    if (page != null) Text(page, color = Muted, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
-                    if (page != null && status != null) Text("  ·  ", color = Muted, fontSize = 12.sp)
-                    if (status != null) Text(status, color = Amber, fontSize = 12.sp, maxLines = 1)
-                }
-            }
+            if (page != null || status != null) PageLine(page, status)
         }
         Icon(Icons.Filled.ArrowDropDown, stringResource(R.string.go_to_chapter), tint = Muted)
+    }
+}
+
+/**
+ * The page and the status ("Live", "Waiting for more narration…") on one line when both fit. When they don't,
+ * the status goes on a line of its own: in a row, the status took its width first and the page was cut short.
+ */
+@Composable
+private fun PageLine(page: String?, status: String?) {
+    Layout(content = {
+        if (page != null) Text(page, color = Muted, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        if (page != null && status != null) Text("  ·  ", color = Muted, fontSize = 12.sp, maxLines = 1)
+        if (status != null) Text(status, color = Amber, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }) { measurables, constraints ->
+        val parts = measurables.map { it.measure(constraints.copy(minWidth = 0)) }
+        if (parts.size == 1) return@Layout layout(parts[0].width, parts[0].height) { parts[0].place(0, 0) }
+        val (first, dot, second) = parts
+        val row = first.width + dot.width + second.width
+        if (row <= constraints.maxWidth) {
+            layout(row, maxOf(first.height, second.height)) {
+                first.place(0, 0)
+                dot.place(first.width, 0)
+                second.place(first.width + dot.width, 0)
+            }
+        } else {
+            layout(maxOf(first.width, second.width), first.height + second.height) {
+                first.place(0, 0)
+                second.place(0, first.height)
+            }
+        }
     }
 }
 
