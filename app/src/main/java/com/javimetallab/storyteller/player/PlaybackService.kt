@@ -59,6 +59,16 @@ class PlaybackService : MediaSessionService() {
                 handler.removeCallbacks(saveTick)
                 if (isPlaying) handler.postDelayed(saveTick, SAVE_EVERY_MS) else saveBookmark()
             }
+
+            // A jump while paused (another chapter, a subtitle, «Go to position») isn't saved by the above:
+            // if Android then kills the app without onDestroy, it would come back to before the jump.
+            override fun onPositionDiscontinuity(
+                oldPosition: Player.PositionInfo,
+                newPosition: Player.PositionInfo,
+                reason: Int,
+            ) {
+                if (reason == Player.DISCONTINUITY_REASON_SEEK && !player.isPlaying) saveBookmark()
+            }
         })
         val open = PendingIntent.getActivity(
             this, 0, Intent(this, MainActivity::class.java),
@@ -106,7 +116,15 @@ class PlaybackService : MediaSessionService() {
     private fun saveBookmark() {
         val id = player.currentMediaItem?.mediaId ?: return
         val (bookId, base) = splitId(id) ?: return
-        Prefs.get(this).saveBookmark(bookId, player.currentMediaItemIndex, base, player.currentPosition)
+        val prefs = Prefs.get(this)
+        val pos = player.currentPosition
+        // The saved place is in a chapter that isn't in the list now (it comes back when the book is
+        // repaired or brought again): opening and closing without listening must not reset it to the start.
+        val old = prefs.bookmark(bookId)
+        if (pos <= 0L && old?.base != null && old.base != base &&
+            (0 until player.mediaItemCount).none { splitId(player.getMediaItemAt(it).mediaId)?.second == old.base }
+        ) return
+        prefs.saveBookmark(bookId, player.currentMediaItemIndex, base, pos)
     }
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession? = session

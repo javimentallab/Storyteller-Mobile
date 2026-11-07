@@ -58,11 +58,7 @@ class NarrateTask(
     }
 
     private fun loadPrevious() {
-        val a = try {
-            JSONArray(File(book, "manifest.json").readText())
-        } catch (_: Exception) {
-            return
-        }
+        val a = Library.readIndex(book) ?: return
         for (i in 0 until a.length()) a.optJSONObject(i)?.let { entries[it.optInt("id")] = it }
     }
 

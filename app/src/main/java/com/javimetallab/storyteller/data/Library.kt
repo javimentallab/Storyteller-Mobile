@@ -124,6 +124,42 @@ class Library(context: Context) {
     companion object {
         private val ID = Regex("[A-Za-z0-9][A-Za-z0-9._-]{0,200}")
 
+        /**
+         * A book's index, to resume it. If writing it was cut off between removing the old one and
+         * renaming the new one, the new one is still in the .tmp. Null if there is none at all; if there
+         * is one but it can't be read, an error: carrying on would save an empty index over it and
+         * narrate the whole book again.
+         */
+        fun readIndex(book: File): JSONArray? {
+            val main = File(book, "manifest.json")
+            val tmp = File(main.path + ".tmp")
+            for (f in listOf(main, tmp)) {
+                if (!f.exists()) continue
+                try {
+                    return JSONArray(f.readText(Charsets.UTF_8))
+                } catch (_: Exception) {
+                }
+            }
+            if (main.exists() || tmp.exists()) throw java.io.IOException("unreadable manifest.json")
+            return null
+        }
+
+        /**
+         * The index after bringing a book from the computer: what arrived, plus the chapters that only
+         * this phone has (narrated here after an earlier fetch). Replacing it dropped those from the index,
+         * and resuming narrated them again.
+         */
+        fun mergeIndex(local: JSONArray?, remote: JSONArray): JSONArray {
+            val byId = sortedMapOf<Int, JSONObject>()
+            for (a in listOfNotNull(local, remote)) {
+                for (i in 0 until a.length()) {
+                    val e = a.optJSONObject(i) ?: continue
+                    if (e.has("id")) byId[e.optInt("id")] = e
+                }
+            }
+            return JSONArray().also { out -> byId.values.forEach { out.put(it) } }
+        }
+
         fun writeAtomic(f: File, text: String) {
             val tmp = File(f.path + ".tmp")
             tmp.writeText(text, Charsets.UTF_8)
