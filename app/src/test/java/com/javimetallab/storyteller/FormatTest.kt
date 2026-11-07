@@ -193,7 +193,7 @@ class FormatTest {
 
     @Test
     fun whatTheListOfSentencesDoes() {
-        val pause = 4_500L
+        val pause = Format.FOLLOW_PAUSE_MS
         // Without a list there is nothing to scroll: asking would wait for its first layout and arrive late.
         assertEquals(Format.CueScroll.NONE, Format.cueScroll(0, -1, 60_000, pause))
         assertEquals(Format.CueScroll.TOP, Format.cueScroll(40, -1, 60_000, pause))
@@ -201,6 +201,16 @@ class FormatTest {
         assertEquals(Format.CueScroll.FOLLOW, Format.cueScroll(40, 13, 60_000, pause))
         assertEquals(Format.CueScroll.NONE, Format.cueScroll(40, 13, 1_000, pause))   // reading elsewhere
         assertEquals(Format.CueScroll.NONE, Format.cueScroll(40, 13, pause, pause))
+    }
+
+    @Test
+    fun backToTheSentencePlayingAfterScrollingByHand() {
+        assertEquals(5_000L, Format.FOLLOW_PAUSE_MS)
+        assertEquals(5_000L, Format.followWait(0))                    // just touched: the whole pause
+        assertEquals(4_000L, Format.followWait(1_000))
+        assertEquals(0L, Format.followWait(5_000))                    // a few seconds untouched: back now
+        assertEquals(0L, Format.followWait(60_000))
+        assertEquals(Format.CueScroll.FOLLOW, Format.cueScroll(40, 13, 5_001, Format.FOLLOW_PAUSE_MS))
     }
 
     @Test

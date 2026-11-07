@@ -182,4 +182,6 @@
     <string name="report_content">Denunciar contenido</string>
     <string name="translate_goes_to">El texto del documento va a %1$s, el servicio de IA que has elegido. Si cobra por uso, lo cobrará.</string>
     <string name="voice_upload_permission">Sube solo tu propia voz o una cuyo dueño te haya dado permiso. No la uses para hacerte pasar por otra persona.</string>
+    <string name="page_real">Pág. %1$s de %2$d · %3$d %%</string>
+    <string name="page_approx">Pág. ≈%1$s de %2$d (aprox.) · %3$d %%</string>
 </resources>

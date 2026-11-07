@@ -106,6 +106,12 @@ object Format {
             (a == 169 && b == 254) || (a == 100 && b in 64..127) // the last one: Tailscale and the like
     }
 
+    /** After scrolling the text by hand, this long without touching it and it goes back to the sentence playing. */
+    const val FOLLOW_PAUSE_MS = 5_000L
+
+    /** How long the list still waits before going back to the sentence playing: 0 = now. Each touch starts it again. */
+    fun followWait(sinceTouchMs: Long, pauseMs: Long = FOLLOW_PAUSE_MS): Long = (pauseMs - sinceTouchMs).coerceAtLeast(0)
+
     enum class CueScroll { NONE, TOP, FOLLOW }
 
     /** What the list of sentences does: no list, nothing; no sentence playing, back to the top; a sentence

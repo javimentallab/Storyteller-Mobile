@@ -187,4 +187,6 @@
     <string name="report_content">Zgłoś treść</string>
     <string name="translate_goes_to">Tekst dokumentu trafia do %1$s, wybranej przez Ciebie usługi AI. Jeśli pobiera opłaty za użycie, obciąży Cię za niego.</string>
     <string name="voice_upload_permission">Prześlij tylko własny głos albo głos osoby, która udzieliła Ci zgody. Nie używaj go, by podawać się za kogoś innego.</string>
+    <string name="page_real">Str. %1$s z %2$d · %3$d %%</string>
+    <string name="page_approx">Str. ≈%1$s z %2$d (w przybliżeniu) · %3$d %%</string>
 </resources>

@@ -184,4 +184,6 @@
     <string name="report_content">Report content</string>
     <string name="translate_goes_to">The text of the document goes to %1$s, the AI service you chose. If it charges by use, it charges for it.</string>
     <string name="voice_upload_permission">Upload only your own voice, or one whose owner has given you permission. Don\'t use it to pass yourself off as someone else.</string>
+    <string name="page_real">Page %1$s of %2$d · %3$d %%</string>
+    <string name="page_approx">Page ≈%1$s of %2$d (approx.) · %3$d %%</string>
 </resources>

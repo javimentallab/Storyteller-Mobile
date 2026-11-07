@@ -50,6 +50,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -64,6 +65,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -74,8 +76,6 @@ import com.javimetallab.storyteller.data.Format
 import com.javimetallab.storyteller.player.PlayerUi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
-
-private const val SCROLL_PAUSE_MS = 4_500L
 
 /** "23 · 18. Find the Sweet Spot". The number is the section's in the EPUB, not its place in the list. */
 @Composable
@@ -158,9 +158,21 @@ private fun ChapterBar(ui: PlayerUi, onOpen: () -> Unit) {
     ) {
         Column(Modifier.weight(1f)) {
             Text(chapterLabel(ch), color = Ink, fontSize = 14.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            when {
-                ui.waiting -> Text(stringResource(R.string.waiting_more), color = Amber, fontSize = 12.sp)
-                ui.live -> Text(stringResource(R.string.live), color = Amber, fontSize = 12.sp)
+            // The printed book's page if the EPUB has it, else an approximate one ("≈"), and how far into the book.
+            val page = ui.page?.let { p ->
+                stringResource(if (p.real) R.string.page_real else R.string.page_approx, p.label, p.total, p.percent)
+            }
+            val status = when {
+                ui.waiting -> stringResource(R.string.waiting_more)
+                ui.live -> stringResource(R.string.live)
+                else -> null
+            }
+            if (page != null || status != null) {
+                Row {
+                    if (page != null) Text(page, color = Muted, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f, fill = false))
+                    if (page != null && status != null) Text("  ·  ", color = Muted, fontSize = 12.sp)
+                    if (status != null) Text(status, color = Amber, fontSize = 12.sp, maxLines = 1)
+                }
             }
         }
         Icon(Icons.Filled.ArrowDropDown, stringResource(R.string.go_to_chapter), tint = Muted)
@@ -177,17 +189,34 @@ private fun CueList(ui: PlayerUi, vm: AppViewModel, modifier: Modifier) {
                 if (source == NestedScrollSource.UserInput) lastTouch = SystemClock.uptimeMillis()
                 return Offset.Zero
             }
+
+            // A fling goes on after the finger is lifted: the pause counts from when it stops.
+            override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
+                if (lastTouch != 0L) lastTouch = SystemClock.uptimeMillis()
+                return Velocity.Zero
+            }
         }
     }
+    val latest by rememberUpdatedState(ui)
     // Follows the sentence, but gives way for a moment when the user is reading elsewhere. One effect, and
     // nothing asked of the list before its first layout: scrolls that wait for that layout aren't cancelled
     // with their effect, so the late one (back to the top) would undo the one going to the sentence, and
     // with the book paused nothing would ever bring it back.
     LaunchedEffect(ui.activeCue, ui.index, ui.cues.isEmpty()) {
-        val move = Format.cueScroll(ui.cues.size, ui.activeCue, SystemClock.uptimeMillis() - lastTouch, SCROLL_PAUSE_MS)
+        val move = Format.cueScroll(ui.cues.size, ui.activeCue, SystemClock.uptimeMillis() - lastTouch, Format.FOLLOW_PAUSE_MS)
         if (move == Format.CueScroll.NONE) return@LaunchedEffect
         val height = snapshotFlow { list.layoutInfo.viewportSize.height }.first { it > 0 }
         if (move == Format.CueScroll.TOP) list.scrollToItem(0) else list.animateScrollToItem(ui.activeCue, -height / 3)
+    }
+    // Scrolled by hand: a few seconds without touching it and back to the sentence playing on its own, even
+    // paused or in the middle of a long sentence. Each touch starts the wait again.
+    LaunchedEffect(lastTouch) {
+        if (lastTouch == 0L) return@LaunchedEffect
+        delay(Format.followWait(SystemClock.uptimeMillis() - lastTouch))
+        val st = latest
+        if (st.cues.isEmpty() || st.activeCue !in st.cues.indices) return@LaunchedEffect
+        val height = snapshotFlow { list.layoutInfo.viewportSize.height }.first { it > 0 }
+        list.animateScrollToItem(st.activeCue, -height / 3)
     }
     if (ui.cues.isEmpty()) {
         Box(modifier.fillMaxWidth()) {

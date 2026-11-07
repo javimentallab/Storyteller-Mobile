@@ -19,6 +19,8 @@ import com.javimetallab.storyteller.data.Cue
 import com.javimetallab.storyteller.data.Format
 import com.javimetallab.storyteller.data.Library
 import com.javimetallab.storyteller.data.Prefs
+import com.javimetallab.storyteller.engine.BookPages
+import com.javimetallab.storyteller.engine.Pages
 import com.javimetallab.storyteller.engine.Work
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -53,7 +55,11 @@ data class PlayerUi(
     val live: Boolean = false,
     val waiting: Boolean = false,
     val playbackError: Boolean = false,
+    val page: PageInfo? = null,
 )
+
+/** "Page 23 of 310 · 7 %": the printed book's page when the EPUB has it (real), else an approximate one. */
+data class PageInfo(val label: String, val total: Int, val real: Boolean, val percent: Int)
 
 /** What the player screen sees. The playing itself happens in PlaybackService. */
 class PlayerModel(private val app: Application, private val scope: CoroutineScope, private val library: Library) {
@@ -68,6 +74,10 @@ class PlayerModel(private val app: Application, private val scope: CoroutineScop
     private var cuesFor: String? = null
     private var wantPlay = false
     private var pendingCurrent: Chapter? = null
+    private var pages: BookPages? = null
+    private var pagesFor: String? = null
+    private var pagesJob: Job? = null
+    private var chapOffsets: List<Int>? = null
 
     private val listener = object : Player.Listener {
         override fun onIsPlayingChanged(isPlaying: Boolean) {
@@ -151,6 +161,7 @@ class PlayerModel(private val app: Application, private val scope: CoroutineScop
                 c.prepare()
             }
             syncIndex()
+            loadPages(bookId, chapters, detail.summary.hasSource)
             if (live) startLive(bookId) else stopLive()
         }
     }
@@ -193,12 +204,56 @@ class PlayerModel(private val app: Application, private val scope: CoroutineScop
         val key = "$bookId/${ch.base}"
         if (!force && cuesFor == key) return
         cuesJob?.cancel()
-        if (cuesFor != key) _ui.update { it.copy(cues = emptyList(), activeCue = -1, cuesLoaded = false) }
+        if (cuesFor != key) {
+            _ui.update { it.copy(cues = emptyList(), activeCue = -1, cuesLoaded = false, page = null) }
+            chapOffsets = null
+        }
         cuesFor = key
         cuesJob = scope.launch {
             val cues = withContext(Dispatchers.IO) { library.cues(bookId, ch.base) }
-            if (cuesFor == key) _ui.update { it.copy(cues = cues?.cues.orEmpty(), cuesLoaded = true) }
+            if (cuesFor == key) {
+                _ui.update { it.copy(cues = cues?.cues.orEmpty(), cuesLoaded = true) }
+                placeCues()
+            }
         }
+    }
+
+    // ---- the page it is on
+    /** Reads the book's pages away from the screen: a big EPUB takes a moment. */
+    private fun loadPages(bookId: String, chapters: List<Chapter>, hasSource: Boolean) {
+        if (pagesFor == bookId && pages != null && hasSource) return      // the EPUB doesn't change; subtitles can grow
+        pagesJob?.cancel()
+        pages = null
+        chapOffsets = null
+        pagesFor = bookId
+        pagesJob = scope.launch {
+            val bp = withContext(Dispatchers.IO) {
+                try {
+                    Pages.forBook(library.dir(bookId)) { chapters.map { ch -> library.cues(bookId, ch.base)?.cues.orEmpty().map { it.text } } }
+                } catch (_: Exception) {
+                    null
+                }
+            }
+            if (pagesFor != bookId) return@launch
+            pages = bp
+            placeCues()
+        }
+    }
+
+    /** Where in the book each sentence of the loaded chapter falls. */
+    private fun placeCues() {
+        val st = _ui.value
+        val ch = st.chapters.getOrNull(st.index)
+        val bp = pages
+        chapOffsets = if (bp != null && ch != null && st.cues.isNotEmpty()) bp.chapterOffsets(ch.id, st.cues.map { it.text }) else null
+        _ui.update { it.copy(page = pageInfo(it.activeCue)) }
+    }
+
+    private fun pageInfo(active: Int): PageInfo? {
+        val offs = chapOffsets?.takeIf { it.isNotEmpty() } ?: return null
+        val bp = pages ?: return null
+        val off = offs[active.coerceIn(0, offs.size - 1)]
+        return PageInfo(bp.page(off), bp.total, bp.real, bp.percent(off))
     }
 
     /** Called several times a second while the screen shows the player. */
@@ -208,9 +263,10 @@ class PlayerModel(private val app: Application, private val scope: CoroutineScop
         val pos = c.currentPosition
         val dur = c.duration.takeIf { it > 0 } ?: 0L
         _ui.update { st ->
+            val active = Format.cueAt(st.cues, pos / 1000.0)
             st.copy(
                 positionMs = pos, durationMs = dur, playing = c.isPlaying,
-                activeCue = Format.cueAt(st.cues, pos / 1000.0),
+                activeCue = active, page = if (active != st.activeCue || st.page == null) pageInfo(active) else st.page,
             )
         }
     }
@@ -266,6 +322,10 @@ class PlayerModel(private val app: Application, private val scope: CoroutineScop
         c?.stop()
         c?.clearMediaItems()
         cuesFor = null
+        pagesJob?.cancel()
+        pages = null
+        pagesFor = null
+        chapOffsets = null
         _ui.value = PlayerUi(speed = prefs.speed)
     }
 
