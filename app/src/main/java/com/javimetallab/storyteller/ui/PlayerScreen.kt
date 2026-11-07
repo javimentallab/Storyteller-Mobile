@@ -124,7 +124,7 @@ fun PlayerScreen(vm: AppViewModel) {
         }
         when {
             ui.loading -> Box(Modifier.weight(1f).fillMaxWidth()) {
-                CircularProgressIndicator(Modifier.align(Alignment.Center), color = Amber)
+                CircularProgressIndicator(Modifier.align(Alignment.Center), color = Accent)
             }
             ui.failed || ui.chapters.isEmpty() -> Box(Modifier.weight(1f).fillMaxWidth()) {
                 Text(stringResource(R.string.cant_open_book), color = Muted, modifier = Modifier.align(Alignment.Center).padding(32.dp))
@@ -183,7 +183,7 @@ private fun PageLine(page: String?, status: String?) {
     Layout(content = {
         if (page != null) Text(page, color = Muted, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
         if (page != null && status != null) Text("  ·  ", color = Muted, fontSize = 12.sp, maxLines = 1)
-        if (status != null) Text(status, color = Amber, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        if (status != null) Text(status, color = Accent, fontSize = 12.sp, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }) { measurables, constraints ->
         val parts = measurables.map { it.measure(constraints.copy(minWidth = 0)) }
         if (parts.size == 1) return@Layout layout(parts[0].width, parts[0].height) { parts[0].place(0, 0) }
@@ -296,7 +296,7 @@ private fun Controls(ui: PlayerUi, vm: AppViewModel) {
                 vm.player.seekTo(dragValue.toLong())
                 dragging = false
             },
-            colors = SliderDefaults.colors(thumbColor = Amber, activeTrackColor = Amber, inactiveTrackColor = Line),
+            colors = SliderDefaults.colors(thumbColor = Accent, activeTrackColor = Accent, inactiveTrackColor = Line),
         )
         Row(Modifier.fillMaxWidth().padding(horizontal = 6.dp), verticalAlignment = Alignment.CenterVertically) {
             Text(Format.time(shownPos), color = Muted, fontSize = 12.sp)
@@ -316,15 +316,15 @@ private fun Controls(ui: PlayerUi, vm: AppViewModel) {
             }
             IconButton(
                 onClick = vm.player::playPause,
-                modifier = Modifier.size(56.dp).background(Amber, CircleShape),
+                modifier = Modifier.size(56.dp).background(Accent, CircleShape),
             ) {
                 if (ui.buffering && !ui.playing) {
-                    CircularProgressIndicator(Modifier.size(24.dp), color = OnAmber, strokeWidth = 2.dp)
+                    CircularProgressIndicator(Modifier.size(24.dp), color = OnAccent, strokeWidth = 2.dp)
                 } else {
                     Icon(
                         if (ui.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow,
                         stringResource(if (ui.playing) R.string.pause else R.string.play),
-                        tint = OnAmber, modifier = Modifier.size(32.dp),
+                        tint = OnAccent, modifier = Modifier.size(32.dp),
                     )
                 }
             }
@@ -365,7 +365,7 @@ private fun SpeedPicker(speed: Float, onPick: (Float) -> Unit) {
         ) {
             for (s in Format.SPEEDS) {
                 DropdownMenuItem(
-                    text = { Text(Format.speedLabel(s), color = if (s == speed) Amber else Ink) },
+                    text = { Text(Format.speedLabel(s), color = if (s == speed) Accent else Ink) },
                     onClick = {
                         open = false
                         onPick(s)
@@ -388,7 +388,7 @@ private fun ChapterDialog(ui: PlayerUi, onPick: (Int) -> Unit, onDismiss: () -> 
                 itemsIndexed(ui.chapters) { i, c ->
                     Text(
                         chapterLabel(c) + " · " + Format.time((c.duration * 1000).toLong()),
-                        color = if (i == ui.index) Amber else Ink,
+                        color = if (i == ui.index) Accent else Ink,
                         modifier = Modifier.fillMaxWidth().clickable { onPick(i) }.padding(vertical = 10.dp),
                     )
                 }

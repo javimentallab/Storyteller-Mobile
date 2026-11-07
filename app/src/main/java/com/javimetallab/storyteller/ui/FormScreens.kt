@@ -75,7 +75,7 @@ private fun PickButton(label: String, chosen: String?, onClick: () -> Unit) {
         border = BorderStroke(1.dp, Line),
         shape = RoundedCornerShape(10.dp),
     ) {
-        Text(chosen ?: label, color = if (chosen == null) Amber else Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
+        Text(chosen ?: label, color = if (chosen == null) Accent else Ink, maxLines = 2, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -137,7 +137,7 @@ fun NarrateScreen(vm: AppViewModel) {
                     }
                     Switch(
                         checked = prepare, onCheckedChange = { prepare = it },
-                        colors = SwitchDefaults.colors(checkedTrackColor = Amber, checkedThumbColor = OnAmber),
+                        colors = SwitchDefaults.colors(checkedTrackColor = Accent, checkedThumbColor = OnAccent),
                     )
                 }
                 PrimaryButton(
@@ -249,7 +249,7 @@ private fun TranslationCard(vm: AppViewModel, t: TranslationItem, running: Boole
         }
         Text(
             "${languageName(t.src)} → ${languageName(t.tgt)} · $state",
-            color = if (t.state == "done" && !running) Muted else Amber, fontSize = 13.sp, modifier = Modifier.padding(vertical = 2.dp),
+            color = if (t.state == "done" && !running) Muted else Accent, fontSize = 13.sp, modifier = Modifier.padding(vertical = 2.dp),
         )
         if (!running) {
             // Wraps instead of cutting a word in two: with three buttons in some languages they don't fit in a row.

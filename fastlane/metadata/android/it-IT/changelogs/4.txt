@@ -1,0 +1,1 @@
+Nuovi colori: blu notte e ciano. Se il servizio di trascrizione che controlla ogni frase esaurisce la memoria o non risponde, l'app attende e chiede di nuovo invece di lasciare la frase non controllata.

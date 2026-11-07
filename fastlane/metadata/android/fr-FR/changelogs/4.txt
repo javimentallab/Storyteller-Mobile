@@ -1,0 +1,1 @@
+Nouvelles couleurs : bleu nuit et cyan. Si le service de transcription qui vérifie chaque phrase manque de mémoire ou ne répond pas, l'application attend et redemande au lieu de laisser la phrase non vérifiée.

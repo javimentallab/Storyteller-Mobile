@@ -1,0 +1,1 @@
+Neue Farben: Nachtblau und Cyan. Wenn der Transkriptionsdienst, der jeden Satz prüft, keinen Speicher mehr hat oder nicht erreichbar ist, wartet die App und fragt erneut, statt den Satz ungeprüft zu lassen.

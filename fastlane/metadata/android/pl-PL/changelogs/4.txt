@@ -1,0 +1,1 @@
+Nowe kolory: granat i cyjan. Gdy usługa transkrypcji sprawdzająca każde zdanie nie ma pamięci lub nie odpowiada, aplikacja czeka i pyta ponownie, zamiast zostawić zdanie niesprawdzone.

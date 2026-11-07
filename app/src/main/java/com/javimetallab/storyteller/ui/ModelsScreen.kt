@@ -173,10 +173,10 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
                 }
                 Switch(
                     checked = e.qc, onCheckedChange = { change(e.copy(qc = it)) },
-                    colors = SwitchDefaults.colors(checkedTrackColor = Amber, checkedThumbColor = OnAmber),
+                    colors = SwitchDefaults.colors(checkedTrackColor = Accent, checkedThumbColor = OnAccent),
                 )
             }
-            TextButton(onClick = { vm.go(Screen.Pron) }) { Text(stringResource(R.string.pron_title), color = Amber) }
+            TextButton(onClick = { vm.go(Screen.Pron) }) { Text(stringResource(R.string.pron_title), color = Accent) }
         }
         if (c != Capability.TRANSCRIPTION) {
             Text(stringResource(R.string.field_parallel), color = Muted, fontSize = 13.sp, modifier = Modifier.padding(top = 8.dp))
@@ -185,7 +185,7 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
                     FilterChip(
                         selected = k == e.parallel, onClick = { change(e.copy(parallel = k)) }, label = { Text("$k") },
                         colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = Amber, selectedLabelColor = OnAmber, labelColor = Ink,
+                            selectedContainerColor = Accent, selectedLabelColor = OnAccent, labelColor = Ink,
                         ),
                     )
                 }
@@ -199,7 +199,7 @@ private fun ModelCard(vm: AppViewModel, c: Capability, title: String, help: Stri
             ) { vm.testModel(c, e) }
         }
         tests[c]?.let { r ->
-            Text(r.text, color = if (r.ok) Amber else Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 6.dp))
+            Text(r.text, color = if (r.ok) Accent else Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 6.dp))
         }
     }
 }
@@ -221,7 +221,7 @@ private fun VoiceUpload(vm: AppViewModel, e: Endpoint, enabled: Boolean, onUploa
         failure = null
     }
     TextButton(enabled = enabled && !busy, onClick = { launcher.launch(arrayOf("audio/*")) }) {
-        Text(stringResource(if (busy) R.string.voice_uploading else R.string.voice_upload), color = if (enabled) Amber else Muted)
+        Text(stringResource(if (busy) R.string.voice_uploading else R.string.voice_upload), color = if (enabled) Accent else Muted)
     }
     Text(stringResource(R.string.voice_upload_help), color = Muted, fontSize = 12.sp)
     failure?.let { Text(it, color = Danger, fontSize = 13.sp, modifier = Modifier.padding(top = 4.dp)) }

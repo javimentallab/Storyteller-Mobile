@@ -1,0 +1,1 @@
+Nieuwe kleuren: nachtblauw en cyaan. Als de transcriptiedienst die elke zin controleert geen geheugen meer heeft of niet bereikbaar is, wacht de app en vraagt opnieuw in plaats van de zin ongecontroleerd te laten.

@@ -1,0 +1,1 @@
+Novas cores: azul-noite e ciano. Se o serviço de transcrição que verifica cada frase ficar sem memória ou não responder, o app espera e pergunta de novo em vez de deixar a frase sem verificação.

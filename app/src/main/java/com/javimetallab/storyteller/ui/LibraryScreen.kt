@@ -174,9 +174,9 @@ private fun BookCard(vm: AppViewModel, b: BookSummary, active: Boolean) {
                 color = Muted, fontSize = 13.sp, modifier = Modifier.padding(top = 2.dp),
             )
             when {
-                active -> Text(stringResource(R.string.book_working), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
-                inLine != null -> Text(stringResource(R.string.book_in_line), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
-                !b.complete -> Text(stringResource(R.string.book_partial, b.progress), color = Amber, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
+                active -> Text(stringResource(R.string.book_working), color = Accent, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
+                inLine != null -> Text(stringResource(R.string.book_in_line), color = Accent, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
+                !b.complete -> Text(stringResource(R.string.book_partial, b.progress), color = Accent, fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             }
             // Wraps: three buttons need about 300 dp, and a 360 dp phone leaves 268 here.
             FlowRow {
@@ -257,7 +257,7 @@ private fun MiniPlayer(vm: AppViewModel) {
         if (ui.durationMs > 0) {
             LinearProgressIndicator(
                 progress = { (ui.positionMs.toFloat() / ui.durationMs).coerceIn(0f, 1f) },
-                modifier = Modifier.fillMaxWidth(), color = Amber, trackColor = Line,
+                modifier = Modifier.fillMaxWidth(), color = Accent, trackColor = Line,
             )
         }
         Row(
@@ -271,7 +271,7 @@ private fun MiniPlayer(vm: AppViewModel) {
             IconButton(onClick = vm.player::playPause) {
                 Icon(
                     if (ui.playing) Icons.Filled.Pause else Icons.Filled.PlayArrow,
-                    stringResource(if (ui.playing) R.string.pause else R.string.play), tint = Amber,
+                    stringResource(if (ui.playing) R.string.pause else R.string.play), tint = Accent,
                 )
             }
         }

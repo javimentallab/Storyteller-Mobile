@@ -60,21 +60,21 @@ import java.text.DateFormat
 import java.util.Date
 
 // The colours of the desktop app.
-val Night = Color(0xFF16120D)
-val Panel = Color(0xFF211B13)
-val Line = Color(0xFF352D22)
-val Ink = Color(0xFFECE2D0)
-val Muted = Color(0xFFA2957F)
-val Amber = Color(0xFFE3A94F)
-val OnAmber = Color(0xFF1A140C)
+val Night = Color(0xFF0F1420)
+val Panel = Color(0xFF18202E)
+val Line = Color(0xFF263246)
+val Ink = Color(0xFFE6ECF5)
+val Muted = Color(0xFF8C9AB0)
+val Accent = Color(0xFF5CC8E0)
+val OnAccent = Color(0xFF08171C)
 val Danger = Color(0xFFFF8A80)
-val ActiveCue = Amber.copy(alpha = 0.17f)
+val ActiveCue = Accent.copy(alpha = 0.17f)
 
 @Composable
 fun StorytellerTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colorScheme = darkColorScheme(
-            primary = Amber, onPrimary = OnAmber, secondary = Amber, onSecondary = OnAmber,
+            primary = Accent, onPrimary = OnAccent, secondary = Accent, onSecondary = OnAccent,
             background = Night, onBackground = Ink, surface = Night, onSurface = Ink,
             surfaceVariant = Panel, onSurfaceVariant = Muted, outline = Line, error = Danger,
             surfaceContainer = Panel, surfaceContainerHigh = Panel, surfaceContainerHighest = Panel,
@@ -196,7 +196,7 @@ fun PrimaryButton(text: String, enabled: Boolean = true, modifier: Modifier = Mo
     Button(
         onClick = onClick, enabled = enabled, modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Amber, contentColor = OnAmber, disabledContainerColor = Line, disabledContentColor = Muted,
+            containerColor = Accent, contentColor = OnAccent, disabledContainerColor = Line, disabledContentColor = Muted,
         ),
         shape = RoundedCornerShape(10.dp),
     ) { Text(text, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center) }
@@ -266,10 +266,10 @@ fun JobPanel(vm: AppViewModel, job: JobState, queued: Int) {
         Text(jobText(job), color = Muted, fontSize = 13.sp, modifier = Modifier.padding(vertical = 4.dp))
         if (job.pct >= 0) {
             LinearProgressIndicator(
-                progress = { job.pct / 100f }, modifier = Modifier.fillMaxWidth(), color = Amber, trackColor = Night,
+                progress = { job.pct / 100f }, modifier = Modifier.fillMaxWidth(), color = Accent, trackColor = Night,
             )
         } else {
-            LinearProgressIndicator(Modifier.fillMaxWidth(), color = Amber, trackColor = Night)
+            LinearProgressIndicator(Modifier.fillMaxWidth(), color = Accent, trackColor = Night)
         }
         Row(Modifier.fillMaxWidth().padding(top = 2.dp), horizontalArrangement = Arrangement.End) {
             TextButton(onClick = { vm.stopJob(save = true) }, enabled = !job.stopping) { Text(stringResource(R.string.stop_and_save)) }

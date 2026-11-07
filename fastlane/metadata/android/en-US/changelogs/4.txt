@@ -1,0 +1,1 @@
+New colours: night blue and cyan. When the transcription service that checks each sentence is out of memory or cannot be reached, the app now waits and asks again instead of leaving the sentence unchecked.

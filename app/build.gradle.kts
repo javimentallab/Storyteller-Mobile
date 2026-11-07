@@ -14,8 +14,8 @@ android {
         applicationId = "com.javimetallab.storyteller"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3
-        versionName = "1.1.0"
+        versionCode = 4
+        versionName = "1.1.1"
     }
 
     // The release key lives outside the repo; keystore.properties (gitignored)

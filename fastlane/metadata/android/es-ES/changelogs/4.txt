@@ -1,0 +1,1 @@
+Colores nuevos: azul noche y cian. Si el servicio de transcripción que revisa cada frase se queda sin memoria o no responde, la app espera y vuelve a preguntar en vez de dejar la frase sin revisar.
