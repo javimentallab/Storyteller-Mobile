@@ -27,7 +27,8 @@ Japanese, Korean, Thai and Hindi.
 ## Features
 
 - **Narrate an EPUB** in the language you choose, with the voice you choose. Several requests at a time if
-  the service allows it, and each sentence is written in order.
+  the service allows it, and each sentence is written in order. It **reads on**: each sentence goes to the
+  voice whole, and the pauses come from the book's full stops and paragraphs.
 - **Resume** where it stopped, and **listen while it narrates**.
 - **Check and redo** sentences that sound wrong: each one goes to the transcription service and, if it
   doesn't match the text, is asked for again. Optional, and slower.
@@ -35,7 +36,9 @@ Japanese, Korean, Thai and Hindi.
 - **Import an audiobook**: it is copied to the phone and transcribed in pieces of two minutes, cut at silences.
 - **Translate** EPUB, PDF, Word, PowerPoint, Excel, subtitles (SRT, VTT) and text (TXT, MD). A PDF comes out
   as a translated EPUB, without its layout. Scanned PDFs aren't read.
-- **Player** with chapters, jumps to any position and playback in the background.
+- **Player** with chapters, jumps to any position and playback in the background. It shows the **page** you
+  are on, the printed book's own when the EPUB carries it, and the text follows the voice again five seconds
+  after you scroll.
 - **One job at a time**, with a queue. Switching to another job saves what the first has done.
 
 ## Services

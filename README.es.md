@@ -27,7 +27,8 @@ japonés, coreano, tailandés e hindi.
 ## Funciones
 
 - **Narrar un EPUB** en el idioma y con la voz que elijas. Varias peticiones a la vez si el servicio lo
-  permite, y cada frase se escribe en orden.
+  permite, y cada frase se escribe en orden. **Lee de seguido**: cada frase va entera a la voz, y las pausas
+  las marcan los puntos y los párrafos del libro.
 - **Reanudar** donde se quedó y **escuchar mientras narra**.
 - **Comprobar y rehacer** las frases que suenan mal: cada una pasa por el servicio de transcripción y, si no
   coincide con el texto, se vuelve a pedir. Es opcional y más lento.
@@ -35,7 +36,9 @@ japonés, coreano, tailandés e hindi.
 - **Importar un audiolibro**: se copia al teléfono y se transcribe en trozos de dos minutos, cortando en los silencios.
 - **Traducir** EPUB, PDF, Word, PowerPoint, Excel, subtítulos (SRT, VTT) y texto (TXT, MD). Un PDF sale como
   EPUB traducido, sin su maquetación. Los PDF escaneados no se leen.
-- **Reproductor** con capítulos, saltos a cualquier posición y reproducción en segundo plano.
+- **Reproductor** con capítulos, saltos a cualquier posición y reproducción en segundo plano. Muestra la
+  **página** por la que vas, la del libro impreso cuando el EPUB la trae, y el texto vuelve a seguir a la voz
+  cinco segundos después de desplazarlo.
 - **Un trabajo a la vez**, con cola. Al pasar a otro trabajo se guarda lo que lleva el primero.
 
 ## Servicios
