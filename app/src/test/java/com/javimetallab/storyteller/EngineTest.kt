@@ -70,6 +70,26 @@ class EngineTest {
         assertTrue(cases.length() > 5)
     }
 
+    /** A whole book and thousands of random texts, made by src/test/tools/golden_chunks.py --big: only with GOLDEN_BIG=<file>. */
+    @Test
+    fun aWholeBookLikeTheDesktopEngine() {
+        val path = System.getenv("GOLDEN_BIG") ?: return
+        val close = mapOf("coma" to TextPrep.Close.CLAUSE, "frase" to TextPrep.Close.SENTENCE, "parrafo" to TextPrep.Close.PARAGRAPH)
+        val cases = org.json.JSONArray(File(path).readText(Charsets.UTF_8))
+        var pieces = 0
+        val wrong = ArrayList<String>()
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val want = c.getJSONArray("out").let { a ->
+                (0 until a.length()).map { k -> TextPrep.Chunk(a.getJSONArray(k).getString(0), close.getValue(a.getJSONArray(k).getString(1))) }
+            }
+            pieces += want.size
+            if (TextPrep.splitChunks(c.getString("in"), c.getString("lang")) != want) wrong += "$i ${c.getString("lang")} ${c.getString("in").take(60)}"
+        }
+        println("GOLDEN_BIG: ${cases.length()} texts, $pieces pieces, ${wrong.size} different")
+        assertEquals(wrong.take(5).joinToString("\n"), 0, wrong.size)
+    }
+
     @Test
     fun theTextForTheVoiceLikeTheDesktopEngine() {
         val spellings = golden.getJSONObject("spell")

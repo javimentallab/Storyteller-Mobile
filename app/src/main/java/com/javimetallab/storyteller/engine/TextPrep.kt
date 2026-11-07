@@ -35,7 +35,7 @@ class Pron(words: Map<String, String>, val asWords: Set<String>, val asLetters: 
 
 /**
  * How a book's text becomes pieces for the voice. A port of engine/cc_engine.py of the desktop
- * app; tests/golden_text.json checks both give the same pieces.
+ * app; app/src/test/resources/golden.json checks both give the same pieces.
  * No \w, \b or \s here: on the JVM they are ASCII and on Android Unicode.
  */
 object TextPrep {
@@ -67,16 +67,54 @@ object TextPrep {
     )
     private val ENDS_SENTENCE = Regex("[.!?…。！？।؟][»”\"’)\\]」』）]*$")
     private val CHUNK_CLAUSE_END = Regex("(?<=[,;:،؛])$S+|(?<=[，、；：])$S*")
-    private const val TIGHT_CLAUSE_END = "，、；："   // no space is written after these
 
-    // Most characters per piece: XTTS cuts the audio past its limit (a little less here, because
-    // numbers are spelled out later). The other languages take 240 or more.
+    // Most characters per piece: XTTS cuts the audio past its limit (about 92 % of it here, because
+    // numbers are spelled out later). With a whole sentence a piece, the limit is reached.
     private val HARD = mapOf(
         "zh-cn" to 75, "ja" to 65, "ko" to 85, "hi" to 140, "ar" to 155, "ru" to 170, "cs" to 175, "pt" to 190,
-        "it" to 200, "pl" to 210, "hu" to 210, "tr" to 210,
+        "it" to 200, "pl" to 210, "hu" to 210, "tr" to 210, "es" to 220, "en" to 230, "de" to 230, "nl" to 230,
+        "fr" to 250,
     )
+    private const val HARD_DEFAULT = 230
 
-    /** One piece per clause, so that the pause is ours: left to XTTS, a comma gets anything from 0 to 0.8 s. */
+    /**
+     * A sentence longer than [hard] is cut at the comma (or ; :) nearest the limit, so that the
+     * piece is as long as it can be; at the one before if that leaves less than [short] on either
+     * side. With no comma that will do, at a space.
+     */
+    private fun splitLong(sentence: String, hard: Int, short: Int): List<String> {
+        val out = ArrayList<String>()
+        var s = sentence
+        while (s.length > hard) {
+            var ok: MatchResult? = null
+            var fallback: MatchResult? = null
+            for (m in CHUNK_CLAUSE_END.findAll(s)) {
+                val end = m.range.first                  // just after the sign
+                if (end > hard) break
+                if (end < short) continue
+                fallback = m
+                if (s.length - (m.range.last + 1) >= short) ok = m
+            }
+            val m = ok ?: fallback
+            if (m != null) {
+                out += s.substring(0, m.range.first).pyStrip()
+                s = s.substring(m.range.last + 1).pyStrip()
+                continue
+            }
+            var cut = s.lastIndexOf(' ', hard - 1)
+            if (cut < minOf(60, hard / 2)) cut = hard
+            out += s.substring(0, cut).pyStrip()
+            s = s.substring(cut).pyStrip()
+        }
+        out += s
+        return out
+    }
+
+    /**
+     * One piece per whole sentence: XTTS reads it in one go and makes its own commas, and between
+     * sentences and paragraphs the pause is the book's ([Close]). Until 7 Nov it cut at every comma,
+     * and it sounded read line by line.
+     */
     private fun splitParagraph(text: String, hard: Int, short: Int = 20): List<String> {
         val raw = ArrayList<String>()
         for (s in CHUNK_SENTENCE_END.split(text)) {
@@ -89,33 +127,14 @@ object TextPrep {
         val out = ArrayList<String>()
         for (sentence in raw) {
             val s = sentence.pyStrip()
-            if (s.isEmpty()) continue
-            val clauses = ArrayList<String>()
-            for (part in CHUNK_CLAUSE_END.split(s)) {
-                if (clauses.isNotEmpty() && clauses.last().length < short) {     // "Además, vivimos…"
-                    val space = if (clauses.last().last() in TIGHT_CLAUSE_END) "" else " "
-                    clauses[clauses.size - 1] = clauses.last() + space + part
-                } else {
-                    clauses += part
-                }
-            }
-            for (clause in clauses) {
-                var p = clause
-                while (p.length > hard) {               // a monstrous clause: cut at a space
-                    var cut = p.lastIndexOf(' ', hard - 1)
-                    if (cut < minOf(60, hard / 2)) cut = hard
-                    out += p.substring(0, cut).pyStrip()
-                    p = p.substring(cut).pyStrip()
-                }
-                out += p
-            }
+            if (s.isNotEmpty()) out += splitLong(s, hard, short)
         }
         return out.filter { LETTER_OR_DIGIT.containsMatchIn(it) || ANY_LETTER.containsMatchIn(it) }
     }
 
     /** The pieces for the voice, like split_chunks on the desktop. Each line of the text is a paragraph. */
     fun splitChunks(text: String, lang: String = "es"): List<Chunk> {
-        val hard = HARD[lang] ?: 240
+        val hard = HARD[lang] ?: HARD_DEFAULT
         val out = ArrayList<Chunk>()
         for (paragraph in text.split("\n")) {
             val parts = splitParagraph(paragraph, hard)

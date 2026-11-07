@@ -204,59 +204,15 @@
    "in": "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.\nEl resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino. ¿Quién lo diría? ¡Nadie! Tenía en su casa una ama que pasaba de los cuarenta… y una sobrina que no llegaba a los veinte.",
    "out": [
     [
-     "En un lugar de la Mancha,",
-     "coma"
-    ],
-    [
-     "de cuyo nombre no quiero acordarme,",
-     "coma"
-    ],
-    [
-     "no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero,",
-     "coma"
-    ],
-    [
-     "adarga antigua, rocín flaco y galgo corredor.",
+     "En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor.",
      "frase"
     ],
     [
-     "Una olla de algo más vaca que carnero,",
-     "coma"
-    ],
-    [
-     "salpicón las más noches,",
-     "coma"
-    ],
-    [
-     "duelos y quebrantos los sábados,",
-     "coma"
-    ],
-    [
-     "lentejas los viernes,",
-     "coma"
-    ],
-    [
-     "algún palomino de añadidura los domingos,",
-     "coma"
-    ],
-    [
-     "consumían las tres partes de su hacienda.",
+     "Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda.",
      "parrafo"
     ],
     [
-     "El resto della concluían sayo de velarte,",
-     "coma"
-    ],
-    [
-     "calzas de velludo para las fiestas,",
-     "coma"
-    ],
-    [
-     "con sus pantuflos de lo mesmo,",
-     "coma"
-    ],
-    [
-     "y los días de entresemana se honraba con su vellorí de lo más fino.",
+     "El resto della concluían sayo de velarte, calzas de velludo para las fiestas, con sus pantuflos de lo mesmo, y los días de entresemana se honraba con su vellorí de lo más fino.",
      "frase"
     ],
     [
@@ -303,15 +259,15 @@
    "in": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
    "out": [
     [
-     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
      "coma"
     ],
     [
-     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
      "coma"
     ],
     [
-     "aaaaaaaaaaaaaaaaaaaa",
+     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
      "parrafo"
     ]
    ]
@@ -320,15 +276,15 @@
    "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
    "out": [
     [
-     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
      "coma"
     ],
     [
-     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
      "coma"
     ],
     [
-     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra.",
      "parrafo"
     ]
    ]
@@ -337,123 +293,23 @@
    "in": "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
    "out": [
     [
-     "una cláusula bastante larga,",
+     "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
      "coma"
     ],
     [
-     "una cláusula bastante larga,",
+     "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
      "coma"
     ],
     [
-     "una cláusula bastante larga,",
+     "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
      "coma"
     ],
     [
-     "una cláusula bastante larga,",
+     "una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga, una cláusula bastante larga,",
      "coma"
     ],
     [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
-     "coma"
-    ],
-    [
-     "una cláusula bastante larga,",
+     "una cláusula bastante larga, una cláusula bastante larga,",
      "parrafo"
     ]
    ]
@@ -495,19 +351,7 @@
    "in": "Dijo: «Ven aquí»; luego, sin más, se fue — y no volvió jamás, aunque todos lo esperaron durante muchos años en la plaza del pueblo, junto a la fuente vieja, bajo los árboles que su abuelo había plantado cuando era joven y fuerte.",
    "out": [
     [
-     "Dijo: «Ven aquí»; luego,",
-     "coma"
-    ],
-    [
-     "sin más, se fue — y no volvió jamás,",
-     "coma"
-    ],
-    [
-     "aunque todos lo esperaron durante muchos años en la plaza del pueblo,",
-     "coma"
-    ],
-    [
-     "junto a la fuente vieja,",
+     "Dijo: «Ven aquí»; luego, sin más, se fue — y no volvió jamás, aunque todos lo esperaron durante muchos años en la plaza del pueblo, junto a la fuente vieja,",
      "coma"
     ],
     [
@@ -541,15 +385,7 @@
    "in": "Además, vivimos aquí, en esta casa tan grande, desde hace muchos años.",
    "out": [
     [
-     "Además, vivimos aquí,",
-     "coma"
-    ],
-    [
-     "en esta casa tan grande,",
-     "coma"
-    ],
-    [
-     "desde hace muchos años.",
+     "Además, vivimos aquí, en esta casa tan grande, desde hace muchos años.",
      "parrafo"
     ]
    ]
@@ -558,11 +394,7 @@
    "in": "¿Qué hora es? —dijo él, y se fue sin esperar la respuesta.",
    "out": [
     [
-     "¿Qué hora es? —dijo él,",
-     "coma"
-    ],
-    [
-     "y se fue sin esperar la respuesta.",
+     "¿Qué hora es? —dijo él, y se fue sin esperar la respuesta.",
      "parrafo"
     ]
    ]
@@ -584,11 +416,7 @@
    "in": "Primera línea del párrafo, con coma.\nSegunda línea. Con dos frases.\n\nTercera.",
    "out": [
     [
-     "Primera línea del párrafo,",
-     "coma"
-    ],
-    [
-     "con coma.",
+     "Primera línea del párrafo, con coma.",
      "parrafo"
     ],
     [
@@ -630,11 +458,7 @@
    "in": "El Sr. Smith y el Dr. Pérez fueron a EE. UU. con John F. Kennedy, y volvieron.",
    "out": [
     [
-     "El Sr. Smith y el Dr. Pérez fueron a EE. UU. con John F. Kennedy,",
-     "coma"
-    ],
-    [
-     "y volvieron.",
+     "El Sr. Smith y el Dr. Pérez fueron a EE. UU. con John F. Kennedy, y volvieron.",
      "parrafo"
     ]
    ]
@@ -643,11 +467,7 @@
    "in": "Costaba 3,50 euros, o $74.99; era caro: muy caro.",
    "out": [
     [
-     "Costaba 3,50 euros, o $74.99;",
-     "coma"
-    ],
-    [
-     "era caro: muy caro.",
+     "Costaba 3,50 euros, o $74.99; era caro: muy caro.",
      "parrafo"
     ]
    ]
@@ -673,15 +493,7 @@
    "in": "uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.",
    "out": [
     [
-     "uno, dos, tres, cuatro,",
-     "coma"
-    ],
-    [
-     "cinco, seis, siete, ocho,",
-     "coma"
-    ],
-    [
-     "nueve, diez.",
+     "uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez.",
      "parrafo"
     ]
    ]
@@ -690,15 +502,15 @@
    "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra fin.",
    "out": [
     [
-     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
      "coma"
     ],
     [
-     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
      "coma"
     ],
     [
-     "fin.",
+     "palabra palabra palabra palabra palabra palabra fin.",
      "parrafo"
     ]
    ]
@@ -707,11 +519,11 @@
    "in": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y algo más.",
    "out": [
     [
-     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
      "coma"
     ],
     [
-     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y algo más.",
+     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx y algo más.",
      "parrafo"
     ]
    ]
@@ -728,11 +540,7 @@
    "in": "Привет, это длинная фраза на русском языке, и она продолжается. Хорошо.",
    "out": [
     [
-     "Привет, это длинная фраза на русском языке,",
-     "coma"
-    ],
-    [
-     "и она продолжается.",
+     "Привет, это длинная фраза на русском языке, и она продолжается.",
      "frase"
     ],
     [
@@ -779,11 +587,7 @@
    "in": "这是一个相当长的句子部分用来测试切分功能是否正常工作，这是一个相当长的句子部分用来测试切分功能是否正常工作。",
    "out": [
     [
-     "这是一个相当长的句子部分用来测试切分功能是否正常工作，",
-     "coma"
-    ],
-    [
-     "这是一个相当长的句子部分用来测试切分功能是否正常工作。",
+     "这是一个相当长的句子部分用来测试切分功能是否正常工作，这是一个相当长的句子部分用来测试切分功能是否正常工作。",
      "parrafo"
     ]
    ]
@@ -792,11 +596,7 @@
    "in": "短，短，短，短，短，短，短，短，短，短，短，短，短。",
    "out": [
     [
-     "短，短，短，短，短，短，短，短，短，短，",
-     "coma"
-    ],
-    [
-     "短，短，短。",
+     "短，短，短，短，短，短，短，短，短，短，短，短，短。",
      "parrafo"
     ]
    ]
@@ -822,11 +622,7 @@
    "in": "مرحبا بالعالم الجميل في هذا اليوم، كيف حالك اليوم؟ بخير.",
    "out": [
     [
-     "مرحبا بالعالم الجميل في هذا اليوم،",
-     "coma"
-    ],
-    [
-     "كيف حالك اليوم؟",
+     "مرحبا بالعالم الجميل في هذا اليوم، كيف حالك اليوم؟",
      "frase"
     ],
     [
@@ -838,6 +634,92 @@
   {
    "in": "* * *\n---\n。",
    "out": []
+  },
+  {
+   "in": "Cuando llegó a la plaza, ya de noche, se sentó en el banco de siempre, sacó el libro y, sin pensarlo mucho, empezó a leer en voz alta.",
+   "out": [
+    [
+     "Cuando llegó a la plaza, ya de noche, se sentó en el banco de siempre, sacó el libro y, sin pensarlo mucho, empezó a leer en voz alta.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "uno dos tres cuatro cinco seis siete uno dos tres cuatro cinco seis siete, ocho nueve diez once doce ocho nueve diez once doce ocho nueve diez once doce, y al final trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte.",
+   "out": [
+    [
+     "uno dos tres cuatro cinco seis siete uno dos tres cuatro cinco seis siete, ocho nueve diez once doce ocho nueve diez once doce ocho nueve diez once doce,",
+     "coma"
+    ],
+    [
+     "y al final trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra, otra cosa más, fin.",
+   "out": [
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra,",
+     "coma"
+    ],
+    [
+     "otra cosa más, fin.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx ; y luego sigue un poco más hasta acabar.",
+   "out": [
+    [
+     "xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxx ;",
+     "coma"
+    ],
+    [
+     "y luego sigue un poco más hasta acabar.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra ",
+   "out": [
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "coma"
+    ],
+    [
+     "palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra palabra",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Un vendedor virtuoso pregunta cuánto quieres gastar y se apega a esa cantidad; un vendedor que no lo es te enseña primero lo más caro, te habla de 1.500 dólares como si nada, y cuando ya has dicho que no, te ofrece lo de 899 como si fuera un regalo, aunque sea justo lo que pensaba venderte desde el principio.\n—¿Y qué hago? —preguntó ella.\n—Nada, de momento, dijo él.",
+   "out": [
+    [
+     "Un vendedor virtuoso pregunta cuánto quieres gastar y se apega a esa cantidad; un vendedor que no lo es te enseña primero lo más caro, te habla de 1.500 dólares como si nada, y cuando ya has dicho que no,",
+     "coma"
+    ],
+    [
+     "te ofrece lo de 899 como si fuera un regalo, aunque sea justo lo que pensaba venderte desde el principio.",
+     "parrafo"
+    ],
+    [
+     "—¿Y qué hago? —preguntó ella.",
+     "parrafo"
+    ],
+    [
+     "—Nada, de momento, dijo él.",
+     "parrafo"
+    ]
+   ]
   }
  ],
  "pauses": {
@@ -851,11 +733,7 @@
    "in": "Привет, это длинная фраза на русском языке, и она продолжается. т.е. это не конец. Хорошо.",
    "out": [
     [
-     "Привет, это длинная фраза на русском языке,",
-     "coma"
-    ],
-    [
-     "и она продолжается. т.е. это не конец.",
+     "Привет, это длинная фраза на русском языке, и она продолжается. т.е. это не конец.",
      "frase"
     ],
     [
@@ -1007,11 +885,7 @@
    "in": "مرحبا بالعالم الجميل في هذا اليوم، كيف حالك اليوم؟ بخير.",
    "out": [
     [
-     "مرحبا بالعالم الجميل في هذا اليوم،",
-     "coma"
-    ],
-    [
-     "كيف حالك اليوم؟",
+     "مرحبا بالعالم الجميل في هذا اليوم، كيف حالك اليوم؟",
      "frase"
     ],
     [
@@ -1065,11 +939,11 @@
    "in": "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word ",
    "out": [
     [
-     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
      "coma"
     ],
     [
-     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+     "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
      "parrafo"
     ]
    ]
@@ -1098,6 +972,48 @@
     ],
     [
      "Voilà.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "zh-cn",
+   "in": "这是一个相当长的句子部分用来测试切分功能是否正常工作，这是一个相当长的句子部分用来测试切分功能是否正常工作，这是一个相当长的句子部分用来测试切分功能是否正常工作。",
+   "out": [
+    [
+     "这是一个相当长的句子部分用来测试切分功能是否正常工作，这是一个相当长的句子部分用来测试切分功能是否正常工作，",
+     "coma"
+    ],
+    [
+     "这是一个相当长的句子部分用来测试切分功能是否正常工作。",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "ru",
+   "in": "Привет, это длинная фраза на русском языке, и она продолжается. Хорошо.",
+   "out": [
+    [
+     "Привет, это длинная фраза на русском языке, и она продолжается.",
+     "frase"
+    ],
+    [
+     "Хорошо.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "lang": "en",
+   "in": "When he finally reached the square, late at night, he sat down on the usual bench, took out the book, and, without thinking too much about it, started reading aloud to nobody in particular, as he always did when the evenings were warm.",
+   "out": [
+    [
+     "When he finally reached the square, late at night, he sat down on the usual bench, took out the book, and, without thinking too much about it, started reading aloud to nobody in particular,",
+     "coma"
+    ],
+    [
+     "as he always did when the evenings were warm.",
      "parrafo"
     ]
    ]
