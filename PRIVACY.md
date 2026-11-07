@@ -1,54 +1,45 @@
 # Privacy policy — Storyteller Mobile
 
-*Last updated: 2 November 2026*
+*Last updated: 7 November 2026*
 
-Storyteller Mobile is published by javimentallab. The app has no accounts, no ads, no analytics and no crash
-reporting, and it has no server of its own.
+## 1. Publisher and scope
 
-## What leaves the phone
+The Storyteller Mobile application (the "App") is published by javimentallab. The App has no user accounts, advertising, analytics tools, crash reporting systems or server of its own.
 
-Only what a job needs, and only to the service you set up for that job in *Models*, usually an AI service:
+## 2. Data transmitted outside the device
 
-- **Narration:** the text of the book, sentence by sentence. If you upload a voice, that recording too.
-- **Transcription:** the audio of an imported audiobook, in pieces of two minutes. If you turn on the check of
-  narrated sentences, their audio too.
+The App transmits only the data required for each task, and exclusively to the service that the User has set up for that task in the *Models* section, usually an artificial intelligence service:
+
+- **Narration:** the text of the book, sentence by sentence, and, where applicable, the voice recording uploaded by the User.
+- **Transcription:** the audio of the imported audiobook, in two-minute segments, and, if the User enables the check of narrated sentences, the audio of those sentences as well.
 - **Translation:** the text of the document.
 
-Each request carries the access key you gave for that service. Whoever runs a service can see what you send
-it, under its own terms, so choose services you trust. Before narrating, the app tells you how much text it
-will send and to whom. Before translating, it tells you to whom.
+Each request includes the access key provided by the User for the relevant service. The provider of each service can access the data sent to it, under its own terms, so the User should choose services the User trusts. Before narrating, the App informs the User of the amount of text to be sent and of its recipient; before translating, it informs the User of the recipient.
 
-If an address is outside your home network and doesn't use HTTPS, the app warns you that your text would travel
-without encryption, and it doesn't send your key there.
+If the address of a service is outside the User's home network and does not use HTTPS, the App warns that the text would be transmitted unencrypted and does not send the access key to that address.
 
-## Reporting content
+## 3. Reporting content
 
-*Report content* opens a Google Form inside the app. What you type in it reaches the developer through Google,
-under Google's terms. The app adds nothing to it: not your books, your keys or anything else.
+The *Report content* function opens a Google form within the App. The information the User enters in it reaches the developer through Google, under Google's terms. The App adds no other data: neither the books, nor the access keys, nor any other information.
 
-## What is kept, and for how long
+## 4. Data retention
 
-The developer receives nothing from the app except what you write in that form, and keeps those reports only as
-long as it takes to deal with them. What a service you chose keeps, and for how long, depends on its own terms.
+The developer receives no data from the App other than what the User writes in that form, and keeps those reports only for as long as necessary to handle them. Retention of data by the services chosen by the User is governed by their own terms.
 
-On the phone, your books, their audio and subtitles, translations, settings and pronunciation dictionaries stay in
-the app's own folders until you delete them or the app. Access keys are encrypted with the Android Keystore.
-Deleting the app deletes all of this, except files you saved elsewhere with *Save as*.
+On the device, the books, their audio and subtitles, translations, settings and pronunciation dictionaries remain in the App's own folders until the User deletes them or uninstalls the App. Access keys are stored encrypted with the Android Keystore. Uninstalling the App deletes all of this data, except for files the User has saved elsewhere with the *Save as* function.
 
-## Backups
+## 5. Backups
 
-Android's cloud backup is disabled for this app. On some phones, moving to a new phone can still copy the app's
-data directly from one device to the other. Access keys don't survive that, because the key that encrypts them
-never leaves the old phone: you would type them again.
+Android cloud backup is disabled for this App. On some devices, when moving to a new device, the App's data may be copied directly from one device to the other. Access keys are not preserved in that process, since the key that encrypts them never leaves the original device, so the User will have to enter them again.
 
-## Permissions
+## 6. Permissions
 
-- **Internet and network state:** to reach the services you chose.
-- **Notifications:** to show the progress of a job and when it ends.
-- **Foreground services and wake lock:** to keep narrating, transcribing, translating or playing with the
-  screen off.
+The App uses the permissions listed below. Android only asks the User for the notifications permission, from Android 13 onwards; the others are granted when the App is installed.
 
-## Contact
+- **Internet and network state:** to reach the services chosen by the User.
+- **Notifications:** to report the progress of each task and its completion.
+- **Foreground services and wake lock:** to keep narrating, transcribing, translating or playing with the screen off.
 
-Questions about this policy: open an issue at
-https://github.com/javimentallab/Storyteller-Mobile/issues
+## 7. Contact
+
+Enquiries about this policy may be addressed to the developer by opening an issue at https://github.com/javimentallab/Storyteller-Mobile/issues.
