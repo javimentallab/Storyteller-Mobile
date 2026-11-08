@@ -366,8 +366,8 @@ object TextPrep {
     // 13-digit ISBN was ~140 characters of words and the piece went past XTTS's limit, which cuts the end off.
     //  - 3 or more groups with hyphens and 7 digits or more: 978-84-376-0494-7, 91-234-56-78 (not 2026-11-08);
     //  - 8 digits or more in a row, unless it is a round amount (25000000 is still said as an amount).
-    private val CODE_GROUPS = Regex("(?U)(?<![\\w.,-])\\d{1,7}(?:-\\d{1,7}){2,}(?:-[Xx])?(?![\\w-])")
-    private val CODE_LONG = Regex("(?U)(?<![\\w.,-])\\d{8,}(?![\\w-]|[.,]\\d)")
+    private val CODE_GROUPS = Regex("(?<![\\p{L}\\p{N}_.,-])\\d{1,7}(?:-\\d{1,7}){2,}(?:-[Xx])?(?![\\p{L}\\p{N}_-])")
+    private val CODE_LONG = Regex("(?<![\\p{L}\\p{N}_.,-])\\d{8,}(?![\\p{L}\\p{N}_-]|[.,]\\d)")
     private val ISO_DATE = Regex("\\d{4}-\\d{2}-\\d{2}")
 
     private fun sayDigits(groups: List<String>, spell: (Long) -> String) =

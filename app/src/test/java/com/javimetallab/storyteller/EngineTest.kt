@@ -559,6 +559,17 @@ class EngineTest {
         assertTrue(readZip(out, "a.xhtml").contains("Use the command now. <code>ls</code></p>"))
     }
 
+    /**
+     * The JVM accepts inline flags like (?U) and Android's regex engine (ICU) rejects them, in the initialiser of
+     * the object: every narration crashed on the phone with all these tests passing.
+     */
+    @Test
+    fun noRegexFlagThatOnlyTheJvmAccepts() {
+        val sources = File("src/main/java").walkTopDown().filter { it.extension == "kt" }.toList()
+        assertTrue(sources.size > 10)
+        for (f in sources) assertFalse(f.path, f.readText().contains("(?U)"))
+    }
+
     /** Measured with the numbers written out, like the desktop: an ISBN no longer takes a piece past XTTS's limit. */
     @Test
     fun chunksWithLongNumbersLikeTheDesktopEngine() {
