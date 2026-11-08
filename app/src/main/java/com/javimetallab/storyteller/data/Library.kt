@@ -12,6 +12,10 @@ import java.io.File
 class Library(context: Context) {
     private val app = context.applicationContext
     val root: File = File(app.getExternalFilesDir(null) ?: app.filesDir, "books").also { it.mkdirs() }
+    private val regenRoot = File(root.parentFile, "regen")
+
+    /** At start-up, for what a regeneration left behind if the app was killed in the middle of it. */
+    fun recoverRegenerations(busy: (String) -> Boolean) = recoverRegenerations(regenRoot, root, busy)
 
     fun dir(id: String): File {
         require(ID.matches(id)) { "bad book id" }
@@ -139,7 +143,7 @@ class Library(context: Context) {
      */
     fun setAside(id: String): File {
         val d = dir(id)
-        val backup = File(File(root.parentFile, "regen"), id)
+        val backup = File(regenRoot, id)
         backup.deleteRecursively()                       // left from a regeneration cut off by a crash
         backup.parentFile?.mkdirs()
         if (!d.renameTo(backup)) {
@@ -218,6 +222,14 @@ class Library(context: Context) {
             if (!backup.renameTo(dest)) {
                 backup.copyRecursively(dest, overwrite = true)
                 backup.deleteRecursively()
+            }
+        }
+
+        /** Regenerations cut off with the app (killed by the system, a crash): each one settled by [settleBackup]. */
+        fun recoverRegenerations(regen: File, books: File, busy: (String) -> Boolean = { false }) {
+            for (backup in regen.listFiles().orEmpty()) {
+                if (!backup.isDirectory || !ID.matches(backup.name) || busy(backup.name)) continue
+                runCatching { settleBackup(backup, File(books, backup.name)) }
             }
         }
 

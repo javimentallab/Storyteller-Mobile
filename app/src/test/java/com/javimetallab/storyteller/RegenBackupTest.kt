@@ -40,6 +40,32 @@ class RegenBackupTest {
         assertFalse(old.exists())
     }
 
+    /** The app was killed halfway through regenerating: sorted out on the next start, unless it is still running. */
+    @Test
+    fun regenerationsCutOffAreRecoveredAtStartUp() {
+        val regen = tmp.newFolder("regen")
+        val books = tmp.newFolder("books")
+        fun setUp(id: String, newIndex: String?) {
+            File(regen, id).mkdirs()
+            File(regen, "$id/cap01.m4a").writeText("old audio")
+            File(regen, "$id/manifest.json").writeText("""[{"id": 1, "n": 9, "done": true}]""")
+            File(books, id).mkdirs()
+            File(books, "$id/cap01.m4a").writeText("new audio")
+            if (newIndex != null) File(books, "$id/manifest.json").writeText(newIndex)
+        }
+        setUp("nothing", null)
+        setUp("partial", """[{"id": 1, "n": 2, "done": false}]""")
+        setUp("running", null)
+        File(regen, "gone").mkdirs()                     // the folder of the new one never got made
+        File(regen, "gone/cap01.m4a").writeText("old audio")
+        Library.recoverRegenerations(regen, books) { it == "running" }
+        assertEquals("old audio", File(books, "nothing/cap01.m4a").readText())
+        assertEquals("new audio", File(books, "partial/cap01.m4a").readText())
+        assertEquals("new audio", File(books, "running/cap01.m4a").readText())
+        assertEquals("old audio", File(books, "gone/cap01.m4a").readText())
+        assertEquals(listOf("running"), regen.list()!!.toList())
+    }
+
     @Test
     fun withSomethingNarratedTheNewOneStaysAndTheCopyGoes() {
         val old = book("old", "old audio", """[{"id": 1, "n": 9, "done": true}]""")

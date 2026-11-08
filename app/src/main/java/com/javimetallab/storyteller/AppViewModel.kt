@@ -75,6 +75,8 @@ data class TestResult(val ok: Boolean, val text: String)
  */
 private const val PENDING_STATE = """{"total": 0, "sentences": 0, "complete": false}"""
 
+private val regenRecovery = java.util.concurrent.atomic.AtomicBoolean(false)
+
 class AppViewModel(app: Application) : AndroidViewModel(app) {
     val prefs = Prefs.get(app)
     val library = Library(app)
@@ -117,6 +119,13 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
     private var pollJob: kotlinx.coroutines.Job? = null
 
     init {
+        // Once per process, before anything can be set aside by this one (the ViewModel is rebuilt when the phone folds).
+        if (regenRecovery.compareAndSet(false, true)) {
+            viewModelScope.launch {
+                withContext(Dispatchers.IO) { library.recoverRegenerations(Work::isActive) }
+                refresh()
+            }
+        }
         viewModelScope.launch { Work.changed.collect { refresh() } }
         viewModelScope.launch {
             Work.finished.collect { end ->
