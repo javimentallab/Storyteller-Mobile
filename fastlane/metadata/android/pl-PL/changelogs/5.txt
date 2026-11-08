@@ -1,0 +1,1 @@
+Numery ISBN i telefonów są czytane cyfra po cyfrze i nie ucinają już zdania. Gdy ponowne tworzenie zostanie anulowane lub się nie powiedzie, wraca poprzednia książka. Tłumaczone EPUB-y zachowują kod i linki wewnętrzne. Utrata sieci jest wykrywana w około minutę.

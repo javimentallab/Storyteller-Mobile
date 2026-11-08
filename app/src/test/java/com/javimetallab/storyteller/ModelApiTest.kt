@@ -446,4 +446,34 @@ class ModelApiTest {
         assertEquals("contenido", dest.readText())
         assertEquals(9L, last)
     }
+
+    private fun watched(every: Long) =
+        ModelApi(Endpoint(url = "http://127.0.0.1:${server.localPort}/v1", key = "k", model = "m"), watchEveryMs = every)
+
+    /** The server can no longer be reached while the call waits: it ends in moments, not after 10 minutes. */
+    @Test
+    fun aLongCallIsCutWhenTheServerCanNoLongerBeReached() {
+        answer = {
+            server.close()                           // no new connections; this one stays open, silent
+            Thread.sleep(8000)
+            Triple(200, "{}", emptyMap())
+        }
+        val start = System.currentTimeMillis()
+        try {
+            watched(100).chat("hola", 0.0, 64)
+            fail("should have been cut")
+        } catch (_: java.io.IOException) {
+        }
+        assertTrue(System.currentTimeMillis() - start < 5000)
+    }
+
+    /** A slow server that can still be reached is left alone. */
+    @Test
+    fun aSlowServerThatCanBeReachedIsLeftAlone() {
+        answer = {
+            Thread.sleep(600)
+            Triple(200, """{"choices":[{"message":{"role":"assistant","content":"hola"}}]}""", emptyMap())
+        }
+        assertEquals("hola", watched(50).chat("hola", 0.0, 64))
+    }
 }

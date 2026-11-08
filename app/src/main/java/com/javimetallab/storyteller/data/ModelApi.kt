@@ -6,6 +6,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
+import java.net.InetSocketAddress
+import java.net.Socket
 import java.net.URL
 import java.net.URLEncoder
 import java.util.Collections
@@ -42,7 +44,7 @@ data class RemoteFile(val name: String, val size: Long)
  * Client of the de facto standard API that OpenAI, Groq, Ollama, llama.cpp, Whisper servers and
  * many others speak. All calls block: use them from a background thread.
  */
-class ModelApi(private val endpoint: Endpoint) {
+class ModelApi(private val endpoint: Endpoint, private val watchEveryMs: Long = WATCH_EVERY_MS) {
     private val base = Format.apiBase(endpoint.url) ?: throw ModelException(ModelException.Kind.BAD_REQUEST, 0, "url")
     private val open = Collections.synchronizedSet(HashSet<HttpURLConnection>())
 
@@ -82,10 +84,43 @@ class ModelApi(private val endpoint: Endpoint) {
         return ModelException(kind, status, errorMessage(body), retry)
     }
 
+    /**
+     * A long call waits up to 10 minutes for an answer, and on a slow server that is normal: the wait can't be
+     * shortened. So while it waits, this checks that the server can still be reached, and if it can't, twice in a
+     * row, it cuts the call so that it is retried. A dropped network is noticed in about a minute.
+     */
+    private fun watchdog(c: HttpURLConnection): Thread {
+        val url = URL(base)
+        val port = if (url.port > 0) url.port else url.defaultPort
+        return Thread {
+            try {
+                var misses = 0
+                while (misses < WATCH_MISSES) {
+                    Thread.sleep(watchEveryMs)
+                    val reached = try {
+                        Socket().use { it.connect(InetSocketAddress(url.host, port), WATCH_CONNECT_MS) }
+                        true
+                    } catch (_: IOException) {
+                        false
+                    }
+                    misses = if (reached) 0 else misses + 1
+                }
+                c.disconnect()
+            } catch (_: InterruptedException) {
+                // the call ended
+            }
+        }.apply {
+            isDaemon = true
+            start()
+        }
+    }
+
     private inline fun <T> use(c: HttpURLConnection, block: () -> T): T {
+        val dog = if (c.readTimeout >= LONG_CALL_MS) watchdog(c) else null
         try {
             return block()
         } finally {
+            dog?.interrupt()
             open.remove(c)
             c.disconnect()
         }
@@ -278,6 +313,11 @@ class ModelApi(private val endpoint: Endpoint) {
     }
 
     companion object {
+        private const val WATCH_EVERY_MS = 30_000L
+        private const val WATCH_MISSES = 2
+        private const val WATCH_CONNECT_MS = 10_000
+        private const val LONG_CALL_MS = 300_000     // transcribing and translating
+
         private val BOOK_FILE = Regex("cap\\d{2,3}\\.(?:mp3|m4a|json)|source\\.epub")
         private val CHAPTER_BASE = Regex("cap\\d{2,3}")
 

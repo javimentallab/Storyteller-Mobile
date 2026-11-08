@@ -142,6 +142,7 @@
     <string name="err_network">无法连接到服务。已完成的部分已保存：稍后继续。</string>
     <string name="err_bad_type">此应用无法翻译这种类型的文件。</string>
     <string name="err_cant_read_file">无法读取该文件。</string>
+    <string name="err_pron_unreadable">无法读取你的发音词典。已将其另存，应用正在使用初始词典。</string>
     <string name="err_no_text">该文档中没有可翻译的文本。</string>
     <string name="err_no_text_pdf">此 PDF 没有可翻译的文本。它可能是扫描件，而此应用不读取图片。</string>
     <string name="err_generic">出了点问题（%1$s）。</string>

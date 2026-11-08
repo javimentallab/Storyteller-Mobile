@@ -148,6 +148,7 @@
     <string name="err_network">Не удаётся связаться с сервисом. Сделанное сохранено: продолжите позже.</string>
     <string name="err_bad_type">Это приложение не может переводить такой тип файлов.</string>
     <string name="err_cant_read_file">Не удаётся прочитать этот файл.</string>
+    <string name="err_pron_unreadable">Не удалось прочитать словарь произношения. Он отложен, приложение использует исходный.</string>
     <string name="err_no_text">В этом документе нет текста для перевода.</string>
     <string name="err_no_text_pdf">В этом PDF нет текста для перевода. Вероятно, он отсканирован, а приложение не читает изображения.</string>
     <string name="err_generic">Что-то пошло не так (%1$s).</string>

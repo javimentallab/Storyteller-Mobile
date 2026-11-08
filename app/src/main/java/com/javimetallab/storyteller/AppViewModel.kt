@@ -130,6 +130,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         viewModelScope.launch {
             Work.finished.collect { end ->
                 if (end.outcome == Outcome.FAILED) _notices.tryEmit(Notice.Code(end.error ?: "internal", end.detail))
+                tellIfPronBroken()
                 refresh()
             }
         }
@@ -298,7 +299,11 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         Work.submit(ctx, FetchBookTask(ctx, b, library.dir(remoteFolder(b))))
     }
 
-    fun pronTexts(lang: String) = PronStore.texts(PronStore.read(getApplication()), lang)
+    fun pronTexts(lang: String) = PronStore.texts(PronStore.read(getApplication()), lang).also { tellIfPronBroken() }
+
+    private fun tellIfPronBroken() {
+        if (PronStore.takeUnreadable()) _notices.tryEmit(Notice.Code("pron_unreadable"))
+    }
 
     fun savePron(lang: String, t: PronStore.Texts) {
         val ctx = getApplication<Application>()

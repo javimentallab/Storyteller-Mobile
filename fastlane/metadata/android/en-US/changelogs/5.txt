@@ -1,0 +1,1 @@
+Long ISBNs and phone numbers are read digit by digit and no longer cut a sentence short. A cancelled or failed regeneration brings the old book back. Translated EPUBs keep inline code and link targets. A dropped network is noticed in about a minute.

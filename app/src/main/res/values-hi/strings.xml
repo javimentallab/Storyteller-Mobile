@@ -144,6 +144,7 @@
     <string name="err_network">सेवा तक नहीं पहुँचा जा सका। जो हो चुका है वह सहेजा गया है: बाद में जारी रखें।</string>
     <string name="err_bad_type">यह ऐप उस तरह की फ़ाइल का अनुवाद नहीं कर सकता।</string>
     <string name="err_cant_read_file">वह फ़ाइल पढ़ी नहीं जा सकती।</string>
+    <string name="err_pron_unreadable">आपका उच्चारण शब्दकोश पढ़ा नहीं जा सका। उसे अलग रख दिया गया है और ऐप शुरुआती शब्दकोश का उपयोग कर रहा है।</string>
     <string name="err_no_text">उस दस्तावेज़ में अनुवाद के लिए टेक्स्ट नहीं है।</string>
     <string name="err_no_text_pdf">इस PDF में अनुवाद के लिए टेक्स्ट नहीं है। शायद यह स्कैन किया हुआ है, और ऐप चित्र नहीं पढ़ता।</string>
     <string name="err_generic">कुछ गलत हो गया (%1$s)।</string>

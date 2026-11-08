@@ -1,0 +1,1 @@
+Los ISBN y teléfonos se leen cifra a cifra y ya no cortan la frase. Si una regeneración se cancela o falla, vuelve el libro de antes. Los EPUB traducidos conservan el código y los enlaces internos. Un corte de red se nota en cerca de un minuto.

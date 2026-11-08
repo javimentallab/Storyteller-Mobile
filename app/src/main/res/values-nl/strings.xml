@@ -144,6 +144,7 @@
     <string name="err_network">De dienst is niet bereikbaar. Wat klaar is, is opgeslagen: hervat het later.</string>
     <string name="err_bad_type">Deze app kan dat bestandstype niet vertalen.</string>
     <string name="err_cant_read_file">Dat bestand kan niet worden gelezen.</string>
+    <string name="err_pron_unreadable">Je uitspraakwoordenboek kon niet worden gelezen. Het is apart gezet en de app gebruikt het oorspronkelijke.</string>
     <string name="err_no_text">Dat document bevat geen tekst om te vertalen.</string>
     <string name="err_no_text_pdf">Deze PDF bevat geen tekst om te vertalen. Hij is waarschijnlijk gescand, en de app leest geen afbeeldingen.</string>
     <string name="err_generic">Er ging iets mis (%1$s).</string>

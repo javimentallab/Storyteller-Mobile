@@ -142,6 +142,7 @@
     <string name="err_network">ติดต่อบริการไม่ได้ ส่วนที่ทำแล้วถูกบันทึกไว้ ทำต่อภายหลังได้</string>
     <string name="err_bad_type">แอปนี้แปลไฟล์ชนิดนั้นไม่ได้</string>
     <string name="err_cant_read_file">อ่านไฟล์นั้นไม่ได้</string>
+    <string name="err_pron_unreadable">อ่านพจนานุกรมการออกเสียงของคุณไม่ได้ จึงแยกเก็บไว้และแอปใช้พจนานุกรมเริ่มต้น</string>
     <string name="err_no_text">เอกสารนั้นไม่มีข้อความให้แปล</string>
     <string name="err_no_text_pdf">PDF นี้ไม่มีข้อความให้แปล อาจเป็นไฟล์สแกน และแอปไม่อ่านรูปภาพ</string>
     <string name="err_generic">เกิดข้อผิดพลาด (%1$s)</string>

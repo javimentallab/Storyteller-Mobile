@@ -148,6 +148,7 @@
     <string name="err_network">Не вдається зв\'язатися із сервісом. Зроблене збережено: продовжте пізніше.</string>
     <string name="err_bad_type">Цей застосунок не може перекладати такий тип файлів.</string>
     <string name="err_cant_read_file">Не вдається прочитати цей файл.</string>
+    <string name="err_pron_unreadable">Не вдалося прочитати словник вимови. Його відкладено, застосунок використовує початковий.</string>
     <string name="err_no_text">У цьому документі немає тексту для перекладу.</string>
     <string name="err_no_text_pdf">У цьому PDF немає тексту для перекладу. Імовірно, він відсканований, а застосунок не читає зображення.</string>
     <string name="err_generic">Щось пішло не так (%1$s).</string>

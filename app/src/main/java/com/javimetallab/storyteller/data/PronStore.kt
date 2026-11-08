@@ -32,16 +32,23 @@ object PronStore {
      * (pron.unreadable-<time>.json) instead of being kept in place: saving a word used to write the
      * starting one over it, and the entries of every language were lost.
      */
-    fun read(context: Context): JSONObject {
-        val f = file(context)
+    fun read(context: Context): JSONObject = read(file(context))
+
+    fun read(f: File): JSONObject {
         if (!f.exists()) return JSONObject(SEED.toString())
         return try {
             JSONObject(f.readText(Charsets.UTF_8))
         } catch (_: Exception) {
-            f.renameTo(File(f.parentFile, "pron.unreadable-${System.currentTimeMillis()}.json"))
+            if (f.renameTo(File(f.parentFile, "pron.unreadable-${System.currentTimeMillis()}.json"))) unreadable = true
             JSONObject(SEED.toString())
         }
     }
+
+    @Volatile
+    private var unreadable = false
+
+    /** Whether a dictionary was found broken since the last time this was asked: to tell the user, once. */
+    fun takeUnreadable(): Boolean = unreadable.also { unreadable = false }
 
     fun forLanguage(context: Context, lang: String) = Pron.of(read(context), lang)
 

@@ -144,6 +144,7 @@
     <string name="err_network">Impossible de joindre le service. Ce qui est fait est enregistré : reprenez plus tard.</string>
     <string name="err_bad_type">Cette appli ne peut pas traduire ce type de fichier.</string>
     <string name="err_cant_read_file">Impossible de lire ce fichier.</string>
+    <string name="err_pron_unreadable">Impossible de lire votre dictionnaire de prononciation. Il a été mis de côté et l’application utilise celui de départ.</string>
     <string name="err_no_text">Ce document ne contient pas de texte à traduire.</string>
     <string name="err_no_text_pdf">Ce PDF ne contient pas de texte à traduire. Il est sans doute numérisé, et l\'appli ne lit pas les images.</string>
     <string name="err_generic">Une erreur s\'est produite (%1$s).</string>

@@ -148,6 +148,7 @@
     <string name="err_network">Nie można połączyć się z usługą. To, co zrobione, jest zapisane: wznów później.</string>
     <string name="err_bad_type">Ta aplikacja nie tłumaczy tego typu plików.</string>
     <string name="err_cant_read_file">Nie można odczytać tego pliku.</string>
+    <string name="err_pron_unreadable">Nie udało się odczytać słownika wymowy. Odłożono go, a aplikacja używa słownika początkowego.</string>
     <string name="err_no_text">W tym dokumencie nie ma tekstu do przetłumaczenia.</string>
     <string name="err_no_text_pdf">Ten PDF nie ma tekstu do przetłumaczenia. Prawdopodobnie jest zeskanowany, a aplikacja nie odczytuje obrazów.</string>
     <string name="err_generic">Coś poszło nie tak (%1$s).</string>

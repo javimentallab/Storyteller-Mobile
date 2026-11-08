@@ -143,6 +143,7 @@
     <string name="err_network">No llego al servicio. Lo hecho está guardado: reanúdalo más tarde.</string>
     <string name="err_bad_type">Esta app no sabe traducir ese tipo de archivo.</string>
     <string name="err_cant_read_file">No puedo leer ese archivo.</string>
+    <string name="err_pron_unreadable">No se ha podido leer tu diccionario de pronunciación. Se ha apartado y la app usa el inicial.</string>
     <string name="err_no_text">No hay texto que traducir en ese documento.</string>
     <string name="err_no_text_pdf">Este PDF no tiene texto que traducir. Seguramente está escaneado, y la app no lee imágenes.</string>
     <string name="err_generic">Algo ha fallado (%1$s).</string>

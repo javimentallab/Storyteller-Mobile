@@ -1,0 +1,1 @@
+ISBN und Telefonnummern werden Ziffer für Ziffer gelesen und schneiden den Satz nicht mehr ab. Wird eine Neuerstellung abgebrochen oder schlägt sie fehl, kehrt das alte Buch zurück. Übersetzte EPUBs behalten Code und interne Links. Ein Netzausfall fällt nach etwa einer Minute auf.

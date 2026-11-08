@@ -144,6 +144,7 @@
     <string name="err_network">Não foi possível acessar o serviço. O que foi feito está salvo: retome mais tarde.</string>
     <string name="err_bad_type">Este app não traduz esse tipo de arquivo.</string>
     <string name="err_cant_read_file">Não é possível ler esse arquivo.</string>
+    <string name="err_pron_unreadable">Não foi possível ler o seu dicionário de pronúncia. Ele foi guardado à parte e o app usa o inicial.</string>
     <string name="err_no_text">Esse documento não tem texto para traduzir.</string>
     <string name="err_no_text_pdf">Este PDF não tem texto para traduzir. Provavelmente é digitalizado, e o app não lê imagens.</string>
     <string name="err_generic">Algo deu errado (%1$s).</string>

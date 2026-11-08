@@ -145,6 +145,7 @@
     <string name="err_network">Can\'t reach the service. What is done is saved: resume it later.</string>
     <string name="err_bad_type">This app can\'t translate that type of file.</string>
     <string name="err_cant_read_file">Can\'t read that file.</string>
+    <string name="err_pron_unreadable">Your pronunciation dictionary could not be read. It has been set aside and the app is using the initial one.</string>
     <string name="err_no_text">No text to translate in that document.</string>
     <string name="err_no_text_pdf">This PDF has no text to translate. It is probably scanned, and the app doesn\'t read images.</string>
     <string name="err_generic">Something went wrong (%1$s).</string>

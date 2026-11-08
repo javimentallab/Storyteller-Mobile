@@ -1,0 +1,1 @@
+Les ISBN et numéros de téléphone sont lus chiffre par chiffre et ne coupent plus la phrase. Si une régénération est annulée ou échoue, l’ancien livre revient. Les EPUB traduits conservent le code et les liens internes. Une coupure réseau est détectée en une minute environ.

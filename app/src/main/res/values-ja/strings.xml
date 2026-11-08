@@ -142,6 +142,7 @@
     <string name="err_network">サービスに接続できません。完了した部分は保存済みです。後で再開してください。</string>
     <string name="err_bad_type">このアプリはその種類のファイルを翻訳できません。</string>
     <string name="err_cant_read_file">そのファイルを読み込めません。</string>
+    <string name="err_pron_unreadable">発音辞書を読み込めませんでした。別に保存し、初期の辞書を使っています。</string>
     <string name="err_no_text">そのドキュメントには翻訳するテキストがありません。</string>
     <string name="err_no_text_pdf">この PDF には翻訳するテキストがありません。スキャンされたものと思われ、このアプリは画像を読み取りません。</string>
     <string name="err_generic">問題が発生しました（%1$s）。</string>

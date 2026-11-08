@@ -1,0 +1,1 @@
+ISBN e telefones são lidos dígito a dígito e não cortam mais a frase. Se uma regeneração for cancelada ou falhar, o livro anterior volta. Os EPUB traduzidos mantêm o código e os links internos. Uma queda de rede é percebida em cerca de um minuto.

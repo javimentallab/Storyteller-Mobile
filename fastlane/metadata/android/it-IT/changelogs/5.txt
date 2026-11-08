@@ -1,0 +1,1 @@
+ISBN e numeri di telefono si leggono cifra per cifra e non tagliano più la frase. Se una rigenerazione viene annullata o fallisce, torna il libro di prima. Gli EPUB tradotti conservano il codice e i link interni. Un’interruzione di rete si nota in circa un minuto.

@@ -144,6 +144,7 @@
     <string name="err_network">Der Dienst ist nicht erreichbar. Was fertig ist, ist gespeichert: Setze es später fort.</string>
     <string name="err_bad_type">Diese App kann diesen Dateityp nicht übersetzen.</string>
     <string name="err_cant_read_file">Diese Datei lässt sich nicht lesen.</string>
+    <string name="err_pron_unreadable">Dein Aussprachewörterbuch ließ sich nicht lesen. Es wurde beiseitegelegt, die App nutzt das Ausgangswörterbuch.</string>
     <string name="err_no_text">Dieses Dokument enthält keinen Text zum Übersetzen.</string>
     <string name="err_no_text_pdf">Dieses PDF enthält keinen Text zum Übersetzen. Es ist wohl gescannt, und die App liest keine Bilder.</string>
     <string name="err_generic">Etwas ist schiefgelaufen (%1$s).</string>

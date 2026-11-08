@@ -96,6 +96,7 @@ private fun errorRes(code: String): Int? = when (code) {
     "network" -> R.string.err_network
     "bad_type" -> R.string.err_bad_type
     "cant_read_file" -> R.string.err_cant_read_file
+    "pron_unreadable" -> R.string.err_pron_unreadable
     "no_text" -> R.string.err_no_text
     "no_text_pdf" -> R.string.err_no_text_pdf
     else -> null
