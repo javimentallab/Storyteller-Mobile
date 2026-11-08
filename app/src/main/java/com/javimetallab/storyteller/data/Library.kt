@@ -33,6 +33,37 @@ class Library(context: Context) {
         return d
     }
 
+    /**
+     * The folder for a book brought from the computer: its own (origin.json says which server book it is),
+     * never one of this phone's. Before, a phone book with the same name got the fetched one mixed into it.
+     */
+    @Synchronized
+    fun remoteFolder(remoteId: String): String {
+        val s = Format.slug(remoteId)
+        var name = s
+        var n = 1
+        while (true) {
+            val d = File(root, name)
+            if (!d.exists() || cameFrom(d, remoteId)) return name
+            n++
+            name = "$s-$n"
+        }
+    }
+
+    private fun cameFrom(d: File, remoteId: String): Boolean {
+        val origin = File(d, ORIGIN)
+        if (origin.exists()) {
+            return try {
+                JSONObject(origin.readText(Charsets.UTF_8)).optString("server_id") == remoteId
+            } catch (_: Exception) {
+                false
+            }
+        }
+        // Fetched before origin.json existed: what this phone makes always has options.json (narrating) or the
+        // language in its state (transcribing); the computer's books have neither.
+        return !File(d, "options.json").exists() && state(d)?.has("language") != true
+    }
+
     fun title(d: File): String = try {
         File(d, "title.txt").readText(Charsets.UTF_8).trim().ifEmpty { null }
     } catch (_: Exception) {
@@ -101,6 +132,23 @@ class Library(context: Context) {
         dir(id).deleteRecursively()
     }
 
+    /**
+     * Regenerating: the book as it was goes aside, out of the library, and comes back if the new
+     * narration is cancelled or fails before narrating anything. It was deleted before starting, and a
+     * cancelled regeneration deleted the whole folder, the EPUB included.
+     */
+    fun setAside(id: String): File {
+        val d = dir(id)
+        val backup = File(File(root.parentFile, "regen"), id)
+        backup.deleteRecursively()                       // left from a regeneration cut off by a crash
+        backup.parentFile?.mkdirs()
+        if (!d.renameTo(backup)) {
+            d.copyRecursively(backup, overwrite = true)
+            d.deleteRecursively()
+        }
+        return backup
+    }
+
     // ---- translations
     val translationsRoot: File = File(app.getExternalFilesDir(null) ?: app.filesDir, "translations").also { it.mkdirs() }
 
@@ -123,6 +171,9 @@ class Library(context: Context) {
 
     companion object {
         private val ID = Regex("[A-Za-z0-9][A-Za-z0-9._-]{0,200}")
+
+        /** In a book brought from the computer: which book of the server it is. */
+        const val ORIGIN = "origin.json"
 
         /**
          * A book's index, to resume it. If writing it was cut off between removing the old one and
@@ -158,6 +209,16 @@ class Library(context: Context) {
                 }
             }
             return JSONArray().also { out -> byId.values.forEach { out.put(it) } }
+        }
+
+        /** Puts back a book set aside with [setAside], over whatever the regeneration left. */
+        fun restore(backup: File, dest: File) {
+            if (!backup.exists()) return
+            dest.deleteRecursively()
+            if (!backup.renameTo(dest)) {
+                backup.copyRecursively(dest, overwrite = true)
+                backup.deleteRecursively()
+            }
         }
 
         fun writeAtomic(f: File, text: String) {

@@ -79,6 +79,7 @@ class WavWriter(private val file: File, val rate: Int, keepFrames: Long = 0) {
 /** Decoding with the phone's own codecs: no ffmpeg in the app, and hardly any size. */
 object AudioCodec {
     private const val TIMEOUT_US = 10_000L
+    private const val STALL_NS = 30_000_000_000L                  // 30 s with nothing out of the encoder
 
     private fun audioTrack(ex: MediaExtractor): Int {
         for (i in 0 until ex.trackCount) {
@@ -214,6 +215,8 @@ object AudioCodec {
         val codec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC)
         val muxer = MediaMuxer(tmp.path, MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4)
         var started = false
+        var samples = 0
+        var lastOutput = System.nanoTime()
         try {
             codec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE)
             codec.start()
@@ -248,26 +251,49 @@ object AudioCodec {
                         track = muxer.addTrack(codec.outputFormat)
                         muxer.start()
                         started = true
+                        lastOutput = System.nanoTime()
                     } else if (o >= 0) {
+                        lastOutput = System.nanoTime()
                         val buf = codec.getOutputBuffer(o)!!
                         val config = info.flags and MediaCodec.BUFFER_FLAG_CODEC_CONFIG != 0
                         if (info.size > 0 && !config && started) {
                             buf.position(info.offset).limit(info.offset + info.size)
                             muxer.writeSampleData(track, buf, info)
+                            samples++
                         }
                         val eos = info.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM != 0
                         codec.releaseOutputBuffer(o, false)
                         if (eos) break
+                    } else if (System.nanoTime() - lastOutput > STALL_NS) {
+                        throw IOException("encoder stalled")        // it used to hang the job, and Stop couldn't end it
                     }
                 }
             }
         } finally {
             runCatching { codec.stop() }
             runCatching { codec.release() }
-            runCatching { if (started) muxer.stop() }
+            // A failed stop() leaves a file that doesn't play: it can't be kept (it was swallowed before,
+            // the chapter was marked done with that file and its WAV deleted).
+            val stopped = runCatching { if (started) muxer.stop() }
             runCatching { muxer.release() }
+            if (stopped.isFailure || !started || samples == 0) {
+                tmp.delete()
+                throw IOException("m4a not written", stopped.exceptionOrNull())
+            }
         }
         if (!tmp.renameTo(dest)) throw IOException("rename m4a")
+        // What came out has to last what went in, or the WAV stays (0 = the file doesn't say: nothing to compare).
+        val expected = (wav.length() - WavWriter.HEADER) / 2.0 / rate
+        val got = try {
+            durationOf(dest)
+        } catch (e: Exception) {
+            dest.delete()
+            throw IOException("m4a unreadable", e)
+        }
+        if (got > 0 && kotlin.math.abs(got - expected) > 1.0) {
+            dest.delete()
+            throw IOException("m4a lasts $got s, not $expected s")
+        }
     }
 
     /** A complete WAV for a piece of audio being sent to a transcription model. */

@@ -82,7 +82,27 @@ object TextPrep {
      * piece is as long as it can be; at the one before if that leaves less than [short] on either
      * side. With no comma that will do, at a space.
      */
-    private fun splitLong(sentence: String, hard: Int, short: Int): List<String> {
+    private fun splitLong(sentence: String, hard: Int, short: Int, spoken: ((String) -> Int)?, limit: Int = hard): List<String> {
+        // Like _split_long on the desktop: measured with the numbers written out, a piece that goes past the real
+        // limit is cut again with a lower, proportional limit (still measured against the real one).
+        val out = ArrayList<String>()
+        for (piece in splitLongRaw(sentence, hard, short)) {
+            val len = spoken?.invoke(piece) ?: piece.length
+            if (len <= limit || piece.length <= 2 * short) {
+                out += piece
+                continue
+            }
+            val h = maxOf(2 * short, (piece.length.toLong() * limit / len).toInt())
+            if (h >= piece.length) {
+                out += piece
+                continue
+            }
+            out += splitLong(piece, h, short, spoken, limit)
+        }
+        return out
+    }
+
+    private fun splitLongRaw(sentence: String, hard: Int, short: Int): List<String> {
         val out = ArrayList<String>()
         var s = sentence
         while (s.length > hard) {
@@ -115,7 +135,7 @@ object TextPrep {
      * sentences and paragraphs the pause is the book's ([Close]). Until 7 Nov it cut at every comma,
      * and it sounded read line by line.
      */
-    private fun splitParagraph(text: String, hard: Int, short: Int = 20): List<String> {
+    private fun splitParagraph(text: String, hard: Int, spoken: ((String) -> Int)?, short: Int = 20): List<String> {
         val raw = ArrayList<String>()
         for (s in CHUNK_SENTENCE_END.split(text)) {
             if (raw.isNotEmpty() && ABBR_END.containsMatchIn(raw.last())) {
@@ -127,17 +147,21 @@ object TextPrep {
         val out = ArrayList<String>()
         for (sentence in raw) {
             val s = sentence.pyStrip()
-            if (s.isNotEmpty()) out += splitLong(s, hard, short)
+            if (s.isNotEmpty()) out += splitLong(s, hard, short, spoken)
         }
         return out.filter { LETTER_OR_DIGIT.containsMatchIn(it) || ANY_LETTER.containsMatchIn(it) }
     }
 
-    /** The pieces for the voice, like split_chunks on the desktop. Each line of the text is a paragraph. */
-    fun splitChunks(text: String, lang: String = "es"): List<Chunk> {
+    /**
+     * The pieces for the voice, like split_chunks on the desktop. Each line of the text is a paragraph.
+     * [spell] writes a number out (Speller): with it, pieces are measured as they will be said, as the desktop does.
+     */
+    fun splitChunks(text: String, lang: String = "es", spell: ((Long) -> String)? = null): List<Chunk> {
         val hard = HARD[lang] ?: HARD_DEFAULT
+        val spoken = spell?.let { sp -> { s: String -> spokenLength(s, lang, sp) } }
         val out = ArrayList<Chunk>()
         for (paragraph in text.split("\n")) {
-            val parts = splitParagraph(paragraph, hard)
+            val parts = splitParagraph(paragraph, hard, spoken)
             for ((i, c) in parts.withIndex()) {
                 val close = when {
                     i == parts.lastIndex -> Close.PARAGRAPH
@@ -338,8 +362,29 @@ object TextPrep {
     private val TWENTY_ONE = Regex("${NB}veintiuno (mil|millones)$NA")
     private val ONE_THOUSAND = Regex("${NB}uno (mil|millones)$NA")
 
+    // Codes read digit by digit (ISBNs, phone and serial numbers), as on the desktop (_read_codes): as an amount a
+    // 13-digit ISBN was ~140 characters of words and the piece went past XTTS's limit, which cuts the end off.
+    //  - 3 or more groups with hyphens and 7 digits or more: 978-84-376-0494-7, 91-234-56-78 (not 2026-11-08);
+    //  - 8 digits or more in a row, unless it is a round amount (25000000 is still said as an amount).
+    private val CODE_GROUPS = Regex("(?U)(?<![\\w.,-])\\d{1,7}(?:-\\d{1,7}){2,}(?:-[Xx])?(?![\\w-])")
+    private val CODE_LONG = Regex("(?U)(?<![\\w.,-])\\d{8,}(?![\\w-]|[.,]\\d)")
+    private val ISO_DATE = Regex("\\d{4}-\\d{2}-\\d{2}")
+
+    private fun sayDigits(groups: List<String>, spell: (Long) -> String) =
+        groups.joinToString(", ") { g -> g.map { c -> if (c.isDigit()) spell(c.digitToInt().toLong()) else c.toString() }.joinToString(" ") }
+
+    private fun codes(input: String, spell: (Long) -> String): String {
+        val t = CODE_GROUPS.replace(input) { m ->
+            if (ISO_DATE.matches(m.value) || m.value.count { it.isDigit() } < 7) m.value else sayDigits(m.value.split('-'), spell)
+        }
+        return CODE_LONG.replace(t) { m -> if (m.value.trimEnd('0').length <= 3) m.value else sayDigits(listOf(m.value), spell) }
+    }
+
+    /** How long a piece is when it reaches the voice, with its numbers written out (_spoken_len on the desktop). */
+    fun spokenLength(text: String, lang: String, spell: (Long) -> String) = numbers(text, lang, spell).length
+
     private fun numbers(input: String, lang: String, spell: (Long) -> String): String {
-        var t = input
+        var t = codes(input, spell)
         val es = lang == "es"
         val point = lang in DECIMAL_POINT
         if (es) {

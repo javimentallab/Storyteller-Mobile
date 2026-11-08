@@ -22,6 +22,7 @@ class FetchBookTask(private val context: Context, private val remote: RemoteBook
     override suspend fun run(ctl: Control) {
         val api = ctl.watch(ModelApi(Prefs.get(context).endpoint(Capability.NARRATION)))
         book.mkdirs()
+        Library.writeAtomic(File(book, Library.ORIGIN), JSONObject().put("server_id", remote.id).toString())
         val total = remote.size.coerceAtLeast(1)
         var done = 0L
         ctl.progress { it.copy(stage = Stage.COPYING, pct = 0) }

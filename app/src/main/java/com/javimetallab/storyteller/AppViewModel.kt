@@ -4,7 +4,6 @@ import com.javimetallab.storyteller.engine.Task
 import com.javimetallab.storyteller.engine.FetchBookTask
 import com.javimetallab.storyteller.data.RemoteBook
 import com.javimetallab.storyteller.data.PronStore
-import com.javimetallab.storyteller.data.Format
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
@@ -26,6 +25,7 @@ import com.javimetallab.storyteller.engine.Epub
 import com.javimetallab.storyteller.engine.JobState
 import com.javimetallab.storyteller.engine.NarrateTask
 import com.javimetallab.storyteller.engine.Outcome
+import com.javimetallab.storyteller.engine.Speller
 import com.javimetallab.storyteller.engine.TextPrep
 import com.javimetallab.storyteller.engine.TranscribeTask
 import com.javimetallab.storyteller.engine.TranslateTask
@@ -67,6 +67,13 @@ data class EpubPreview(val file: File, val name: String, val title: String, val 
 
 /** How the last test of a model went. */
 data class TestResult(val ok: Boolean, val text: String)
+
+/**
+ * The state of a book whose narration has not started yet: half done and resumable. Without it, a narration
+ * that failed before its first save (a bad address, an EPUB that can't be read) left a folder with no index,
+ * and the book vanished from the library.
+ */
+private const val PENDING_STATE = """{"total": 0, "sentences": 0, "complete": false}"""
 
 class AppViewModel(app: Application) : AndroidViewModel(app) {
     val prefs = Prefs.get(app)
@@ -275,7 +282,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun remoteFolder(b: RemoteBook) = Format.slug(b.id)
+    fun remoteFolder(b: RemoteBook) = library.remoteFolder(b.id)
 
     fun fetchBook(b: RemoteBook) {
         val ctx = getApplication<Application>()
@@ -322,7 +329,8 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     copyToFile(uri, tmp)
                     val book = Epub.read(tmp)
                     val lang = prefs.endpoint(Capability.NARRATION).language
-                    val pieces = book.chapters.map { ch -> TextPrep.splitChunks(ch.text, lang).map { it.text } }
+                    val speller = Speller(lang)           // cut as the narration will cut it (numbers written out)
+                    val pieces = book.chapters.map { ch -> TextPrep.splitChunks(ch.text, lang, speller::spell).map { it.text } }
                     val fallback = picked?.name?.substringBeforeLast('.')?.replace('_', ' ').orEmpty()
                     EpubPreview(
                         tmp, picked?.name.orEmpty(), book.title.ifBlank { fallback }, book.chapters.size,
@@ -349,6 +357,7 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
                     val d = library.newBook(p.title.ifBlank { "Book" })
                     if (!p.file.renameTo(File(d, "source.epub"))) p.file.copyTo(File(d, "source.epub"), overwrite = true)
                     Library.writeAtomic(File(d, "options.json"), JSONObject().put("prepare", prepareText).toString())
+                    Library.writeAtomic(File(d, "gen_state.json"), PENDING_STATE)
                     d
                 }
                 Work.submit(ctx, NarrateTask(ctx, dir, p.title, resume = false))
@@ -382,13 +391,20 @@ class AppViewModel(app: Application) : AndroidViewModel(app) {
         val ctx = getApplication<Application>()
         viewModelScope.launch {
             val dir = library.dir(b.id)
-            withContext(Dispatchers.IO) {
-                val keep = setOf("source.epub", "title.txt", "options.json")
-                dir.listFiles().orEmpty().filter { it.name !in keep }.forEach { it.deleteRecursively() }
+            player.forget(b.id)
+            // The old book goes aside (not deleted) and comes back if the regeneration is cancelled or
+            // fails before narrating anything. Only what is needed to narrate it again is copied over.
+            val backup = withContext(Dispatchers.IO) {
+                val aside = library.setAside(b.id)
+                dir.mkdirs()
+                for (name in listOf("source.epub", "title.txt", "options.json")) {
+                    File(aside, name).takeIf { it.exists() }?.copyTo(File(dir, name), overwrite = true)
+                }
+                Library.writeAtomic(File(dir, "gen_state.json"), PENDING_STATE)
+                aside
             }
             prefs.forgetBookmark(b.id)
-            player.forget(b.id)
-            Work.submit(ctx, NarrateTask(ctx, dir, b.title, resume = false))
+            Work.submit(ctx, NarrateTask(ctx, dir, b.title, resume = false, backup = backup))
         }
     }
 

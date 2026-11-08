@@ -1200,6 +1200,16 @@
    "lang": "tr",
    "in": "1999 yılında geldi.",
    "out": "bindokuzyüzdoksandokuz yılında geldi."
+  },
+  {
+   "lang": "es",
+   "in": "ISBN 978-84-376-0494-7 y el 912345678.",
+   "out": "isbn nueve siete ocho, ocho cuatro, tres siete seis, cero cuatro nueve cuatro, siete y el nueve uno dos tres cuatro cinco seis siete ocho."
+  },
+  {
+   "lang": "es",
+   "in": "El 2026-11-08 ganó 25000000 euros entre 1990-2000.",
+   "out": "el dos mil veintiséis-once-ocho ganó veinticinco millones euros entre mil novecientos noventa-dos mil."
   }
  ],
  "spell": {
@@ -1223,7 +1233,24 @@
    "7": "siete",
    "30": "treinta",
    "10": "diez",
-   "21": "veintiuno"
+   "21": "veintiuno",
+   "12345678": "doce millones trescientos cuarenta y cinco mil seiscientos setenta y ocho",
+   "1999": "mil novecientos noventa y nueve",
+   "9788437604947": "nueve billones setecientos ochenta y ocho mil cuatrocientos treinta y siete millones seiscientos cuatro mil novecientos cuarenta y siete",
+   "11": "once",
+   "78": "setenta y ocho",
+   "912345678": "novecientos doce millones trescientos cuarenta y cinco mil seiscientos setenta y ocho",
+   "978": "novecientos setenta y ocho",
+   "84": "ochenta y cuatro",
+   "56": "cincuenta y seis",
+   "91": "noventa y uno",
+   "4815162342": "cuatro mil ochocientos quince millones ciento sesenta y dos mil trescientos cuarenta y dos",
+   "234": "doscientos treinta y cuatro",
+   "2026": "dos mil veintiséis",
+   "494": "cuatrocientos noventa y cuatro",
+   "376": "trescientos setenta y seis",
+   "25000000": "veinticinco millones",
+   "1990": "mil novecientos noventa"
   },
   "en": {
    "1500": "one thousand, five hundred",
@@ -1617,6 +1644,38 @@
    "recall": 0.0,
    "ok": false,
    "score": 0.0
+  }
+ ],
+ "chunks_spoken": [
+  {
+   "in": "Esta edición, con ISBN 9788437604947 y depósito legal 12345678, se imprimió en Madrid en el año 1999 por encargo de la editorial, que la distribuyó en toda España.",
+   "out": [
+    [
+     "Esta edición, con ISBN 9788437604947 y depósito legal 12345678,",
+     "coma"
+    ],
+    [
+     "se imprimió en Madrid en el año 1999 por encargo de la editorial, que la distribuyó en toda España.",
+     "parrafo"
+    ]
+   ]
+  },
+  {
+   "in": "Para pedirlo, llame al 912345678 o al 91-234-56-78, dé el código 978-84-376-0494-7 de la edición del 2026-11-08 y, si no contestan, escriba indicando el pedido 4815162342 y su nombre completo.",
+   "out": [
+    [
+     "Para pedirlo, llame al 912345678 o al 91-234-56-78,",
+     "coma"
+    ],
+    [
+     "dé el código 978-84-376-0494-7 de la edición del 2026-11-08 y, si no contestan,",
+     "coma"
+    ],
+    [
+     "escriba indicando el pedido 4815162342 y su nombre completo.",
+     "parrafo"
+    ]
+   ]
   }
  ]
 }

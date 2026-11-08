@@ -32,6 +32,8 @@ class NarrateTask(
     private val book: File,
     title: String,
     private val resume: Boolean,
+    /** Regenerating: the book as it was, set aside (Library.setAside) until the new one has something. */
+    private val backup: File? = null,
 ) : Task("narrate", title, bookId = book.name) {
     private val temp = File(context.cacheDir, "narrate").also { it.mkdirs() }
     private val entries = LinkedHashMap<Int, JSONObject>()
@@ -39,10 +41,30 @@ class NarrateTask(
     private var sentenceCount = 0
 
     override fun discard() {
-        if (!resume) book.deleteRecursively()
+        when {
+            backup != null && !resume -> Library.restore(backup, book)   // cancelling a regeneration: the old book again
+            backup != null -> backup.deleteRecursively()                    // cancelling its resumption keeps what was narrated
+            !resume -> book.deleteRecursively()
+        }
     }
 
-    override fun resumed() = NarrateTask(context, book, title, resume = true)
+    override fun resumed() = NarrateTask(context, book, title, resume = true, backup = backup)
+
+    private fun narratedAnything() = entries.values.any { it.optInt("n") > 0 }
+
+    override suspend fun run(ctl: Control) {
+        try {
+            narrate(ctl)
+        } catch (e: Stopped) {
+            throw e                                  // stopping keeps everything; cancelling goes through discard()
+        } catch (e: Exception) {
+            // A regeneration that failed: with nothing narrated, the old book comes back; with something, the new
+            // one stays, half done and resumable, like any other narration.
+            backup?.let { if (narratedAnything()) it.deleteRecursively() else Library.restore(it, book) }
+            throw e
+        }
+        backup?.deleteRecursively()
+    }
 
     private fun saveManifest() {
         val a = JSONArray()
@@ -62,7 +84,7 @@ class NarrateTask(
         for (i in 0 until a.length()) a.optJSONObject(i)?.let { entries[it.optInt("id")] = it }
     }
 
-    override suspend fun run(ctl: Control) {
+    private suspend fun narrate(ctl: Control) {
         ctl.progress { it.copy(stage = Stage.READING) }
         val endpoint = Prefs.get(context).endpoint(Capability.NARRATION)
         val api = ctl.watch(ModelApi(endpoint))
@@ -83,7 +105,8 @@ class NarrateTask(
         val chapters = epub.chapters
         total = chapters.size
         if (total == 0) throw IOException("no text")
-        val sentences = chapters.map { TextPrep.splitChunks(it.text, lang) }
+        // Measured with the numbers written out, even if the server is the one writing them (prepare off).
+        val sentences = chapters.map { ctl.check(); TextPrep.splitChunks(it.text, lang, speller::spell) }
         val allSentences = sentences.sumOf { it.size }.coerceAtLeast(1)
         sentenceCount = allSentences
         if (resume) loadPrevious()
@@ -273,7 +296,12 @@ class TranscribeTask(
             val m = JSONArray(File(book, "manifest.json").readText()).getJSONObject(0)
             fileName = m.optString("file").ifEmpty { fileName }
             val old = JSONObject(File(book, "cap01.json").readText()).optJSONArray("cues") ?: JSONArray()
-            for (i in 0 until old.length()) cueList.put(old.get(i))
+            // The subtitles are saved before the state: cut off in between, the last piece's would be
+            // transcribed again and come out twice. Only what the state says is covered stays.
+            for (i in 0 until old.length()) {
+                val c = old.optJSONObject(i) ?: continue
+                if (c.optDouble("start", 0.0) < covered) cueList.put(c)
+            }
         } else {
             ctl.progress { it.copy(stage = Stage.COPYING) }
             val dest = File(book, fileName)
@@ -321,17 +349,20 @@ class TranscribeTask(
         // The decoder calls back on this thread, and it can't suspend: the pieces wait here.
         val ready = ArrayDeque<Pair<ShortArray, Int>>()
         var decoderDone = false
+        // Set when this side stops taking pieces (an error sending one): the decoder stops too. Without it,
+        // it waited forever for room in the queue, holding the codec and the file.
+        val abort = java.util.concurrent.atomic.AtomicBoolean(false)
         val decoder = Thread {
             try {
                 AudioCodec.decode(audio, covered) { piece, rate ->
-                    if (ctl.mode != Control.Mode.RUN) return@decode false
+                    if (ctl.mode != Control.Mode.RUN || abort.get()) return@decode false
                     val pcm = Pcm(piece, rate).resampledTo(RATE)
                     chunker.add(pcm.samples) { out, n ->
                         val copy = out.copyOf(n)
                         synchronized(ready) {
                             ready.addLast(copy to n)
                             (ready as Object).notifyAll()
-                            while (ready.size >= 2 && ctl.mode == Control.Mode.RUN) (ready as Object).wait(500)
+                            while (ready.size >= 2 && ctl.mode == Control.Mode.RUN && !abort.get()) (ready as Object).wait(500)
                         }
                     }
                     true
@@ -369,7 +400,9 @@ class TranscribeTask(
                 send(next.first, next.second)
             }
         } finally {
+            abort.set(true)
             synchronized(ready) { (ready as Object).notifyAll() }
+            decoder.join(5_000)
             wav.delete()
         }
         failure?.let { throw IOException(it) }

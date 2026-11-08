@@ -8,7 +8,7 @@
 falta. Con --big escribe además, aparte y fuera del repo, los capítulos de un libro y textos
 aleatorios con todos los signos: EngineTest los compara si se le pasa -Dgolden.big=<fichero>.
 """
-import argparse, importlib.util, json, os, random
+import argparse, importlib.util, json, os, random, re
 
 NEW = [
     "Cuando llegó a la plaza, ya de noche, se sentó en el banco de siempre, sacó el libro y, sin pensarlo mucho, empezó a leer en voz alta.",
@@ -30,6 +30,19 @@ NEW_LANG = [
     ("en", "When he finally reached the square, late at night, he sat down on the usual bench, took out the book, "
            "and, without thinking too much about it, started reading aloud to nobody in particular, as he always did "
            "when the evenings were warm."),
+]
+# Con números largos: el escritorio mide el trozo con los números escritos en letra y lo vuelve a partir si se
+# pasa del tope de XTTS («chunks_spoken»); el móvil hace lo mismo cuando se le pasa con qué escribirlos.
+NEW_SPOKEN = [
+    ("Esta edición, con ISBN 9788437604947 y depósito legal 12345678, se imprimió en Madrid en el año 1999 por "
+     "encargo de la editorial, que la distribuyó en toda España."),
+    ("Para pedirlo, llame al 912345678 o al 91-234-56-78, dé el código 978-84-376-0494-7 de la edición del "
+     "2026-11-08 y, si no contestan, escriba indicando el pedido 4815162342 y su nombre completo."),
+]
+# Los códigos se leen cifra a cifra; las fechas, las cantidades redondas y lo demás, como siempre.
+NEW_VOICE = [
+    ("es", "ISBN 978-84-376-0494-7 y el 912345678."),
+    ("es", "El 2026-11-08 ganó 25000000 euros entre 1990-2000."),
 ]
 LANGS = ["es", "es", "es", "en", "fr", "de", "ru", "zh-cn", "ja", "ar", "hi", "pt", "it"]
 WORDS = ["casa", "árbol", "Sr.", "EE.", "UU.", "J.", "niño", "pingüino", "3,5", "1.500", "$74.99", "10:30",
@@ -86,6 +99,19 @@ def main():
         c["out"] = chunks(E, c["in"])
     for c in g["chunks_lang"]:
         c["out"] = chunks(E, c["in"], c["lang"])
+    g["chunks_spoken"] = [{"in": t, "out": chunks(E, t)} for t in NEW_SPOKEN]
+    have = {(c["lang"], c["in"]) for c in g["voice"]}
+    for lang, t in NEW_VOICE:
+        if (lang, t) not in have:
+            E.NUM_LANG = lang
+            g["voice"].append({"lang": lang, "in": t, "out": E.normalize_text(t)})
+            E.NUM_LANG = "es"
+    # Cómo escribe num2words cada número de esos casos (y cada cifra): el móvil lo usa en lugar de ICU en la prueba.
+    from num2words import num2words
+    spell = g.setdefault("spell", {}).setdefault("es", {})
+    for t in NEW_SPOKEN + [t for _l, t in NEW_VOICE]:
+        for n in {int(x) for x in re.findall(r"\d+", t)} | set(range(10)):
+            spell.setdefault(str(n), num2words(n, lang="es"))
     g["pauses"] = dict(E.PAUSES)
     with open(a.golden, "w", encoding="utf-8", newline="\n") as f:
         json.dump(g, f, ensure_ascii=False, indent=1)

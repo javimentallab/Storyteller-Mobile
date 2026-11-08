@@ -524,6 +524,61 @@ class EngineTest {
         assertTrue(opf, opf.contains(">es<"))
     }
 
+    private fun epubWith(body: String) = zip(
+        "epub",
+        "mimetype" to "application/epub+zip",
+        "META-INF/container.xml" to """<container><rootfiles><rootfile full-path="c.opf"/></rootfiles></container>""",
+        "c.opf" to """<package xmlns:dc="d"><metadata><dc:title>Book</dc:title></metadata><manifest><item id="a" href="a.xhtml" media-type="application/xhtml+xml"/></manifest></package>""",
+        "a.xhtml" to """<html xmlns="http://www.w3.org/1999/xhtml"><body>$body</body></html>""",
+    )
+
+    /** Inline code and link targets inside a translated paragraph were lost (desktop fault 14). */
+    @Test
+    fun epubTranslationKeepsInlineCodeInPlaceAndLinkTargets() {
+        val f = epubWith("""<p id="p1">Usa la orden <code>ls -la</code> y <a id="ancla"></a>sigue <span id="s2">aquí</span>.</p>""")
+        val d = Docs.open(f, "en")
+        assertEquals(listOf("Usa la orden ⟦0⟧ y sigue aquí."), d.units.filter { "⟦" in it.text }.map { it.text })
+        d.units.forEach { u -> u.apply(if ("⟦" in u.text) "Use the command ⟦0⟧ and go on here." else u.text) }
+        val out = File.createTempFile("out", ".epub")
+        d.save(out)
+        val x = readZip(out, "a.xhtml")
+        assertTrue(x, x.contains("Use the command <code>ls -la</code> and go on here."))
+        assertTrue(x, x.contains("id=\"ancla\""))
+        assertTrue(x, x.contains("id=\"s2\""))
+        assertTrue(x, x.contains("id=\"p1\""))
+        assertTrue(Translation.prompt("Usa ⟦0⟧.", "es", "en").contains("Keep every marker"))
+        assertFalse(Translation.prompt("Hola.", "es", "en").contains("⟦"))
+    }
+
+    @Test
+    fun epubCodeWhoseMarkerTheModelDroppedGoesAtTheEnd() {
+        val d = Docs.open(epubWith("""<p>Usa la orden <code>ls</code> ahora.</p>"""), "en")
+        d.units.forEach { u -> u.apply(if ("⟦" in u.text) "Use the command now." else u.text) }
+        val out = File.createTempFile("out", ".epub")
+        d.save(out)
+        assertTrue(readZip(out, "a.xhtml").contains("Use the command now. <code>ls</code></p>"))
+    }
+
+    /** Measured with the numbers written out, like the desktop: an ISBN no longer takes a piece past XTTS's limit. */
+    @Test
+    fun chunksWithLongNumbersLikeTheDesktopEngine() {
+        val spell = golden.getJSONObject("spell").getJSONObject("es")
+        val speller = { n: Long -> spell.optString(n.toString()).ifEmpty { n.toString() } }
+        val close = mapOf("coma" to TextPrep.Close.CLAUSE, "frase" to TextPrep.Close.SENTENCE, "parrafo" to TextPrep.Close.PARAGRAPH)
+        val cases = golden.getJSONArray("chunks_spoken")
+        for (i in 0 until cases.length()) {
+            val c = cases.getJSONObject(i)
+            val want = c.getJSONArray("out").let { a ->
+                (0 until a.length()).map { k -> TextPrep.Chunk(a.getJSONArray(k).getString(0), close.getValue(a.getJSONArray(k).getString(1))) }
+            }
+            val got = TextPrep.splitChunks(c.getString("in"), "es", speller)
+            assertEquals("case $i", want, got)
+            assertTrue(got.size > 1)
+            for (p in got) assertTrue(p.text, TextPrep.spokenLength(p.text, "es", speller) <= 220)
+        }
+        assertTrue(cases.length() >= 2)
+    }
+
     @Test
     fun forVoiceLeavesSubtitlesAloneAndSpellsWhatItSends() {
         val spell = { n: Long -> "<$n>" }

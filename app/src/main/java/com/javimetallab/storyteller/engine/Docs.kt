@@ -42,12 +42,24 @@ object Translation {
     fun prompt(text: String, src: String, tgt: String): String {
         val (sl, sc) = NAMES[src] ?: (src to src)
         val (tl, tc) = NAMES[tgt] ?: (tgt to tgt)
+        // Only with markers in the text: every other prompt stays the same (and so do their cached translations).
+        val marks = if (MARK.containsMatchIn(text)) {
+            "The text contains markers like ⟦0⟧ that stand for code or other untranslated pieces. " +
+                "Keep every marker exactly as written, once each, where it belongs in the $tl sentence.\n"
+        } else {
+            ""
+        }
         return "You are a professional $sl ($sc) to $tl ($tc) translator. Your goal is to accurately " +
             "convey the meaning and nuances of the original $sl text while adhering to $tl grammar, " +
             "vocabulary, and cultural sensitivities.\n" +
             "Produce only the $tl translation, without any additional explanations or commentary. " +
+            marks +
             "Please translate the following $sl text into $tl:\n\n\n$text"
     }
+
+    /** Where a piece that isn't translated (inline code…) goes in a paragraph's text: ⟦0⟧, ⟦1⟧… */
+    val MARK = Regex("⟦(\\d+)⟧")
+    fun mark(n: Int) = "⟦$n⟧"
 
     fun needsTranslation(t: String) = LETTER.containsMatchIn(t)
 
@@ -164,6 +176,12 @@ private class EpubDoc(file: File, private val tgt: String) : Doc {
         )
         val SKIP = setOf("script", "style", "code", "pre", "math", "svg", "kbd", "samp", "var")
         val KEEP_INLINE = setOf("img", "image", "svg", "math", "object", "video", "audio", "iframe")
+
+        /**
+         * Inside a paragraph being translated these stay as they are and IN PLACE, as a ⟦n⟧ marker in its
+         * text. They were lost when the paragraph was rewritten: the <code> of "run <code>ls</code> first".
+         */
+        val HOLD = SKIP - KEEP_INLINE
         val NOTE = Regex("^\\W*(\\d{1,3}|[*†‡§]+|[ivxlc]{1,5})\\W*$", RegexOption.IGNORE_CASE)
     }
 
@@ -254,29 +272,39 @@ private class EpubDoc(file: File, private val tgt: String) : Doc {
             (n == "a" && ("noteref" in e.attr("epub:type") || '#' in e.attr("href")))
     }
 
-    private fun blockText(el: Element): String {
+    /** The text to translate, and the pieces kept as they are (code, <pre>…), each as ⟦n⟧ in its place. */
+    private fun blockParts(el: Element): Pair<String, List<Element>> {
         val out = StringBuilder()
+        val held = ArrayList<Element>()
         fun go(e: Element) {
             for (c in e.childNodes()) {
                 if (c is TextNode) {
                     out.append(c.wholeText)
                 } else if (c is Element) {
                     val n = lname(c)
-                    if (n == "br") out.append('\n') else if (n !in SKIP && !isNote(c)) go(c)
+                    when {
+                        n == "br" -> out.append('\n')
+                        n in HOLD -> {
+                            out.append(Translation.mark(held.size))
+                            held.add(c)
+                        }
+                        n !in SKIP && !isNote(c) -> go(c)
+                    }
                 }
             }
         }
         go(el)
-        return Docs.ws(out.toString())
+        return Docs.ws(out.toString()) to held
     }
 
     private fun addBlock(el: Element) {
-        val text = blockText(el)
-        if (Translation.needsTranslation(text)) units += DocUnit(text) { setBlock(el, it) }
+        val (text, held) = blockParts(el)
+        if (Translation.needsTranslation(Translation.MARK.replace(text, ""))) units += DocUnit(text) { setBlock(el, it, held) }
     }
 
-    /** Footnotes, images and formulas stay. Inline formatting inside a sentence is lost. */
-    private fun setBlock(el: Element, t: String) {
+    /** Footnotes, images, formulas, code and link targets stay. Other inline formatting inside a sentence is lost. */
+    private fun setBlock(el: Element, t: String, held: List<Element> = emptyList()) {
+        held.forEach { it.remove() }                     // they go back in at their markers
         val front = ArrayList<Element>()
         val end = ArrayList<Element>()
         for (d in el.getAllElements().drop(1).toList()) {
@@ -296,11 +324,30 @@ private class EpubDoc(file: File, private val tgt: String) : Doc {
             if (lname(only) in BLOCK || lname(only) == "br") break
             target = only
         }
+        // Link targets (<a id="note3"/>, <span id="p12">) were lost when emptying: they stay, empty, at the start,
+        // so the links from the contents and the notes still lead to this paragraph.
+        val anchors = target.getAllElements().drop(1).filter { it.id().isNotEmpty() }
+            .map { Element(it.tagName()).attr("id", it.id()) }
         target.empty()
-        front.forEach { target.appendChild(it) }
-        t.split("\n").forEachIndexed { i, line ->
+        (front + anchors).forEach { target.appendChild(it) }
+        val used = HashSet<Int>()
+        var at = 0
+        fun text(piece: String) = piece.split("\n").forEachIndexed { i, line ->
             if (i > 0) target.appendElement("br")
-            target.appendChild(TextNode(line))
+            if (line.isNotEmpty()) target.appendChild(TextNode(line))
+        }
+        for (m in Translation.MARK.findAll(t)) {
+            text(t.substring(at, m.range.first))
+            val n = m.groupValues[1].toInt()
+            if (n < held.size && used.add(n)) target.appendChild(held[n])
+            at = m.range.last + 1
+        }
+        text(t.substring(at))
+        held.forEachIndexed { n, h ->                    // the model dropped its marker: at the end, not lost
+            if (n !in used) {
+                target.appendChild(TextNode(" "))
+                target.appendChild(h)
+            }
         }
         end.forEach { target.appendChild(it) }
     }

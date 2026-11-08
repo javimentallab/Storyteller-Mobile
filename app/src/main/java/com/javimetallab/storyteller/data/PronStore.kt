@@ -27,10 +27,20 @@ object PronStore {
 
     private fun file(context: Context) = File(context.filesDir, "pron.json")
 
-    fun read(context: Context): JSONObject = try {
-        JSONObject(file(context).readText(Charsets.UTF_8))
-    } catch (_: Exception) {
-        JSONObject(SEED.toString())
+    /**
+     * The dictionary, or the starting one if there is none yet. One that can't be read is moved aside
+     * (pron.unreadable-<time>.json) instead of being kept in place: saving a word used to write the
+     * starting one over it, and the entries of every language were lost.
+     */
+    fun read(context: Context): JSONObject {
+        val f = file(context)
+        if (!f.exists()) return JSONObject(SEED.toString())
+        return try {
+            JSONObject(f.readText(Charsets.UTF_8))
+        } catch (_: Exception) {
+            f.renameTo(File(f.parentFile, "pron.unreadable-${System.currentTimeMillis()}.json"))
+            JSONObject(SEED.toString())
+        }
     }
 
     fun forLanguage(context: Context, lang: String) = Pron.of(read(context), lang)
