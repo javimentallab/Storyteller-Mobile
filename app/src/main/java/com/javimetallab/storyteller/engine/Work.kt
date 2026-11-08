@@ -118,6 +118,9 @@ abstract class Task(val kind: String, val title: String, val bookId: String? = n
     /** Stopped before it started, or cancelled: undo what was prepared. */
     open fun discard() {}
 
+    /** Stopped by the user, keeping what it has, and not going on by itself. */
+    open fun stopped() {}
+
     /** The same job, to go on later from what it has saved. */
     open fun resumed(): Task = this
 }
@@ -214,6 +217,7 @@ object Work {
                     changed.update { it + 1 }
                     continue                     // nothing to announce: it hasn't ended, it has given way
                 } else {
+                    runCatching { task.stopped() }
                     Finished(_current.value ?: job, Outcome.STOPPED)
                 }
             } catch (e: BadDocument) {

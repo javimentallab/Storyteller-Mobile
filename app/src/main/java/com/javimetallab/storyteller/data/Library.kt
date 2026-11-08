@@ -221,6 +221,17 @@ class Library(context: Context) {
             }
         }
 
+        /** Whether the book's index has at least one sentence narrated. An unreadable index counts as nothing. */
+        fun narrated(book: File): Boolean {
+            val a = runCatching { readIndex(book) }.getOrNull() ?: return false
+            return (0 until a.length()).any { (a.optJSONObject(it)?.optInt("n") ?: 0) > 0 }
+        }
+
+        /** A regeneration that won't go on: with something narrated the new book stays, with nothing the old one is back. */
+        fun settleBackup(backup: File, book: File) {
+            if (narrated(book)) backup.deleteRecursively() else restore(backup, book)
+        }
+
         fun writeAtomic(f: File, text: String) {
             val tmp = File(f.path + ".tmp")
             tmp.writeText(text, Charsets.UTF_8)

@@ -43,24 +43,26 @@ class NarrateTask(
     override fun discard() {
         when {
             backup != null && !resume -> Library.restore(backup, book)   // cancelling a regeneration: the old book again
-            backup != null -> backup.deleteRecursively()                    // cancelling its resumption keeps what was narrated
+            backup != null -> Library.settleBackup(backup, book)            // cancelling its resumption keeps what was narrated
             !resume -> book.deleteRecursively()
         }
     }
 
-    override fun resumed() = NarrateTask(context, book, title, resume = true, backup = backup)
+    override fun stopped() {
+        backup?.let { Library.settleBackup(it, book) }
+    }
 
-    private fun narratedAnything() = entries.values.any { it.optInt("n") > 0 }
+    override fun resumed() = NarrateTask(context, book, title, resume = true, backup = backup)
 
     override suspend fun run(ctl: Control) {
         try {
             narrate(ctl)
         } catch (e: Stopped) {
-            throw e                                  // stopping keeps everything; cancelling goes through discard()
+            throw e                                  // Work decides: stopped(), discard() or, giving way, resumed()
         } catch (e: Exception) {
             // A regeneration that failed: with nothing narrated, the old book comes back; with something, the new
             // one stays, half done and resumable, like any other narration.
-            backup?.let { if (narratedAnything()) it.deleteRecursively() else Library.restore(it, book) }
+            backup?.let { Library.settleBackup(it, book) }
             throw e
         }
         backup?.deleteRecursively()
