@@ -2,6 +2,9 @@
 
 *Last updated: 7 November 2026*
 
+> **Notice.** This privacy policy is under legal review. The revised version will replace this text once
+> the review is complete. Until then, this version applies.
+
 ## 1. Publisher and scope
 
 The Storyteller Mobile application (the "App") is published by javimentallab. The App has no user accounts, advertising, analytics tools, crash reporting systems or server of its own.
