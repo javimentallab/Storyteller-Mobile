@@ -1,0 +1,1 @@
+Polityka prywatności otwiera się teraz zawsze w języku używanym przez aplikację. Poza tym aplikacja działa bez zmian.

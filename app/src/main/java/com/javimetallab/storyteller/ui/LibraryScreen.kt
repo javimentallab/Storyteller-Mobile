@@ -94,6 +94,7 @@ fun LibraryScreen(vm: AppViewModel) {
 
 @Composable
 private fun LibraryMenu(vm: AppViewModel) {
+    val privacyFile = stringResource(R.string.privacy_file)
     var open by remember { mutableStateOf(false) }
     Box {
         IconButton(onClick = { open = true }) {
@@ -111,7 +112,7 @@ private fun LibraryMenu(vm: AppViewModel) {
                 text = { Text(stringResource(R.string.privacy_policy)) },
                 onClick = {
                     open = false
-                    vm.openPrivacyPolicy()
+                    vm.openPrivacyPolicy(privacyFile)
                 },
             )
         }

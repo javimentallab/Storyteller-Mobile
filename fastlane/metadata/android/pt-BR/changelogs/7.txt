@@ -1,0 +1,1 @@
+A política de privacidade agora sempre abre no idioma exibido pelo app. O restante do app funciona da mesma forma.
