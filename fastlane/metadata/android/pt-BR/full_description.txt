@@ -7,4 +7,4 @@
 <li><b>Ouvir</b> com capítulos, saltos para qualquer posição e reprodução em segundo plano.</li>
 </ul>
 <p>Seu texto e seu áudio vão só para os serviços que você escolher, e quem os administra pode ver o que você envia. As chaves de acesso ficam criptografadas no telefone. Sem contas, anúncios nem análises.</p>
-<p>Disponível em inglês, espanhol, português, francês, alemão, italiano, holandês, polonês, russo, ucraniano, chinês, japonês, coreano, tailandês e hindi.</p>
+<p>Disponível em português, inglês, espanhol, catalão, galego, basco, francês, alemão, italiano, holandês, polonês, russo, ucraniano, chinês, japonês, coreano, tailandês e hindi.</p>

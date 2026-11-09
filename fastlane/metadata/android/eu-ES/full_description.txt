@@ -1,0 +1,10 @@
+<p>Storyteller Mobile-k EPUB bat ahots neuronalez narratutako audioliburu bihurtzen du, eta audioari jarraitzen dioten azpitituluekin erreproduzitzen du. Audioliburuak ere inportatzen ditu eta transkribatu egiten ditu azpititulu horiek egiteko, eta liburuak eta dokumentuak itzultzen ditu.</p>
+<p>Telefonoan ez da eredurik exekutatzen; beraz, aplikazioak leku gutxi hartzen du. Lan bakoitzerako zerbitzua aukeratzen duzu: publiko bat zure sarbide-gakoarekin edo zurea zure sarean. OpenAIrena bezalako API bat duen edozeinek balio du, baita Ollamak eta llama.cpp-k ere itzultzeko. Ez dakar zerbitzurik: zurea edo zerbitzu publiko bateko kontu bat behar duzu, eta hark erabileraren arabera kobra dezake.</p>
+<ul>
+<li><b>Narratu</b> EPUB bat nahi duzun hizkuntzan eta ahotsarekin. Utzitako lekutik berrekiten du, eta narratzen ari den bitartean entzun dezakezu. Aukerako egiaztapen batek gaizki entzuten diren esaldiak berregiten ditu, eta ahoskera-hiztegi bat dago hizkuntza bakoitzerako.</li>
+<li><b>Inportatu</b> audioliburu bat: telefonora kopiatzen da eta zatika transkribatzen da azpititulu sinkronizatuak egiteko.</li>
+<li><b>Itzuli</b> EPUB, PDF, Word, PowerPoint, Excel, azpitituluak eta testua. PDF bat EPUB itzuli gisa ateratzen da, bere maketaziorik gabe.</li>
+<li><b>Entzun</b> kapituluekin, edozein posiziotarako jauziekin eta bigarren planoko erreprodukzioarekin.</li>
+</ul>
+<p>Zure testua eta audioa aukeratzen dituzun zerbitzuetara bakarrik doaz, eta haiek kudeatzen dituenak ikus dezake bidaltzen duzuna. Sarbide-gakoak zifratuta gordetzen dira telefonoan. Konturik, iragarkirik eta analisirik gabe.</p>
+<p>Euskaraz, gaztelaniaz, ingelesez, katalanez, galizieraz, portugesez, frantsesez, alemanez, italieraz, nederlanderaz, polonieraz, errusieraz, ukraineraz, txineraz, japonieraz, koreeraz, thailanderaz eta hindiz eskuragarri.</p>

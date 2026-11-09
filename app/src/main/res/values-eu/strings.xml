@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Liburutegia -->
+    <string name="library">Liburutegia</string>
+    <string name="library_empty">Oraindik ez dago libururik. Narratu EPUB bat edo inportatu audioliburu bat hasteko.</string>
+    <string name="narrate_epub">Narratu EPUBa</string>
+    <string name="import_audiobook">Inportatu audioliburua</string>
+    <string name="translate">Itzuli</string>
+    <string name="models">Ereduak</string>
+    <plurals name="book_chapters">
+        <item quantity="one">kapitulu %1$d · %2$s</item>
+        <item quantity="other">%1$d kapitulu · %2$s</item>
+    </plurals>
+    <string name="book_working">● Abian</string>
+    <string name="book_partial">⏸ Erdizka · %% %1$d</string>
+    <string name="listen">Entzun</string>
+    <string name="resume">Berrekin</string>
+    <string name="regenerate">Narratu berriro</string>
+    <string name="more_options">Aukera gehiago</string>
+    <string name="confirm_delete">«%1$s» telefono honetatik ezabatu? Haren audioa betiko galduko da.</string>
+    <string name="confirm_regenerate">«%1$s» berriro narratu hasieratik? Orain arte narratutakoa galduko da.</string>
+    <string name="confirm_cancel_job">«%1$s» bertan behera utzi? Orain arte egindakoa baztertuko da.</string>
+    <string name="delete">Ezabatu</string>
+    <string name="cancel">Utzi</string>
+    <string name="keep_going">Jarraitu</string>
+    <string name="back">Atzera</string>
+
+    <!-- Lanak -->
+    <string name="work_channel">Narratu, transkribatu eta itzuli</string>
+    <string name="done_channel">Amaituak</string>
+    <string name="job_finished">Amaituta</string>
+    <string name="job_failed">Erdizka gelditu da. Egindakoa gordeta dago.</string>
+    <string name="stop_and_save">Gelditu eta gorde</string>
+    <string name="job_queued">Txandaren zain…</string>
+    <string name="job_copying">Fitxategia kopiatzen…</string>
+    <string name="job_reading">Dokumentua irakurtzen…</string>
+    <string name="job_narrating">%1$d/%2$d kapitulua · %3$d. esaldia</string>
+    <string name="job_encoding">Kapitulua konprimatzen…</string>
+    <string name="job_transcribing">Transkribatzen… %1$s / %2$s</string>
+    <string name="job_translating">Itzultzen… %1$d/%2$d</string>
+    <string name="job_saving">Gordetzen…</string>
+    <string name="job_stopping">Gelditzen…</string>
+    <string name="job_waiting">zerbitzua lanpetuta dago, %1$d s barru saiatuko da berriro</string>
+    <string name="eta_calculating">geratzen den denbora kalkulatzen…</string>
+    <string name="eta_less_minute">min 1 baino gutxiago falta da</string>
+    <string name="eta_minutes">~%1$d min falta dira</string>
+    <string name="eta_hours">~%1$d h %2$d min falta dira</string>
+    <string name="eta_until">%1$s (%2$s aldera)</string>
+
+    <!-- Ereduak -->
+    <string name="models_intro">Ereduak ez dira telefonoan exekutatzen. Lan bakoitzerako, aukeratu hura egiten duen zerbitzua: publiko bat zure sarbide-gakoarekin, edo zurea. Zure testua eta audioa aukeratzen duzun zerbitzura doaz.</string>
+    <string name="section_narration">Narrazioa</string>
+    <string name="section_narration_help">Testutik ahotsera. OpenAIrena bezalako API bat: /v1/audio/speech</string>
+    <string name="section_transcription">Transkripzioa</string>
+    <string name="section_transcription_help">Ahotsetik testura, inportatutako audioliburuetarako. OpenAIrena bezalako API bat: /v1/audio/transcriptions</string>
+    <string name="section_translation">Itzulpena</string>
+    <string name="section_translation_help">Edozein txat-eredu. OpenAIrena bezalako API bat: /v1/chat/completions (baita Ollama eta llama.cpp ere)</string>
+    <string name="field_url">URLa</string>
+    <string name="field_key">Sarbide-gakoa</string>
+    <string name="field_key_hint">Utzi hutsik zerbitzuak ez badu</string>
+    <string name="field_model">Eredua</string>
+    <string name="field_voice">Ahotsa</string>
+    <string name="field_format">Audio-formatua</string>
+    <string name="field_parallel">Aldi bereko eskaerak</string>
+    <string name="field_parallel_help">Zenbat eta gehiago, orduan eta azkarrago, zerbitzuak uzten badu.</string>
+    <string name="search_models">Ikusi zer eredu dituen</string>
+    <string name="search_voices">Ikusi zer ahots dituen</string>
+    <string name="show_key">Erakutsi gakoa</string>
+    <string name="hide_key">Ezkutatu gakoa</string>
+    <string name="test">Probatu</string>
+    <string name="testing">Probatzen…</string>
+    <string name="test_ok">Funtzionatzen du.</string>
+    <string name="test_narration_ok">Funtzionatzen du: %1$s s audio.</string>
+    <string name="test_translation_ok">Funtzionatzen du: «%1$s»</string>
+    <string name="http_status">Errorea: %1$d</string>
+    <string name="cleartext_warning">Helbide hau ez dago zure etxeko sarean eta ez du HTTPS erabiltzen: zure testua zifratu gabe bidaliko litzateke eta zure gakoa ez da bidaltzen; beraz, gakoa eskatzen duen zerbitzu batek errorea emango du.</string>
+    <string name="needs_model">Aukeratu lehenik zer ereduk egiten duen hau.</string>
+
+    <!-- Narratu -->
+    <string name="narrate_title">Narratu EPUB bat</string>
+    <string name="choose_epub">Aukeratu EPUBa…</string>
+    <string name="reading_file">Irakurtzen…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">kapitulu %1$d</item>
+        <item quantity="other">%1$d kapitulu</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d esaldi · %3$d karaktere</string>
+    <string name="narrate_goes_to">Testuko %1$d karaktere bidaliko dira %2$s zerbitzura. Zerbitzu horrek erabileraren arabera kobratzen badu, kobratu egingo ditu.</string>
+    <string name="prepare_text">Prestatu testua ahotserako</string>
+    <string name="prepare_text_help">Zenbakiak hitzez, laburdurak eta puntuazio arraroa. Ahots ireki askok behar dute. Azpitituluak ez dira aldatzen.</string>
+    <string name="no_chapters">Ez da testurik aurkitu EPUB honetan.</string>
+    <string name="start">Hasi</string>
+
+    <!-- Inportatu -->
+    <string name="import_title">Inportatu audioliburu bat</string>
+    <string name="import_help">Telefonora kopiatzen da eta transkribatu egiten da azpititulu sinkronizatuak egiteko. Audioa aukeratu duzun zerbitzura doa, bi minutuko zatitan.</string>
+    <string name="choose_audio">Aukeratu audioa…</string>
+    <string name="audio_language">Audioaren hizkuntza</string>
+    <string name="detect_language">Detektatu automatikoki</string>
+
+    <!-- Itzuli -->
+    <string name="translate_title">Itzuli dokumentu bat</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, azpitituluak (SRT, VTT) edo testua (TXT, MD). Esaldi baten barruko letra etzanak eta lodiak galdu egiten dira. PDF bat EPUB itzuli gisa ateratzen da, bere maketaziorik gabe.</string>
+    <string name="choose_document">Aukeratu dokumentua…</string>
+    <string name="from_language">Nondik</string>
+    <string name="to_language">Nora</string>
+    <string name="same_language">Bi hizkuntzak berdinak dira.</string>
+    <string name="translations_list">Itzulpenak</string>
+    <string name="translation_done">Amaituta</string>
+    <string name="translation_partial">Erdizka · %1$d / %2$d</string>
+    <string name="translation_partial_short">Erdizka</string>
+    <string name="translation_running">Itzultzen…</string>
+    <string name="save_to_phone">Gorde honela…</string>
+    <string name="saved_to_phone">Gordeta.</string>
+    <string name="confirm_delete_translation">«%1$s» dokumentuaren itzulpena ezabatu?</string>
+
+    <!-- Erreproduzitzailea -->
+    <string name="live">● Zuzenean</string>
+    <string name="waiting_more">Narrazio gehiagoren zain…</string>
+    <string name="section_n">%1$d. atala</string>
+    <string name="go_to_chapter">Joan kapitulura</string>
+    <string name="go_to_position">Joan posiziora</string>
+    <string name="position_hint">mm:ss edo segundoak</string>
+    <string name="bad_position">Idatzi mm:ss formatuan edo segundotan.</string>
+    <string name="go">Joan</string>
+    <string name="play">Erreproduzitu</string>
+    <string name="pause">Pausatu</string>
+    <string name="back_10">10 segundo atzera</string>
+    <string name="forward_10">10 segundo aurrera</string>
+    <string name="previous_chapter">Aurreko kapitulua</string>
+    <string name="next_chapter">Hurrengo kapitulua</string>
+    <string name="no_text_yet">Oraindik ez dago zati honen testurik.</string>
+    <string name="cant_open_book">Ezin da liburu hau ireki.</string>
+    <string name="playback_error">Ezin da kapitulu hau erreproduzitu.</string>
+
+    <!-- Erroreak -->
+    <string name="err_auth">Zerbitzuak sarbide-gakoa baztertu du. Egiaztatu Ereduak atalean.</string>
+    <string name="err_not_found">Zerbitzuak ez du hori. Egiaztatu URLa eta eredua Ereduak atalean.</string>
+    <string name="err_rate_limit">Zerbitzuak eskaera gehiegi daudela dio, itxaron ondoren ere. Egindakoa gordeta dago: berrekin geroago.</string>
+    <string name="err_bad_request">Zerbitzuak eskaera baztertu du. Egiaztatu eredua eta ahotsa Ereduak atalean.</string>
+    <string name="err_server">Zerbitzuak berak du arazo bat. Egindakoa gordeta dago: berrekin geroago.</string>
+    <string name="err_bad_answer">Zerbitzuak aplikazio honek ulertzen ez duen erantzuna eman du. URL hori API mota zuzena al da?</string>
+    <string name="err_network">Ezin da zerbitzura iritsi. Egindakoa gordeta dago: berrekin geroago.</string>
+    <string name="err_bad_type">Aplikazio honek ezin du fitxategi mota hori itzuli.</string>
+    <string name="err_cant_read_file">Ezin da fitxategi hori irakurri.</string>
+    <string name="err_pron_unreadable">Ezin izan da zure ahoskera-hiztegia irakurri. Alde batera utzi da, eta aplikazioak hasierakoa erabiltzen du.</string>
+    <string name="err_no_text">Dokumentu horretan ez dago itzultzeko testurik.</string>
+    <string name="err_no_text_pdf">PDF honek ez du itzultzeko testurik. Ziurrenik eskaneatuta dago, eta aplikazioak ez ditu irudiak irakurtzen.</string>
+    <string name="err_generic">Zerbait gaizki joan da (%1$s).</string>
+
+    <!-- Hizkuntza, QC, hiztegia, ahotsak eta liburuak, mahaigainean bezala -->
+    <string name="field_language">Hizkuntza</string>
+    <string name="field_language_help">Liburua irakurtzeko hizkuntza. Aukeratu hizkuntza horretan ondo entzuten den ahotsa ere.</string>
+    <string name="qc_title">Berrikusi eta birsortu gaizki entzuten diren esaldiak</string>
+    <string name="qc_help">Esaldi bakoitza transkripzio-zerbitzutik pasatzen da eta, testuarekin bat ez badator, berriro eskatzen da. Motelagoa. Transkripzioaren URLa behar du.</string>
+    <string name="voice_upload">Igo ahots bat…</string>
+    <string name="voice_uploading">Ahotsa igotzen…</string>
+    <string name="voice_upload_help">5 eta 12 s bitarteko grabazio garbia. Storytellerren zerbitzari propioak (st_server) bakarrik onartzen du.</string>
+    <string name="voice_upload_send">Igo</string>
+    <string name="voice_upload_unsupported">Zerbitzu honek ez du ahotsik onartzen: Storytellerren zerbitzari propioak (st_server) bakarrik.</string>
+    <string name="voice_name">Ahotsaren izena</string>
+    <string name="pron_title">Ahoskera-hiztegia</string>
+    <string name="pron_help">Nola irakurtzen diren hitz batzuk hizkuntza honetan: %1$s. Hizkuntza bakoitzak berea du: hizkuntza Ereduak atalean aldatzen da.</string>
+    <string name="pron_words">Hitzak: hitza = nola esaten den, bat lerro bakoitzean</string>
+    <string name="pron_letters">Letraz letra irakurtzen diren siglak</string>
+    <string name="pron_as_words">Hitz gisa irakurtzen diren siglak</string>
+    <string name="pron_save">Gorde</string>
+    <string name="fetch_title">Ekarri liburuak mahaigainetik</string>
+    <string name="fetch_help">Storytellerren zerbitzari propiotik (st_server), narrazioaren URLan. Amaitutako kapituluak bakarrik datoz; mahaigaineko aplikazioa dagoen bezala geratzen da.</string>
+    <string name="fetch_loading">Zerbitzariari galdetzen…</string>
+    <string name="fetch_empty">Zerbitzari horrek oraindik ez du amaitutako kapitulurik.</string>
+    <string name="fetch_unsupported">Zerbitzu honek ez du libururik: Storytellerren zerbitzari propioak (st_server) bakarrik.</string>
+    <string name="fetch_summary">%1$d / %2$d kapitulu · %3$s</string>
+    <string name="fetch_have_it">Baduzu jadanik</string>
+    <string name="fetch_bring">Ekarri</string>
+
+    <string name="job_switch">Aldatu honetara</string>
+    <string name="job_add_to_line">Jarri ilaran</string>
+    <string name="job_waiting_turn">Ilaran: %1$s</string>
+    <string name="book_in_line">● Bere txandaren zain</string>
+
+    <string name="privacy_policy">Pribatutasun-politika</string>
+    <string name="privacy_file">PRIVACY.eu.md</string>
+    <string name="report_content">Salatu edukia</string>
+    <string name="translate_goes_to">Dokumentuaren testua %1$s zerbitzura doa, aukeratu duzun AA zerbitzura. Erabileraren arabera kobratzen badu, kobratu egingo du.</string>
+    <string name="voice_upload_permission">Igo zure ahotsa bakarrik edo jabeak baimena eman dizun ahots bat. Ez erabili beste norbait zarela sinestarazteko.</string>
+    <string name="page_real">Or. %1$s/%2$d · %% %3$d</string>
+    <string name="page_approx">Or. ≈%1$s/%2$d (gutxi gorabehera) · %% %3$d</string>
+</resources>

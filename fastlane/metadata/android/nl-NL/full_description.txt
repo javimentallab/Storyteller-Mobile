@@ -7,4 +7,4 @@
 <li><b>Luisteren</b>: met hoofdstukken, sprongen naar elke positie en afspelen op de achtergrond.</li>
 </ul>
 <p>Je tekst en audio gaan alleen naar de diensten die je kiest, en wie ze beheert kan zien wat je stuurt. Toegangssleutels worden versleuteld op de telefoon bewaard. Geen accounts, advertenties of analyses.</p>
-<p>Beschikbaar in het Engels, Spaans, Portugees, Frans, Duits, Italiaans, Nederlands, Pools, Russisch, Oekraïens, Chinees, Japans, Koreaans, Thai en Hindi.</p>
+<p>Beschikbaar in het Nederlands, Engels, Spaans, Catalaans, Galicisch, Baskisch, Portugees, Frans, Duits, Italiaans, Pools, Russisch, Oekraïens, Chinees, Japans, Koreaans, Thai en Hindi.</p>

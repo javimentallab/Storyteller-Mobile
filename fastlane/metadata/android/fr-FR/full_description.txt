@@ -7,4 +7,4 @@
 <li><b>Écouter</b> avec chapitres, sauts vers n'importe quelle position et lecture en arrière-plan.</li>
 </ul>
 <p>Votre texte et votre audio vont uniquement aux services que vous choisissez, et leurs exploitants peuvent voir ce que vous envoyez. Les clés d'accès sont chiffrées sur le téléphone. Ni compte, ni publicité, ni statistiques.</p>
-<p>Disponible en anglais, espagnol, portugais, français, allemand, italien, néerlandais, polonais, russe, ukrainien, chinois, japonais, coréen, thaï et hindi.</p>
+<p>Disponible en français, anglais, espagnol, catalan, galicien, basque, portugais, allemand, italien, néerlandais, polonais, russe, ukrainien, chinois, japonais, coréen, thaï et hindi.</p>

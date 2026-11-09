@@ -7,4 +7,4 @@
 <li><b>Ascolta</b> con capitoli, salti a qualsiasi posizione e riproduzione in background.</li>
 </ul>
 <p>Il tuo testo e il tuo audio vanno solo ai servizi che scegli, e chi li gestisce può vedere ciò che invii. Le chiavi di accesso sono salvate cifrate sul telefono. Niente account, pubblicità o statistiche.</p>
-<p>Disponibile in inglese, spagnolo, portoghese, francese, tedesco, italiano, olandese, polacco, russo, ucraino, cinese, giapponese, coreano, thailandese e hindi.</p>
+<p>Disponibile in italiano, inglese, spagnolo, catalano, galiziano, basco, portoghese, francese, tedesco, olandese, polacco, russo, ucraino, cinese, giapponese, coreano, thailandese e hindi.</p>

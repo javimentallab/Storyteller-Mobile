@@ -7,4 +7,4 @@
 <li><b>Listen</b> with chapters, jumps to any position and playback in the background.</li>
 </ul>
 <p>Your text and audio go only to the services you choose, and whoever runs them can see what you send. Access keys are stored encrypted on the phone. No accounts, ads or analytics.</p>
-<p>Available in English, Spanish, Portuguese, French, German, Italian, Dutch, Polish, Russian, Ukrainian, Chinese, Japanese, Korean, Thai and Hindi.</p>
+<p>Available in English, Spanish, Catalan, Galician, Basque, Portuguese, French, German, Italian, Dutch, Polish, Russian, Ukrainian, Chinese, Japanese, Korean, Thai and Hindi.</p>

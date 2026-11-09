@@ -7,4 +7,4 @@
 <li><b>Słuchanie</b>: rozdziały, skoki do dowolnej pozycji i odtwarzanie w tle.</li>
 </ul>
 <p>Twój tekst i dźwięk trafiają tylko do wybranych usług, a ich operatorzy widzą to, co wysyłasz. Klucze dostępu są przechowywane na telefonie w postaci zaszyfrowanej. Bez kont, reklam i analityki.</p>
-<p>Dostępna po angielsku, hiszpańsku, portugalsku, francusku, niemiecku, włosku, niderlandzku, polsku, rosyjsku, ukraińsku, chińsku, japońsku, koreańsku, tajsku i w hindi.</p>
+<p>Dostępna po polsku, angielsku, hiszpańsku, katalońsku, galicyjsku, baskijsku, portugalsku, francusku, niemiecku, włosku, niderlandzku, rosyjsku, ukraińsku, chińsku, japońsku, koreańsku, tajsku i w hindi.</p>

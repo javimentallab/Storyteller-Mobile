@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Biblioteca -->
+    <string name="library">Biblioteca</string>
+    <string name="library_empty">Encara no hi ha llibres. Narra un EPUB o importa un audiollibre per començar.</string>
+    <string name="narrate_epub">Narra EPUB</string>
+    <string name="import_audiobook">Importa audiollibre</string>
+    <string name="translate">Tradueix</string>
+    <string name="models">Models</string>
+    <plurals name="book_chapters">
+        <item quantity="one">%1$d capítol · %2$s</item>
+        <item quantity="other">%1$d capítols · %2$s</item>
+    </plurals>
+    <string name="book_working">● En curs</string>
+    <string name="book_partial">⏸ A mitges · %1$d %%</string>
+    <string name="listen">Escolta</string>
+    <string name="resume">Reprèn</string>
+    <string name="regenerate">Torna a narrar</string>
+    <string name="more_options">Més opcions</string>
+    <string name="confirm_delete">Vols esborrar «%1$s» d\'aquest mòbil? El seu àudio es perd per sempre.</string>
+    <string name="confirm_regenerate">Vols tornar a narrar «%1$s» des del principi? El que s\'ha narrat fins ara es perd.</string>
+    <string name="confirm_cancel_job">Vols cancel·lar «%1$s»? El que s\'ha fet fins ara es descarta.</string>
+    <string name="delete">Esborra</string>
+    <string name="cancel">Cancel·la</string>
+    <string name="keep_going">Continua</string>
+    <string name="back">Enrere</string>
+
+    <!-- Feines -->
+    <string name="work_channel">Narrar, transcriure i traduir</string>
+    <string name="done_channel">Acabats</string>
+    <string name="job_finished">Acabat</string>
+    <string name="job_failed">S\'ha aturat a mitges. El que s\'ha fet està desat.</string>
+    <string name="stop_and_save">Atura i desa</string>
+    <string name="job_queued">Esperant el torn…</string>
+    <string name="job_copying">Copiant el fitxer…</string>
+    <string name="job_reading">Llegint el document…</string>
+    <string name="job_narrating">Capítol %1$d/%2$d · frase %3$d</string>
+    <string name="job_encoding">Comprimint el capítol…</string>
+    <string name="job_transcribing">Transcrivint… %1$s de %2$s</string>
+    <string name="job_translating">Traduint… %1$d/%2$d</string>
+    <string name="job_saving">Desant…</string>
+    <string name="job_stopping">Aturant…</string>
+    <string name="job_waiting">el servei està ocupat, torno a provar d\'aquí a %1$d s</string>
+    <string name="eta_calculating">calculant el temps restant…</string>
+    <string name="eta_less_minute">queda menys d\'1 min</string>
+    <string name="eta_minutes">queden ~%1$d min</string>
+    <string name="eta_hours">queden ~%1$d h %2$d min</string>
+    <string name="eta_until">%1$s (cap a les %2$s)</string>
+
+    <!-- Models -->
+    <string name="models_intro">Els models no s\'executen al mòbil. Per a cada tasca, tria el servei que la fa: un de públic amb la teva clau d\'accés, o un de teu. El teu text i el teu àudio van al servei que triïs.</string>
+    <string name="section_narration">Narració</string>
+    <string name="section_narration_help">De text a veu. Una API com la d\'OpenAI: /v1/audio/speech</string>
+    <string name="section_transcription">Transcripció</string>
+    <string name="section_transcription_help">De veu a text, per als audiollibres importats. Una API com la d\'OpenAI: /v1/audio/transcriptions</string>
+    <string name="section_translation">Traducció</string>
+    <string name="section_translation_help">Qualsevol model de xat. Una API com la d\'OpenAI: /v1/chat/completions (també Ollama i llama.cpp)</string>
+    <string name="field_url">URL</string>
+    <string name="field_key">Clau d\'accés</string>
+    <string name="field_key_hint">Deixa-la buida si el servei no en té</string>
+    <string name="field_model">Model</string>
+    <string name="field_voice">Veu</string>
+    <string name="field_format">Format d\'àudio</string>
+    <string name="field_parallel">Peticions alhora</string>
+    <string name="field_parallel_help">Més és més ràpid, si el servei ho permet.</string>
+    <string name="search_models">Mira quins models té</string>
+    <string name="search_voices">Mira quines veus té</string>
+    <string name="show_key">Mostra la clau</string>
+    <string name="hide_key">Amaga la clau</string>
+    <string name="test">Prova</string>
+    <string name="testing">Provant…</string>
+    <string name="test_ok">Funciona.</string>
+    <string name="test_narration_ok">Funciona: %1$s s d\'àudio.</string>
+    <string name="test_translation_ok">Funciona: «%1$s»</string>
+    <string name="http_status">Error %1$d</string>
+    <string name="cleartext_warning">Aquesta adreça no és de la teva xarxa de casa i no fa servir HTTPS: el teu text viatjaria sense xifrar i la teva clau no s\'envia, de manera que un servei que la demani donarà error.</string>
+    <string name="needs_model">Tria primer quin model fa això.</string>
+
+    <!-- Narrar -->
+    <string name="narrate_title">Narrar un EPUB</string>
+    <string name="choose_epub">Tria un EPUB…</string>
+    <string name="reading_file">Llegint-lo…</string>
+    <plurals name="chapter_count">
+        <item quantity="one">%1$d capítol</item>
+        <item quantity="other">%1$d capítols</item>
+    </plurals>
+    <string name="narrate_summary">%1$s · %2$d frases · %3$d caràcters</string>
+    <string name="narrate_goes_to">S\'enviaran %1$d caràcters de text a %2$s. Si aquest servei cobra per ús, els cobrarà.</string>
+    <string name="prepare_text">Prepara el text per a la veu</string>
+    <string name="prepare_text_help">Nombres en lletres, abreviatures i puntuació estranya. Moltes veus obertes ho necessiten. Els subtítols no canvien.</string>
+    <string name="no_chapters">No he trobat text en aquest EPUB.</string>
+    <string name="start">Comença</string>
+
+    <!-- Importar -->
+    <string name="import_title">Importar un audiollibre</string>
+    <string name="import_help">Es copia al mòbil i es transcriu per fer els subtítols sincronitzats. L\'àudio va al servei que hagis triat, en trossos de dos minuts.</string>
+    <string name="choose_audio">Tria un àudio…</string>
+    <string name="audio_language">Idioma de l\'àudio</string>
+    <string name="detect_language">Detecta automàticament</string>
+
+    <!-- Traduir -->
+    <string name="translate_title">Traduir un document</string>
+    <string name="translate_help">EPUB, PDF, Word, PowerPoint, Excel, subtítols (SRT, VTT) o text (TXT, MD). Es perden les cursives i les negretes dins d\'una frase. Un PDF surt com un EPUB traduït, sense la seva maquetació.</string>
+    <string name="choose_document">Tria un document…</string>
+    <string name="from_language">De</string>
+    <string name="to_language">A</string>
+    <string name="same_language">Els dos idiomes són el mateix.</string>
+    <string name="translations_list">Traduccions</string>
+    <string name="translation_done">Acabada</string>
+    <string name="translation_partial">A mitges · %1$d de %2$d</string>
+    <string name="translation_partial_short">A mitges</string>
+    <string name="translation_running">Traduint…</string>
+    <string name="save_to_phone">Desa com a…</string>
+    <string name="saved_to_phone">Desat.</string>
+    <string name="confirm_delete_translation">Vols esborrar la traducció de «%1$s»?</string>
+
+    <!-- Reproductor -->
+    <string name="live">● En directe</string>
+    <string name="waiting_more">Esperant que se\'n narri més…</string>
+    <string name="section_n">Secció %1$d</string>
+    <string name="go_to_chapter">Ves al capítol</string>
+    <string name="go_to_position">Ves a la posició</string>
+    <string name="position_hint">mm:ss o segons</string>
+    <string name="bad_position">Escriu-ho com a mm:ss o en segons.</string>
+    <string name="go">Ves</string>
+    <string name="play">Reprodueix</string>
+    <string name="pause">Pausa</string>
+    <string name="back_10">Enrere 10 segons</string>
+    <string name="forward_10">Endavant 10 segons</string>
+    <string name="previous_chapter">Capítol anterior</string>
+    <string name="next_chapter">Capítol següent</string>
+    <string name="no_text_yet">Encara no hi ha text d\'aquesta part.</string>
+    <string name="cant_open_book">No puc obrir aquest llibre.</string>
+    <string name="playback_error">No puc reproduir aquest capítol.</string>
+
+    <!-- Errors -->
+    <string name="err_auth">El servei ha rebutjat la clau d\'accés. Revisa-la a Models.</string>
+    <string name="err_not_found">El servei no té això. Revisa l\'URL i el model a Models.</string>
+    <string name="err_rate_limit">El servei diu que hi ha massa peticions, fins i tot després d\'esperar. El que s\'ha fet està desat: reprèn-ho més tard.</string>
+    <string name="err_bad_request">El servei ha rebutjat la petició. Revisa el model i la veu a Models.</string>
+    <string name="err_server">El servei té un problema propi. El que s\'ha fet està desat: reprèn-ho més tard.</string>
+    <string name="err_bad_answer">El servei ha donat una resposta que aquesta aplicació no entén. Aquest URL és del tipus d\'API correcte?</string>
+    <string name="err_network">No arribo al servei. El que s\'ha fet està desat: reprèn-ho més tard.</string>
+    <string name="err_bad_type">Aquesta aplicació no sap traduir aquest tipus de fitxer.</string>
+    <string name="err_cant_read_file">No puc llegir aquest fitxer.</string>
+    <string name="err_pron_unreadable">No s\'ha pogut llegir el teu diccionari de pronunciació. S\'ha apartat i l\'aplicació fa servir l\'inicial.</string>
+    <string name="err_no_text">No hi ha text per traduir en aquest document.</string>
+    <string name="err_no_text_pdf">Aquest PDF no té text per traduir. Segurament està escanejat, i l\'aplicació no llegeix imatges.</string>
+    <string name="err_generic">Alguna cosa ha fallat (%1$s).</string>
+
+    <!-- Idioma, QC, diccionari, veus i llibres, com a l'escriptori -->
+    <string name="field_language">Idioma</string>
+    <string name="field_language_help">L\'idioma en què es llegeix el llibre. Tria també una veu que hi soni bé.</string>
+    <string name="qc_title">Revisa i regenera les frases que sonin malament</string>
+    <string name="qc_help">Cada frase passa pel servei de transcripció i, si no coincideix amb el text, es torna a demanar. Més lent. Necessita l\'URL de transcripció.</string>
+    <string name="voice_upload">Puja una veu…</string>
+    <string name="voice_uploading">Pujant la veu…</string>
+    <string name="voice_upload_help">Una gravació neta de 5 a 12 s. Només l\'admet el servidor propi d\'Storyteller (st_server).</string>
+    <string name="voice_upload_send">Puja</string>
+    <string name="voice_upload_unsupported">Aquest servei no admet veus: només el servidor propi d\'Storyteller (st_server).</string>
+    <string name="voice_name">Nom de la veu</string>
+    <string name="pron_title">Diccionari de pronunciació</string>
+    <string name="pron_help">Com es llegeixen algunes paraules en %1$s. Cada idioma té el seu: l\'idioma es canvia a Models.</string>
+    <string name="pron_words">Paraules: paraula = com es diu, una a cada línia</string>
+    <string name="pron_letters">Sigles que es lletregen</string>
+    <string name="pron_as_words">Sigles que es llegeixen com a paraula</string>
+    <string name="pron_save">Desa</string>
+    <string name="fetch_title">Portar llibres de l\'escriptori</string>
+    <string name="fetch_help">Del servidor propi d\'Storyteller (st_server), a l\'URL de narració. Només venen els capítols acabats; l\'aplicació d\'escriptori es queda com està.</string>
+    <string name="fetch_loading">Preguntant al servidor…</string>
+    <string name="fetch_empty">Aquest servidor encara no té capítols acabats.</string>
+    <string name="fetch_unsupported">Aquest servei no té llibres: només el servidor propi d\'Storyteller (st_server).</string>
+    <string name="fetch_summary">%1$d de %2$d capítols · %3$s</string>
+    <string name="fetch_have_it">Ja el tens</string>
+    <string name="fetch_bring">Porta</string>
+
+    <string name="job_switch">Passa a aquest</string>
+    <string name="job_add_to_line">Posa a la cua</string>
+    <string name="job_waiting_turn">A la cua: %1$s</string>
+    <string name="book_in_line">● Esperant el seu torn</string>
+
+    <string name="privacy_policy">Política de privadesa</string>
+    <string name="privacy_file">PRIVACY.ca.md</string>
+    <string name="report_content">Denuncia contingut</string>
+    <string name="translate_goes_to">El text del document va a %1$s, el servei d\'IA que has triat. Si cobra per ús, el cobrarà.</string>
+    <string name="voice_upload_permission">Puja només la teva pròpia veu o la d\'algú que t\'hagi donat permís. No la facis servir per fer-te passar per una altra persona.</string>
+    <string name="page_real">Pàg. %1$s de %2$d · %3$d %%</string>
+    <string name="page_approx">Pàg. ≈%1$s de %2$d (aprox.) · %3$d %%</string>
+</resources>

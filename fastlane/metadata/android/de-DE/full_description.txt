@@ -7,4 +7,4 @@
 <li><b>Anhören</b>: mit Kapiteln, Sprüngen an jede Position und Wiedergabe im Hintergrund.</li>
 </ul>
 <p>Dein Text und dein Audio gehen nur an die Dienste, die du wählst, und deren Betreiber können sehen, was du schickst. Zugangsschlüssel werden verschlüsselt auf dem Telefon gespeichert. Keine Konten, keine Werbung, keine Analysen.</p>
-<p>Verfügbar auf Englisch, Spanisch, Portugiesisch, Französisch, Deutsch, Italienisch, Niederländisch, Polnisch, Russisch, Ukrainisch, Chinesisch, Japanisch, Koreanisch, Thailändisch und Hindi.</p>
+<p>Verfügbar auf Deutsch, Englisch, Spanisch, Katalanisch, Galicisch, Baskisch, Portugiesisch, Französisch, Italienisch, Niederländisch, Polnisch, Russisch, Ukrainisch, Chinesisch, Japanisch, Koreanisch, Thai und Hindi.</p>
