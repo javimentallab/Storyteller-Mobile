@@ -24,6 +24,8 @@ Si la dirección de un servicio se encuentra fuera de la red doméstica del Usua
 
 La función *Denunciar contenido* abre, dentro de la Aplicación, un formulario de Google. La información que el Usuario introduzca en él llega al Titular a través de Google, conforme a las condiciones de este. La Aplicación no añade ningún otro dato: ni los libros, ni las claves de acceso, ni ninguna otra información.
 
+Por exigencia del artículo 13 del Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo, de 27 de abril de 2016, General de Protección de Datos, se señala lo siguiente:
+
 - **Finalidad:** tramitar la denuncia y, en su caso, adoptar medidas frente al uso indebido de la Aplicación.
 - **Base legal:** el interés legítimo del Titular en atender las denuncias y prevenir el uso indebido de la Aplicación (artículo 6.1.f del Reglamento General de Protección de Datos).
 - **Plazo de conservación:** el tiempo necesario para tramitar la denuncia. Después se suprime, salvo que deba conservarse, debidamente bloqueada, para la formulación, el ejercicio o la defensa de reclamaciones, durante los plazos de prescripción aplicables.

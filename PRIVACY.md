@@ -24,6 +24,8 @@ If the address of a service is outside the User's home network and does not use 
 
 The *Report content* function opens a Google form within the App. The information the User enters in it reaches the Provider through Google, under Google's terms. The App adds no other data: neither the books, nor the access keys, nor any other information.
 
+As required by Article 13 of Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (General Data Protection Regulation), the following information is provided:
+
 - **Purpose:** to handle the report and, where appropriate, to take action against misuse of the App.
 - **Legal basis:** the Provider's legitimate interest in handling reports and preventing misuse of the App (Article 6(1)(f) of the General Data Protection Regulation).
 - **Retention period:** as long as necessary to handle the report. It is then deleted, unless it must be kept, duly blocked, for the establishment, exercise or defence of legal claims during the applicable limitation periods.
