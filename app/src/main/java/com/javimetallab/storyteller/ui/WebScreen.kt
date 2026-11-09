@@ -1,6 +1,7 @@
 package com.javimetallab.storyteller.ui
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -19,7 +20,8 @@ import com.javimetallab.storyteller.R
 import com.javimetallab.storyteller.Screen
 import com.javimetallab.storyteller.data.Links
 
-fun AppViewModel.openPrivacyPolicy() = go(Screen.Web(R.string.privacy_policy, Links.PRIVACY))
+fun AppViewModel.openPrivacyPolicy() =
+    go(Screen.Web(R.string.privacy_policy, Links.privacy(getApplication<Application>().getString(R.string.privacy_file))))
 
 fun AppViewModel.openReportForm() = go(Screen.Web(R.string.report_content, Links.REPORT_FORM))
 

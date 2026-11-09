@@ -185,6 +185,7 @@
     <string name="book_in_line">● Ждёт своей очереди</string>
 
     <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="privacy_file">PRIVACY.ru.md</string>
     <string name="report_content">Пожаловаться на контент</string>
     <string name="translate_goes_to">Текст документа отправляется в %1$s — выбранный вами ИИ-сервис. Если он берёт плату за использование, он её учтёт.</string>
     <string name="voice_upload_permission">Загружайте только свой голос или голос человека, который дал вам разрешение. Не выдавайте себя за другого человека.</string>

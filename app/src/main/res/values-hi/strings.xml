@@ -181,6 +181,7 @@
     <string name="book_in_line">● अपनी बारी का इंतज़ार</string>
 
     <string name="privacy_policy">निजता नीति</string>
+    <string name="privacy_file">PRIVACY.hi.md</string>
     <string name="report_content">सामग्री की रिपोर्ट करें</string>
     <string name="translate_goes_to">दस्तावेज़ का टेक्स्ट %1$s को भेजा जाता है, जो आपकी चुनी हुई AI सेवा है। अगर वह उपयोग के हिसाब से शुल्क लेती है, तो इसका शुल्क लगेगा।</string>
     <string name="voice_upload_permission">सिर्फ़ अपनी आवाज़ या ऐसी आवाज़ अपलोड करें जिसके मालिक ने अनुमति दी हो। इसका उपयोग किसी और का रूप धरने के लिए न करें।</string>

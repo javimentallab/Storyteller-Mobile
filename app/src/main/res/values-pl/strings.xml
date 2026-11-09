@@ -185,6 +185,7 @@
     <string name="book_in_line">● Czeka na swoją kolej</string>
 
     <string name="privacy_policy">Polityka prywatności</string>
+    <string name="privacy_file">PRIVACY.pl.md</string>
     <string name="report_content">Zgłoś treść</string>
     <string name="translate_goes_to">Tekst dokumentu trafia do %1$s, wybranej przez Ciebie usługi AI. Jeśli pobiera opłaty za użycie, obciąży Cię za niego.</string>
     <string name="voice_upload_permission">Prześlij tylko własny głos albo głos osoby, która udzieliła Ci zgody. Nie używaj go, by podawać się za kogoś innego.</string>

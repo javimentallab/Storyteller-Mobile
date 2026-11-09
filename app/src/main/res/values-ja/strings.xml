@@ -179,6 +179,7 @@
     <string name="book_in_line">● 順番待ち</string>
 
     <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="privacy_file">PRIVACY.ja.md</string>
     <string name="report_content">コンテンツを報告</string>
     <string name="translate_goes_to">文書のテキストは、選んだ AI サービスである %1$s に送られます。従量課金のサービスなら、その分が請求されます。</string>
     <string name="voice_upload_permission">アップロードするのはご自身の声か、本人の許可を得た声だけにしてください。他人になりすますために使わないでください。</string>

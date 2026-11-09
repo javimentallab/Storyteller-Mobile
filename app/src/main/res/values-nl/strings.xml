@@ -181,6 +181,7 @@
     <string name="book_in_line">● Wacht op zijn beurt</string>
 
     <string name="privacy_policy">Privacybeleid</string>
+    <string name="privacy_file">PRIVACY.nl.md</string>
     <string name="report_content">Inhoud melden</string>
     <string name="translate_goes_to">De tekst van het document gaat naar %1$s, de AI-dienst die je hebt gekozen. Als die per gebruik rekent, rekent hij hem aan.</string>
     <string name="voice_upload_permission">Upload alleen je eigen stem of die van iemand die je toestemming heeft gegeven. Gebruik hem niet om je als iemand anders voor te doen.</string>

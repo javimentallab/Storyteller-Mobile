@@ -185,6 +185,7 @@
     <string name="book_in_line">● Чекає своєї черги</string>
 
     <string name="privacy_policy">Політика конфіденційності</string>
+    <string name="privacy_file">PRIVACY.uk.md</string>
     <string name="report_content">Поскаржитися на вміст</string>
     <string name="translate_goes_to">Текст документа надсилається до %1$s — вибраного вами сервісу ШІ. Якщо він бере плату за використання, він її врахує.</string>
     <string name="voice_upload_permission">Завантажуйте лише свій голос або голос людини, яка дала вам дозвіл. Не видавайте себе за іншу людину.</string>

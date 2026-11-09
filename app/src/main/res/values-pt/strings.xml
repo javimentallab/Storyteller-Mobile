@@ -181,6 +181,7 @@
     <string name="book_in_line">● Aguardando a vez</string>
 
     <string name="privacy_policy">Política de privacidade</string>
+    <string name="privacy_file">PRIVACY.pt.md</string>
     <string name="report_content">Denunciar conteúdo</string>
     <string name="translate_goes_to">O texto do documento vai para %1$s, o serviço de IA que você escolheu. Se ele cobrar pelo uso, vai cobrar por isso.</string>
     <string name="voice_upload_permission">Envie só a sua própria voz ou uma cujo dono tenha dado permissão. Não a use para se passar por outra pessoa.</string>

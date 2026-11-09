@@ -103,7 +103,10 @@ class FormatTest {
 
     @Test
     fun fixedAddresses() {
-        assertTrue(Links.PRIVACY.startsWith("https://"))
+        assertTrue(Links.privacy("PRIVACY.de.md").startsWith("https://"))
+        assertTrue(Links.privacy("PRIVACY.de.md").endsWith("/PRIVACY.de.md"))
+        // The list of languages at the top of the policy moves between files in the same folder.
+        assertTrue(Links.staysInside(Links.privacy("PRIVACY.md"), Links.privacy("PRIVACY.de.md")))
         assertTrue(Regex("https://docs\\.google\\.com/forms/d/e/[^/]+/viewform").matches(Links.REPORT_FORM))
         // The answer lands next to the form, and "send another" comes back to it.
         assertTrue(Links.staysInside(Links.REPORT_FORM, Links.REPORT_FORM.replace("viewform", "formResponse")))

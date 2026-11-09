@@ -179,6 +179,7 @@
     <string name="book_in_line">● 순서를 기다리는 중</string>
 
     <string name="privacy_policy">개인정보처리방침</string>
+    <string name="privacy_file">PRIVACY.ko.md</string>
     <string name="report_content">콘텐츠 신고</string>
     <string name="translate_goes_to">문서의 텍스트는 선택한 AI 서비스인 %1$s(으)로 전송됩니다. 사용량에 따라 요금을 받는 서비스라면 이 분량도 청구됩니다.</string>
     <string name="voice_upload_permission">본인의 목소리나 당사자의 허락을 받은 목소리만 올리세요. 다른 사람을 사칭하는 데 쓰지 마세요.</string>

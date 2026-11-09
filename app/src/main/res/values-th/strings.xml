@@ -179,6 +179,7 @@
     <string name="book_in_line">● กำลังรอคิว</string>
 
     <string name="privacy_policy">นโยบายความเป็นส่วนตัว</string>
+    <string name="privacy_file">PRIVACY.th.md</string>
     <string name="report_content">รายงานเนื้อหา</string>
     <string name="translate_goes_to">ข้อความในเอกสารจะถูกส่งไปยัง %1$s ซึ่งเป็นบริการ AI ที่คุณเลือก หากบริการนั้นคิดเงินตามการใช้งาน จะคิดเงินส่วนนี้ด้วย</string>
     <string name="voice_upload_permission">อัปโหลดเฉพาะเสียงของคุณเอง หรือเสียงที่เจ้าของอนุญาตแล้ว อย่าใช้เพื่อแอบอ้างเป็นผู้อื่น</string>

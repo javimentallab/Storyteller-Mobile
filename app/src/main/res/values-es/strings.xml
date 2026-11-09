@@ -180,6 +180,7 @@
     <string name="book_in_line">● Esperando su turno</string>
 
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="privacy_file">PRIVACY.es.md</string>
     <string name="report_content">Denunciar contenido</string>
     <string name="translate_goes_to">El texto del documento va a %1$s, el servicio de IA que has elegido. Si cobra por uso, lo cobrará.</string>
     <string name="voice_upload_permission">Sube solo tu propia voz o una cuyo dueño te haya dado permiso. No la uses para hacerte pasar por otra persona.</string>

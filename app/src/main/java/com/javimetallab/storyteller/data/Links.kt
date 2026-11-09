@@ -4,7 +4,8 @@ import java.net.URL
 
 /** The app's only fixed addresses. */
 object Links {
-    const val PRIVACY = "https://github.com/javimentallab/Storyteller-Mobile/blob/main/PRIVACY.md"
+    /** The privacy policy in the language the app is showing: [file] comes from the translated strings. */
+    fun privacy(file: String) = "https://github.com/javimentallab/Storyteller-Mobile/blob/main/$file"
 
     /** The Google Form behind "Report content", which Play asks for in apps that generate content with AI. */
     const val REPORT_FORM = "https://docs.google.com/forms/d/e/1FAIpQLSeAp75uOtXTUgbvuwDpWg9llQR_SMirFGVH5SS8BQaXkChMVQ/viewform"

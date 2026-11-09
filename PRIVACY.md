@@ -1,8 +1,8 @@
 # Privacy policy — Storyteller Mobile
 
-*Last updated: 8 November 2026*
+*Last updated: 9 November 2026*
 
-*Versión en español: [PRIVACY.es.md](PRIVACY.es.md)*
+*[English](PRIVACY.md) · [Español](PRIVACY.es.md) · [Deutsch](PRIVACY.de.md) · [Français](PRIVACY.fr.md) · [Italiano](PRIVACY.it.md) · [Nederlands](PRIVACY.nl.md) · [Polski](PRIVACY.pl.md) · [Português](PRIVACY.pt.md) · [Русский](PRIVACY.ru.md) · [Українська](PRIVACY.uk.md) · [简体中文](PRIVACY.zh-CN.md) · [日本語](PRIVACY.ja.md) · [한국어](PRIVACY.ko.md) · [ไทย](PRIVACY.th.md) · [हिन्दी](PRIVACY.hi.md)*
 
 ## 1. Data controller and scope
 
@@ -16,7 +16,7 @@ The App transmits only the data required for each operation, and exclusively to 
 - **Transcription:** the audio of the imported audiobook, in two-minute segments, and, if the User enables the check of narrated sentences, the audio of those sentences as well.
 - **Translation:** the text of the document.
 
-Each request includes the access key provided by the User for the relevant service. The provider of each service can access the data sent to it, under its own terms, so the User should choose services the User trusts. Before narrating, the App informs the User of the amount of text to be sent and of its recipient; before translating, it informs the User of the recipient. The Provider has no access to these data and takes no part in their processing, which is the responsibility of the providers of the services chosen by the User.
+Each request includes the access key provided by the User for the relevant service. The provider of each service can access the data sent to it, under its own terms, so the User shall choose services the User trusts. Before narrating, the App informs the User of the amount of text to be sent and of its recipient; before translating, it informs the User of the recipient. The Provider has no access to these data and takes no part in their processing, which is the responsibility of the providers of the services chosen by the User.
 
 If the address of a service is outside the User's home network and does not use HTTPS, the App warns that the text would be transmitted unencrypted and does not send the access key to that address.
 

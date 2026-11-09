@@ -181,6 +181,7 @@
     <string name="book_in_line">● In attesa del proprio turno</string>
 
     <string name="privacy_policy">Informativa sulla privacy</string>
+    <string name="privacy_file">PRIVACY.it.md</string>
     <string name="report_content">Segnala contenuti</string>
     <string name="translate_goes_to">Il testo del documento va a %1$s, il servizio di IA che hai scelto. Se fa pagare in base all\'uso, lo addebiterà.</string>
     <string name="voice_upload_permission">Carica solo la tua voce o quella di chi ti ha dato il permesso. Non usarla per spacciarti per un\'altra persona.</string>
