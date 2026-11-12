@@ -44,6 +44,15 @@ NEW_VOICE = [
     ("es", "ISBN 978-84-376-0494-7 y el 912345678."),
     ("es", "El 2026-11-08 ganó 25000000 euros entre 1990-2000."),
 ]
+# Números romanos (solo en español): tras siglo, capítulo…; tras un rey o papa; delante de Guerra, Reich…
+# Y lo que no debe cambiar: rótulos, siglas, el «I» del inglés, el verbo «vi» y las mayúsculas de un título.
+NEW_VOICE += [
+    ("es", "En el siglo XXI, y no en el siglo xxi ni entre los siglos XIX y XX, del siglo XV al XVIII."),
+    ("es", "En el siglo I a. C. Capítulos III-V. CAPÍTULO IV. Tomo ii. Capítulo I: el comienzo."),
+    ("es", "Felipe II, Luis XIV, Isabel II, Juan Pablo II, Benedicto XVI, Carlos V y Juan Carlos I."),
+    ("es", "Mehmet II, Cleopatra VII, Alfonso XIII y LUIS XIV, tras la II Guerra Mundial y el III Reich."),
+    ("es", "Anexo C, Sección D, mi CV, Talla XL, un CD. Then I said. El libro vi que estaba. LO VI TODO."),
+]
 LANGS = ["es", "es", "es", "en", "fr", "de", "ru", "zh-cn", "ja", "ar", "hi", "pt", "it"]
 WORDS = ["casa", "árbol", "Sr.", "EE.", "UU.", "J.", "niño", "pingüino", "3,5", "1.500", "$74.99", "10:30",
          "dijo", "él", "y", "que", "palabra", "larguísima", "Привет", "мир", "这是", "一个", "句子", "猫",
@@ -110,6 +119,7 @@ def main():
     from num2words import num2words
     spell = g.setdefault("spell", {}).setdefault("es", {})
     for t in NEW_SPOKEN + [t for _l, t in NEW_VOICE]:
+        t += " " + E._roman_numerals(t)                   # los romanos llegan en cifras: también hay que escribirlas
         for n in {int(x) for x in re.findall(r"\d+", t)} | set(range(10)):
             spell.setdefault(str(n), num2words(n, lang="es"))
     g["pauses"] = dict(E.PAUSES)

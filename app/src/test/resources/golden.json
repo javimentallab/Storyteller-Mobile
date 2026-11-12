@@ -1210,6 +1210,31 @@
    "lang": "es",
    "in": "El 2026-11-08 ganó 25000000 euros entre 1990-2000.",
    "out": "el dos mil veintiséis-once-ocho ganó veinticinco millones euros entre mil novecientos noventa-dos mil."
+  },
+  {
+   "lang": "es",
+   "in": "En el siglo XXI, y no en el siglo xxi ni entre los siglos XIX y XX, del siglo XV al XVIII.",
+   "out": "en el siglo veintiuno, y no en el siglo veintiuno ni entre los siglos diecinueve y veinte, del siglo quince al dieciocho."
+  },
+  {
+   "lang": "es",
+   "in": "En el siglo I a. C. Capítulos III-V. CAPÍTULO IV. Tomo ii. Capítulo I: el comienzo.",
+   "out": "en el siglo primero a. C. Capítulos tres a cinco. Capítulo cuatro. Tomo dos. Capítulo uno, el comienzo."
+  },
+  {
+   "lang": "es",
+   "in": "Felipe II, Luis XIV, Isabel II, Juan Pablo II, Benedicto XVI, Carlos V y Juan Carlos I.",
+   "out": "felipe segundo, Luis catorce, Isabel segunda, Juan Pablo segundo, Benedicto dieciséis, Carlos quinto y Juan Carlos primero."
+  },
+  {
+   "lang": "es",
+   "in": "Mehmet II, Cleopatra VII, Alfonso XIII y LUIS XIV, tras la II Guerra Mundial y el III Reich.",
+   "out": "mehmet segundo, Cleopatra séptima, Alfonso trece y Luis catorce, tras la segunda Guerra Mundial y el tercer Reich."
+  },
+  {
+   "lang": "es",
+   "in": "Anexo C, Sección D, mi CV, Talla XL, un CD. Then I said. El libro vi que estaba. LO VI TODO.",
+   "out": "anexo C, Sección D, mi ce uve, Talla equis ele, un ce de. Then I said. El libro vi que estaba. Lo uve i Todo."
   }
  ],
  "spell": {
@@ -1250,7 +1275,14 @@
    "494": "cuatrocientos noventa y cuatro",
    "376": "trescientos setenta y seis",
    "25000000": "veinticinco millones",
-   "1990": "mil novecientos noventa"
+   "1990": "mil novecientos noventa",
+   "15": "quince",
+   "18": "dieciocho",
+   "19": "diecinueve",
+   "20": "veinte",
+   "14": "catorce",
+   "16": "dieciséis",
+   "13": "trece"
   },
   "en": {
    "1500": "one thousand, five hundred",

@@ -308,6 +308,87 @@ object TextPrep {
         Regex("$NB[Dd][Rr]\\.$NA") to "doctor",
         Regex("$NB[Jj][Rr]\\.?$NA") to "júnior",
     )
+
+    // Roman numerals, Spanish only, as on the desktop (_roman_numerals). Without this «XXI» was one more acronym and
+    // got spelt («siglo equis equis i») before the user's dictionary could see it. Only where there is no doubt:
+    // after siglo, capítulo, tomo…; after a king's or pope's name; before Guerra, República, Reich… Amounts come out
+    // as digits and numbers() writes them.
+    private val ROMAN_OK = Regex("M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})")
+    private val ROMAN_VAL = mapOf('I' to 1, 'V' to 5, 'X' to 10, 'L' to 50, 'C' to 100, 'D' to 500, 'M' to 1000)
+    private val ORD_M = "primero segundo tercero cuarto quinto sexto séptimo octavo noveno décimo".split(" ")
+    private val ORD_F = ORD_M.map { it.dropLast(1) + "a" }
+    private val ORD_BEFORE_M = listOf("primer", "segundo", "tercer") + ORD_M.drop(3)      // el III Reich: «tercer»
+    private const val ROMAN_AFTER = "siglos?|cap[iíÍ]tulos?|tomos?|vol[uúÚ]men(?:es)?|partes?|libros?|actos?|escenas?|" +
+        "cantos?|secci[oóÓ]n(?:es)?|lecci[oóÓ]n(?:es)?|fases?|t[iíÍ]tulos?|ap[eéÉ]ndices?|anexos?|edici[oóÓ]n(?:es)?"
+    // A single letter only if it is I, V or X («Anexo C» is a label); in lower case, two letters or more and never «vi».
+    private const val RN = "(?:[IVX]|[IVXLCDM]{2,}|(?!vi$NA)[ivx]{2,})$NA"
+    private const val RSEP = "(?:$S*[-–]$S*|$S*,$S*|$S+(?:y|e|o|u|al|a)$S+)"
+    private val ROMAN_TRIGGER = Regex("(?i:$NB($ROMAN_AFTER))($S+)($RN(?:$RSEP$RN)*)")
+    private val ROMAN_TOKEN = Regex("[IVXLCDMivx]+")
+    private val ROMAN_DASH = Regex("$S*[-–]$S*")
+    private const val ROMAN_NOUN_F = "guerra|rep[uúÚ]blica|internacional|cruzada|jornadas?|edici[oóÓ]n|asamblea|" +
+        "conferencia|cumbre|bienal|olimpiada"
+    private const val ROMAN_NOUN_M = "reich|concilio|imperio|congreso|plan|festival|premio|encuentro|simposio|centenario|milenio"
+    private val ROMAN_BEFORE = Regex("$NB([IVXLCDM]+)$S+(?i:($ROMAN_NOUN_F)|($ROMAN_NOUN_M))$NA")
+    // Kings, queens and popes: from I to X an ordinal, then a cardinal. Another name only with two letters or more of
+    // I, V and X (Mehmet II, Apolo XI), also as an ordinal up to X: in 60 books they were nearly always kings.
+    private val REGNAL_M = ("felipe carlos fernando alfonso enrique juan pedro luis jaime sancho ramiro ordoño " +
+        "bermudo fruela martín amadeo pío león gregorio benedicto pablo paulo inocencio clemente urbano " +
+        "bonifacio alejandro sixto adriano julio calixto esteban benito nicolás eugenio marcelo celestino " +
+        "napoleón jorge eduardo guillermo ricardo federico otón iván leopoldo francisco josé manuel miguel " +
+        "constantino justiniano teodosio basilio gustavo cristián christian olaf haakon harald canuto carol " +
+        "mehmed solimán selim murad abderramán hisham ptolomeo ramsés tutmosis amenofis darío jerjes " +
+        "artajerjes ciro sebastián rodrigo ramón berenguer wifredo alberto rodolfo maximiliano segismundo " +
+        "vladislao casimiro estanislao vaticano filipo mehmet antíoco seleuco antígono demetrio " +
+        "pérdicas amintas herodes agripa atalo mitrídates vologeso cosroes sapor tolomeo nabucodonosor " +
+        "sargón salmanasar senaquerib seti psamético nectanebo amenhotep hamid mahmud osmán bayaceto " +
+        "mustafá ahmed abdul conrado lotario ludovico pipino clodoveo childerico dagoberto hugo roberto " +
+        "jacobo cleón").split(" ").toSet()
+    private val REGNAL_F = ("isabel maría juana catalina victoria ana leonor urraca berenguela cristina " +
+        "margarita blanca guillermina beatriz cleopatra arsínoe berenice").split(" ").toSet()
+    private val ROMAN_NOT_NAME = ("el la los las lo le les un una unos unas yo tú tu él ella mi su que de del en por " +
+        "para con se no si al me te nos os ya pero como cuando donde").split(" ").toSet()
+    private val ROMAN_NAME = Regex("$NB([A-ZÁÉÍÓÚÑ][a-záéíóúñü]+|[A-ZÁÉÍÓÚÑ]{2,})($S+)([IVXLCDM]+)$NA")
+    private val ROMAN_IVX = Regex("[IVX]{2,}")
+
+    private fun roman(s: String): Int? {
+        val up = s.uppercase()
+        if (up.isEmpty() || !ROMAN_OK.matches(up)) return null
+        val v = up.map { ROMAN_VAL.getValue(it) }
+        return v.indices.sumOf { i -> if (i + 1 < v.size && v[i + 1] > v[i]) -v[i] else v[i] }
+    }
+
+    private fun romanNumerals(input: String): String {
+        var t = ROMAN_TRIGGER.replace(input) { m ->
+            val century = m.groupValues[1].lowercase().startsWith("siglo")
+            val seq = ROMAN_TOKEN.replace(m.groupValues[3]) { r ->
+                val n = roman(r.value) ?: return@replace r.value
+                if (century && n == 1) "primero" else n.toString()             // el siglo I = «el siglo primero»
+            }
+            m.groupValues[1] + m.groupValues[2] + ROMAN_DASH.replace(seq, " a ")   // capítulos III-V = «tres a cinco»
+        }
+        t = ROMAN_BEFORE.replace(t) { m ->
+            val n = roman(m.groupValues[1]) ?: return@replace m.value
+            val fem = m.groups[2] != null
+            val noun = if (fem) m.groupValues[2] else m.groupValues[3]
+            val word = if (n > 10) n.toString() else (if (fem) ORD_F else ORD_BEFORE_M)[n - 1]
+            "$word $noun"
+        }
+        return ROMAN_NAME.replace(t) { m ->
+            val (who, gap, rom) = m.destructured
+            val n = roman(rom) ?: return@replace m.value
+            val key = who.lowercase()
+            val listed = key in REGNAL_M || key in REGNAL_F
+            val loose = ROMAN_IVX.matches(rom) && who != who.uppercase() && key !in ROMAN_NOT_NAME   // not «LO VI TODO»
+            when {
+                !listed && !loose -> m.value
+                n <= 10 && key in REGNAL_F -> who + gap + ORD_F[n - 1]
+                n <= 10 -> who + gap + ORD_M[n - 1]
+                else -> who + gap + n
+            }
+        }
+    }
+
     private val CLOCK = Regex("$NB(\\d{1,2}):(\\d{2})$NA")
     private val NOT_WORD = Regex("[^\\p{L}\\p{N}_]")
 
@@ -424,7 +505,10 @@ object TextPrep {
      */
     fun forVoice(input: String, lang: String, spell: (Long) -> String, pron: Pron = Pron.NONE): String {
         var t = input
-        if (lang == "es") for ((rx, rep) in ABBREVIATIONS_ES) t = rx.replace(t, rep)
+        if (lang == "es") {
+            for ((rx, rep) in ABBREVIATIONS_ES) t = rx.replace(t, rep)
+            t = romanNumerals(t)                                       // before fixCaps, which would spell «XXI»
+        }
         t = CLOCK.replace(t, "$1 $2")
         t = normalizePunct(t, lang)
         t = t.split(" ").joinToString(" ") { fixCaps(it, lang, pron) }
