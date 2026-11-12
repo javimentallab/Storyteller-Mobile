@@ -23,4 +23,4 @@ It needs JDK 21 and the Android SDK with platform 36: set `ANDROID_HOME`, or `sd
 - **Same text as the desktop:** the text preparation has to cut sentences like the [desktop app](https://github.com/javimentallab/Storyteller). `app/src/test/resources/golden.json` comes from its engine, and the tests check it.
 - **Private data:** no personal paths, hostnames, IP addresses or tokens in the code, the history or the screenshots.
 - **Interface text:** new text goes in every language, and has to fit on screen in all of them. Texts are in `app/src/main/res/values*/strings.xml`, and the store texts in `fastlane/metadata/android/`.
-- **Licence:** your contribution is released under the project's [MIT licence](LICENSE).
+- **Licence:** your contribution is released under the project's [PolyForm Noncommercial licence](LICENSE), and you allow the maintainer to license it under other terms as well, including commercial ones.

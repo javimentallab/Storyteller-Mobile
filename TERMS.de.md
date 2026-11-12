@@ -6,7 +6,7 @@
 
 **1. Identität des Anbieters.** Die Anwendung Storyteller Mobile (die „App“) wird auf Google Play von Javier Comyn Pérez, mit Anschrift calle Olivos, número 36, 28670 Villaviciosa de Odón, Madrid, España (der „Anbieter“), angeboten. Jede Mitteilung im Zusammenhang mit diesen Bedingungen kann unter jotacomyn@gmail.com oder über https://github.com/javimentallab/Storyteller-Mobile/issues an den Anbieter gerichtet werden.
 
-**2. Gegenstand und Lizenz.** Diese Bedingungen regeln die Nutzung der über Google Play vertriebenen App. Ihr Erwerb räumt dem Nutzer gegen einmalige Zahlung eine Lizenz zur Nutzung auf seinen Geräten in dem von Google Play gestatteten Umfang ein. Der Quellcode der App wird gesondert unter der MIT-Lizenz vertrieben; diese Bedingungen gelten ausschließlich für die über Google Play vertriebene Version.
+**2. Gegenstand und Lizenz.** Diese Bedingungen regeln die Nutzung der über Google Play vertriebenen App. Ihr Erwerb räumt dem Nutzer gegen einmalige Zahlung eine Lizenz zur Nutzung auf seinen Geräten in dem von Google Play gestatteten Umfang ein. Der Quellcode der App wird gesondert unter der Lizenz PolyForm Noncommercial 1.0.0 vertrieben; diese Bedingungen gelten ausschließlich für die über Google Play vertriebene Version.
 
 **3. Dienste Dritter.** Die App enthält weder ein Modell noch einen Dienst. Zum Vorlesen, Transkribieren oder Übersetzen benötigt der Nutzer einen eigenen Dienst oder ein Konto bei einem öffentlichen Dienst. Diese Dienste unterliegen ihren eigenen Bedingungen und Tarifen; der Nutzer schließt Verträge unmittelbar mit deren Betreibern und trägt die aus ihrer Nutzung entstehenden Kosten. Der Anbieter hat keine Kontrolle über diese Dienste, die geändert werden oder ihre Kompatibilität mit der App verlieren können.
 

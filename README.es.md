@@ -80,4 +80,4 @@ Consulta [CONTRIBUTING](CONTRIBUTING.md), en inglés. Para avisar en privado de 
 
 ## Licencia
 
-[MIT](LICENSE). Las bibliotecas y datos de terceros que lleva el APK están en [NOTICE](NOTICE).
+[PolyForm Noncommercial 1.0.0](LICENSE): se permite cualquier uso no comercial; el uso comercial necesita permiso del autor. Las versiones hasta la 1.1.4 se publicaron con licencia MIT. Las bibliotecas y datos de terceros que lleva el APK están en [NOTICE](NOTICE).

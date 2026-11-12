@@ -80,4 +80,4 @@ See [CONTRIBUTING](CONTRIBUTING.md). To report a security problem privately, see
 
 ## License
 
-[MIT](LICENSE). The third-party libraries and data in the APK are listed in [NOTICE](NOTICE).
+[PolyForm Noncommercial 1.0.0](LICENSE): any noncommercial use is allowed; commercial use needs the author's permission. Versions up to 1.1.4 were released under the MIT licence. The third-party libraries and data in the APK are listed in [NOTICE](NOTICE).

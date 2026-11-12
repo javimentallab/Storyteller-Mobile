@@ -6,7 +6,7 @@
 
 **1. 提供者身份。** Storyteller Mobile 应用程序（以下简称“本应用”）由 Javier Comyn Pérez（地址：calle Olivos, número 36, 28670 Villaviciosa de Odón, Madrid, España，以下简称“提供者”）在 Google Play 上提供。有关本条款的任何通信均可通过 jotacomyn@gmail.com 或 https://github.com/javimentallab/Storyteller-Mobile/issues 向提供者发送。
 
-**2. 标的和许可。** 本条款规范通过 Google Play 分发的本应用的使用。购买本应用后，用户通过一次性付款获得在其设备上并按 Google Play 允许的条件使用本应用的许可。本应用的源代码根据 MIT 许可证单独分发；本条款仅适用于在 Google Play 上分发的版本。
+**2. 标的和许可。** 本条款规范通过 Google Play 分发的本应用的使用。购买本应用后，用户通过一次性付款获得在其设备上并按 Google Play 允许的条件使用本应用的许可。本应用的源代码根据 PolyForm Noncommercial 1.0.0 许可证单独分发；本条款仅适用于在 Google Play 上分发的版本。
 
 **3. 第三方服务。** 本应用不包含任何模型或服务。如需进行朗读、转录或翻译，用户需要自有服务或公共服务的账户。此类服务受其自身的条款和收费标准约束；用户直接与此类服务的服务商订立合同，并承担因使用此类服务而产生的费用。提供者不控制此类服务，此类服务可能发生变更或不再与本应用兼容。
 
